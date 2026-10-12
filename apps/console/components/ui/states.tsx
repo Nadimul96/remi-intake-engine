@@ -36,7 +36,7 @@ export function ErrorState({
   message: string;
 }): ReactElement {
   return (
-    <div className="flex items-start gap-3 rounded-xl border border-danger/30 bg-danger-soft p-4 text-sm">
+    <div role="alert" className="flex items-start gap-3 rounded-xl border border-danger/30 bg-danger-soft p-4 text-sm">
       <AlertTriangle className="mt-0.5 size-4 shrink-0 text-danger" />
       <div className="min-w-0">
         <p className="font-medium text-danger-text">{title}</p>
