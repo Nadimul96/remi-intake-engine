@@ -39,7 +39,7 @@ jobs:
           scripts/wait-for-stack.sh 1500
 
       - name: Seed processed every demo file with no failed runs
-        run: docker compose logs --no-log-prefix seed | tee /dev/stderr | grep -F "Processed 22 file(s), 0 failed"
+        run: docker compose logs --no-log-prefix seed | tee /dev/stderr | grep -qF "Processed 22 file(s), 0 failed"
 
       - name: Conflicts, provenance and pages through the console port
         run: node scripts/verify-stack.mts
@@ -54,7 +54,7 @@ jobs:
 
       - name: Restart is idempotent
         run: |
-          docker compose logs --no-log-prefix seed | tee /dev/stderr | grep -F "Demo files already ingested"
+          docker compose logs --no-log-prefix seed | tee /dev/stderr | grep -qF "Demo files already ingested"
           node scripts/verify-stack.mts
 
       - name: Bring your own key, a rejected Gemini key falls back to rules
@@ -66,9 +66,9 @@ jobs:
           scripts/wait-for-stack.sh 180
           node scripts/verify-stack.mts --model-fallback
           docker compose logs --no-log-prefix worker > "$LOGS/worker-byok.log"
-          grep -F "Model-assisted extraction: gemini" "$LOGS/worker-byok.log"
+          grep -F "Model-assisted extraction" "$LOGS/worker-byok.log" || true
+          grep -qF "Model-assisted extraction: gemini" "$LOGS/worker-byok.log"
           count="$(grep -c "Model-assisted extraction disabled: gemini rejected the API key" "$LOGS/worker-byok.log" || true)"
-          grep -F "Model-assisted extraction disabled" "$LOGS/worker-byok.log" || true
           if [[ "$count" != "1" ]]; then
             echo "::error::Expected exactly one auth error in the worker log, saw $count"
             exit 1
