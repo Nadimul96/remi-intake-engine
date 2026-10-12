@@ -11,7 +11,7 @@
     "dev:console": "pnpm --filter @remi/console dev",
     "dev:api": "pnpm --filter @remi/api dev",
     "dev:workflows": "pnpm --filter @remi/workflows dev",
-    "dev:extractor": "python3 services/extractor/src/main.py",
+    "dev:extractor": "uv run --directory services/extractor python -m remi_extractor",
     "infra:up": "docker compose -f infrastructure/local/docker-compose.yml up -d",
     "infra:down": "docker compose -f infrastructure/local/docker-compose.yml down -v",
     "db:migrate": "pnpm --filter @remi/db migrate"
