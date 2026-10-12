@@ -417,7 +417,7 @@
         {
          "column": 1,
          "ref": "A34",
-         "text": "PN using 2.5% rent growth is too conservative — see Axiometrics data in comps tab, Houston submarket running 3.8% trailing 12."
+         "text": "PN using 2.5% rent growth is too conservative — see Synthetic Rent Survey data in comps tab, Houston submarket running 3.8% trailing 12."
         }
        ],
        "rowNumber": 34
@@ -706,7 +706,7 @@
         {
          "column": 4,
          "ref": "D15",
-         "text": "Axiometrics shows 3.8% trailing"
+         "text": "Synthetic Rent Survey shows 3.8% trailing"
         }
        ],
        "rowNumber": 15
@@ -3169,7 +3169,7 @@
         {
          "column": 1,
          "ref": "A9",
-         "text": "AXIOMETRICS MARKET DATA"
+         "text": "SYNTHETIC RENT SURVEY MARKET DATA"
         }
        ],
        "rowNumber": 9
@@ -3402,5 +3402,5 @@
   }
  },
  "parserTarget": "xlsx",
- "sha256": "c18f2b80df195b63e650ca94b4a58d24f84aa3c589fd8abac7325f962af08f0c"
+ "sha256": "677023b0c040e626cadb2e22827ab0b28194ef83ecfdf00a281d81e127f488ee"
 }
