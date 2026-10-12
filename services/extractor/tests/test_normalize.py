@@ -61,3 +61,15 @@ def test_cell_text_renders_numbers_like_a_spreadsheet():
     assert cell_text(0.056) == "0.056"
     assert cell_text("  ") is None
     assert cell_text(True) == "TRUE"
+
+
+def test_pasted_email_threads_take_their_subject_as_title(synthetic):
+    path = synthetic / "emails" / "Thread_03_DSCR_Breach_Alert.txt"
+    document = normalize_payload("text", path.name, path.read_bytes())["document"]
+    assert document["title"] == "URGENT — Oakwood Commons DSCR Covenant Breach"
+
+
+def test_csv_notes_below_the_table_stay_whole(synthetic):
+    path = synthetic / UW_DIR / "T12_Oakwood_2020_Priya_Normalized.csv"
+    worksheet = normalize_payload("csv", path.name, path.read_bytes())["workbook"]["worksheets"][0]
+    assert cells_by_ref(worksheet)["A29"] == "NORMALIZED NOI: $597,400"

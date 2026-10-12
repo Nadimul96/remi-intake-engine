@@ -78,12 +78,19 @@ def normalize_pdf(payload: bytes) -> dict[str, Any]:
     )
 
 
+def text_title(text: str) -> str | None:
+    """The first non-empty line, or the Subject header when the text is a pasted email."""
+    head = [line.strip() for line in text.splitlines() if line.strip()][:8]
+    subject = next((line.split(":", 1)[1].strip() for line in head if line.lower().startswith("subject:")), None)
+    title = subject or (head[0] if head else None)
+    return title[:200] if title else None
+
+
 def normalize_text(text: str) -> dict[str, Any]:
     """Plain text becomes a document; form feeds, when present, separate pages."""
     chunks = text.split("\f") if "\f" in text else [text]
     pages = [page_entry(index, chunk, "plain_text") for index, chunk in enumerate(chunks, start=1)]
-    first_line = next((line.strip() for line in text.splitlines() if line.strip()), None)
-    return document_payload(title=first_line[:200] if first_line else None, pages=pages, metadata={"source": "text"})
+    return document_payload(title=text_title(text), pages=pages, metadata={"source": "text"})
 
 
 def document_payload(title: str | None, pages: list[dict[str, Any]], metadata: dict[str, Any]) -> dict[str, Any]:

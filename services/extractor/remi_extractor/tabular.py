@@ -126,6 +126,33 @@ def count_uncached_formulas(formula_sheet: Any, values_sheet: Any) -> int:
     )
 
 
+def read_csv_rows(text: str, delimiter: str) -> list[list[str]]:
+    """Parse CSV rows, keeping free-text notes below the table as one cell each.
+
+    Spreadsheets exported to CSV often end with notes ("NORMALIZED NOI: $597,400")
+    whose unquoted commas would otherwise be split into meaningless cells. Once the
+    table has ended with a blank line, a row much narrower than the table header is
+    kept as the original line of text.
+    """
+    physical_lines = text.splitlines()
+    reader = csv.reader(io.StringIO(text), delimiter=delimiter)
+    values: list[list[str]] = []
+    table_width = 0
+    table_ended = False
+
+    for row in reader:
+        if not any(cell.strip() for cell in row):
+            table_ended = table_ended or table_width > 0
+            values.append([])
+            continue
+        table_width = table_width or len(row)
+        if table_ended and len(row) * 2 < table_width:
+            values.append([physical_lines[reader.line_num - 1].strip()])
+        else:
+            values.append(row)
+    return values
+
+
 def normalize_csv(text: str, file_name: str) -> dict[str, Any]:
     sample = "\n".join(text.splitlines()[:10])
     try:
@@ -133,7 +160,7 @@ def normalize_csv(text: str, file_name: str) -> dict[str, Any]:
     except csv.Error:
         delimiter = ","
 
-    values = [list(row) for row in csv.reader(io.StringIO(text), delimiter=delimiter)]
+    values = read_csv_rows(text, delimiter)
     rows, truncated = build_rows(values)
     max_column = max((len(row) for row in values), default=0)
 
