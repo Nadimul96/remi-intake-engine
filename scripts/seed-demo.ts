@@ -81,6 +81,26 @@ async function upload(absolutePath: string): Promise<void> {
   await api("/api/intake/register", { fileName, contentType, sizeBytes: bytes.byteLength, uploadKey });
 }
 
+/**
+ * Accept the asset-name candidates so the entity pages have names to reconcile. These
+ * are recorded as ordinary reviewer decisions with a note, not written around the API.
+ */
+async function acceptAssetNames(): Promise<number> {
+  const queue = await api<{ items: { candidateId: string; fieldName: string; reviewStatus: string }[] }>(
+    "/api/review/candidates"
+  );
+  const pending = queue.items.filter(
+    (item) => item.fieldName === "probable_asset_name_mention" && item.reviewStatus === "pending_review"
+  );
+  for (const item of pending) {
+    await api(`/api/review/candidates/${item.candidateId}/decision`, {
+      action: "accept",
+      note: "Accepted by the demo seed so entity reconciliation has names to work with."
+    });
+  }
+  return pending.length;
+}
+
 async function main(): Promise<void> {
   const demoSet = JSON.parse(await readFile(path.join(REPO_ROOT, "fixtures/demo-set.json"), "utf8")) as DemoSet;
   await waitForApi();
@@ -88,7 +108,8 @@ async function main(): Promise<void> {
   const existing = new Set((await api<{ items: IntakeItem[] }>("/api/intake")).items.map((item) => item.fileName));
   const pending = demoSet.files.filter((file) => FORCE || !existing.has(path.basename(file)));
   if (pending.length === 0) {
-    console.log("Demo data already seeded; nothing to do (use --force to upload again).");
+    console.log("Demo files already ingested (use --force to upload again).");
+    console.log(`Accepted ${await acceptAssetNames()} asset-name candidate(s) for entity reconciliation.`);
     return;
   }
 
@@ -109,6 +130,7 @@ async function main(): Promise<void> {
       console.log(
         `Processed ${done.length} file(s), ${failed.length} failed; ${conflicts.counts.open} open conflict(s).`
       );
+      console.log(`Accepted ${await acceptAssetNames()} asset-name candidate(s) for entity reconciliation.`);
       for (const item of failed) {
         console.log(`  failed: ${item.fileName}`);
       }
