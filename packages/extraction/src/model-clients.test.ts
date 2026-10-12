@@ -116,6 +116,24 @@ test("a rejected key is logged once, then extraction falls back to rules without
   );
 });
 
+test("concurrent requests rejected for the same key log once", async () => {
+  await withServer(
+    () => GEMINI_INVALID_KEY,
+    async (baseUrl, seen) => {
+      const logged: string[] = [];
+      const client = createModelClient(
+        { provider: "gemini", model: "m", apiKey: "not-a-real-key", baseUrl, timeoutMs: 5000 },
+        (message) => logged.push(message)
+      );
+      const outcomes = await Promise.allSettled([1, 2, 3].map(() => client.complete(prompt)));
+      assert.ok(outcomes.every((outcome) => outcome.status === "rejected"));
+      assert.equal(seen.length, 3);
+      assert.equal(logged.length, 1);
+    },
+    400
+  );
+});
+
 test("other HTTP errors are reported per request and do not disable the model", async () => {
   await withServer(
     () => ({ error: { message: "model is overloaded" } }),

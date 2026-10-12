@@ -178,11 +178,14 @@ export function withAuthCutoff(
         return await client.complete(prompt);
       } catch (error) {
         if (error instanceof ModelAuthError) {
-          rejection = new ModelAuthError(`${provider} rejected the API key (${error.message})`);
-          log(
-            `Model-assisted extraction disabled: ${rejection.message}. ${KEY_HELP[provider]}, or set ` +
-              "MODEL_EXTRACTION=off. Continuing with rule-based extraction only."
-          );
+          // Requests already in flight fail too; only the first one to come back logs.
+          if (!rejection) {
+            rejection = new ModelAuthError(`${provider} rejected the API key (${error.message})`);
+            log(
+              `Model-assisted extraction disabled: ${rejection.message}. ${KEY_HELP[provider]}, or set ` +
+                "MODEL_EXTRACTION=off. Continuing with rule-based extraction only."
+            );
+          }
           throw rejection;
         }
         throw error;
