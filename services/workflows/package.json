@@ -4,23 +4,22 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
     "dev": "tsx watch src/index.ts",
     "test": "tsx --test src/lib/candidate-extraction.test.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.750.0",
-    "@aws-sdk/s3-request-presigner": "^3.750.0",
+    "@aws-sdk/client-s3": "^3.1149.0",
+    "@aws-sdk/s3-request-presigner": "^3.1149.0",
     "@remi/db": "workspace:*",
     "@remi/domain": "workspace:*",
-    "@temporalio/worker": "^1.11.3",
-    "@temporalio/workflow": "^1.11.3",
-    "file-type": "^20.4.1"
+    "@temporalio/worker": "^1.24.0",
+    "@temporalio/workflow": "^1.24.0",
+    "file-type": "^22.1.1"
   },
   "devDependencies": {
-    "@types/node": "^22.13.4",
-    "tsx": "^4.19.3",
-    "typescript": "^5.8.2"
+    "@types/node": "^24.19.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
   }
 }

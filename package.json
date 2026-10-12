@@ -1,7 +1,7 @@
 {
   "name": "remi-intake-engine",
   "private": true,
-  "packageManager": "pnpm@10.13.1",
+  "packageManager": "pnpm@12.11.2",
   "scripts": {
     "build": "turbo run build",
     "typecheck": "turbo run typecheck",
@@ -17,8 +17,11 @@
     "db:migrate": "pnpm --filter @remi/db migrate"
   },
   "devDependencies": {
-    "@types/node": "^22.13.4",
-    "turbo": "^2.4.4",
-    "typescript": "^5.8.2"
+    "@types/node": "^24.19.2",
+    "turbo": "^2.11.7",
+    "typescript": "^7.0.2"
+  },
+  "engines": {
+    "node": ">=22.12"
   }
 }

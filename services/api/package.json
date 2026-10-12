@@ -4,22 +4,21 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
     "dev": "tsx watch src/index.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.750.0",
-    "@aws-sdk/s3-request-presigner": "^3.750.0",
-    "@fastify/cors": "^11.0.0",
+    "@aws-sdk/client-s3": "^3.1149.0",
+    "@aws-sdk/s3-request-presigner": "^3.1149.0",
+    "@fastify/cors": "^11.3.1",
     "@remi/db": "workspace:*",
     "@remi/domain": "workspace:*",
-    "@temporalio/client": "^1.11.3",
-    "fastify": "^5.2.1"
+    "@temporalio/client": "^1.24.0",
+    "fastify": "^5.12.5"
   },
   "devDependencies": {
-    "@types/node": "^22.13.4",
-    "tsx": "^4.19.3",
-    "typescript": "^5.8.2"
+    "@types/node": "^24.19.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
   }
 }
