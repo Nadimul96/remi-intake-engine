@@ -48,6 +48,7 @@ import {
 import type {
   ArtifactParserTarget,
   CandidateExtractionResult,
+  IntakeRegistrationWorkflowInput,
   NormalizedContentKind,
   NormalizedContentSummary,
   ParserResultStatus,
@@ -1098,14 +1099,7 @@ async function processArtifactBlobInternal(input: {
   }
 }
 
-export async function promoteUploadedArtifact(input: {
-  actorId: string;
-  ingestionRunId: string;
-  sourceItemId: string;
-  tenantId: string;
-  uploadKey: string;
-  workflowRunId: string;
-}): Promise<{
+export async function promoteUploadedArtifact(input: IntakeRegistrationWorkflowInput): Promise<{
   artifactBlobId: string;
   contentType: string | null;
   fileName: string;
