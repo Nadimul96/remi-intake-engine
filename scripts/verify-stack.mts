@@ -129,10 +129,19 @@ async function verifyDemo(): Promise<void> {
     });
   }
 
+  const conflictsHtml = await (await fetch(`${CONSOLE}/conflicts`)).text();
   await check("the conflicts page lists every conflict, server-rendered", async () => {
-    const html = await (await fetch(`${CONSOLE}/conflicts`)).text();
     for (const conflict of conflicts.items) {
-      assert.ok(html.includes(conflict.title), `missing "${conflict.title}"`);
+      assert.ok(conflictsHtml.includes(conflict.title), `missing "${conflict.title}"`);
+    }
+  });
+
+  await check("the console's scripts and styles are served (standalone build has its static files)", async () => {
+    const assets = [...new Set(conflictsHtml.match(/\/_next\/static\/[^"'\s)]+\.(?:js|css)/g) ?? [])];
+    assert.ok(assets.length > 0, "the page references no /_next/static assets");
+    for (const asset of assets) {
+      const response = await fetch(`${CONSOLE}${asset}`);
+      assert.equal(response.status, 200, `${asset} answered ${response.status}`);
     }
   });
 }
