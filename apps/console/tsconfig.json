@@ -12,6 +12,8 @@
     "app/**/*.tsx",
     "components/**/*.ts",
     "components/**/*.tsx",
+    "next.config.ts",
+    "lib/**/*.ts",
     ".next/types/**/*.ts",
     "next-env.d.ts"
   ],

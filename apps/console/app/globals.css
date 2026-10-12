@@ -1,58 +1,95 @@
+@import "tailwindcss";
+
+/* Design tokens. Every color in the console comes from these, so light and dark stay in step. */
 :root {
+  /* Each token carries its light and dark value; color-scheme picks one (system by default). */
+  color-scheme: light dark;
+  --bg: light-dark(#ffffff, #09090b);
+  --surface: light-dark(#fafafa, #0f0f12);
+  --surface-raised: light-dark(#ffffff, #141418);
+  --subtle: light-dark(#f4f4f5, #1b1b20);
+  --border: light-dark(#e4e4e7, #26262c);
+  --border-strong: light-dark(#d4d4d8, #34343c);
+  --fg: light-dark(#18181b, #ededf0);
+  --muted: light-dark(#71717a, #9a9aa3);
+  --faint: light-dark(#a1a1aa, #6b6b74);
+  --accent: light-dark(#4f46e5, #818cf8);
+  --accent-fg: light-dark(#ffffff, #0b0b12);
+  --accent-soft: light-dark(#eef2ff, #1e1b4b);
+  --accent-text: light-dark(#4338ca, #a5b4fc);
+  --danger: light-dark(#dc2626, #f87171);
+  --danger-soft: light-dark(#fef2f2, #2a1215);
+  --danger-text: light-dark(#b91c1c, #fca5a5);
+  --warning: light-dark(#d97706, #fbbf24);
+  --warning-soft: light-dark(#fffbeb, #2a1f0b);
+  --warning-text: light-dark(#b45309, #fcd34d);
+  --success: light-dark(#059669, #34d399);
+  --success-soft: light-dark(#ecfdf5, #0c2219);
+  --success-text: light-dark(#047857, #6ee7b7);
+  --info-soft: light-dark(#f0f9ff, #0c1d2b);
+  --info-text: light-dark(#0369a1, #7dd3fc);
+  --highlight: light-dark(#fef08a, #713f12);
+  --shadow: 0 1px 2px light-dark(rgb(0 0 0 / 0.05), rgb(0 0 0 / 0.4));
+}
+
+:root.light {
+  color-scheme: light;
+}
+
+:root.dark {
   color-scheme: dark;
-  --bg: #0b1110;
-  --panel: #121a18;
-  --panel-alt: #17211f;
-  --panel-soft: #0f1615;
-  --line: rgba(255, 255, 255, 0.08);
-  --text: #f3f3ee;
-  --muted: #96a39c;
-  --accent: #c48a4a;
-  --success: #3ca776;
-  --danger: #d56363;
-  --active: #5f8dd3;
 }
 
-* {
-  box-sizing: border-box;
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-raised: var(--surface-raised);
+  --color-subtle: var(--subtle);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-text: var(--accent-text);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-danger-text: var(--danger-text);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-warning-text: var(--warning-text);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-success-text: var(--success-text);
+  --color-info-soft: var(--info-soft);
+  --color-info-text: var(--info-text);
+  --color-highlight: var(--highlight);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --shadow-card: var(--shadow);
 }
 
-html,
-body {
-  margin: 0;
-  min-height: 100%;
-  background: radial-gradient(circle at top, rgba(196, 138, 74, 0.12), transparent 28%), var(--bg);
-  color: var(--text);
-  font-family: "SF Pro Display", "Inter", sans-serif;
-}
+@layer base {
+  html {
+    background: var(--bg);
+  }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-feature-settings: "cv11", "ss01";
+    -webkit-font-smoothing: antialiased;
+  }
 
-button,
-input,
-textarea {
-  font: inherit;
-}
+  ::selection {
+    background: var(--accent-soft);
+    color: var(--accent-text);
+  }
 
-.tone-success {
-  color: #ccf6df;
-  background: rgba(60, 167, 118, 0.2);
-}
-
-.tone-danger {
-  color: #ffd7d7;
-  background: rgba(213, 99, 99, 0.18);
-}
-
-.tone-active {
-  color: #d8e6ff;
-  background: rgba(95, 141, 211, 0.22);
-}
-
-.tone-muted {
-  color: #d7ded9;
-  background: rgba(255, 255, 255, 0.08);
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
 }
