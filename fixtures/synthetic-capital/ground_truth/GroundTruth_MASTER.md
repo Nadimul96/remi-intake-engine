@@ -189,7 +189,7 @@ Q16: "Which underwriting model for Oakwood Commons was used for the IC memo?"
 - [x] Thread_07_Hendricks_COVID_Complaint.txt (4 emails — Fund I wisdom)
 
 ### Market Research (illustrative sample, not real index data)
-- [x] Zillow_Houston_Rent_Index_Sample.csv
+- [x] Synthetic_Houston_Rent_Index_Sample.csv
 
 ### Ground Truth
 - [x] This file (GroundTruth_MASTER.md)

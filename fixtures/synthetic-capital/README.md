@@ -34,7 +34,7 @@ fixtures/synthetic-capital/
 │   ├── GroundTruth_MASTER.md                answer key: metrics, people, conflicts
 │   └── ModelValidation_MASTER.md            worked arithmetic behind the key
 └── market_research/
-    └── Zillow_Houston_Rent_Index_Sample.csv 13-row illustrative series
+    └── Synthetic_Houston_Rent_Index_Sample.csv  13-row illustrative series
 ```
 
 73 files, about 750 KB. File types: `.txt`, `.csv`, `.xlsx` (the `_FORMULA` variants carry live
