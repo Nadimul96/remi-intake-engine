@@ -54,9 +54,13 @@ import type {
   ParserResultStatus,
   ParserWarning
 } from "@remi/domain";
-import { buildProvenanceAnchors, extractEvidenceBackedCandidates } from "@remi/extraction";
+import { buildProvenanceAnchors, createModelClient, extractCandidates, modelConfigFromEnv } from "@remi/extraction";
 import { fileTypeFromBuffer } from "file-type";
 import { workflowConfig } from "../config";
+
+// Optional AI-assisted extraction; an invalid configuration fails at worker start, not mid-pipeline.
+const modelConfig = modelConfigFromEnv(process.env);
+const modelClient = modelConfig ? createModelClient(modelConfig) : null;
 
 const s3Client = new S3Client({
   credentials: {
@@ -658,12 +662,20 @@ async function extractCandidatesForBlobInternal(input: {
     };
   }
 
-  const drafts = extractEvidenceBackedCandidates({
-    artifactBlobId: input.artifactBlobId,
-    fileName: input.fileName,
-    normalizedContent: input.normalizedContent,
-    provenanceAnchors: input.provenanceAnchors
-  });
+  const extraction = await extractCandidates(
+    {
+      artifactBlobId: input.artifactBlobId,
+      fileName: input.fileName,
+      normalizedContent: input.normalizedContent,
+      provenanceAnchors: input.provenanceAnchors
+    },
+    { modelClient }
+  );
+  const drafts = extraction.drafts;
+  const modelWarnings: ParserWarning[] = extraction.model.warnings.map((message) => ({
+    code: "model_assisted_extraction_warning",
+    message
+  }));
   const candidates = await replaceExtractedCandidates({
     artifactBlobId: input.artifactBlobId,
     candidates: drafts.map((candidate) => ({
@@ -697,17 +709,18 @@ async function extractCandidatesForBlobInternal(input: {
     metadata: {
       anchorCount: input.provenanceAnchors.totalCount,
       contentKind: input.normalizedContent.contentKind,
-      countsByType: groupCandidateCounts(candidates)
+      countsByType: groupCandidateCounts(candidates),
+      modelAssisted: extraction.model
     },
     reasonCodes: candidates.length > 0 ? ["candidate_extraction_completed"] : ["no_reviewable_candidates_generated"],
     reprocessRecommended: false,
     retryRecommended: false,
-    status: candidates.length > 0 ? "completed" : "skipped",
+    status: candidates.length === 0 ? "skipped" : modelWarnings.length > 0 ? "completed_with_warnings" : "completed",
     summary:
       candidates.length > 0
         ? `${candidates.length} evidence-backed candidate signal(s) extracted.`
         : "No reviewable evidence-backed candidates were extracted from this artifact.",
-    warnings: []
+    warnings: modelWarnings
   });
 
   return {
