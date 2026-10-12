@@ -38,6 +38,22 @@ jobs:
           echo $! > "$LOGS/up.pid"
           scripts/wait-for-stack.sh 1500
 
+      - name: Only the browser's ports are published, on 127.0.0.1
+        run: |
+          published="$(docker compose ps --format json |
+            jq -sr 'flatten | map(.Publishers // [] | map(select(.PublishedPort != 0) | "\(.URL):\(.PublishedPort)")) | flatten | unique | join(" ")')"
+          echo "Published: $published"
+          for port in 5432 7233 4001 4003; do
+            if grep -qE ":$port( |$)" <<<"$published"; then
+              echo "::error::Port $port is published in the default compose file"
+              exit 1
+            fi
+          done
+          if [[ "$published" != "127.0.0.1:3000 127.0.0.1:8233 127.0.0.1:9000" ]]; then
+            echo "::error::Expected only 127.0.0.1:3000, 8233 and 9000 to be published"
+            exit 1
+          fi
+
       - name: Seed processed every demo file with no failed runs
         run: docker compose logs --no-log-prefix seed | tee /dev/stderr | grep -qF "Processed 22 file(s), 0 failed"
 
@@ -77,6 +93,14 @@ jobs:
             echo "::error::The worker logged the API key"
             exit 1
           fi
+
+      - name: pnpm dev:infra publishes the local-dev ports on 127.0.0.1
+        run: |
+          npm run dev:infra
+          for port in 5432 7233 9000 9001; do
+            nc -z 127.0.0.1 "$port" || { echo "::error::Nothing listening on 127.0.0.1:$port"; exit 1; }
+          done
+          echo "127.0.0.1:5432, 7233, 9000 and 9001 are reachable"
 
       - name: Compose state and logs
         if: failure()

@@ -85,6 +85,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - run: docker compose config --quiet
+      - run: docker compose -f docker-compose.yml -f docker-compose.dev.yml config --quiet
       - uses: docker/setup-buildx-action@v4
       - name: Build services image
         uses: docker/build-push-action@v7
