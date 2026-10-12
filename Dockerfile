@@ -13,7 +13,6 @@ COPY apps/console/package.json apps/console/
 COPY packages/db/package.json packages/db/
 COPY packages/domain/package.json packages/domain/
 COPY packages/extraction/package.json packages/extraction/
-COPY packages/connectors/package.json packages/connectors/
 COPY services/api/package.json services/api/
 COPY services/workflows/package.json services/workflows/
 RUN pnpm install --frozen-lockfile
