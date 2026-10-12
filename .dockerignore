@@ -1,0 +1,10 @@
+**/node_modules
+**/.next
+**/.turbo
+**/.venv
+**/__pycache__
+.git
+.env
+.env.*
+!.env.example
+docs/media

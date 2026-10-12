@@ -3,7 +3,7 @@ import { loadRootEnv, requiredEnv } from "@remi/db";
 loadRootEnv(import.meta.url);
 
 export const workflowConfig = {
-  bucket: requiredEnv("MINIO_BUCKET"),
+  bucket: requiredEnv("S3_BUCKET"),
   derivedPrefix: process.env.S3_DERIVED_PREFIX ?? "derived",
   extractorUrl: requiredEnv("EXTRACTOR_URL"),
   immutablePrefix: process.env.S3_IMMUTABLE_PREFIX ?? "artifacts",

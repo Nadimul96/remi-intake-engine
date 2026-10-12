@@ -6,7 +6,7 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": ["**", "!**/next-env.d.ts", "!fixtures", "!tests/fixtures", "!packages/extraction/test/snapshots/**"]
+    "includes": ["**", "!**/next-env.d.ts", "!fixtures", "!tests/fixtures", "!packages/extraction/test/snapshots"]
   },
   "formatter": {
     "enabled": true,
@@ -48,6 +48,16 @@
         "rules": {
           "style": {
             "noNonNullAssertion": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["scripts/**"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noUndeclaredEnvVars": "off"
           }
         }
       }

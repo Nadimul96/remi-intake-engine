@@ -1,6 +1,7 @@
 import cors from "@fastify/cors";
 import Fastify from "fastify";
 import { apiConfig } from "./lib/config";
+import { ensureBucket } from "./lib/storage";
 import { authRoutes } from "./routes/auth";
 import { conflictRoutes } from "./routes/conflicts";
 import { entityRoutes } from "./routes/entities";
@@ -21,13 +22,27 @@ declare module "fastify" {
   }
 }
 
+async function retry(what: string, attempt: () => Promise<void>, tries = 30): Promise<void> {
+  for (let remaining = tries; ; remaining -= 1) {
+    try {
+      return await attempt();
+    } catch (error) {
+      if (remaining <= 1) {
+        throw error;
+      }
+      console.warn(`Waiting for ${what}: ${error instanceof Error ? error.message : error}`);
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+    }
+  }
+}
+
 async function main(): Promise<void> {
   const app = Fastify({
     logger: true
   });
 
   await app.register(cors, {
-    origin: apiConfig.corsOrigin
+    origin: apiConfig.corsOrigins
   });
 
   app.addHook("onRequest", async (request) => {
@@ -47,6 +62,9 @@ async function main(): Promise<void> {
   await app.register(entityRoutes);
   await app.register(truthRoutes);
   await app.register(conflictRoutes);
+
+  // Storage may still be starting when the stack comes up together.
+  await retry("object storage", ensureBucket);
 
   await app.listen({
     host: "0.0.0.0",

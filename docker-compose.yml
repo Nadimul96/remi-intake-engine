@@ -1,0 +1,156 @@
+# One command to a populated demo:  docker compose up --build
+#
+# Starts Postgres, a Temporal dev server, S3-compatible storage (RustFS), the Python
+# extractor, the API, the worker and the console; applies migrations; then seeds the
+# demo by pushing fixtures/demo-set.json through the real pipeline.
+#
+# Console http://localhost:3000 · API http://localhost:4001 · Temporal UI http://localhost:8233
+# Every value below has a working default; override any of them in a .env file.
+
+x-app-env: &app-env
+  DATABASE_URL: postgresql://remi:remi@postgres:5432/remi
+  DEFAULT_TENANT_ID: ${DEFAULT_TENANT_ID:-fund-zero}
+  DEFAULT_ACTOR_ID: ${DEFAULT_ACTOR_ID:-operator-demo}
+  TEMPORAL_ADDRESS: temporal:7233
+  TEMPORAL_NAMESPACE: default
+  INTAKE_TASK_QUEUE: remi-intake
+  S3_BUCKET: remi-dev
+  S3_ENDPOINT: http://storage:9000
+  S3_PUBLIC_ENDPOINT: http://localhost:${STORAGE_PORT:-9000}
+  S3_ACCESS_KEY: ${S3_ACCESS_KEY:-remi-local}
+  S3_SECRET_KEY: ${S3_SECRET_KEY:-remi-local-secret}
+  S3_REGION: us-east-1
+  S3_FORCE_PATH_STYLE: "true"
+  EXTRACTOR_URL: http://extractor:4003
+  CONSOLE_ORIGIN: http://localhost:${CONSOLE_PORT:-3000},http://127.0.0.1:${CONSOLE_PORT:-3000}
+  MODEL_EXTRACTION: ${MODEL_EXTRACTION:-off}
+  GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+  GEMINI_MODEL: ${GEMINI_MODEL:-}
+  OPENAI_COMPATIBLE_BASE_URL: ${OPENAI_COMPATIBLE_BASE_URL:-}
+  OPENAI_COMPATIBLE_API_KEY: ${OPENAI_COMPATIBLE_API_KEY:-}
+  OPENAI_COMPATIBLE_MODEL: ${OPENAI_COMPATIBLE_MODEL:-}
+
+services:
+  postgres:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_DB: remi
+      POSTGRES_USER: remi
+      POSTGRES_PASSWORD: remi
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U remi -d remi"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql
+
+  temporal:
+    # The Temporal CLI dev server: one process, in-memory persistence, built-in UI.
+    image: temporalio/temporal:1.9.1
+    command: ["server", "start-dev", "--ip", "0.0.0.0", "--ui-port", "8233", "--log-level", "warn"]
+    ports:
+      - "${TEMPORAL_PORT:-7233}:7233"
+      - "${TEMPORAL_UI_PORT:-8233}:8233"
+
+  storage:
+    # S3-compatible object storage (MinIO's images are no longer published on Docker Hub).
+    image: rustfs/rustfs:1.0.1
+    environment:
+      RUSTFS_ACCESS_KEY: ${S3_ACCESS_KEY:-remi-local}
+      RUSTFS_SECRET_KEY: ${S3_SECRET_KEY:-remi-local-secret}
+      RUSTFS_ADDRESS: ":9000"
+      RUSTFS_CONSOLE_ENABLE: "true"
+      RUSTFS_CONSOLE_ADDRESS: ":9001"
+    ports:
+      - "${STORAGE_PORT:-9000}:9000"
+      - "${STORAGE_CONSOLE_PORT:-9001}:9001"
+    volumes:
+      - storage-data:/data
+
+  extractor:
+    build: ./services/extractor
+    ports:
+      - "${EXTRACTOR_PORT:-4003}:4003"
+
+  migrate:
+    build:
+      context: .
+      target: services
+    command: ["pnpm", "db:migrate"]
+    environment: *app-env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
+
+  api:
+    build:
+      context: .
+      target: services
+    command: ["pnpm", "--filter", "@remi/api", "start"]
+    environment:
+      <<: *app-env
+      API_PORT: "4001"
+    ports:
+      - "${API_PORT:-4001}:4001"
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4001/api/health').then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))"]
+      interval: 3s
+      timeout: 3s
+      retries: 40
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      storage:
+        condition: service_started
+      temporal:
+        condition: service_started
+    restart: unless-stopped
+
+  worker:
+    build:
+      context: .
+      target: services
+    command: ["pnpm", "--filter", "@remi/workflows", "start"]
+    environment: *app-env
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      extractor:
+        condition: service_healthy
+      temporal:
+        condition: service_started
+    restart: unless-stopped
+
+  seed:
+    build:
+      context: .
+      target: services
+    command: ["pnpm", "seed"]
+    environment:
+      API_BASE_URL: http://api:4001
+    depends_on:
+      api:
+        condition: service_healthy
+      worker:
+        condition: service_started
+    restart: "no"
+
+  console:
+    build:
+      context: .
+      target: console
+    environment:
+      API_BASE_URL: http://api:4001
+    ports:
+      - "${CONSOLE_PORT:-3000}:3000"
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  postgres-data:
+  storage-data:

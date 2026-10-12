@@ -1660,5 +1660,5 @@ export async function getIntakeQueueItem(sourceItemId: string): Promise<IntakeDe
 }
 
 export function buildSourceUri(objectKey: string): string {
-  return `s3://${requiredEnv("MINIO_BUCKET")}/${objectKey}`;
+  return `s3://${requiredEnv("S3_BUCKET")}/${objectKey}`;
 }

@@ -5,14 +5,20 @@ loadRootEnv(import.meta.url);
 export const apiConfig = {
   actorId: process.env.DEFAULT_ACTOR_ID ?? "operator-demo",
   actorName: "REMI Operator (Stub)",
-  bucket: requiredEnv("MINIO_BUCKET"),
-  corsOrigin: process.env.CONSOLE_ORIGIN ?? "http://localhost:3000",
+  bucket: requiredEnv("S3_BUCKET"),
+  /** Browser origins allowed to call the API and upload to storage (comma-separated CONSOLE_ORIGIN). */
+  corsOrigins: (process.env.CONSOLE_ORIGIN ?? "http://localhost:3000,http://127.0.0.1:3000")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean),
   immutablePrefix: process.env.S3_IMMUTABLE_PREFIX ?? "artifacts",
   intakeSourceConnectionKey: process.env.INTAKE_SOURCE_CONNECTION_KEY ?? "local-upload",
   port: Number(process.env.API_PORT ?? 4001),
   s3: {
     accessKeyId: requiredEnv("S3_ACCESS_KEY"),
     endpoint: requiredEnv("S3_ENDPOINT"),
+    /** Host the browser uses for presigned uploads when it differs from the in-network endpoint. */
+    publicEndpoint: process.env.S3_PUBLIC_ENDPOINT || requiredEnv("S3_ENDPOINT"),
     forcePathStyle: process.env.S3_FORCE_PATH_STYLE !== "false",
     region: process.env.S3_REGION ?? "us-east-1",
     secretAccessKey: requiredEnv("S3_SECRET_KEY"),

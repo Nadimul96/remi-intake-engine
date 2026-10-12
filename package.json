@@ -4,7 +4,7 @@
   "packageManager": "pnpm@12.11.2",
   "scripts": {
     "build": "turbo run build",
-    "typecheck": "turbo run typecheck",
+    "typecheck": "turbo run typecheck && tsc -p scripts",
     "test": "pnpm --filter @remi/extraction test",
     "test:db": "pnpm --filter @remi/db test",
     "dev": "turbo run dev --parallel --filter=@remi/console --filter=@remi/api --filter=@remi/workflows",
@@ -12,15 +12,18 @@
     "dev:api": "pnpm --filter @remi/api dev",
     "dev:workflows": "pnpm --filter @remi/workflows dev",
     "dev:extractor": "uv run --directory services/extractor python -m remi_extractor",
-    "infra:up": "docker compose -f infrastructure/local/docker-compose.yml up -d",
-    "infra:down": "docker compose -f infrastructure/local/docker-compose.yml down -v",
-    "db:migrate": "pnpm --filter @remi/db migrate"
+    "db:migrate": "pnpm --filter @remi/db migrate",
+    "demo": "docker compose up --build",
+    "demo:down": "docker compose down -v",
+    "seed": "tsx scripts/seed-demo.ts",
+    "doctor": "tsx scripts/doctor.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.15",
     "@types/node": "^24.19.2",
     "turbo": "^2.11.7",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "tsx": "^4.23.15"
   },
   "engines": {
     "node": ">=22.12"
