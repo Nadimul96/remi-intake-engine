@@ -49,16 +49,6 @@ importers:
         specifier: ^5.8.2
         version: 5.9.3
 
-  packages/connectors:
-    dependencies:
-      '@remi/domain':
-        specifier: workspace:*
-        version: link:../domain
-    devDependencies:
-      typescript:
-        specifier: ^5.8.2
-        version: 5.9.3
-
   packages/db:
     dependencies:
       '@remi/domain':
