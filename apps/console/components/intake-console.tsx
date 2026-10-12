@@ -2,8 +2,8 @@
 
 import type { IntakeDetail, IntakeQueueItem } from "@remi/domain";
 import { formatBytes, statusTone } from "@remi/ui";
-import { startTransition, useEffect, useEffectEvent, useMemo, useState } from "react";
 import type { DragEvent, ReactElement } from "react";
+import { startTransition, useEffect, useEffectEvent, useMemo, useState } from "react";
 
 import { ConsoleNav } from "./console-nav";
 
@@ -218,7 +218,9 @@ export function IntakeConsole(props: {
         }}
       >
         <div>
-          <div style={{ color: "var(--accent)", fontSize: "0.75rem", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+          <div
+            style={{ color: "var(--accent)", fontSize: "0.75rem", letterSpacing: "0.12em", textTransform: "uppercase" }}
+          >
             REMI Operator Console
           </div>
           <h1 style={{ fontSize: "2rem", margin: "0.35rem 0 0.2rem" }}>Intake Queue</h1>
@@ -421,7 +423,8 @@ export function IntakeConsole(props: {
                         {item.status}
                       </span>
                       <span style={{ color: "var(--muted)", fontSize: "0.84rem" }}>
-                        {item.supportTier ?? "pending"} • {item.normalizationStatus ?? item.inspectionStatus ?? item.ingestionStage}
+                        {item.supportTier ?? "pending"} •{" "}
+                        {item.normalizationStatus ?? item.inspectionStatus ?? item.ingestionStage}
                       </span>
                     </div>
                     <div>{formatBytes(item.sizeBytes)}</div>
@@ -445,7 +448,14 @@ export function IntakeConsole(props: {
           {detail ? (
             <>
               <div>
-                <div style={{ color: "var(--muted)", fontSize: "0.78rem", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                <div
+                  style={{
+                    color: "var(--muted)",
+                    fontSize: "0.78rem",
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase"
+                  }}
+                >
                   Provenance
                 </div>
                 <h2 style={{ margin: "0.35rem 0 0" }}>{detail.fileName}</h2>
@@ -562,7 +572,7 @@ export function IntakeConsole(props: {
                         ["From", message.sender ?? "Unknown"],
                         ["To", message.to.join(", ") || "None"],
                         ["CC", message.cc.join(", ") || "None"],
-                        ["Sent", message.sentAt ? formatTimestamp(message.sentAt) : message.sentAtRaw ?? "Unknown"],
+                        ["Sent", message.sentAt ? formatTimestamp(message.sentAt) : (message.sentAtRaw ?? "Unknown")],
                         ["Attachment Count", String(message.attachmentCount)],
                         ["Body Preview", message.bodyPreview ?? "No preview"]
                       ])}
@@ -620,7 +630,9 @@ export function IntakeConsole(props: {
                     label="Anchor Groups"
                     value={
                       detail.provenanceAnchors.groups.length > 0
-                        ? detail.provenanceAnchors.groups.map((group) => `${group.anchorKind} (${group.count})`).join(", ")
+                        ? detail.provenanceAnchors.groups
+                            .map((group) => `${group.anchorKind} (${group.count})`)
+                            .join(", ")
                         : "None"
                     }
                   />
@@ -646,8 +658,14 @@ export function IntakeConsole(props: {
                 <div style={{ display: "grid", gap: "0.65rem" }}>
                   <MetadataRow label="Extraction Status" value={detail.candidateExtractionResult.status} />
                   <MetadataRow label="Summary" value={detail.candidateExtractionResult.summary} />
-                  <MetadataRow label="Candidate Count" value={String(detail.candidateExtractionResult.candidateCount)} />
-                  <MetadataRow label="Reason Codes" value={formatReasonCodes(detail.candidateExtractionResult.reasonCodes)} />
+                  <MetadataRow
+                    label="Candidate Count"
+                    value={String(detail.candidateExtractionResult.candidateCount)}
+                  />
+                  <MetadataRow
+                    label="Reason Codes"
+                    value={formatReasonCodes(detail.candidateExtractionResult.reasonCodes)}
+                  />
                   <MetadataRow
                     label="Retry Recommended"
                     value={detail.candidateExtractionResult.retryRecommended ? "Yes" : "No"}
@@ -689,8 +707,16 @@ export function IntakeConsole(props: {
                               ? `${candidate.reviewedByActorName}${candidate.reviewedAt ? ` • ${formatTimestamp(candidate.reviewedAt)}` : ""}`
                               : "Not reviewed"
                           ],
-                          ["Edited Value", candidate.reviewedValue !== null ? formatCandidateValue(candidate.reviewedValue) : "None"],
-                          ["Accepted Record", candidate.acceptedRecordId ? `${candidate.acceptedRecordType} • ${candidate.acceptedRecordId}` : "None"],
+                          [
+                            "Edited Value",
+                            candidate.reviewedValue !== null ? formatCandidateValue(candidate.reviewedValue) : "None"
+                          ],
+                          [
+                            "Accepted Record",
+                            candidate.acceptedRecordId
+                              ? `${candidate.acceptedRecordType} • ${candidate.acceptedRecordId}`
+                              : "None"
+                          ],
                           ["Summary", candidate.summary],
                           ["Evidence Preview", candidate.citationPacket.evidencePreview],
                           ["Anchor IDs", candidate.citationPacket.provenanceAnchorIds.join(", ")],
@@ -727,7 +753,14 @@ export function IntakeConsole(props: {
                         <div style={{ fontWeight: 600 }}>
                           {artifact.kind} • v{artifact.version}
                         </div>
-                        <div style={{ color: "var(--muted)", fontSize: "0.82rem", marginTop: "0.2rem", wordBreak: "break-word" }}>
+                        <div
+                          style={{
+                            color: "var(--muted)",
+                            fontSize: "0.82rem",
+                            marginTop: "0.2rem",
+                            wordBreak: "break-word"
+                          }}
+                        >
                           {artifact.storageKey}
                         </div>
                       </div>
@@ -742,7 +775,10 @@ export function IntakeConsole(props: {
                 <div style={{ fontSize: "0.9rem", fontWeight: 600, marginBottom: "0.65rem" }}>Timeline</div>
                 <div style={{ display: "grid", gap: "0.75rem" }}>
                   {detail.timeline.map((event) => (
-                    <div key={event.id} style={{ borderLeft: "2px solid rgba(196, 138, 74, 0.4)", paddingLeft: "0.75rem" }}>
+                    <div
+                      key={event.id}
+                      style={{ borderLeft: "2px solid rgba(196, 138, 74, 0.4)", paddingLeft: "0.75rem" }}
+                    >
                       <div style={{ fontWeight: 600 }}>{event.message}</div>
                       <div style={{ color: "var(--muted)", fontSize: "0.84rem", marginTop: "0.18rem" }}>
                         {event.eventType} • {formatTimestamp(event.createdAt)}

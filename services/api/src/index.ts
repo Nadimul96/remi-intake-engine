@@ -1,6 +1,6 @@
 import cors from "@fastify/cors";
 import Fastify from "fastify";
-
+import { apiConfig } from "./lib/config";
 import { authRoutes } from "./routes/auth";
 import { entityRoutes } from "./routes/entities";
 import { healthRoutes } from "./routes/health";
@@ -10,7 +10,6 @@ import { reviewRoutes } from "./routes/review";
 import { screeningRoutes } from "./routes/screening";
 import { truthRoutes } from "./routes/truth";
 import { uploadRoutes } from "./routes/uploads";
-import { apiConfig } from "./lib/config";
 
 declare module "fastify" {
   interface FastifyRequest {

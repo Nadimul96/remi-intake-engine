@@ -1,4 +1,3 @@
-import { createId } from "@remi/domain";
 import type {
   AcceptedRecordSummary,
   AcceptedRecordType,
@@ -13,7 +12,8 @@ import type {
   ReviewCandidateActionType,
   ReviewHistoryEntry
 } from "@remi/domain";
-import postgres from "postgres";
+import { createId } from "@remi/domain";
+import type postgres from "postgres";
 
 import { getExtractedCandidate } from "./candidates";
 import { getDb } from "./client";
@@ -854,7 +854,9 @@ export async function reviewCandidate(input: {
     }
 
     if (!candidate.review_ready) {
-      throw new CandidateReviewConflictError("Candidate is not review-ready because provenance evidence is incomplete.");
+      throw new CandidateReviewConflictError(
+        "Candidate is not review-ready because provenance evidence is incomplete."
+      );
     }
 
     if (!candidate.current_extraction) {
@@ -900,8 +902,7 @@ export async function reviewCandidate(input: {
       return;
     }
 
-    const reviewStatus: CandidateReviewStatus =
-      input.action === "edit_and_accept" ? "edited_and_accepted" : "accepted";
+    const reviewStatus: CandidateReviewStatus = input.action === "edit_and_accept" ? "edited_and_accepted" : "accepted";
     const acceptedRecordType = acceptedRecordTypeForCandidateType(candidate.candidate_type);
     const acceptedValue =
       input.action === "edit_and_accept" ? input.reviewedValue : normalizeJsonValue(candidate.candidate_value_json);

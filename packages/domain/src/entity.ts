@@ -203,12 +203,7 @@ export const EntityResolutionDetailSchema = z.object({
 export const EntityResolutionDecisionRequestSchema = z
   .object({
     action: EntityResolutionDecisionActionSchema,
-    note: z
-      .string()
-      .trim()
-      .max(2_000)
-      .nullable()
-      .optional(),
+    note: z.string().trim().max(2_000).nullable().optional(),
     targetEntityId: z.string().trim().min(1).optional(),
     displayName: z.string().trim().min(1).max(255).optional(),
     entityType: CanonicalEntityTypeSchema.optional()

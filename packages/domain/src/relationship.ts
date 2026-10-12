@@ -1,11 +1,13 @@
 import { z } from "zod";
-
-import { AcceptedRecordSummarySchema, ReviewArtifactSummarySchema, ReviewHistoryEntrySchema } from "./review";
+import { ExtractedCandidateSummarySchema } from "./candidates";
 import { ProvenanceAnchorSummarySchema } from "./content";
 import { CanonicalEntitySummarySchema } from "./entity";
-import { ExtractedCandidateSummarySchema } from "./candidates";
+import { AcceptedRecordSummarySchema, ReviewArtifactSummarySchema, ReviewHistoryEntrySchema } from "./review";
 
-export const assetOrganizationRelationshipTypes = ["originating_organization_for_asset", "broker_organization_for_asset"] as const;
+export const assetOrganizationRelationshipTypes = [
+  "originating_organization_for_asset",
+  "broker_organization_for_asset"
+] as const;
 export const relationshipResolutionProposalStates = ["pending_review", "accepted", "rejected", "superseded"] as const;
 export const relationshipResolutionDecisionActions = ["accept", "reject"] as const;
 export const relationshipAcceptedRecordStatuses = ["active", "unsupported", "deleted"] as const;
@@ -184,12 +186,7 @@ export const AssetOrganizationRelationshipDetailSchema = z.object({
 export const RelationshipResolutionDecisionRequestSchema = z
   .object({
     action: RelationshipResolutionDecisionActionSchema,
-    note: z
-      .string()
-      .trim()
-      .max(2_000)
-      .nullable()
-      .optional(),
+    note: z.string().trim().max(2_000).nullable().optional(),
     canonicalAssetEntityId: z.string().trim().min(1).optional(),
     canonicalOrganizationEntityId: z.string().trim().min(1).optional()
   })
@@ -212,7 +209,10 @@ export const RelationshipResolutionDecisionRequestSchema = z
       }
     }
 
-    if (value.action === "reject" && (value.canonicalAssetEntityId !== undefined || value.canonicalOrganizationEntityId !== undefined)) {
+    if (
+      value.action === "reject" &&
+      (value.canonicalAssetEntityId !== undefined || value.canonicalOrganizationEntityId !== undefined)
+    ) {
       context.addIssue({
         code: z.ZodIssueCode.custom,
         message: "Entity selections are only allowed when action is accept.",
@@ -227,11 +227,15 @@ export const RelationshipResolutionDecisionResponseSchema = AssetOrganizationRel
 
 export type AcceptedAssetOrganizationRelationshipLink = z.infer<typeof AcceptedAssetOrganizationRelationshipLinkSchema>;
 export type AssetOrganizationRelationshipDetail = z.infer<typeof AssetOrganizationRelationshipDetailSchema>;
-export type AssetOrganizationRelationshipProposalSummary = z.infer<typeof AssetOrganizationRelationshipProposalSummarySchema>;
+export type AssetOrganizationRelationshipProposalSummary = z.infer<
+  typeof AssetOrganizationRelationshipProposalSummarySchema
+>;
 export type AssetOrganizationRelationshipQueueCounts = z.infer<typeof AssetOrganizationRelationshipQueueCountsSchema>;
 export type AssetOrganizationRelationshipQueueFilters = z.infer<typeof RelationshipQueueFiltersSchema>;
 export type AssetOrganizationRelationshipQueueItem = z.infer<typeof AssetOrganizationRelationshipQueueItemSchema>;
-export type AssetOrganizationRelationshipQueueResponse = z.infer<typeof AssetOrganizationRelationshipQueueResponseSchema>;
+export type AssetOrganizationRelationshipQueueResponse = z.infer<
+  typeof AssetOrganizationRelationshipQueueResponseSchema
+>;
 export type AssetOrganizationRelationshipType = z.infer<typeof AssetOrganizationRelationshipTypeSchema>;
 export type RelationshipAcceptedRecordStatus = z.infer<typeof RelationshipAcceptedRecordStatusSchema>;
 export type RelationshipEntityMatchCandidate = z.infer<typeof RelationshipEntityMatchCandidateSchema>;

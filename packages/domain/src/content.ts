@@ -9,7 +9,12 @@ export const parserResultStatuses = [
   "failed"
 ] as const;
 export const normalizedContentKinds = ["document", "email", "workbook"] as const;
-export const attachmentPromotionStatuses = ["embedded_only", "promoted", "reused_existing_blob", "promotion_failed"] as const;
+export const attachmentPromotionStatuses = [
+  "embedded_only",
+  "promoted",
+  "reused_existing_blob",
+  "promotion_failed"
+] as const;
 const artifactProcessingSupportTiers = ["supported", "best_effort", "deferred", "unsupported"] as const;
 const artifactProcessingParserTargets = ["pdf", "eml", "xlsx", "archive", "none"] as const;
 const artifactProcessingInspectionStatuses = ["pending", "completed", "failed", "unsupported"] as const;

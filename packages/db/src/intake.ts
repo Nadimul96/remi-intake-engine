@@ -1,4 +1,3 @@
-import { createId } from "@remi/domain";
 import type {
   ArtifactBlob,
   ArtifactFileClassification,
@@ -7,7 +6,6 @@ import type {
   ArtifactSupportTier,
   CandidateExtractionResult,
   DerivedArtifactSummary,
-  ExtractedCandidateSummary,
   IntakeDetail,
   IntakeQueueItem,
   NormalizedContentKind,
@@ -17,7 +15,8 @@ import type {
   SourceConnectionKind,
   TimelineEvent
 } from "@remi/domain";
-import postgres from "postgres";
+import { createId } from "@remi/domain";
+import type postgres from "postgres";
 
 import { getCandidateExtractionSummary, getExtractedCandidates } from "./candidates";
 import { getDb } from "./client";
@@ -77,7 +76,12 @@ interface CompleteIngestionInput {
 
 interface DerivedArtifactUpsertInput {
   artifactBlobId: string;
-  kind: "artifact_inspection" | "candidate_citation_packets" | "normalized_metadata" | "preview_text" | "provenance_anchor_manifest";
+  kind:
+    | "artifact_inspection"
+    | "candidate_citation_packets"
+    | "normalized_metadata"
+    | "preview_text"
+    | "provenance_anchor_manifest";
   metadata: Record<string, unknown>;
   storageBucket: string;
   storageKey: string;
@@ -243,7 +247,8 @@ function fallbackCandidateExtractionResult(input: {
   if (input.normalizationStatus === "deferred" || input.normalizationStatus === "skipped") {
     return {
       status: "skipped",
-      summary: "Candidate extraction was skipped because normalized content is unavailable or reused state has not been recorded yet.",
+      summary:
+        "Candidate extraction was skipped because normalized content is unavailable or reused state has not been recorded yet.",
       reasonCodes: ["candidate_extraction_not_recorded"],
       warnings: [],
       retryRecommended: false,
@@ -365,13 +370,15 @@ export async function createIntakeRegistration(input: RegistrationInput): Promis
 
   return sql.begin(async (rawTx) => {
     const tx = rawTx as unknown as DbTransaction;
-    const existing = await tx<{
-      external_workflow_id: string | null;
-      ingestion_run_id: string;
-      source_item_id: string;
-      workflow_run_id: string;
-      workflow_status: "completed" | "failed" | "queued" | "running";
-    }[]>`
+    const existing = await tx<
+      {
+        external_workflow_id: string | null;
+        ingestion_run_id: string;
+        source_item_id: string;
+        workflow_run_id: string;
+        workflow_status: "completed" | "failed" | "queued" | "running";
+      }[]
+    >`
       select
         s.id as source_item_id,
         ir.id as ingestion_run_id,
@@ -402,8 +409,7 @@ export async function createIntakeRegistration(input: RegistrationInput): Promis
         sourceItemId: existing[0].source_item_id,
         ingestionRunId: existing[0].ingestion_run_id,
         workflowRunId: existing[0].workflow_run_id,
-        shouldStartWorkflow:
-          !existing[0].external_workflow_id && existing[0].workflow_status === "queued",
+        shouldStartWorkflow: !existing[0].external_workflow_id && existing[0].workflow_status === "queued",
         wasReplayed: true
       };
     }
@@ -551,17 +557,19 @@ export async function markIngestionProcessing(input: {
 
 export async function upsertArtifactBlob(input: PromoteArtifactInput): Promise<ArtifactBlob> {
   const sql = getDb();
-  const [row] = await sql<{
-    content_type: string | null;
-    created_at: Date;
-    id: string;
-    original_file_name: string;
-    sha256: string;
-    size_bytes: bigint | number | string;
-    storage_bucket: string;
-    storage_key: string;
-    tenant_id: string;
-  }[]>`
+  const [row] = await sql<
+    {
+      content_type: string | null;
+      created_at: Date;
+      id: string;
+      original_file_name: string;
+      sha256: string;
+      size_bytes: bigint | number | string;
+      storage_bucket: string;
+      storage_key: string;
+      tenant_id: string;
+    }[]
+  >`
     insert into artifact_blobs (
       id,
       tenant_id,
@@ -592,14 +600,16 @@ export async function upsertArtifactBlob(input: PromoteArtifactInput): Promise<A
 
 export async function upsertDerivedArtifact(input: DerivedArtifactUpsertInput): Promise<DerivedArtifactSummary> {
   const sql = getDb();
-  const [row] = await sql<{
-    created_at: Date;
-    id: string;
-    kind: DerivedArtifactSummary["kind"];
-    metadata_json: Record<string, unknown> | string;
-    storage_key: string;
-    version: number;
-  }[]>`
+  const [row] = await sql<
+    {
+      created_at: Date;
+      id: string;
+      kind: DerivedArtifactSummary["kind"];
+      metadata_json: Record<string, unknown> | string;
+      storage_key: string;
+      version: number;
+    }[]
+  >`
     insert into derived_artifacts (
       id,
       artifact_blob_id,
@@ -916,7 +926,8 @@ export async function recordNormalizationSkipped(input: {
       actorId: input.actorId,
       eventType: "normalization_skipped",
       ingestionRunId: input.ingestionRunId,
-      message: input.status === "deferred" ? "Normalized content creation deferred" : "Normalized content creation skipped",
+      message:
+        input.status === "deferred" ? "Normalized content creation deferred" : "Normalized content creation skipped",
       payload: {
         reasonCodes: input.reasonCodes,
         status: input.status
@@ -1350,34 +1361,36 @@ export async function failIngestion(input: {
 
 export async function listIntakeQueueItems(limit = 50): Promise<IntakeQueueItem[]> {
   const sql = getDb();
-  const rows = await sql<{
-    artifact_blob_id: string | null;
-    artifact_sha256: string | null;
-    content_type: string | null;
-    created_at: Date;
-    file_name: string;
-    immutable_storage_key: string | null;
-    ingestion_stage:
-      | "anchoring"
-      | "candidate_extraction"
-      | "complete"
-      | "failed"
-      | "inspection"
-      | "normalization"
-      | "registered"
-      | "immutable_storage";
-    ingestion_status: "completed" | "failed" | "processing" | "queued";
-    source_connection_kind: SourceConnectionKind;
-    source_connection_name: string;
-    source_uri: string;
-    source_updated_at: Date;
-    sourceitem_id: string;
-    sourceitem_status: "completed" | "failed" | "processing" | "registered" | "staged";
-    size_bytes: bigint | number | string;
-    inspection_metadata_json: Record<string, unknown> | string | null;
-    normalization_status: ParserResultStatus | null;
-    workflow_status: "completed" | "failed" | "queued" | "running" | null;
-  }[]>`
+  const rows = await sql<
+    {
+      artifact_blob_id: string | null;
+      artifact_sha256: string | null;
+      content_type: string | null;
+      created_at: Date;
+      file_name: string;
+      immutable_storage_key: string | null;
+      ingestion_stage:
+        | "anchoring"
+        | "candidate_extraction"
+        | "complete"
+        | "failed"
+        | "inspection"
+        | "normalization"
+        | "registered"
+        | "immutable_storage";
+      ingestion_status: "completed" | "failed" | "processing" | "queued";
+      source_connection_kind: SourceConnectionKind;
+      source_connection_name: string;
+      source_uri: string;
+      source_updated_at: Date;
+      sourceitem_id: string;
+      sourceitem_status: "completed" | "failed" | "processing" | "registered" | "staged";
+      size_bytes: bigint | number | string;
+      inspection_metadata_json: Record<string, unknown> | string | null;
+      normalization_status: ParserResultStatus | null;
+      workflow_status: "completed" | "failed" | "queued" | "running" | null;
+    }[]
+  >`
     select
       s.id as sourceitem_id,
       s.file_name,
@@ -1458,33 +1471,35 @@ export async function listIntakeQueueItems(limit = 50): Promise<IntakeQueueItem[
 
 export async function getIntakeQueueItem(sourceItemId: string): Promise<IntakeDetail | null> {
   const sql = getDb();
-  const [item] = await sql<{
-    artifact_blob_id: string | null;
-    artifact_sha256: string | null;
-    content_type: string | null;
-    created_at: Date;
-    file_name: string;
-    immutable_storage_key: string | null;
-    ingestion_stage:
-      | "anchoring"
-      | "candidate_extraction"
-      | "complete"
-      | "failed"
-      | "inspection"
-      | "normalization"
-      | "registered"
-      | "immutable_storage";
-    ingestion_status: "completed" | "failed" | "processing" | "queued";
-    source_connection_kind: SourceConnectionKind;
-    source_connection_name: string;
-    source_uri: string;
-    source_updated_at: Date;
-    sourceitem_id: string;
-    sourceitem_status: "completed" | "failed" | "processing" | "registered" | "staged";
-    size_bytes: bigint | number | string;
-    inspection_metadata_json: Record<string, unknown> | string | null;
-    workflow_status: "completed" | "failed" | "queued" | "running" | null;
-  }[]>`
+  const [item] = await sql<
+    {
+      artifact_blob_id: string | null;
+      artifact_sha256: string | null;
+      content_type: string | null;
+      created_at: Date;
+      file_name: string;
+      immutable_storage_key: string | null;
+      ingestion_stage:
+        | "anchoring"
+        | "candidate_extraction"
+        | "complete"
+        | "failed"
+        | "inspection"
+        | "normalization"
+        | "registered"
+        | "immutable_storage";
+      ingestion_status: "completed" | "failed" | "processing" | "queued";
+      source_connection_kind: SourceConnectionKind;
+      source_connection_name: string;
+      source_uri: string;
+      source_updated_at: Date;
+      sourceitem_id: string;
+      sourceitem_status: "completed" | "failed" | "processing" | "registered" | "staged";
+      size_bytes: bigint | number | string;
+      inspection_metadata_json: Record<string, unknown> | string | null;
+      workflow_status: "completed" | "failed" | "queued" | "running" | null;
+    }[]
+  >`
     select
       s.id as sourceitem_id,
       s.file_name,
@@ -1535,13 +1550,15 @@ export async function getIntakeQueueItem(sourceItemId: string): Promise<IntakeDe
     return null;
   }
 
-  const events = await sql<{
-    created_at: Date;
-    event_type: TimelineEvent["eventType"];
-    id: string;
-    message: string;
-    payload_json: Record<string, unknown> | string;
-  }[]>`
+  const events = await sql<
+    {
+      created_at: Date;
+      event_type: TimelineEvent["eventType"];
+      id: string;
+      message: string;
+      payload_json: Record<string, unknown> | string;
+    }[]
+  >`
     select id, event_type, message, payload_json, created_at
     from intake_events
     where source_item_id = ${sourceItemId}
@@ -1557,14 +1574,16 @@ export async function getIntakeQueueItem(sourceItemId: string): Promise<IntakeDe
   }));
 
   const derivedArtifacts = item.artifact_sha256
-    ? await sql<{
-        created_at: Date;
-        id: string;
-        kind: DerivedArtifactSummary["kind"];
-        metadata_json: Record<string, unknown> | string;
-        storage_key: string;
-        version: number;
-      }[]>`
+    ? await sql<
+        {
+          created_at: Date;
+          id: string;
+          kind: DerivedArtifactSummary["kind"];
+          metadata_json: Record<string, unknown> | string;
+          storage_key: string;
+          version: number;
+        }[]
+      >`
         select id, kind, version, storage_key, metadata_json, created_at
         from derived_artifacts
         where artifact_blob_id = (

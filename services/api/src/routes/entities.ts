@@ -1,16 +1,16 @@
 import {
-  EntityResolutionDecisionRequestSchema,
-  EntityResolutionDecisionResponseSchema,
-  EntityResolutionDetailSchema,
-  EntityResolutionQueueResponseSchema
-} from "@remi/domain";
-import {
   EntityResolutionConflictError,
   EntityResolutionNotFoundError,
   getEntityResolutionDetail,
   listEntityResolutionQueue,
   reviewEntityResolutionProposal
 } from "@remi/db";
+import {
+  EntityResolutionDecisionRequestSchema,
+  EntityResolutionDecisionResponseSchema,
+  EntityResolutionDetailSchema,
+  EntityResolutionQueueResponseSchema
+} from "@remi/domain";
 import type { FastifyPluginAsync } from "fastify";
 
 export const entityRoutes: FastifyPluginAsync = async (app) => {

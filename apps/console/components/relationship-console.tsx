@@ -12,8 +12,8 @@ import type {
 } from "@remi/domain";
 import { formatBytes, statusTone } from "@remi/ui";
 import Link from "next/link";
-import { startTransition, useEffect, useEffectEvent, useState } from "react";
 import type { ReactElement } from "react";
+import { startTransition, useEffect, useEffectEvent, useState } from "react";
 
 import { ConsoleNav } from "./console-nav";
 
@@ -150,30 +150,32 @@ export function RelationshipConsole(props: {
       ""
   );
 
-  const loadQueue = useEffectEvent(async (focusProposalId?: string, nextFilters?: AssetOrganizationRelationshipQueueFilters) => {
-    setIsRefreshing(true);
+  const loadQueue = useEffectEvent(
+    async (focusProposalId?: string, nextFilters?: AssetOrganizationRelationshipQueueFilters) => {
+      setIsRefreshing(true);
 
-    try {
-      const activeFilters = nextFilters ?? filters;
-      const payload = await parseJson<AssetOrganizationRelationshipQueueResponse>(
-        await fetch(`${props.apiBaseUrl}/api/relationships/reconciliation${buildQueueQuery(activeFilters)}`, {
-          cache: "no-store"
-        })
-      );
+      try {
+        const activeFilters = nextFilters ?? filters;
+        const payload = await parseJson<AssetOrganizationRelationshipQueueResponse>(
+          await fetch(`${props.apiBaseUrl}/api/relationships/reconciliation${buildQueueQuery(activeFilters)}`, {
+            cache: "no-store"
+          })
+        );
 
-      setQueue(payload);
-      setSelectedId((current) => {
-        const preferred = focusProposalId ?? current;
-        if (preferred && payload.items.some((item) => item.proposal.id === preferred)) {
-          return preferred;
-        }
+        setQueue(payload);
+        setSelectedId((current) => {
+          const preferred = focusProposalId ?? current;
+          if (preferred && payload.items.some((item) => item.proposal.id === preferred)) {
+            return preferred;
+          }
 
-        return payload.items[0]?.proposal.id ?? null;
-      });
-    } finally {
-      setIsRefreshing(false);
+          return payload.items[0]?.proposal.id ?? null;
+        });
+      } finally {
+        setIsRefreshing(false);
+      }
     }
-  });
+  );
 
   const loadDetail = useEffectEvent(async (proposalId: string) => {
     const payload = await parseJson<AssetOrganizationRelationshipDetail>(
@@ -279,7 +281,9 @@ export function RelationshipConsole(props: {
         }}
       >
         <div>
-          <div style={{ color: "var(--accent)", fontSize: "0.75rem", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+          <div
+            style={{ color: "var(--accent)", fontSize: "0.75rem", letterSpacing: "0.12em", textTransform: "uppercase" }}
+          >
             REMI Operator Console
           </div>
           <h1 style={{ fontSize: "2rem", margin: "0.35rem 0 0.2rem" }}>Asset-Organization Relationships</h1>
@@ -409,7 +413,9 @@ export function RelationshipConsole(props: {
 
           <div style={{ display: "grid" }}>
             {queue.items.length === 0 ? (
-              <div style={{ color: "var(--muted)", padding: "1rem" }}>No accepted relationship records currently require reconciliation.</div>
+              <div style={{ color: "var(--muted)", padding: "1rem" }}>
+                No accepted relationship records currently require reconciliation.
+              </div>
             ) : (
               queue.items.map((item) => {
                 const selected = item.proposal.id === selectedId;
@@ -431,14 +437,29 @@ export function RelationshipConsole(props: {
                     }}
                     type="button"
                   >
-                    <div style={{ alignItems: "center", display: "flex", justifyContent: "space-between", gap: "0.75rem" }}>
+                    <div
+                      style={{ alignItems: "center", display: "flex", justifyContent: "space-between", gap: "0.75rem" }}
+                    >
                       <strong style={{ fontSize: "0.97rem" }}>{humanizeStatus(item.proposal.relationshipType)}</strong>
-                      <div style={{ alignItems: "center", display: "flex", gap: "0.45rem", justifyContent: "flex-end", flexWrap: "wrap" }}>
-                        <StatusBadge tone={item.proposal.currentProposal ? "tone-active" : "tone-muted"} value={item.proposal.currentProposal ? "current" : "historical"} />
+                      <div
+                        style={{
+                          alignItems: "center",
+                          display: "flex",
+                          gap: "0.45rem",
+                          justifyContent: "flex-end",
+                          flexWrap: "wrap"
+                        }}
+                      >
+                        <StatusBadge
+                          tone={item.proposal.currentProposal ? "tone-active" : "tone-muted"}
+                          value={item.proposal.currentProposal ? "current" : "historical"}
+                        />
                         <StatusBadge tone={tone} value={humanizeStatus(item.proposal.proposalState)} />
                       </div>
                     </div>
-                    <div style={{ color: "var(--muted)", fontSize: "0.86rem" }}>{formatCandidateValue(item.acceptedValue)}</div>
+                    <div style={{ color: "var(--muted)", fontSize: "0.86rem" }}>
+                      {formatCandidateValue(item.acceptedValue)}
+                    </div>
                     <div style={{ color: "var(--muted)", fontSize: "0.8rem" }}>
                       {item.artifactFileName} • {humanizeStatus(item.proposal.resolutionReadiness)}
                     </div>
@@ -461,7 +482,9 @@ export function RelationshipConsole(props: {
           }}
         >
           {!detail ? (
-            <div style={{ color: "var(--muted)" }}>Select a relationship proposal to inspect the accepted truth and attach it.</div>
+            <div style={{ color: "var(--muted)" }}>
+              Select a relationship proposal to inspect the accepted truth and attach it.
+            </div>
           ) : (
             <div style={{ display: "grid", gap: "1rem" }}>
               <div
@@ -474,9 +497,18 @@ export function RelationshipConsole(props: {
               >
                 <div style={{ alignItems: "center", display: "flex", flexWrap: "wrap", gap: "0.6rem" }}>
                   <h2 style={{ fontSize: "1.3rem", margin: 0 }}>{humanizeStatus(detail.proposal.relationshipType)}</h2>
-                  <StatusBadge tone={detail.proposal.currentProposal ? "tone-active" : "tone-muted"} value={detail.proposal.currentProposal ? "current" : "historical"} />
-                  <StatusBadge tone={statusTone(detail.proposal.proposalState)} value={humanizeStatus(detail.proposal.proposalState)} />
-                  <StatusBadge tone={statusTone(detail.proposal.resolutionReadiness)} value={humanizeStatus(detail.proposal.resolutionReadiness)} />
+                  <StatusBadge
+                    tone={detail.proposal.currentProposal ? "tone-active" : "tone-muted"}
+                    value={detail.proposal.currentProposal ? "current" : "historical"}
+                  />
+                  <StatusBadge
+                    tone={statusTone(detail.proposal.proposalState)}
+                    value={humanizeStatus(detail.proposal.proposalState)}
+                  />
+                  <StatusBadge
+                    tone={statusTone(detail.proposal.resolutionReadiness)}
+                    value={humanizeStatus(detail.proposal.resolutionReadiness)}
+                  />
                 </div>
                 <div style={{ color: "var(--muted)", fontSize: "0.9rem" }}>{detail.proposal.statusExplanation}</div>
               </div>
@@ -486,7 +518,11 @@ export function RelationshipConsole(props: {
                   <MetadataRow label="Field" value={detail.acceptedRecord.fieldName} />
                   <MetadataRow label="Accepted Record Status" value={humanizeStatus(detail.acceptedRecordStatus)} />
                   <MetadataRow label="Value Type" value={detail.acceptedRecord.valueType} />
-                  <MetadataRow label="Accepted Value" value={formatCandidateValue(detail.acceptedRecord.acceptedValue)} multiline />
+                  <MetadataRow
+                    label="Accepted Value"
+                    value={formatCandidateValue(detail.acceptedRecord.acceptedValue)}
+                    multiline
+                  />
                   <MetadataRow label="Retention Context" value={detail.acceptedRecordStatusExplanation} multiline />
                   <MetadataRow label="Reviewed At" value={formatTimestamp(detail.acceptedRecord.reviewedAt)} />
                   <MetadataRow label="Reviewer" value={detail.acceptedRecord.reviewerActorName} />
@@ -498,7 +534,10 @@ export function RelationshipConsole(props: {
                   <MetadataRow label="Size" value={formatBytes(detail.artifact.sizeBytes)} />
                   <MetadataRow label="Source URI" value={detail.artifact.sourceUri ?? "Unknown"} multiline />
                   <MetadataRow label="Candidate" value={detail.sourceCandidate.fieldName} />
-                  <MetadataRow label="Proposal Lifecycle" value={detail.proposal.currentProposal ? "Current proposal" : "Historical proposal"} />
+                  <MetadataRow
+                    label="Proposal Lifecycle"
+                    value={detail.proposal.currentProposal ? "Current proposal" : "Historical proposal"}
+                  />
                 </MetadataCard>
               </TwoColumn>
 
@@ -527,7 +566,9 @@ export function RelationshipConsole(props: {
                       />
                     ))
                   ) : (
-                    <div style={{ color: "var(--muted)" }}>No canonical organization candidates are currently suggested.</div>
+                    <div style={{ color: "var(--muted)" }}>
+                      No canonical organization candidates are currently suggested.
+                    </div>
                   )}
                 </MetadataCard>
               </TwoColumn>
@@ -537,7 +578,10 @@ export function RelationshipConsole(props: {
                   {detail.currentRelationshipLink ? (
                     <>
                       <MetadataRow label="Asset" value={detail.currentRelationshipLink.canonicalAssetDisplayName} />
-                      <MetadataRow label="Organization" value={detail.currentRelationshipLink.canonicalOrganizationDisplayName} />
+                      <MetadataRow
+                        label="Organization"
+                        value={detail.currentRelationshipLink.canonicalOrganizationDisplayName}
+                      />
                       <MetadataRow
                         label="Link Source"
                         value={
@@ -547,10 +591,15 @@ export function RelationshipConsole(props: {
                         }
                       />
                       <MetadataRow label="Reason" value={detail.currentRelationshipLink.linkReason} />
-                      <MetadataRow label="Updated At" value={formatTimestamp(detail.currentRelationshipLink.updatedAt)} />
+                      <MetadataRow
+                        label="Updated At"
+                        value={formatTimestamp(detail.currentRelationshipLink.updatedAt)}
+                      />
                     </>
                   ) : (
-                    <div style={{ color: "var(--muted)" }}>This accepted relationship truth is not attached to canonical entities yet.</div>
+                    <div style={{ color: "var(--muted)" }}>
+                      This accepted relationship truth is not attached to canonical entities yet.
+                    </div>
                   )}
                 </MetadataCard>
 
@@ -587,23 +636,37 @@ export function RelationshipConsole(props: {
                           padding: "0.75rem"
                         }}
                       >
-                        <div style={{ alignItems: "center", display: "flex", gap: "0.45rem", justifyContent: "space-between" }}>
+                        <div
+                          style={{
+                            alignItems: "center",
+                            display: "flex",
+                            gap: "0.45rem",
+                            justifyContent: "space-between"
+                          }}
+                        >
                           <strong>{humanizeStatus(entry.action)}</strong>
-                          <span style={{ color: "var(--muted)", fontSize: "0.82rem" }}>{formatTimestamp(entry.createdAt)}</span>
+                          <span style={{ color: "var(--muted)", fontSize: "0.82rem" }}>
+                            {formatTimestamp(entry.createdAt)}
+                          </span>
                         </div>
                         <div style={{ color: "var(--muted)", fontSize: "0.84rem", marginTop: "0.35rem" }}>
                           {humanizeStatus(entry.previousProposalState)} {"->"} {humanizeStatus(entry.newProposalState)}
                         </div>
                         <div style={{ display: "grid", gap: "0.2rem", marginTop: "0.45rem" }}>
                           <MetadataRow label="Chosen Asset" value={entry.chosenCanonicalAssetDisplayName ?? "None"} />
-                          <MetadataRow label="Chosen Organization" value={entry.chosenCanonicalOrganizationDisplayName ?? "None"} />
+                          <MetadataRow
+                            label="Chosen Organization"
+                            value={entry.chosenCanonicalOrganizationDisplayName ?? "None"}
+                          />
                           <MetadataRow label="Reviewer" value={entry.reviewerActorName} />
                           <MetadataRow label="Note" value={entry.reviewNote ?? "None"} multiline />
                         </div>
                       </div>
                     ))
                   ) : (
-                    <div style={{ color: "var(--muted)" }}>No relationship reconciliation decisions have been recorded yet.</div>
+                    <div style={{ color: "var(--muted)" }}>
+                      No relationship reconciliation decisions have been recorded yet.
+                    </div>
                   )}
                 </MetadataCard>
 
@@ -619,11 +682,22 @@ export function RelationshipConsole(props: {
                           padding: "0.75rem"
                         }}
                       >
-                        <div style={{ alignItems: "center", display: "flex", gap: "0.45rem", justifyContent: "space-between" }}>
+                        <div
+                          style={{
+                            alignItems: "center",
+                            display: "flex",
+                            gap: "0.45rem",
+                            justifyContent: "space-between"
+                          }}
+                        >
                           <strong>{humanizeStatus(entry.eventType)}</strong>
-                          <span style={{ color: "var(--muted)", fontSize: "0.82rem" }}>{formatTimestamp(entry.createdAt)}</span>
+                          <span style={{ color: "var(--muted)", fontSize: "0.82rem" }}>
+                            {formatTimestamp(entry.createdAt)}
+                          </span>
                         </div>
-                        <div style={{ color: "var(--muted)", fontSize: "0.84rem", marginTop: "0.35rem" }}>{entry.summary}</div>
+                        <div style={{ color: "var(--muted)", fontSize: "0.84rem", marginTop: "0.35rem" }}>
+                          {entry.summary}
+                        </div>
                         <div style={{ display: "grid", gap: "0.2rem", marginTop: "0.45rem" }}>
                           <MetadataRow
                             label="State Change"
@@ -639,7 +713,9 @@ export function RelationshipConsole(props: {
                       </div>
                     ))
                   ) : (
-                    <div style={{ color: "var(--muted)" }}>No system-driven relationship sync events have been recorded yet.</div>
+                    <div style={{ color: "var(--muted)" }}>
+                      No system-driven relationship sync events have been recorded yet.
+                    </div>
                   )}
                 </MetadataCard>
               </TwoColumn>
@@ -696,7 +772,9 @@ export function RelationshipConsole(props: {
                   </div>
 
                   {actionState.status !== "idle" ? (
-                    <div style={{ color: actionState.status === "error" ? "#fca5a5" : "var(--muted)" }}>{actionState.message}</div>
+                    <div style={{ color: actionState.status === "error" ? "#fca5a5" : "var(--muted)" }}>
+                      {actionState.message}
+                    </div>
                   ) : null}
 
                   <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
@@ -710,7 +788,9 @@ export function RelationshipConsole(props: {
                     </button>
                     <button
                       disabled={
-                        detail.proposal.proposalState === "superseded" || !selectedAssetEntityId || !selectedOrganizationEntityId
+                        detail.proposal.proposalState === "superseded" ||
+                        !selectedAssetEntityId ||
+                        !selectedOrganizationEntityId
                       }
                       onClick={() => void submitAction("accept")}
                       style={primaryButtonStyle}
@@ -864,7 +944,9 @@ function CandidateCard(props: {
     >
       <div style={{ alignItems: "center", display: "flex", justifyContent: "space-between", gap: "0.5rem" }}>
         <strong>{props.candidate.entityDisplayName}</strong>
-        <span style={{ color: "var(--muted)", fontSize: "0.8rem" }}>{Math.round(props.candidate.confidence * 100)}%</span>
+        <span style={{ color: "var(--muted)", fontSize: "0.8rem" }}>
+          {Math.round(props.candidate.confidence * 100)}%
+        </span>
       </div>
       <div style={{ color: "var(--muted)", fontSize: "0.82rem" }}>
         {humanizeStatus(props.candidate.signalType)} • {props.candidate.matchedFrom}

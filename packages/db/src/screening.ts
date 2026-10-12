@@ -9,10 +9,9 @@ import type {
   ScreeningLaneStatus,
   ScreeningReadinessStatus
 } from "@remi/domain";
-
+import { listEntityResolutionQueue } from "./entities";
 import { getIntakeQueueItem } from "./intake";
 import { listAssetOrganizationRelationshipQueue } from "./relationships";
-import { listEntityResolutionQueue } from "./entities";
 import { listAcceptedTruthRecords } from "./truth";
 
 const allRelationshipFilters = {
@@ -50,7 +49,11 @@ function candidateSignalSummary(items: ExtractedCandidateSummary[]): DealScreeni
   };
 }
 
-function laneStatus<T>(items: T[], isCurrent: (item: T) => boolean, isResolved: (item: T) => boolean): ScreeningLaneStatus {
+function laneStatus<T>(
+  items: T[],
+  isCurrent: (item: T) => boolean,
+  isResolved: (item: T) => boolean
+): ScreeningLaneStatus {
   const currentItems = items.filter(isCurrent);
   const resolvedCurrent = currentItems.filter(isResolved).length;
   return {
@@ -65,9 +68,7 @@ function acceptedString(items: AcceptedTruthListItem[], fieldName: string): stri
   return typeof record?.acceptedValue === "string" && record.acceptedValue.trim() ? record.acceptedValue.trim() : null;
 }
 
-function relationshipValue(
-  item: AcceptedTruthListItem | AssetOrganizationRelationshipQueueItem | null
-): {
+function relationshipValue(item: AcceptedTruthListItem | AssetOrganizationRelationshipQueueItem | null): {
   assetName: string | null;
   organizationDomain: string | null;
   organizationName: string | null;
@@ -86,7 +87,9 @@ function relationshipValue(
   const organizationName =
     "organizationName" in value && typeof value.organizationName === "string" ? value.organizationName.trim() : null;
   const organizationDomain =
-    "organizationDomain" in value && typeof value.organizationDomain === "string" ? value.organizationDomain.trim() : null;
+    "organizationDomain" in value && typeof value.organizationDomain === "string"
+      ? value.organizationDomain.trim()
+      : null;
   const relationshipType =
     "relationshipType" in value && typeof value.relationshipType === "string" ? value.relationshipType : null;
 
@@ -129,8 +132,12 @@ function buildAboutSummary(input: {
     acceptedString(input.acceptedTruthItems, "probable_asset_name_mention") ??
     input.sourceItem.normalizedContent.emailThread?.subject ??
     input.sourceItem.fileName;
-  const organizationName = relationship?.organizationName ?? acceptedString(input.acceptedTruthItems, "probable_originating_organization_name");
-  const organizationDomain = relationship?.organizationDomain ?? acceptedString(input.acceptedTruthItems, "probable_originating_organization_domain");
+  const organizationName =
+    relationship?.organizationName ??
+    acceptedString(input.acceptedTruthItems, "probable_originating_organization_name");
+  const organizationDomain =
+    relationship?.organizationDomain ??
+    acceptedString(input.acceptedTruthItems, "probable_originating_organization_domain");
 
   if (assetName && (organizationName || organizationDomain)) {
     return `REMI currently reads this package as ${relationshipTypeLabel(relationship?.relationshipType ?? null)} context for asset "${assetName}" and organization "${organizationName ?? organizationDomain}".`;
@@ -172,7 +179,9 @@ function buildNeedsAttention(input: {
     });
   }
 
-  for (const item of input.entityAssetItems.filter((entry) => entry.proposal.currentProposal && entry.currentEntityLink === null)) {
+  for (const item of input.entityAssetItems.filter(
+    (entry) => entry.proposal.currentProposal && entry.currentEntityLink === null
+  )) {
     issues.push({
       id: `asset-entity:${item.proposal.id}`,
       kind: "asset_identity",
@@ -182,7 +191,9 @@ function buildNeedsAttention(input: {
     });
   }
 
-  for (const item of input.entityOrganizationItems.filter((entry) => entry.proposal.currentProposal && entry.currentEntityLink === null)) {
+  for (const item of input.entityOrganizationItems.filter(
+    (entry) => entry.proposal.currentProposal && entry.currentEntityLink === null
+  )) {
     issues.push({
       id: `organization-entity:${item.proposal.id}`,
       kind: "organization_identity",
@@ -269,7 +280,9 @@ export async function getDealScreeningWorkbench(sourceItemId: string): Promise<D
   const candidateSignals = candidateSignalSummary(sourceItem.candidateSignals);
 
   const [acceptedTruthBrowser, entityQueue, relationshipQueue] = await Promise.all([
-    artifactBlobId ? listAcceptedTruthRecords("all") : Promise.resolve({ counts: emptyAcceptedTruthCounts(), items: [] }),
+    artifactBlobId
+      ? listAcceptedTruthRecords("all")
+      : Promise.resolve({ counts: emptyAcceptedTruthCounts(), items: [] }),
     candidateIds.size > 0 ? listEntityResolutionQueue() : Promise.resolve(null),
     candidateIds.size > 0 ? listAssetOrganizationRelationshipQueue(allRelationshipFilters) : Promise.resolve(null)
   ]);
@@ -282,11 +295,15 @@ export async function getDealScreeningWorkbench(sourceItemId: string): Promise<D
 
   const entityItems =
     entityQueue?.items.filter(
-      (item) => (artifactBlobId !== null && item.artifactBlobId === artifactBlobId) || candidateIds.has(item.proposal.sourceCandidateId)
+      (item) =>
+        (artifactBlobId !== null && item.artifactBlobId === artifactBlobId) ||
+        candidateIds.has(item.proposal.sourceCandidateId)
     ) ?? [];
   const relationshipItems =
     relationshipQueue?.items.filter(
-      (item) => (artifactBlobId !== null && item.artifactBlobId === artifactBlobId) || candidateIds.has(item.proposal.sourceCandidateId)
+      (item) =>
+        (artifactBlobId !== null && item.artifactBlobId === artifactBlobId) ||
+        candidateIds.has(item.proposal.sourceCandidateId)
     ) ?? [];
 
   const entityResolution = {

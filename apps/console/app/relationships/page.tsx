@@ -1,7 +1,4 @@
-import type {
-  AssetOrganizationRelationshipDetail,
-  AssetOrganizationRelationshipQueueResponse
-} from "@remi/domain";
+import type { AssetOrganizationRelationshipDetail, AssetOrganizationRelationshipQueueResponse } from "@remi/domain";
 import type { ReactElement } from "react";
 
 import { RelationshipConsole } from "../../components/relationship-console";

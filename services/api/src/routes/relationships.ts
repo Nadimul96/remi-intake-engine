@@ -1,17 +1,17 @@
 import {
-  AssetOrganizationRelationshipDetailSchema,
-  RelationshipQueueFiltersSchema,
-  AssetOrganizationRelationshipQueueResponseSchema,
-  RelationshipResolutionDecisionRequestSchema,
-  RelationshipResolutionDecisionResponseSchema
-} from "@remi/domain";
-import {
   AssetOrganizationRelationshipConflictError,
   AssetOrganizationRelationshipNotFoundError,
   getAssetOrganizationRelationshipDetail,
   listAssetOrganizationRelationshipQueue,
   reviewAssetOrganizationRelationshipProposal
 } from "@remi/db";
+import {
+  AssetOrganizationRelationshipDetailSchema,
+  AssetOrganizationRelationshipQueueResponseSchema,
+  RelationshipQueueFiltersSchema,
+  RelationshipResolutionDecisionRequestSchema,
+  RelationshipResolutionDecisionResponseSchema
+} from "@remi/domain";
 import type { FastifyPluginAsync } from "fastify";
 
 export const relationshipRoutes: FastifyPluginAsync = async (app) => {

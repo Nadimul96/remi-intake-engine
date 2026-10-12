@@ -3,8 +3,8 @@
 import type { CandidateReviewDetail, CandidateReviewQueueResponse, ReviewCandidateActionResponse } from "@remi/domain";
 import { formatBytes, statusTone } from "@remi/ui";
 import Link from "next/link";
-import { startTransition, useEffect, useEffectEvent, useState } from "react";
 import type { ReactElement } from "react";
+import { startTransition, useEffect, useEffectEvent, useState } from "react";
 
 import { ConsoleNav } from "./console-nav";
 
@@ -101,7 +101,9 @@ export function ReviewConsole(props: {
   });
   const [reviewNote, setReviewNote] = useState(props.initialDetail?.candidate.reviewNote ?? "");
   const [editedValueText, setEditedValueText] = useState(
-    serializeEditableValue(props.initialDetail?.candidate.reviewedValue ?? props.initialDetail?.candidate.candidateValue)
+    serializeEditableValue(
+      props.initialDetail?.candidate.reviewedValue ?? props.initialDetail?.candidate.candidateValue
+    )
   );
 
   const loadQueue = useEffectEvent(async (focusCandidateId?: string) => {
@@ -238,7 +240,9 @@ export function ReviewConsole(props: {
         }}
       >
         <div>
-          <div style={{ color: "var(--accent)", fontSize: "0.75rem", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+          <div
+            style={{ color: "var(--accent)", fontSize: "0.75rem", letterSpacing: "0.12em", textTransform: "uppercase" }}
+          >
             REMI Operator Console
           </div>
           <h1 style={{ fontSize: "2rem", margin: "0.35rem 0 0.2rem" }}>Candidate Review Queue</h1>
@@ -340,7 +344,9 @@ export function ReviewConsole(props: {
                       <div style={{ color: "var(--muted)", fontSize: "0.84rem", marginTop: "0.2rem" }}>
                         {item.candidateType} • {item.artifactFileName}
                       </div>
-                      <div style={{ color: "var(--muted)", fontSize: "0.84rem", marginTop: "0.25rem" }}>{item.summary}</div>
+                      <div style={{ color: "var(--muted)", fontSize: "0.84rem", marginTop: "0.25rem" }}>
+                        {item.summary}
+                      </div>
                     </div>
                     <div style={{ display: "grid", gap: "0.35rem" }}>
                       <span
@@ -374,7 +380,14 @@ export function ReviewConsole(props: {
           {detail ? (
             <>
               <div>
-                <div style={{ color: "var(--muted)", fontSize: "0.78rem", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                <div
+                  style={{
+                    color: "var(--muted)",
+                    fontSize: "0.78rem",
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase"
+                  }}
+                >
                   Candidate Proposal
                 </div>
                 <h2 style={{ margin: "0.35rem 0 0" }}>{detail.candidate.fieldName}</h2>
@@ -412,7 +425,11 @@ export function ReviewConsole(props: {
                 />
                 <MetadataRow
                   label="Edited Value"
-                  value={detail.candidate.reviewedValue !== null ? formatCandidateValue(detail.candidate.reviewedValue) : "None"}
+                  value={
+                    detail.candidate.reviewedValue !== null
+                      ? formatCandidateValue(detail.candidate.reviewedValue)
+                      : "None"
+                  }
                 />
                 <MetadataRow label="Review Note" value={detail.candidate.reviewNote ?? "None"} />
               </div>
@@ -426,7 +443,10 @@ export function ReviewConsole(props: {
                       rows={[
                         ["Accepted Value", formatCandidateValue(detail.acceptedRecord.acceptedValue)],
                         ["Review Status", humanizeStatus(detail.acceptedRecord.reviewStatus)],
-                        ["Reviewed By", `${detail.acceptedRecord.reviewerActorName} • ${formatTimestamp(detail.acceptedRecord.reviewedAt)}`],
+                        [
+                          "Reviewed By",
+                          `${detail.acceptedRecord.reviewerActorName} • ${formatTimestamp(detail.acceptedRecord.reviewedAt)}`
+                        ],
                         ["Review Note", detail.acceptedRecord.reviewNote ?? "None"],
                         ["Source Candidate", detail.acceptedRecord.sourceCandidateId]
                       ]}
@@ -442,7 +462,9 @@ export function ReviewConsole(props: {
                     </Link>
                   </div>
                 ) : (
-                  <div style={{ color: "var(--muted)" }}>No accepted truth record has been created for this candidate.</div>
+                  <div style={{ color: "var(--muted)" }}>
+                    No accepted truth record has been created for this candidate.
+                  </div>
                 )}
               </div>
 
@@ -451,7 +473,9 @@ export function ReviewConsole(props: {
                 {detail.reviewHistory.length > 0 ? (
                   <HistoryCard entries={detail.reviewHistory} />
                 ) : (
-                  <div style={{ color: "var(--muted)" }}>No review decisions have been recorded for this candidate yet.</div>
+                  <div style={{ color: "var(--muted)" }}>
+                    No review decisions have been recorded for this candidate yet.
+                  </div>
                 )}
               </div>
 
@@ -489,7 +513,9 @@ export function ReviewConsole(props: {
                 <div style={{ fontSize: "0.9rem", fontWeight: 600, marginBottom: "0.65rem" }}>Review Action</div>
                 <div style={{ display: "grid", gap: "0.75rem" }}>
                   <label style={{ display: "grid", gap: "0.35rem" }}>
-                    <span style={{ color: "var(--muted)", fontSize: "0.82rem", textTransform: "uppercase" }}>Review Note</span>
+                    <span style={{ color: "var(--muted)", fontSize: "0.82rem", textTransform: "uppercase" }}>
+                      Review Note
+                    </span>
                     <textarea
                       onChange={(event) => setReviewNote(event.target.value)}
                       rows={3}
@@ -517,7 +543,7 @@ export function ReviewConsole(props: {
                         border: "1px solid var(--line)",
                         borderRadius: "0.8rem",
                         color: "var(--text)",
-                        fontFamily: "\"SF Mono\", \"Menlo\", monospace",
+                        fontFamily: '"SF Mono", "Menlo", monospace',
                         padding: "0.75rem",
                         resize: "vertical"
                       }}
@@ -624,9 +650,11 @@ function HistoryCard(props: { entries: CandidateReviewDetail["reviewHistory"] })
             {humanizeStatus(entry.previousReviewStatus)} {"->"} {humanizeStatus(entry.newReviewStatus)} •{" "}
             {entry.reviewerActorName}
           </div>
-          {entry.reviewNote ? <div style={{ fontSize: "0.9rem", whiteSpace: "pre-wrap" }}>{entry.reviewNote}</div> : null}
+          {entry.reviewNote ? (
+            <div style={{ fontSize: "0.9rem", whiteSpace: "pre-wrap" }}>{entry.reviewNote}</div>
+          ) : null}
           {entry.editedValue !== null ? (
-            <div style={{ fontFamily: "\"SF Mono\", \"Menlo\", monospace", fontSize: "0.84rem", whiteSpace: "pre-wrap" }}>
+            <div style={{ fontFamily: '"SF Mono", "Menlo", monospace', fontSize: "0.84rem", whiteSpace: "pre-wrap" }}>
               {formatCandidateValue(entry.editedValue)}
             </div>
           ) : null}
@@ -642,7 +670,9 @@ function MetadataRow(props: { label: string; value: string }): ReactElement {
       <div style={{ color: "var(--muted)", fontSize: "0.78rem", letterSpacing: "0.08em", textTransform: "uppercase" }}>
         {props.label}
       </div>
-      <div style={{ fontSize: "0.94rem", lineHeight: 1.45, whiteSpace: "pre-wrap", wordBreak: "break-word" }}>{props.value}</div>
+      <div style={{ fontSize: "0.94rem", lineHeight: 1.45, whiteSpace: "pre-wrap", wordBreak: "break-word" }}>
+        {props.value}
+      </div>
     </div>
   );
 }

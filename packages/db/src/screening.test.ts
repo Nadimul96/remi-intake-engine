@@ -1,13 +1,12 @@
 import assert from "node:assert/strict";
 import { randomUUID } from "node:crypto";
 import { readFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
 import { after, test } from "node:test";
+import { fileURLToPath } from "node:url";
 
 import { createId } from "@remi/domain";
-
-import { replaceExtractedCandidates, upsertCandidateExtractionState } from "./candidates";
 import type { PersistExtractedCandidateInput } from "./candidates";
+import { replaceExtractedCandidates, upsertCandidateExtractionState } from "./candidates";
 import { closeDb, getDb } from "./client";
 import { persistNormalizedContent } from "./content";
 import { listEntityResolutionQueue, reviewEntityResolutionProposal } from "./entities";
@@ -490,7 +489,10 @@ test("deal screening workbench assembles fixture-backed resolved and unresolved 
       note: "Create canonical organization for resolved workbench packet.",
       proposalId: resolvedOrganizationProposal.proposal.id
     });
-    assert.ok(resolvedOrganizationDetail.currentEntityLink, "resolved organization truth should attach to a canonical organization");
+    assert.ok(
+      resolvedOrganizationDetail.currentEntityLink,
+      "resolved organization truth should attach to a canonical organization"
+    );
     const organizationEntityId = resolvedOrganizationDetail.currentEntityLink.canonicalEntityId;
     canonicalEntityIds.add(organizationEntityId);
 
@@ -514,7 +516,10 @@ test("deal screening workbench assembles fixture-backed resolved and unresolved 
       note: "Attach broker relationship for resolved workbench packet.",
       proposalId: resolvedRelationshipProposal.proposal.id
     });
-    assert.ok(resolvedRelationshipDetail.currentRelationshipLink, "resolved workbench packet should attach a broker relationship");
+    assert.ok(
+      resolvedRelationshipDetail.currentRelationshipLink,
+      "resolved workbench packet should attach a broker relationship"
+    );
 
     const unresolvedPacket = await createFixtureSourcePacket({
       connectionId: sourceConnection.id,
@@ -586,7 +591,10 @@ test("deal screening workbench assembles fixture-backed resolved and unresolved 
     const unresolvedOrganizationProposal = entityQueue.items.find(
       (item) => item.proposal.sourceCandidateId === unresolvedAcceptedOrganization.candidate.id
     );
-    assert.ok(unresolvedOrganizationProposal, "unresolved workbench source should create an organization entity proposal");
+    assert.ok(
+      unresolvedOrganizationProposal,
+      "unresolved workbench source should create an organization entity proposal"
+    );
     await reviewEntityResolutionProposal({
       action: "accept",
       actorId: "actor_screening_test",

@@ -9,6 +9,7 @@ import {
   S3Client
 } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import type { NormalizedContentInput } from "@remi/db";
 import {
   completeIngestion,
   failIngestion,
@@ -20,35 +21,34 @@ import {
   getProvenanceAnchorsSummary,
   markAnchoringStarted,
   markCandidateExtractionStarted,
-  markNormalizationStarted,
   markIngestionImmutableStored,
-  markInspectionStarted,
   markIngestionProcessing,
+  markInspectionStarted,
+  markNormalizationStarted,
+  type ProvenanceAnchorInput,
   persistNormalizedContent,
   persistProvenanceAnchors,
-  replaceExtractedCandidates,
-  type ProvenanceAnchorInput,
   recordAnchoringFailure,
   recordAnchoringSkipped,
   recordCandidateExtractionFailure,
   recordCandidateExtractionSkipped,
   recordCandidateSignals,
+  recordInspectionArtifacts,
+  recordInspectionFailure,
   recordNormalizationFailure,
   recordNormalizationSkipped,
   recordNormalizedContent,
-  recordInspectionArtifacts,
-  recordInspectionFailure,
   recordProvenanceAnchors,
+  replaceExtractedCandidates,
   updateAttachmentPromotion,
-  upsertCandidateExtractionState,
+  upsertArtifactBlob,
   upsertArtifactProcessingState,
-  upsertDerivedArtifact,
-  upsertArtifactBlob
+  upsertCandidateExtractionState,
+  upsertDerivedArtifact
 } from "@remi/db";
-import type { NormalizedContentInput } from "@remi/db";
 import type {
-  CandidateExtractionResult,
   ArtifactParserTarget,
+  CandidateExtractionResult,
   NormalizedContentKind,
   NormalizedContentSummary,
   ParserResultStatus,
@@ -84,7 +84,9 @@ async function readObjectBuffer(key: string): Promise<Buffer> {
   return Buffer.from(await response.Body.transformToByteArray());
 }
 
-async function getObjectMetadata(key: string): Promise<{ contentType: string | null; originalFileName: string | null }> {
+async function getObjectMetadata(
+  key: string
+): Promise<{ contentType: string | null; originalFileName: string | null }> {
   const response = await s3Client.send(
     new HeadObjectCommand({
       Bucket: workflowConfig.bucket,
@@ -125,11 +127,7 @@ function buildDerivedStorageKey(input: {
   return `${workflowConfig.derivedPrefix}/${input.artifactBlobId}/${input.kind}/v${input.version}.${input.extension}`;
 }
 
-async function writeDerivedObject(input: {
-  body: string;
-  contentType: string;
-  key: string;
-}): Promise<void> {
+async function writeDerivedObject(input: { body: string; contentType: string; key: string }): Promise<void> {
   await s3Client.send(
     new PutObjectCommand({
       Body: input.body,
@@ -570,7 +568,12 @@ async function ensureImmutableBlobFromBuffer(input: {
   };
 }
 
-async function persistAnchorManifest(input: { artifactBlobId: string; groups: { anchorKind: string; count: number }[]; items: unknown[]; totalCount: number }): Promise<void> {
+async function persistAnchorManifest(input: {
+  artifactBlobId: string;
+  groups: { anchorKind: string; count: number }[];
+  items: unknown[];
+  totalCount: number;
+}): Promise<void> {
   const manifestKey = buildDerivedStorageKey({
     artifactBlobId: input.artifactBlobId,
     extension: "json",
@@ -744,7 +747,7 @@ async function inspectArtifactBlobInternal(input: {
     parserTarget: (payload.inspection.parserTarget as ArtifactParserTarget) ?? "none",
     supportTier:
       (payload.inspection.supportTier as "best_effort" | "deferred" | "supported" | "unsupported" | null) ?? null
-      };
+  };
 }
 
 function groupCandidateCounts(candidates: Awaited<ReturnType<typeof getExtractedCandidates>>): Record<string, number> {
@@ -937,7 +940,9 @@ async function promoteEmailAttachments(input: {
     reusedBlobCount: 0,
     warnings: []
   };
-  const semanticAttachments = new Map(input.normalizedContent.attachments.map((attachment) => [attachment.partIndex, attachment]));
+  const semanticAttachments = new Map(
+    input.normalizedContent.attachments.map((attachment) => [attachment.partIndex, attachment])
+  );
 
   for (const rawAttachment of input.normalizedEmailInput.email.attachments) {
     const semanticAttachment = semanticAttachments.get(rawAttachment.partIndex);
@@ -1059,7 +1064,8 @@ async function processArtifactBlobInternal(input: {
     (existingProcessing.normalizationStatus === "completed" ||
       existingProcessing.normalizationStatus === "completed_with_warnings" ||
       existingProcessing.normalizationStatus === "deferred") &&
-    (existingProcessing.normalizationStatus === "deferred" || (reusableState.hasNormalizedContent && reusableState.hasAnchors))
+    (existingProcessing.normalizationStatus === "deferred" ||
+      (reusableState.hasNormalizedContent && reusableState.hasAnchors))
   ) {
     const normalizedContent = reusableState.hasNormalizedContent
       ? await getNormalizedContentRecords(input.artifactBlobId)
@@ -1089,7 +1095,11 @@ async function processArtifactBlobInternal(input: {
       retryRecommended: false,
       reusedExistingBlob: true,
       status:
-        existingProcessing.normalizationStatus === "completed_with_warnings" ? "completed_with_warnings" : existingProcessing.normalizationStatus === "completed" ? "completed" : "deferred",
+        existingProcessing.normalizationStatus === "completed_with_warnings"
+          ? "completed_with_warnings"
+          : existingProcessing.normalizationStatus === "completed"
+            ? "completed"
+            : "deferred",
       summary: existingProcessing.summary ?? "Existing artifact processing was reused.",
       warnings: []
     };
@@ -1103,7 +1113,9 @@ async function processArtifactBlobInternal(input: {
       inspectionStatus: input.inspection.inspectionStatus,
       normalizationStatus: "deferred",
       parserTarget: input.inspection.parserTarget,
-      reasonCodes: [`parser_not_eligible:${input.inspection.supportTier ?? "unknown"}/${input.inspection.parserTarget}`],
+      reasonCodes: [
+        `parser_not_eligible:${input.inspection.supportTier ?? "unknown"}/${input.inspection.parserTarget}`
+      ],
       reprocessRecommended: input.inspection.supportTier === "deferred",
       retryRecommended: false,
       summary,
@@ -1127,7 +1139,9 @@ async function processArtifactBlobInternal(input: {
       candidateCount: candidateExtraction.candidateCount,
       contentKind: null,
       normalizedContent: emptyNormalizedContent(),
-      reasonCodes: [`parser_not_eligible:${input.inspection.supportTier ?? "unknown"}/${input.inspection.parserTarget}`],
+      reasonCodes: [
+        `parser_not_eligible:${input.inspection.supportTier ?? "unknown"}/${input.inspection.parserTarget}`
+      ],
       reprocessRecommended: input.inspection.supportTier === "deferred",
       retryRecommended: false,
       reusedExistingBlob: false,
@@ -1167,7 +1181,11 @@ async function processArtifactBlobInternal(input: {
     let attachmentWarnings: ParserWarning[] = [];
     let reprocessRecommended = false;
 
-    if (payload.content_kind === "email" && payload.normalized_content.kind === "email" && payload.normalized_content.email.attachments.length > 0) {
+    if (
+      payload.content_kind === "email" &&
+      payload.normalized_content.kind === "email" &&
+      payload.normalized_content.email.attachments.length > 0
+    ) {
       if (input.attachmentDepth >= 3) {
         attachmentWarnings.push({
           code: "attachment_recursion_limit_reached",
@@ -1285,7 +1303,6 @@ async function processArtifactBlobInternal(input: {
     throw error;
   }
 }
-
 
 export async function promoteUploadedArtifact(input: {
   actorId: string;
@@ -1493,7 +1510,8 @@ export async function normalizeUploadedArtifact(input: {
     await upsertArtifactProcessingState({
       artifactBlobId: input.artifactBlobId,
       contentKind: null,
-      inspectionStatus: input.supportTier === "deferred" || input.supportTier === "unsupported" ? "unsupported" : "completed",
+      inspectionStatus:
+        input.supportTier === "deferred" || input.supportTier === "unsupported" ? "unsupported" : "completed",
       normalizationStatus: status === "deferred" ? "deferred" : null,
       parserTarget: input.parserTarget,
       reasonCodes: [`parser_not_eligible:${input.supportTier ?? "unknown"}/${input.parserTarget}`],
@@ -1581,9 +1599,10 @@ export async function normalizeUploadedArtifact(input: {
 
   try {
     const parserTarget = input.parserTarget as Extract<ArtifactParserTarget, "eml" | "pdf" | "xlsx">;
-    let normalizedContent = existingProcessing?.normalizationStatus && reusableState.hasNormalizedContent
-      ? await getNormalizedContentRecords(input.artifactBlobId)
-      : null;
+    let normalizedContent =
+      existingProcessing?.normalizationStatus && reusableState.hasNormalizedContent
+        ? await getNormalizedContentRecords(input.artifactBlobId)
+        : null;
     let contentKind = existingProcessing?.contentKind ?? reusableState.contentKind;
     let normalizedPayload: NormalizeServiceResponse | null = null;
 
@@ -1636,8 +1655,8 @@ export async function normalizeUploadedArtifact(input: {
 
     const warnings = [
       ...buildParserWarnings({
-      parserTarget,
-      supportTier: input.supportTier
+        parserTarget,
+        supportTier: input.supportTier
       }),
       ...(attachmentOutcome?.warnings ?? [])
     ];

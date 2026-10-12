@@ -26,7 +26,9 @@ async function getInitialBrowser(): Promise<AcceptedTruthBrowserResponse> {
   return (await response.json()) as AcceptedTruthBrowserResponse;
 }
 
-async function getInitialDetail(item: AcceptedTruthBrowserResponse["items"][number] | null): Promise<AcceptedTruthDetail | null> {
+async function getInitialDetail(
+  item: AcceptedTruthBrowserResponse["items"][number] | null
+): Promise<AcceptedTruthDetail | null> {
   if (!item) {
     return null;
   }

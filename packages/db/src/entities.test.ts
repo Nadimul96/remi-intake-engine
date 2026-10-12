@@ -3,11 +3,9 @@ import { randomUUID } from "node:crypto";
 import { after, test } from "node:test";
 
 import { createId } from "@remi/domain";
-
-import { closeDb, getDb } from "./client";
 import type { PersistExtractedCandidateInput } from "./candidates";
 import { replaceExtractedCandidates } from "./candidates";
-import { getAcceptedTruthDetail } from "./truth";
+import { closeDb, getDb } from "./client";
 import {
   getEntityResolutionDetail,
   listCanonicalEntities,
@@ -15,6 +13,7 @@ import {
   reviewEntityResolutionProposal
 } from "./entities";
 import { reviewCandidate } from "./reviews";
+import { getAcceptedTruthDetail } from "./truth";
 
 const sql = getDb();
 
@@ -241,7 +240,11 @@ test("entity reconciliation supports create-new, alias-match, and possible-match
     assert.ok(primaryResolved.currentEntityLink, "first proposal acceptance should create an entity link");
     const primaryCanonicalEntityId = primaryResolved.currentEntityLink.canonicalEntityId;
     canonicalEntityIds.add(primaryCanonicalEntityId);
-    assert.equal(primaryResolved.reconciliationHistory.length, 1, "first accepted entity proposal should record reconciliation history");
+    assert.equal(
+      primaryResolved.reconciliationHistory.length,
+      1,
+      "first accepted entity proposal should record reconciliation history"
+    );
     assert.equal(primaryResolved.reconciliationHistory[0].previousProposalState, "pending_review");
     assert.equal(primaryResolved.reconciliationHistory[0].newProposalState, "accepted");
     assert.equal(primaryResolved.reconciliationHistory[0].chosenEntityCreated, true);
@@ -255,7 +258,11 @@ test("entity reconciliation supports create-new, alias-match, and possible-match
       1,
       "repeated sync runs should not duplicate active-link-preserved events"
     );
-    assert.equal(primaryDetail.reconciliationHistory.length, 1, "human reconciliation history should remain intact after sync refresh");
+    assert.equal(
+      primaryDetail.reconciliationHistory.length,
+      1,
+      "human reconciliation history should remain intact after sync refresh"
+    );
 
     const possibleMatchName = `Harbor Pointe ${suffix}`;
     const possible = await createAcceptedAssetTruth({
@@ -354,7 +361,10 @@ test("entity reconciliation supports create-new, alias-match, and possible-match
       note: "Create canonical asset after prior rejection."
     });
 
-    assert.ok(acceptedAfterReject.currentEntityLink, "re-reviewing a rejected proposal should be allowed and append history");
+    assert.ok(
+      acceptedAfterReject.currentEntityLink,
+      "re-reviewing a rejected proposal should be allowed and append history"
+    );
     canonicalEntityIds.add(acceptedAfterReject.currentEntityLink.canonicalEntityId);
     assert.equal(acceptedAfterReject.reconciliationHistory.length, 2);
     assert.equal(acceptedAfterReject.reconciliationHistory[0].previousProposalState, "rejected");
@@ -377,19 +387,32 @@ test("entity reconciliation supports create-new, alias-match, and possible-match
     });
 
     assert.ok(truthDetail, "accepted truth detail should still load after alias attachment");
-    assert.ok(truthDetail.reviewHistory.length >= 1, "accepted truth review history should remain intact after alias attachment");
+    assert.ok(
+      truthDetail.reviewHistory.length >= 1,
+      "accepted truth review history should remain intact after alias attachment"
+    );
 
     await sql`delete from accepted_classification_records where id = ${possible.acceptedRecord.id}`;
 
     queue = await listEntityResolutionQueue();
     const supersededPossibleQueueItem = queue.items.find((item) => item.proposal.id === possibleQueueItem.proposal.id);
-    assert.ok(supersededPossibleQueueItem, "superseded proposals should remain visible in the entity lane after source truth disappears");
+    assert.ok(
+      supersededPossibleQueueItem,
+      "superseded proposals should remain visible in the entity lane after source truth disappears"
+    );
     assert.equal(supersededPossibleQueueItem.proposal.currentProposal, false);
-    assert.equal(supersededPossibleQueueItem.currentEntityLink, null, "stale entity links should be removed when source truth disappears");
+    assert.equal(
+      supersededPossibleQueueItem.currentEntityLink,
+      null,
+      "stale entity links should be removed when source truth disappears"
+    );
 
     await listEntityResolutionQueue();
     const supersededPossibleDetail = await getEntityResolutionDetail(possibleQueueItem.proposal.id);
-    assert.ok(supersededPossibleDetail, "proposal detail should fall back to source-candidate state after accepted truth removal");
+    assert.ok(
+      supersededPossibleDetail,
+      "proposal detail should fall back to source-candidate state after accepted truth removal"
+    );
     assert.equal(
       supersededPossibleDetail.acceptedRecord.metadata.acceptedRecordMissing,
       true,
@@ -404,8 +427,13 @@ test("entity reconciliation supports create-new, alias-match, and possible-match
       supersededPossibleDetail.systemEvents.some((entry) => entry.eventType === "stale_link_removed"),
       "truth disappearance should record stale entity-link removal"
     );
-    const removedAliasEvent = supersededPossibleDetail.systemEvents.find((entry) => entry.eventType === "alias_removed");
-    assert.ok(removedAliasEvent, "truth disappearance should record alias removal when observed aliases are cleaned up");
+    const removedAliasEvent = supersededPossibleDetail.systemEvents.find(
+      (entry) => entry.eventType === "alias_removed"
+    );
+    assert.ok(
+      removedAliasEvent,
+      "truth disappearance should record alias removal when observed aliases are cleaned up"
+    );
     assert.deepEqual(removedAliasEvent.aliasValues, [possibleMatchName]);
     assert.equal(
       supersededPossibleDetail.systemEvents.filter((entry) => entry.eventType === "proposal_superseded").length,
@@ -424,8 +452,16 @@ test("entity reconciliation supports create-new, alias-match, and possible-match
     );
 
     queue = await listEntityResolutionQueue();
-    assert.equal(queue.counts.attachedAcceptedTruths, 3, "only current accepted truths should count as attached after one source truth disappears");
-    assert.equal(queue.counts.unattachedAcceptedTruths, 0, "no accepted truths should remain unattached after final acceptance");
+    assert.equal(
+      queue.counts.attachedAcceptedTruths,
+      3,
+      "only current accepted truths should count as attached after one source truth disappears"
+    );
+    assert.equal(
+      queue.counts.unattachedAcceptedTruths,
+      0,
+      "no accepted truths should remain unattached after final acceptance"
+    );
     assert.equal(queue.counts.pendingReview, 0, "no entity proposals should remain pending after final acceptance");
   } finally {
     if (artifactIds.length > 0) {
@@ -522,11 +558,7 @@ test("entity reconciliation supports narrow organization domain and name flows w
     };
   }
 
-  async function createAcceptedOrganizationTruth(input: {
-    domain?: string;
-    fileStem: string;
-    name?: string;
-  }) {
+  async function createAcceptedOrganizationTruth(input: { domain?: string; fileStem: string; name?: string }) {
     const artifact = await createArtifact(`${input.fileStem}-${suffix}.eml`);
     const candidates: PersistExtractedCandidateInput[] = [];
 
@@ -592,7 +624,10 @@ test("entity reconciliation supports narrow organization domain and name flows w
       candidates
     });
 
-    const acceptedRecords = new Map<string, NonNullable<Awaited<ReturnType<typeof reviewCandidate>>["acceptedRecord"]>>();
+    const acceptedRecords = new Map<
+      string,
+      NonNullable<Awaited<ReturnType<typeof reviewCandidate>>["acceptedRecord"]>
+    >();
     const acceptedCandidates = new Map<string, Awaited<ReturnType<typeof reviewCandidate>>["candidate"]>();
     for (const candidate of createdCandidates) {
       const reviewDetail = await reviewCandidate({
@@ -641,7 +676,10 @@ test("entity reconciliation supports narrow organization domain and name flows w
       note: "Create canonical organization from accepted domain truth."
     });
 
-    assert.ok(createdOrganization.currentEntityLink, "organization create-new flow should create a canonical entity link");
+    assert.ok(
+      createdOrganization.currentEntityLink,
+      "organization create-new flow should create a canonical entity link"
+    );
     assert.equal(createdOrganization.currentEntityLink.canonicalEntityType, "organization");
     assert.equal(createdOrganization.currentEntityLink.canonicalEntityDisplayName, "Creston Capital");
     const organizationEntityId = createdOrganization.currentEntityLink.canonicalEntityId;
@@ -650,8 +688,7 @@ test("entity reconciliation supports narrow organization domain and name flows w
     queue = await listEntityResolutionQueue();
     const nameQueueItem = queue.items.find(
       (item) =>
-        item.proposal.sourceCandidateId ===
-        primary.acceptedCandidates.get("probable_originating_organization_name")?.id
+        item.proposal.sourceCandidateId === primary.acceptedCandidates.get("probable_originating_organization_name")?.id
     );
     assert.ok(nameQueueItem, "accepted organization-name truth should also generate a reconciliation proposal");
     assert.equal(nameQueueItem.proposal.entityType, "organization");
@@ -682,7 +719,10 @@ test("entity reconciliation supports narrow organization domain and name flows w
         duplicateDomain.acceptedCandidates.get("probable_originating_organization_domain")?.id
     );
 
-    assert.ok(attachExistingQueueItem, "duplicate accepted organization domain should generate another reconciliation proposal");
+    assert.ok(
+      attachExistingQueueItem,
+      "duplicate accepted organization domain should generate another reconciliation proposal"
+    );
     assert.equal(attachExistingQueueItem.proposal.entityType, "organization");
     assert.equal(attachExistingQueueItem.proposal.proposalKind, "attach_to_existing");
     assert.equal(attachExistingQueueItem.proposal.matchCategory, "exact_match");
@@ -698,7 +738,10 @@ test("entity reconciliation supports narrow organization domain and name flows w
       note: "Attach organization-domain truth to the existing canonical organization."
     });
 
-    assert.ok(attachedByDomain.currentEntityLink, "organization-domain truth should attach to the existing organization");
+    assert.ok(
+      attachedByDomain.currentEntityLink,
+      "organization-domain truth should attach to the existing organization"
+    );
     assert.equal(attachedByDomain.currentEntityLink.canonicalEntityId, organizationEntityId);
 
     const canonicalEntities = await listCanonicalEntities();
@@ -723,7 +766,11 @@ test("entity reconciliation supports narrow organization domain and name flows w
     assert.equal(acceptedOrgTruth.acceptedRecord.acceptedValue, "crestoncapital.com");
 
     queue = await listEntityResolutionQueue();
-    assert.equal(queue.counts.pendingReview, 0, "no organization reconciliation proposals should remain pending after review");
+    assert.equal(
+      queue.counts.pendingReview,
+      0,
+      "no organization reconciliation proposals should remain pending after review"
+    );
   } finally {
     if (artifactIds.length > 0) {
       await sql`delete from artifact_blobs where id in ${sql([...new Set(artifactIds)])}`;

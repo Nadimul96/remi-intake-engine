@@ -1,9 +1,4 @@
 import {
-  INTAKE_REGISTRATION_WORKFLOW,
-  IntakeRegistrationWorkflowInputSchema,
-  RegisterIntakeRequestSchema
-} from "@remi/domain";
-import {
   bindWorkflowExecutionId,
   buildSourceUri,
   createIntakeRegistration,
@@ -11,6 +6,11 @@ import {
   getIntakeQueueItem,
   listIntakeQueueItems
 } from "@remi/db";
+import {
+  INTAKE_REGISTRATION_WORKFLOW,
+  IntakeRegistrationWorkflowInputSchema,
+  RegisterIntakeRequestSchema
+} from "@remi/domain";
 import type { FastifyPluginAsync } from "fastify";
 
 import { apiConfig } from "../lib/config";

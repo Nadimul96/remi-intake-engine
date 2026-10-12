@@ -8,8 +8,8 @@ import type {
   ReviewHistoryEntry
 } from "@remi/domain";
 import { formatBytes, statusTone } from "@remi/ui";
-import { startTransition, useEffect, useEffectEvent, useState } from "react";
 import type { ReactElement } from "react";
+import { startTransition, useEffect, useEffectEvent, useState } from "react";
 
 import { ConsoleNav } from "./console-nav";
 
@@ -92,42 +92,42 @@ export function TruthBrowser(props: {
   const [detail, setDetail] = useState<AcceptedTruthDetail | null>(props.initialDetail);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
-  const loadBrowser = useEffectEvent(async (nextFilter: AcceptedTruthFilter, focus?: AcceptedRecordSelection | null) => {
-    setIsRefreshing(true);
+  const loadBrowser = useEffectEvent(
+    async (nextFilter: AcceptedTruthFilter, focus?: AcceptedRecordSelection | null) => {
+      setIsRefreshing(true);
 
-    try {
-      const payload = await parseJson<AcceptedTruthBrowserResponse>(
-        await fetch(`${props.apiBaseUrl}/api/truth?type=${nextFilter}`, {
-          cache: "no-store"
-        })
-      );
+      try {
+        const payload = await parseJson<AcceptedTruthBrowserResponse>(
+          await fetch(`${props.apiBaseUrl}/api/truth?type=${nextFilter}`, {
+            cache: "no-store"
+          })
+        );
 
-      setBrowser(payload);
-      setSelected((current) => {
-        const preferred = focus ?? current;
-        const matching = preferred
-          ? payload.items.find((item) => selectionMatches(item, preferred))
-          : null;
+        setBrowser(payload);
+        setSelected((current) => {
+          const preferred = focus ?? current;
+          const matching = preferred ? payload.items.find((item) => selectionMatches(item, preferred)) : null;
 
-        if (matching) {
-          return {
-            acceptedRecordId: matching.acceptedRecordId,
-            acceptedRecordType: matching.acceptedRecordType
-          };
-        }
+          if (matching) {
+            return {
+              acceptedRecordId: matching.acceptedRecordId,
+              acceptedRecordType: matching.acceptedRecordType
+            };
+          }
 
-        const first = payload.items[0];
-        return first
-          ? {
-              acceptedRecordId: first.acceptedRecordId,
-              acceptedRecordType: first.acceptedRecordType
-            }
-          : null;
-      });
-    } finally {
-      setIsRefreshing(false);
+          const first = payload.items[0];
+          return first
+            ? {
+                acceptedRecordId: first.acceptedRecordId,
+                acceptedRecordType: first.acceptedRecordType
+              }
+            : null;
+        });
+      } finally {
+        setIsRefreshing(false);
+      }
     }
-  });
+  );
 
   const loadDetail = useEffectEvent(async (nextSelected: AcceptedRecordSelection) => {
     const payload = await parseJson<AcceptedTruthDetail>(
@@ -173,7 +173,9 @@ export function TruthBrowser(props: {
         }}
       >
         <div>
-          <div style={{ color: "var(--accent)", fontSize: "0.75rem", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+          <div
+            style={{ color: "var(--accent)", fontSize: "0.75rem", letterSpacing: "0.12em", textTransform: "uppercase" }}
+          >
             REMI Operator Console
           </div>
           <h1 style={{ fontSize: "2rem", margin: "0.35rem 0 0.2rem" }}>Accepted Truth Browser</h1>
@@ -266,7 +268,9 @@ export function TruthBrowser(props: {
           </div>
           <div style={{ display: "grid" }}>
             {browser.items.length === 0 ? (
-              <div style={{ color: "var(--muted)", padding: "1.25rem" }}>No accepted truth records match this filter.</div>
+              <div style={{ color: "var(--muted)", padding: "1.25rem" }}>
+                No accepted truth records match this filter.
+              </div>
             ) : (
               browser.items.map((item) => {
                 const isSelected = selectionMatches(item, selected);
@@ -326,9 +330,7 @@ export function TruthBrowser(props: {
                       </span>
                       <div style={{ color: "var(--muted)", fontSize: "0.82rem" }}>{sourceState}</div>
                     </div>
-                    <div style={{ color: "var(--muted)", fontSize: "0.84rem" }}>
-                      {formatTimestamp(item.updatedAt)}
-                    </div>
+                    <div style={{ color: "var(--muted)", fontSize: "0.84rem" }}>{formatTimestamp(item.updatedAt)}</div>
                   </button>
                 );
               })
@@ -349,7 +351,14 @@ export function TruthBrowser(props: {
           {detail ? (
             <>
               <div>
-                <div style={{ color: "var(--muted)", fontSize: "0.78rem", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                <div
+                  style={{
+                    color: "var(--muted)",
+                    fontSize: "0.78rem",
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase"
+                  }}
+                >
                   Accepted Truth
                 </div>
                 <h2 style={{ margin: "0.35rem 0 0" }}>{detail.acceptedRecord.fieldName}</h2>
@@ -365,7 +374,10 @@ export function TruthBrowser(props: {
                   rows={[
                     ["Accepted Value", formatCandidateValue(detail.acceptedRecord.acceptedValue)],
                     ["Review Status", humanizeStatus(detail.acceptedRecord.reviewStatus)],
-                    ["Reviewed By", `${detail.acceptedRecord.reviewerActorName} • ${formatTimestamp(detail.acceptedRecord.reviewedAt)}`],
+                    [
+                      "Reviewed By",
+                      `${detail.acceptedRecord.reviewerActorName} • ${formatTimestamp(detail.acceptedRecord.reviewedAt)}`
+                    ],
                     ["Review Note", detail.acceptedRecord.reviewNote ?? "None"],
                     ["Value Type", detail.acceptedRecord.valueType],
                     ["Provenance Anchors", String(detail.acceptedRecord.provenanceAnchorIds.length)]
@@ -421,7 +433,14 @@ export function TruthBrowser(props: {
                   ]}
                 />
                 <div style={{ marginTop: "0.75rem" }}>
-                  <div style={{ color: "var(--muted)", fontSize: "0.78rem", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                  <div
+                    style={{
+                      color: "var(--muted)",
+                      fontSize: "0.78rem",
+                      letterSpacing: "0.08em",
+                      textTransform: "uppercase"
+                    }}
+                  >
                     Newer Current Candidates In Same Artifact/Field Area
                   </div>
                   {detail.lineage.newerCandidates.length > 0 ? (
@@ -458,7 +477,9 @@ export function TruthBrowser(props: {
                     ])}
                   />
                 ) : (
-                  <div style={{ color: "var(--muted)" }}>No provenance anchors were loaded for this accepted record.</div>
+                  <div style={{ color: "var(--muted)" }}>
+                    No provenance anchors were loaded for this accepted record.
+                  </div>
                 )}
               </div>
 
@@ -467,12 +488,16 @@ export function TruthBrowser(props: {
                 {detail.reviewHistory.length > 0 ? (
                   <ReviewHistoryTimeline entries={detail.reviewHistory} />
                 ) : (
-                  <div style={{ color: "var(--muted)" }}>No review history is recorded for this accepted record yet.</div>
+                  <div style={{ color: "var(--muted)" }}>
+                    No review history is recorded for this accepted record yet.
+                  </div>
                 )}
               </div>
             </>
           ) : (
-            <div style={{ color: "var(--muted)" }}>Select an accepted record to inspect its source evidence and lineage.</div>
+            <div style={{ color: "var(--muted)" }}>
+              Select an accepted record to inspect its source evidence and lineage.
+            </div>
           )}
         </aside>
       </section>
@@ -563,9 +588,11 @@ function ReviewHistoryTimeline(props: { entries: ReviewHistoryEntry[] }): ReactE
             {humanizeStatus(entry.previousReviewStatus)} {"->"} {humanizeStatus(entry.newReviewStatus)} •{" "}
             {entry.reviewerActorName}
           </div>
-          {entry.reviewNote ? <div style={{ fontSize: "0.9rem", whiteSpace: "pre-wrap" }}>{entry.reviewNote}</div> : null}
+          {entry.reviewNote ? (
+            <div style={{ fontSize: "0.9rem", whiteSpace: "pre-wrap" }}>{entry.reviewNote}</div>
+          ) : null}
           {entry.editedValue !== null ? (
-            <div style={{ fontFamily: "\"SF Mono\", \"Menlo\", monospace", fontSize: "0.84rem", whiteSpace: "pre-wrap" }}>
+            <div style={{ fontFamily: '"SF Mono", "Menlo", monospace', fontSize: "0.84rem", whiteSpace: "pre-wrap" }}>
               {formatCandidateValue(entry.editedValue)}
             </div>
           ) : null}

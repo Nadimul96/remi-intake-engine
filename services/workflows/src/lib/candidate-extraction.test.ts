@@ -90,8 +90,12 @@ test("candidate extraction emits grounded organization domain and name signals f
     })
   );
 
-  const organizationDomain = candidates.find((candidate) => candidate.fieldName === "probable_originating_organization_domain");
-  const organizationName = candidates.find((candidate) => candidate.fieldName === "probable_originating_organization_name");
+  const organizationDomain = candidates.find(
+    (candidate) => candidate.fieldName === "probable_originating_organization_domain"
+  );
+  const organizationName = candidates.find(
+    (candidate) => candidate.fieldName === "probable_originating_organization_name"
+  );
 
   assert.ok(organizationDomain, "corporate sender domains should produce an organization-domain candidate");
   assert.equal(organizationDomain?.candidateValue, "crestoncapital.com");
@@ -107,8 +111,13 @@ test("candidate extraction emits a narrow asset-organization relationship signal
     })
   );
 
-  const relationship = candidates.find((candidate) => candidate.fieldName === "probable_originating_organization_for_asset");
-  assert.ok(relationship, "coexisting asset and organization evidence should produce an asset-organization relationship candidate");
+  const relationship = candidates.find(
+    (candidate) => candidate.fieldName === "probable_originating_organization_for_asset"
+  );
+  assert.ok(
+    relationship,
+    "coexisting asset and organization evidence should produce an asset-organization relationship candidate"
+  );
   assert.deepEqual(relationship?.candidateValue, {
     assetName: "Sycamore Ridge",
     emailMessageId: "emailmsg_test",
@@ -126,8 +135,13 @@ test("candidate extraction emits a broker asset-organization relationship signal
     })
   );
 
-  const brokerRelationship = candidates.find((candidate) => candidate.fieldName === "probable_broker_organization_for_asset");
-  assert.ok(brokerRelationship, "explicit broker sender evidence should produce a broker asset-organization relationship candidate");
+  const brokerRelationship = candidates.find(
+    (candidate) => candidate.fieldName === "probable_broker_organization_for_asset"
+  );
+  assert.ok(
+    brokerRelationship,
+    "explicit broker sender evidence should produce a broker asset-organization relationship candidate"
+  );
   assert.deepEqual(brokerRelationship?.candidateValue, {
     assetName: "Sycamore Ridge",
     emailMessageId: "emailmsg_test",

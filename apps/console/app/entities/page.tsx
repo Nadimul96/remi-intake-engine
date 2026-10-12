@@ -50,5 +50,7 @@ export default async function EntityResolutionPage(): Promise<ReactElement> {
   const initialQueue = await getInitialQueue();
   const initialDetail = await getInitialDetail(initialQueue.items[0]?.proposal.id ?? null);
 
-  return <EntityReconciliationConsole apiBaseUrl={apiBaseUrl} initialDetail={initialDetail} initialQueue={initialQueue} />;
+  return (
+    <EntityReconciliationConsole apiBaseUrl={apiBaseUrl} initialDetail={initialDetail} initialQueue={initialQueue} />
+  );
 }

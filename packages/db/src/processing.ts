@@ -1,14 +1,14 @@
-import { createId } from "@remi/domain";
 import type {
-  PromotedArtifactSummary,
   NormalizedContentKind,
   ParserResultStatus,
   ParserResultSummary,
   ParserWarning,
+  PromotedArtifactSummary,
   ProvenanceAnchorSummary,
   ProvenanceAnchorsSummary
 } from "@remi/domain";
-import postgres from "postgres";
+import { createId } from "@remi/domain";
+import type postgres from "postgres";
 
 import { getDb } from "./client";
 import { getNormalizedContentRecords } from "./content";
@@ -145,16 +145,18 @@ function mapArtifactProcessing(row: {
 
 export async function upsertNormalizationResult(input: UpsertNormalizationResultInput): Promise<ParserResultSummary> {
   const sql = getDb();
-  const [row] = await sql<{
-    content_kind: NormalizedContentKind | null;
-    reason_codes_json: string[] | string;
-    reprocess_recommended: boolean;
-    retry_recommended: boolean;
-    status: ParserResultStatus;
-    summary: string;
-    updated_at: Date;
-    warnings_json: ParserWarning[] | string;
-  }[]>`
+  const [row] = await sql<
+    {
+      content_kind: NormalizedContentKind | null;
+      reason_codes_json: string[] | string;
+      reprocess_recommended: boolean;
+      retry_recommended: boolean;
+      status: ParserResultStatus;
+      summary: string;
+      updated_at: Date;
+      warnings_json: ParserWarning[] | string;
+    }[]
+  >`
     insert into normalization_results (
       id,
       source_item_id,
@@ -259,18 +261,20 @@ export async function upsertArtifactProcessingState(
 
 export async function getArtifactProcessingSummary(artifactBlobId: string): Promise<PromotedArtifactSummary | null> {
   const sql = getDb();
-  const [row] = await sql<{
-    artifact_blob_id: string;
-    content_kind: NormalizedContentKind | null;
-    content_type: string | null;
-    inspection_status: "completed" | "failed" | "pending" | "unsupported" | null;
-    normalization_status: ParserResultStatus | null;
-    original_file_name: string;
-    parser_target: "archive" | "eml" | "none" | "pdf" | "xlsx" | null;
-    sha256: string;
-    summary: string;
-    support_tier: "best_effort" | "deferred" | "supported" | "unsupported" | null;
-  }[]>`
+  const [row] = await sql<
+    {
+      artifact_blob_id: string;
+      content_kind: NormalizedContentKind | null;
+      content_type: string | null;
+      inspection_status: "completed" | "failed" | "pending" | "unsupported" | null;
+      normalization_status: ParserResultStatus | null;
+      original_file_name: string;
+      parser_target: "archive" | "eml" | "none" | "pdf" | "xlsx" | null;
+      sha256: string;
+      summary: string;
+      support_tier: "best_effort" | "deferred" | "supported" | "unsupported" | null;
+    }[]
+  >`
     select
       aps.artifact_blob_id,
       aps.support_tier,
@@ -293,16 +297,18 @@ export async function getArtifactProcessingSummary(artifactBlobId: string): Prom
 
 export async function getNormalizationResultSummary(sourceItemId: string): Promise<ParserResultSummary | null> {
   const sql = getDb();
-  const [row] = await sql<{
-    content_kind: NormalizedContentKind | null;
-    reason_codes_json: string[] | string;
-    reprocess_recommended: boolean;
-    retry_recommended: boolean;
-    status: ParserResultStatus;
-    summary: string;
-    updated_at: Date;
-    warnings_json: ParserWarning[] | string;
-  }[]>`
+  const [row] = await sql<
+    {
+      content_kind: NormalizedContentKind | null;
+      reason_codes_json: string[] | string;
+      reprocess_recommended: boolean;
+      retry_recommended: boolean;
+      status: ParserResultStatus;
+      summary: string;
+      updated_at: Date;
+      warnings_json: ParserWarning[] | string;
+    }[]
+  >`
     select
       status,
       summary,
@@ -370,12 +376,14 @@ export async function persistProvenanceAnchors(input: {
       `;
     }
 
-    const existing = await tx<{
-      anchor_key: string;
-      anchor_kind: string;
-      owner_id: string;
-      owner_type: string;
-    }[]>`
+    const existing = await tx<
+      {
+        anchor_key: string;
+        anchor_kind: string;
+        owner_id: string;
+        owner_type: string;
+      }[]
+    >`
       select owner_type, owner_id, anchor_kind, anchor_key
       from provenance_anchors
       where artifact_blob_id = ${input.artifactBlobId}
@@ -405,17 +413,19 @@ export async function persistProvenanceAnchors(input: {
 
 export async function getProvenanceAnchorsSummary(artifactBlobId: string): Promise<ProvenanceAnchorsSummary> {
   const sql = getDb();
-  const rows = await sql<{
-    anchor_key: string;
-    anchor_kind: string;
-    id: string;
-    locator_json: Record<string, unknown> | string;
-    metadata_json: Record<string, unknown> | string;
-    owner_id: string;
-    owner_type: string;
-    summary: string;
-    title: string;
-  }[]>`
+  const rows = await sql<
+    {
+      anchor_key: string;
+      anchor_kind: string;
+      id: string;
+      locator_json: Record<string, unknown> | string;
+      metadata_json: Record<string, unknown> | string;
+      owner_id: string;
+      owner_type: string;
+      summary: string;
+      title: string;
+    }[]
+  >`
     select
       id,
       owner_type,
@@ -432,7 +442,12 @@ export async function getProvenanceAnchorsSummary(artifactBlobId: string): Promi
   `;
 
   const items = rows.map(mapAnchor);
-  const groups = [...items.reduce((map, item) => map.set(item.anchorKind, (map.get(item.anchorKind) ?? 0) + 1), new Map<string, number>())]
+  const groups = [
+    ...items.reduce(
+      (map, item) => map.set(item.anchorKind, (map.get(item.anchorKind) ?? 0) + 1),
+      new Map<string, number>()
+    )
+  ]
     .map(([anchorKind, count]) => ({ anchorKind, count }))
     .sort((left, right) => left.anchorKind.localeCompare(right.anchorKind));
 

@@ -1,5 +1,5 @@
-import { proxyActivities } from "@temporalio/workflow";
 import type { IntakeRegistrationWorkflowInput } from "@remi/domain";
+import { proxyActivities } from "@temporalio/workflow";
 
 interface IntakeActivities {
   extractCandidatesForUploadedArtifact(input: {

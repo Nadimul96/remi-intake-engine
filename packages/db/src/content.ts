@@ -1,4 +1,3 @@
-import { createId } from "@remi/domain";
 import type {
   AttachmentSummary,
   DocumentPageSummary,
@@ -10,7 +9,8 @@ import type {
   WorkbookSummary,
   WorksheetSummary
 } from "@remi/domain";
-import postgres from "postgres";
+import { createId } from "@remi/domain";
+import type postgres from "postgres";
 
 import { getDb } from "./client";
 
@@ -165,11 +165,7 @@ function asStringArray(value: string[] | string | null): string[] {
   return [];
 }
 
-async function deleteMissingDocumentPages(
-  tx: DbTransaction,
-  documentId: string,
-  pageNumbers: number[]
-): Promise<void> {
+async function deleteMissingDocumentPages(tx: DbTransaction, documentId: string, pageNumbers: number[]): Promise<void> {
   const existing = await tx<{ page_number: number }[]>`
     select page_number
     from document_pages
@@ -213,11 +209,7 @@ async function deleteMissingAttachments(
   `;
 }
 
-async function deleteMissingWorksheets(
-  tx: DbTransaction,
-  workbookId: string,
-  sheetIndexes: number[]
-): Promise<void> {
+async function deleteMissingWorksheets(tx: DbTransaction, workbookId: string, sheetIndexes: number[]): Promise<void> {
   const existing = await tx<{ sheet_index: number }[]>`
     select sheet_index
     from worksheets
@@ -275,7 +267,9 @@ function parseSentAt(value: string | null): Date | null {
   return parsed;
 }
 
-export async function persistNormalizedContent(input: PersistNormalizedContentInput): Promise<NormalizedContentRecords> {
+export async function persistNormalizedContent(
+  input: PersistNormalizedContentInput
+): Promise<NormalizedContentRecords> {
   const sql = getDb();
 
   await sql.begin(async (rawTx) => {
@@ -283,9 +277,11 @@ export async function persistNormalizedContent(input: PersistNormalizedContentIn
 
     if (input.normalizedContent.kind === "document") {
       const { document } = input.normalizedContent;
-      const [documentRow] = await tx<{
-        id: string;
-      }[]>`
+      const [documentRow] = await tx<
+        {
+          id: string;
+        }[]
+      >`
         insert into documents (
           id,
           tenant_id,
@@ -354,9 +350,11 @@ export async function persistNormalizedContent(input: PersistNormalizedContentIn
 
     if (input.normalizedContent.kind === "email") {
       const { email } = input.normalizedContent;
-      const [threadRow] = await tx<{
-        id: string;
-      }[]>`
+      const [threadRow] = await tx<
+        {
+          id: string;
+        }[]
+      >`
         insert into email_threads (
           id,
           tenant_id,
@@ -387,9 +385,11 @@ export async function persistNormalizedContent(input: PersistNormalizedContentIn
       const messageIdsByPosition = new Map<number, string>();
 
       for (const message of email.messages) {
-        const [messageRow] = await tx<{
-          id: string;
-        }[]>`
+        const [messageRow] = await tx<
+          {
+            id: string;
+          }[]
+        >`
           insert into email_messages (
             id,
             email_thread_id,
@@ -519,9 +519,11 @@ export async function persistNormalizedContent(input: PersistNormalizedContentIn
 
     if (input.normalizedContent.kind === "workbook") {
       const { workbook } = input.normalizedContent;
-      const [workbookRow] = await tx<{
-        id: string;
-      }[]>`
+      const [workbookRow] = await tx<
+        {
+          id: string;
+        }[]
+      >`
         insert into workbooks (
           id,
           tenant_id,
@@ -549,9 +551,11 @@ export async function persistNormalizedContent(input: PersistNormalizedContentIn
       const worksheetIdsByIndex = new Map<number, string>();
 
       for (const worksheet of workbook.worksheets) {
-        const [worksheetRow] = await tx<{
-          id: string;
-        }[]>`
+        const [worksheetRow] = await tx<
+          {
+            id: string;
+          }[]
+        >`
           insert into worksheets (
             id,
             workbook_id,
@@ -621,10 +625,7 @@ export async function persistNormalizedContent(input: PersistNormalizedContentIn
             updated_at = now()
         `;
 
-        tablesBySheetIndex.set(table.sheetIndex, [
-          ...(tablesBySheetIndex.get(table.sheetIndex) ?? []),
-          table.tableKey
-        ]);
+        tablesBySheetIndex.set(table.sheetIndex, [...(tablesBySheetIndex.get(table.sheetIndex) ?? []), table.tableKey]);
       }
 
       for (const [sheetIndex, worksheetId] of worksheetIdsByIndex.entries()) {
@@ -645,14 +646,16 @@ export async function persistNormalizedContent(input: PersistNormalizedContentIn
 export async function getNormalizedContentRecords(artifactBlobId: string): Promise<NormalizedContentRecords> {
   const sql = getDb();
 
-  const [document] = await sql<{
-    id: string;
-    page_count: number;
-    text_available: boolean;
-    text_preview: string | null;
-    title: string | null;
-    updated_at: Date;
-  }[]>`
+  const [document] = await sql<
+    {
+      id: string;
+      page_count: number;
+      text_available: boolean;
+      text_preview: string | null;
+      title: string | null;
+      updated_at: Date;
+    }[]
+  >`
     select id, title, page_count, text_available, text_preview, updated_at
     from documents
     where artifact_blob_id = ${artifactBlobId}
@@ -660,13 +663,15 @@ export async function getNormalizedContentRecords(artifactBlobId: string): Promi
   `;
 
   const documentPages = document
-    ? await sql<{
-        char_count: number;
-        id: string;
-        page_number: number;
-        text_available: boolean;
-        text_preview: string | null;
-      }[]>`
+    ? await sql<
+        {
+          char_count: number;
+          id: string;
+          page_number: number;
+          text_available: boolean;
+          text_preview: string | null;
+        }[]
+      >`
         select id, page_number, text_available, char_count, text_preview
         from document_pages
         where document_id = ${document.id}
@@ -674,13 +679,15 @@ export async function getNormalizedContentRecords(artifactBlobId: string): Promi
       `
     : [];
 
-  const [emailThread] = await sql<{
-    id: string;
-    message_count: number;
-    subject: string | null;
-    thread_key: string;
-    updated_at: Date;
-  }[]>`
+  const [emailThread] = await sql<
+    {
+      id: string;
+      message_count: number;
+      subject: string | null;
+      thread_key: string;
+      updated_at: Date;
+    }[]
+  >`
     select id, thread_key, subject, message_count, updated_at
     from email_threads
     where artifact_blob_id = ${artifactBlobId}
@@ -688,19 +695,21 @@ export async function getNormalizedContentRecords(artifactBlobId: string): Promi
   `;
 
   const emailMessages = emailThread
-    ? await sql<{
-        attachment_count: number;
-        body_preview: string | null;
-        cc_json: string[] | string;
-        id: string;
-        message_id_header: string | null;
-        position: number;
-        sender: string | null;
-        sent_at: Date | null;
-        sent_at_raw: string | null;
-        subject: string | null;
-        to_json: string[] | string;
-      }[]>`
+    ? await sql<
+        {
+          attachment_count: number;
+          body_preview: string | null;
+          cc_json: string[] | string;
+          id: string;
+          message_id_header: string | null;
+          position: number;
+          sender: string | null;
+          sent_at: Date | null;
+          sent_at_raw: string | null;
+          subject: string | null;
+          to_json: string[] | string;
+        }[]
+      >`
         select
           id,
           position,
@@ -720,33 +729,35 @@ export async function getNormalizedContentRecords(artifactBlobId: string): Promi
     : [];
 
   const attachments = emailMessages.length
-    ? await sql<{
-        content_type: string | null;
-        file_name: string | null;
-        id: string;
-        part_index: number;
-        promoted_content_kind: NormalizedContentKind | null;
-        promoted_content_type: string | null;
-        promoted_file_name: string | null;
-        promoted_artifact_blob_id: string | null;
-        promoted_inspection_status: "completed" | "failed" | "pending" | "unsupported" | null;
-        promoted_normalization_status:
-          | "completed"
-          | "completed_with_warnings"
-          | "deferred"
-          | "failed"
-          | "pending"
-          | "skipped"
-          | null;
-        promoted_parser_target: "archive" | "eml" | "none" | "pdf" | "xlsx" | null;
-        promoted_sha256: string | null;
-        promoted_summary: string | null;
-        promoted_support_tier: "best_effort" | "deferred" | "supported" | "unsupported" | null;
-        promotion_status: AttachmentSummary["promotionStatus"];
-        promotion_summary: string | null;
-        sha256: string | null;
-        size_bytes: bigint | number | string | null;
-      }[]>`
+    ? await sql<
+        {
+          content_type: string | null;
+          file_name: string | null;
+          id: string;
+          part_index: number;
+          promoted_content_kind: NormalizedContentKind | null;
+          promoted_content_type: string | null;
+          promoted_file_name: string | null;
+          promoted_artifact_blob_id: string | null;
+          promoted_inspection_status: "completed" | "failed" | "pending" | "unsupported" | null;
+          promoted_normalization_status:
+            | "completed"
+            | "completed_with_warnings"
+            | "deferred"
+            | "failed"
+            | "pending"
+            | "skipped"
+            | null;
+          promoted_parser_target: "archive" | "eml" | "none" | "pdf" | "xlsx" | null;
+          promoted_sha256: string | null;
+          promoted_summary: string | null;
+          promoted_support_tier: "best_effort" | "deferred" | "supported" | "unsupported" | null;
+          promotion_status: AttachmentSummary["promotionStatus"];
+          promotion_summary: string | null;
+          sha256: string | null;
+          size_bytes: bigint | number | string | null;
+        }[]
+      >`
         select
           a.id,
           a.part_index,
@@ -774,12 +785,14 @@ export async function getNormalizedContentRecords(artifactBlobId: string): Promi
       `
     : [];
 
-  const [workbook] = await sql<{
-    file_name: string;
-    id: string;
-    sheet_count: number;
-    updated_at: Date;
-  }[]>`
+  const [workbook] = await sql<
+    {
+      file_name: string;
+      id: string;
+      sheet_count: number;
+      updated_at: Date;
+    }[]
+  >`
     select id, file_name, sheet_count, updated_at
     from workbooks
     where artifact_blob_id = ${artifactBlobId}
@@ -787,14 +800,16 @@ export async function getNormalizedContentRecords(artifactBlobId: string): Promi
   `;
 
   const worksheets = workbook
-    ? await sql<{
-        id: string;
-        max_column: number | null;
-        max_row: number | null;
-        name: string;
-        sheet_index: number;
-        table_count: number;
-      }[]>`
+    ? await sql<
+        {
+          id: string;
+          max_column: number | null;
+          max_row: number | null;
+          name: string;
+          sheet_index: number;
+          table_count: number;
+        }[]
+      >`
         select id, sheet_index, name, max_row, max_column, table_count
         from worksheets
         where workbook_id = ${workbook.id}
@@ -803,13 +818,15 @@ export async function getNormalizedContentRecords(artifactBlobId: string): Promi
     : [];
 
   const structuredTables = worksheets.length
-    ? await sql<{
-        header_row_count: number | null;
-        id: string;
-        name: string;
-        ref: string | null;
-        table_key: string;
-      }[]>`
+    ? await sql<
+        {
+          header_row_count: number | null;
+          id: string;
+          name: string;
+          ref: string | null;
+          table_key: string;
+        }[]
+      >`
         select id, table_key, name, ref, header_row_count
         from structured_tables
         where worksheet_id in ${sql(worksheets.map((worksheet) => worksheet.id))}

@@ -3,8 +3,8 @@
 import type { DealScreeningWorkbench, IntakeQueueItem, ScreeningIssue, ScreeningReadinessStatus } from "@remi/domain";
 import { formatBytes, statusTone } from "@remi/ui";
 import Link from "next/link";
-import { startTransition, useEffect, useEffectEvent, useMemo, useState } from "react";
 import type { ReactElement } from "react";
+import { startTransition, useEffect, useEffectEvent, useMemo, useState } from "react";
 
 import { ConsoleNav } from "./console-nav";
 
@@ -48,7 +48,12 @@ function humanizeStatus(value: string): string {
   return value.replaceAll("_", " ");
 }
 
-function readinessBadge(status: ScreeningReadinessStatus): { background: string; border: string; color: string; label: string } {
+function readinessBadge(status: ScreeningReadinessStatus): {
+  background: string;
+  border: string;
+  color: string;
+  label: string;
+} {
   switch (status) {
     case "ready":
       return {
@@ -169,7 +174,9 @@ export function ScreeningWorkbench(props: {
         }}
       >
         <div>
-          <div style={{ color: "var(--accent)", fontSize: "0.75rem", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+          <div
+            style={{ color: "var(--accent)", fontSize: "0.75rem", letterSpacing: "0.12em", textTransform: "uppercase" }}
+          >
             REMI Operator Console
           </div>
           <h1 style={{ fontSize: "2rem", margin: "0.35rem 0 0.2rem" }}>Deal Screening Workbench</h1>
@@ -208,7 +215,10 @@ export function ScreeningWorkbench(props: {
         }}
       >
         <SummaryCard label="Readiness" value={badge.label} tone={badge.color} />
-        <SummaryCard label="Pending Candidate Reviews" value={String(workbench?.readiness.pendingCandidateReviews ?? 0)} />
+        <SummaryCard
+          label="Pending Candidate Reviews"
+          value={String(workbench?.readiness.pendingCandidateReviews ?? 0)}
+        />
         <SummaryCard
           label="Asset Identity"
           value={`${workbench?.readiness.assetIdentity.resolvedCurrent ?? 0}/${workbench?.readiness.assetIdentity.currentTotal ?? 0}`}
@@ -240,7 +250,9 @@ export function ScreeningWorkbench(props: {
           }}
         >
           <div style={{ borderBottom: "1px solid var(--line)", padding: "1rem" }}>
-            <div style={{ fontSize: "0.8rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--muted)" }}>
+            <div
+              style={{ fontSize: "0.8rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--muted)" }}
+            >
               Source Packets
             </div>
             <div style={{ color: "var(--muted)", marginTop: "0.35rem" }}>
@@ -336,7 +348,10 @@ export function ScreeningWorkbench(props: {
                           <span style={{ color: "var(--muted)", fontSize: "0.82rem" }}>{issueLabel(issue)}</span>
                         </div>
                         <div style={{ color: "var(--muted)", marginTop: "0.35rem" }}>{issue.summary}</div>
-                        <Link href={issue.href} style={{ color: "var(--accent)", display: "inline-block", marginTop: "0.55rem" }}>
+                        <Link
+                          href={issue.href}
+                          style={{ color: "var(--accent)", display: "inline-block", marginTop: "0.55rem" }}
+                        >
                           Open lane
                         </Link>
                       </div>
@@ -357,7 +372,10 @@ export function ScreeningWorkbench(props: {
                     ["Support Tier", workbench.sourceItem.supportTier ?? "Unknown"],
                     ["Parser Target", workbench.sourceItem.parserTarget ?? "Unknown"],
                     ["Normalized Kind", workbench.sourceItem.normalizedContent.contentKind ?? "None"],
-                    ["Thread Subject", workbench.sourceItem.normalizedContent.emailThread?.subject ?? "No email thread"],
+                    [
+                      "Thread Subject",
+                      workbench.sourceItem.normalizedContent.emailThread?.subject ?? "No email thread"
+                    ],
                     ["Messages", String(workbench.sourceItem.normalizedContent.emailMessages.length)],
                     ["Attachments", String(workbench.sourceItem.normalizedContent.attachments.length)]
                   ]}
@@ -373,7 +391,9 @@ export function ScreeningWorkbench(props: {
                     {workbench.acceptedTruth.counts.all} accepted record(s) from this intake package.
                   </div>
                   {workbench.acceptedTruth.items.length === 0 ? (
-                    <div style={{ color: "var(--muted)" }}>No accepted truth is attached to this source packet yet.</div>
+                    <div style={{ color: "var(--muted)" }}>
+                      No accepted truth is attached to this source packet yet.
+                    </div>
                   ) : (
                     workbench.acceptedTruth.items.map((item) => (
                       <div
@@ -403,11 +423,14 @@ export function ScreeningWorkbench(props: {
 
               <Panel title="Candidate Signals">
                 <div style={{ color: "var(--muted)", marginBottom: "0.75rem" }}>
-                  {workbench.candidateSignals.items.length} current signal(s), {workbench.candidateSignals.pendingReview} pending review.
+                  {workbench.candidateSignals.items.length} current signal(s),{" "}
+                  {workbench.candidateSignals.pendingReview} pending review.
                 </div>
                 <div style={{ display: "grid", gap: "0.65rem" }}>
                   {workbench.candidateSignals.items.length === 0 ? (
-                    <div style={{ color: "var(--muted)" }}>No candidate signals were recorded for this source packet.</div>
+                    <div style={{ color: "var(--muted)" }}>
+                      No candidate signals were recorded for this source packet.
+                    </div>
                   ) : (
                     workbench.candidateSignals.items.map((item) => (
                       <div

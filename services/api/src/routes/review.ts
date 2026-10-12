@@ -1,16 +1,16 @@
 import {
-  CandidateReviewDetailSchema,
-  CandidateReviewQueueResponseSchema,
-  ReviewCandidateActionRequestSchema,
-  ReviewCandidateActionResponseSchema
-} from "@remi/domain";
-import {
   CandidateReviewConflictError,
   CandidateReviewNotFoundError,
   getCandidateReviewDetail,
   listCandidateReviewQueue,
   reviewCandidate
 } from "@remi/db";
+import {
+  CandidateReviewDetailSchema,
+  CandidateReviewQueueResponseSchema,
+  ReviewCandidateActionRequestSchema,
+  ReviewCandidateActionResponseSchema
+} from "@remi/domain";
 import type { FastifyPluginAsync } from "fastify";
 
 export const reviewRoutes: FastifyPluginAsync = async (app) => {

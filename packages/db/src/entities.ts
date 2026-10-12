@@ -1,13 +1,11 @@
 import { createHash } from "node:crypto";
-
-import { createId } from "@remi/domain";
 import type {
   AcceptedRecordSummary,
   AcceptedRecordType,
   AcceptedTruthEntityLink,
   CanonicalEntityAliasSummary,
-  CanonicalEntityType,
   CanonicalEntitySummary,
+  CanonicalEntityType,
   EntityResolutionDecisionAction,
   EntityResolutionDetail,
   EntityResolutionHistoryEntry,
@@ -21,7 +19,8 @@ import type {
   EntityResolutionSystemEvent,
   EntityResolutionSystemEventType
 } from "@remi/domain";
-import postgres from "postgres";
+import { createId } from "@remi/domain";
+import type postgres from "postgres";
 
 import { getDb } from "./client";
 import { getCandidateReviewDetail } from "./reviews";
@@ -291,8 +290,9 @@ function inferAssetName(rawValue: string | null): string | null {
       .replace(/[()[\]<>]/g, " ")
   );
   const stripped = normalizeWhitespace(
-    normalized
-      .split(/\b(?:rent roll|workbook|teaser|offering memorandum|om|summary|attached|attachment|updated|sample)\b/i)[0] ?? ""
+    normalized.split(
+      /\b(?:rent roll|workbook|teaser|offering memorandum|om|summary|attached|attachment|updated|sample)\b/i
+    )[0] ?? ""
   );
 
   if (!stripped || /^remi\b/i.test(stripped) || /^sample\b/i.test(stripped) || stripped.length < 5) {
@@ -341,7 +341,10 @@ function hintLabel(kind: IdentityHintKind): string {
 }
 
 function tokenizeNormalizedName(value: string): string[] {
-  return value.split(" ").map((token) => token.trim()).filter(Boolean);
+  return value
+    .split(" ")
+    .map((token) => token.trim())
+    .filter(Boolean);
 }
 
 function overlapScore(leftNormalized: string, rightNormalized: string): number {
@@ -491,10 +494,14 @@ function acceptedTruthToEntityDraft(input: {
         confidence: 0.92,
         entityType: "organization",
         normalizedDisplayName: normalizeEntityName(
-          input.companionOrganizationNames?.[0] ?? inferOrganizationDisplayNameFromDomain(normalizedDomain) ?? normalizedDomain
+          input.companionOrganizationNames?.[0] ??
+            inferOrganizationDisplayNameFromDomain(normalizedDomain) ??
+            normalizedDomain
         ),
         proposedDisplayName:
-          input.companionOrganizationNames?.[0] ?? inferOrganizationDisplayNameFromDomain(normalizedDomain) ?? normalizedDomain,
+          input.companionOrganizationNames?.[0] ??
+          inferOrganizationDisplayNameFromDomain(normalizedDomain) ??
+          normalizedDomain,
         sourceFieldName: row.field_name
       };
     }
@@ -519,7 +526,9 @@ function buildProposalKey(input: {
           aliasId: candidate.aliasId,
           entityId: candidate.entityId,
           matchedName:
-            candidate.signalType === "exact_domain_match" ? normalizeDomain(candidate.matchedName) : normalizeEntityName(candidate.matchedName),
+            candidate.signalType === "exact_domain_match"
+              ? normalizeDomain(candidate.matchedName)
+              : normalizeEntityName(candidate.matchedName),
           signalType: candidate.signalType
         })),
         normalizedDisplayName: input.normalizedDisplayName,
@@ -739,7 +748,10 @@ function buildPossibleMatchCandidate(input: {
     return null;
   }
 
-  const confidence = Math.min(0.76, input.hint.kind === "accepted_truth_name" ? 0.58 + score * 0.18 : 0.54 + score * 0.16);
+  const confidence = Math.min(
+    0.76,
+    input.hint.kind === "accepted_truth_name" ? 0.58 + score * 0.18 : 0.54 + score * 0.16
+  );
   const targetLabel = input.targetAlias
     ? `alias "${input.targetAlias.aliasValue}"`
     : `canonical ${input.entityType} "${input.entity.displayName}"`;
@@ -776,7 +788,8 @@ function buildMatchCandidates(input: {
 
     if (input.draft.entityType === "organization" && primaryHint.kind === "accepted_truth_domain") {
       const domainAliasMatch = entity.aliases.find(
-        (alias) => alias.aliasType === "observed_domain" && alias.normalizedAliasValue === primaryHint.normalizedDisplayName
+        (alias) =>
+          alias.aliasType === "observed_domain" && alias.normalizedAliasValue === primaryHint.normalizedDisplayName
       );
 
       if (domainAliasMatch) {
@@ -824,7 +837,10 @@ function buildMatchCandidates(input: {
             primaryHint.kind === "accepted_truth_domain" || primaryHint.kind === "organization_domain_hint"
               ? "exact_domain_match"
               : "alias_match",
-          confidence: primaryHint.kind === "accepted_truth_domain" || primaryHint.kind === "organization_domain_hint" ? 0.95 : 0.91,
+          confidence:
+            primaryHint.kind === "accepted_truth_domain" || primaryHint.kind === "organization_domain_hint"
+              ? 0.95
+              : 0.91,
           rationale:
             primaryHint.kind === "accepted_truth_domain" || primaryHint.kind === "organization_domain_hint"
               ? `Accepted truth domain exactly matches observed domain "${primaryAliasMatch.aliasValue}" for ${canonicalLabel} "${entity.displayName}".`
@@ -839,9 +855,13 @@ function buildMatchCandidates(input: {
 
     if (!bestCandidate) {
       for (const hint of secondaryHints) {
-        if (input.draft.entityType === "organization" && (hint.kind === "accepted_truth_domain" || hint.kind === "organization_domain_hint")) {
+        if (
+          input.draft.entityType === "organization" &&
+          (hint.kind === "accepted_truth_domain" || hint.kind === "organization_domain_hint")
+        ) {
           const domainAliasMatch = entity.aliases.find(
-            (alias) => alias.aliasType === "observed_domain" && alias.normalizedAliasValue === hint.normalizedDisplayName
+            (alias) =>
+              alias.aliasType === "observed_domain" && alias.normalizedAliasValue === hint.normalizedDisplayName
           );
           if (domainAliasMatch) {
             bestCandidate = {
@@ -1392,7 +1412,7 @@ async function syncEntityResolutionProposalTx(input: {
     entityType: draft.entityType,
     acceptedTruthDomain:
       input.acceptedTruth.field_name === "probable_originating_organization_domain"
-        ? normalizeJsonValue(input.acceptedTruth.accepted_value_json) as string
+        ? (normalizeJsonValue(input.acceptedTruth.accepted_value_json) as string)
         : null,
     acceptedTruthName: draft.proposedDisplayName,
     artifactFileName: input.acceptedTruth.artifact_file_name,
@@ -1720,7 +1740,8 @@ async function syncEntityResolutionProposalTx(input: {
       eventKey: `proposal-reactivated:${proposalId}:${matchingProposal.superseded_at?.toISOString() ?? matchingProposal.updated_at.toISOString()}`,
       previousProposalState: matchingProposal.proposal_state,
       newProposalState: "pending_review",
-      summary: "Auto-sync reactivated this proposal because the same accepted-truth reconciliation context became current again."
+      summary:
+        "Auto-sync reactivated this proposal because the same accepted-truth reconciliation context became current again."
     });
   }
 
@@ -1736,7 +1757,8 @@ async function syncEntityResolutionProposalTx(input: {
   `;
 
   for (const row of supersededRows) {
-    const newProposalState: EntityResolutionProposalState = row.proposal_state === "accepted" ? "accepted" : "superseded";
+    const newProposalState: EntityResolutionProposalState =
+      row.proposal_state === "accepted" ? "accepted" : "superseded";
     await recordEntityResolutionSystemEventTx({
       tx: input.tx,
       tenantId: row.tenant_id,
@@ -1758,7 +1780,10 @@ async function syncEntityResolutionProposalTx(input: {
   }
 }
 
-async function supersedeStaleProposalsTx(input: { retainedSourceCandidateIds: string[]; tx: DbTransaction }): Promise<void> {
+async function supersedeStaleProposalsTx(input: {
+  retainedSourceCandidateIds: string[];
+  tx: DbTransaction;
+}): Promise<void> {
   const staleProposals =
     input.retainedSourceCandidateIds.length === 0
       ? await input.tx<ProposalRow[]>`
@@ -1920,7 +1945,8 @@ async function supersedeStaleProposalsTx(input: { retainedSourceCandidateIds: st
   }
 
   for (const proposal of staleProposals) {
-    const newProposalState: EntityResolutionProposalState = proposal.proposal_state === "accepted" ? "accepted" : "superseded";
+    const newProposalState: EntityResolutionProposalState =
+      proposal.proposal_state === "accepted" ? "accepted" : "superseded";
     await recordEntityResolutionSystemEventTx({
       tx: input.tx,
       tenantId: proposal.tenant_id,
@@ -1963,7 +1989,12 @@ async function supersedeStaleProposalsTx(input: { retainedSourceCandidateIds: st
     if (removedAliases.length > 0) {
       const aliasValues = removedAliases.map((alias) => alias.alias_value);
       const aliasHash = createHash("sha1")
-        .update(removedAliases.map((alias) => alias.id).sort().join("|"))
+        .update(
+          removedAliases
+            .map((alias) => alias.id)
+            .sort()
+            .join("|")
+        )
         .digest("hex");
       await recordEntityResolutionSystemEventTx({
         tx: input.tx,
@@ -2270,13 +2301,15 @@ async function upsertObservedAliasTx(input: {
     where source_candidate_id = ${input.proposal.source_candidate_id}
   `;
 
-  const [sourceCandidate] = await input.tx<{
-    artifact_blob_id: string;
-    candidate_value_json: unknown;
-    field_name: string;
-    reviewed_value_json: unknown | null;
-    tenant_id: string;
-  }[]>`
+  const [sourceCandidate] = await input.tx<
+    {
+      artifact_blob_id: string;
+      candidate_value_json: unknown;
+      field_name: string;
+      reviewed_value_json: unknown | null;
+      tenant_id: string;
+    }[]
+  >`
     select
       tenant_id,
       artifact_blob_id,
@@ -2297,9 +2330,14 @@ async function upsertObservedAliasTx(input: {
     aliasValue: string;
     normalizedAliasValue: string;
   }> = [];
-  const reviewedSourceValue = normalizeJsonValue(sourceCandidate.reviewed_value_json ?? sourceCandidate.candidate_value_json);
+  const reviewedSourceValue = normalizeJsonValue(
+    sourceCandidate.reviewed_value_json ?? sourceCandidate.candidate_value_json
+  );
 
-  if (input.proposal.entity_type === "organization" && sourceCandidate.field_name === "probable_originating_organization_domain") {
+  if (
+    input.proposal.entity_type === "organization" &&
+    sourceCandidate.field_name === "probable_originating_organization_domain"
+  ) {
     if (typeof reviewedSourceValue === "string") {
       const normalizedDomain = normalizeDomain(reviewedSourceValue);
       if (normalizedDomain) {
@@ -2732,7 +2770,11 @@ export async function reviewEntityResolutionProposal(input: {
       }
 
       resolvedEntity = targetEntity;
-    } else if (!wantsCreateNewEntity && proposal.proposal_kind === "attach_to_existing" && matchingCandidates.length > 1) {
+    } else if (
+      !wantsCreateNewEntity &&
+      proposal.proposal_kind === "attach_to_existing" &&
+      matchingCandidates.length > 1
+    ) {
       throw new EntityResolutionConflictError(
         "Proposal matches multiple canonical entities. Select a specific entity or clear the selection to create a new entity."
       );

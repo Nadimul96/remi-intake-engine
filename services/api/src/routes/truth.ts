@@ -1,15 +1,17 @@
+import { getAcceptedTruthDetail, listAcceptedTruthRecords } from "@remi/db";
 import {
   AcceptedRecordTypeSchema,
   AcceptedTruthBrowserResponseSchema,
   AcceptedTruthDetailSchema,
   AcceptedTruthFilterSchema
 } from "@remi/domain";
-import { getAcceptedTruthDetail, listAcceptedTruthRecords } from "@remi/db";
 import type { FastifyPluginAsync } from "fastify";
 
 export const truthRoutes: FastifyPluginAsync = async (app) => {
   app.get("/api/truth", async (request, reply) => {
-    const filterResult = AcceptedTruthFilterSchema.safeParse(((request.query as { type?: string }).type ?? "all").trim());
+    const filterResult = AcceptedTruthFilterSchema.safeParse(
+      ((request.query as { type?: string }).type ?? "all").trim()
+    );
     if (!filterResult.success) {
       reply.code(400);
       return {

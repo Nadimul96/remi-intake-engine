@@ -86,7 +86,11 @@ function collapseAlphaNumeric(value: string): string {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, "");
 }
 
-function parseSenderIdentity(sender: string | null): { displayName: string | null; domain: string | null; emailAddress: string | null } {
+function parseSenderIdentity(sender: string | null): {
+  displayName: string | null;
+  domain: string | null;
+  emailAddress: string | null;
+} {
   if (!sender) {
     return {
       displayName: null,
@@ -96,8 +100,9 @@ function parseSenderIdentity(sender: string | null): { displayName: string | nul
   }
 
   const trimmed = normalizeWhitespace(sender);
-  const angleMatch = trimmed.match(/^(.*?)[<\[](.*?)?[>\]]$/);
-  const candidateEmail = angleMatch?.[2]?.trim() || trimmed.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i)?.[0] || null;
+  const angleMatch = trimmed.match(/^(.*?)[<[](.*?)?[>\]]$/);
+  const candidateEmail =
+    angleMatch?.[2]?.trim() || trimmed.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i)?.[0] || null;
   const emailAddress = candidateEmail ? candidateEmail.toLowerCase() : null;
   const domain = emailAddress?.split("@")[1] ?? null;
   const displayName = angleMatch?.[1]
@@ -129,7 +134,10 @@ function inferOrganizationDomain(sender: string | null): { confidence: number; d
   };
 }
 
-function inferOrganizationName(input: { sender: string | null; domain: string | null }): { confidence: number; name: string } | null {
+function inferOrganizationName(input: {
+  sender: string | null;
+  domain: string | null;
+}): { confidence: number; name: string } | null {
   const parsed = parseSenderIdentity(input.sender);
   if (!parsed.displayName) {
     return null;
@@ -145,12 +153,14 @@ function inferOrganizationName(input: { sender: string | null; domain: string | 
     return null;
   }
 
-  const baseDomainLabel = input.domain ? input.domain.split(".").slice(-2, -1)[0] ?? input.domain.split(".")[0] : null;
+  const baseDomainLabel = input.domain
+    ? (input.domain.split(".").slice(-2, -1)[0] ?? input.domain.split(".")[0])
+    : null;
   const collapsedDomainLabel = baseDomainLabel ? collapseAlphaNumeric(baseDomainLabel) : "";
   const hasCorporateSignal = ORGANIZATION_NAME_HINT_PATTERN.test(displayName);
-  const matchesDomainIdentity = Boolean(collapsedDomainLabel) && (
-    collapsedDisplayName.includes(collapsedDomainLabel) || collapsedDomainLabel.includes(collapsedDisplayName)
-  );
+  const matchesDomainIdentity =
+    Boolean(collapsedDomainLabel) &&
+    (collapsedDisplayName.includes(collapsedDomainLabel) || collapsedDomainLabel.includes(collapsedDisplayName));
 
   if (!hasCorporateSignal && !matchesDomainIdentity) {
     return null;
@@ -175,8 +185,9 @@ function inferAssetName(rawValue: string | null): string | null {
   );
 
   const stripped = normalizeWhitespace(
-    normalized
-      .split(/\b(?:rent roll|workbook|teaser|offering memorandum|om|summary|attached|attachment|updated|sample)\b/i)[0] ?? ""
+    normalized.split(
+      /\b(?:rent roll|workbook|teaser|offering memorandum|om|summary|attached|attachment|updated|sample)\b/i
+    )[0] ?? ""
   );
 
   if (!stripped || /^remi\b/i.test(stripped) || /^sample\b/i.test(stripped) || stripped.length < 5) {
@@ -187,7 +198,10 @@ function inferAssetName(rawValue: string | null): string | null {
   return titled.split(/\s+/).length >= 2 ? titled : null;
 }
 
-function classifyDocument(input: { fileName: string; hints: string[] }): { confidence: number; label: string; methodDetail: string } | null {
+function classifyDocument(input: {
+  fileName: string;
+  hints: string[];
+}): { confidence: number; label: string; methodDetail: string } | null {
   const combined = normalizeWhitespace([input.fileName, ...input.hints].join(" ")).toLowerCase();
 
   if (/\brent roll\b/.test(combined)) {
@@ -225,8 +239,14 @@ function classifyDocument(input: { fileName: string; hints: string[] }): { confi
   return null;
 }
 
-function inferOriginatorRole(input: { bodyPreview: string | null; sender: string | null; subject: string | null }): { confidence: number; role: string } | null {
-  const haystack = normalizeWhitespace([input.sender ?? "", input.subject ?? "", input.bodyPreview ?? ""].join(" ")).toLowerCase();
+function inferOriginatorRole(input: {
+  bodyPreview: string | null;
+  sender: string | null;
+  subject: string | null;
+}): { confidence: number; role: string } | null {
+  const haystack = normalizeWhitespace(
+    [input.sender ?? "", input.subject ?? "", input.bodyPreview ?? ""].join(" ")
+  ).toLowerCase();
 
   if (!haystack) {
     return null;
@@ -678,7 +698,9 @@ function buildEmailCandidates(input: ExtractionContext): CandidateDraft[] {
         extractionMethod: "rule",
         extractionMethodDetail: docClass.methodDetail,
         fieldName: "probable_document_classification",
-        provenanceAnchors: [headerAnchor, bodyAnchor].filter((value): value is ProvenanceAnchorSummary => Boolean(value)),
+        provenanceAnchors: [headerAnchor, bodyAnchor].filter((value): value is ProvenanceAnchorSummary =>
+          Boolean(value)
+        ),
         sourceSemanticObjectId: message.id,
         sourceSemanticObjectType: "email_message",
         summary: `Email appears to be a ${docClass.label.replaceAll("_", " ")} intake artifact.`,
@@ -699,7 +721,9 @@ function buildEmailCandidates(input: ExtractionContext): CandidateDraft[] {
         candidateType: "classification_candidate",
         candidateValue: originatorRole.role,
         confidence: originatorRole.confidence,
-        evidencePreview: normalizeWhitespace([message.sender ?? "", message.subject ?? "", message.bodyPreview ?? ""].join(" | ")),
+        evidencePreview: normalizeWhitespace(
+          [message.sender ?? "", message.subject ?? "", message.bodyPreview ?? ""].join(" | ")
+        ),
         extractionMethod: "rule",
         extractionMethodDetail: "originator_role_rule",
         fieldName: "probable_originator_role",
@@ -763,7 +787,9 @@ function buildEmailCandidates(input: ExtractionContext): CandidateDraft[] {
   }
 
   if (assetName && headerAnchor && (organizationDomain || organizationName)) {
-    const relationshipEvidence = normalizeWhitespace([message.sender ?? "", message.subject ?? "", message.bodyPreview ?? ""].join(" | "));
+    const relationshipEvidence = normalizeWhitespace(
+      [message.sender ?? "", message.subject ?? "", message.bodyPreview ?? ""].join(" | ")
+    );
     candidates.push(
       buildCandidateDraft({
         artifactBlobId: input.artifactBlobId,
@@ -773,7 +799,9 @@ function buildEmailCandidates(input: ExtractionContext): CandidateDraft[] {
           emailMessageId: message.id,
           organizationDomain: organizationDomain?.domain ?? null,
           organizationName: organizationName?.name ?? null,
-          relationshipType: strongBrokerRelationshipSignal ? "broker_organization_for_asset" : "originating_organization_for_asset"
+          relationshipType: strongBrokerRelationshipSignal
+            ? "broker_organization_for_asset"
+            : "originating_organization_for_asset"
         },
         confidence: strongBrokerRelationshipSignal ? 0.93 : organizationDomain && organizationName ? 0.9 : 0.82,
         evidencePreview: relationshipEvidence,
@@ -781,7 +809,9 @@ function buildEmailCandidates(input: ExtractionContext): CandidateDraft[] {
           assetName,
           organizationDomain: organizationDomain?.domain ?? null,
           organizationName: organizationName?.name ?? null,
-          relationshipType: strongBrokerRelationshipSignal ? "broker_organization_for_asset" : "originating_organization_for_asset"
+          relationshipType: strongBrokerRelationshipSignal
+            ? "broker_organization_for_asset"
+            : "originating_organization_for_asset"
         },
         extractionMethod: "rule",
         extractionMethodDetail: strongBrokerRelationshipSignal
@@ -904,7 +934,11 @@ function buildEmailCandidates(input: ExtractionContext): CandidateDraft[] {
         extractionMethod: "rule",
         extractionMethodDetail: "attachment_context_relationship_rule",
         fieldName: "probable_deal_package_relationship",
-        provenanceAnchors: [attachmentAnchor, ...(threadAnchor ? [threadAnchor] : []), ...(bodyAnchor ? [bodyAnchor] : [])],
+        provenanceAnchors: [
+          attachmentAnchor,
+          ...(threadAnchor ? [threadAnchor] : []),
+          ...(bodyAnchor ? [bodyAnchor] : [])
+        ],
         sourceSemanticObjectId: attachment.id,
         sourceSemanticObjectType: "attachment",
         summary: `Attachment ${attachment.fileName ?? `part ${attachment.partIndex + 1}`} likely supports the originating deal package context.`,

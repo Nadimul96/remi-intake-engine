@@ -1,6 +1,4 @@
 import { createHash } from "node:crypto";
-
-import { createId } from "@remi/domain";
 import type {
   AcceptedAssetOrganizationRelationshipLink,
   AcceptedRecordSummary,
@@ -11,8 +9,8 @@ import type {
   AssetOrganizationRelationshipQueueResponse,
   AssetOrganizationRelationshipType,
   CanonicalEntitySummary,
-  RelationshipEntityMatchCandidate,
   RelationshipAcceptedRecordStatus,
+  RelationshipEntityMatchCandidate,
   RelationshipResolutionDecisionAction,
   RelationshipResolutionHistoryEntry,
   RelationshipResolutionProposalState,
@@ -20,7 +18,8 @@ import type {
   RelationshipResolutionSystemEvent,
   RelationshipResolutionSystemEventType
 } from "@remi/domain";
-import postgres from "postgres";
+import { createId } from "@remi/domain";
+import type postgres from "postgres";
 
 import { getDb } from "./client";
 import { getCandidateReviewDetail } from "./reviews";
@@ -255,7 +254,12 @@ function normalizeJsonValue(value: unknown): unknown {
 }
 
 function normalizeEntityName(value: string | null): string {
-  return (value ?? "").trim().toLowerCase().replace(/[^a-z0-9]+/g, " ").replace(/\s+/g, " ").trim();
+  return (value ?? "")
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function normalizeDomain(value: string | null): string | null {
@@ -264,7 +268,11 @@ function normalizeDomain(value: string | null): string | null {
     return null;
   }
 
-  const stripped = trimmed.replace(/^@+/, "").replace(/^https?:\/\//, "").split("/")[0] ?? "";
+  const stripped =
+    trimmed
+      .replace(/^@+/, "")
+      .replace(/^https?:\/\//, "")
+      .split("/")[0] ?? "";
   return /^[a-z0-9.-]+\.[a-z]{2,}$/i.test(stripped) ? stripped : null;
 }
 
@@ -306,7 +314,10 @@ function mapCanonicalEntityAlias(row: CanonicalEntityAliasRow) {
   } satisfies CanonicalEntitySummary["aliases"][number];
 }
 
-function mapCanonicalEntity(row: CanonicalEntityRow, aliases: CanonicalEntitySummary["aliases"]): CanonicalEntitySummary {
+function mapCanonicalEntity(
+  row: CanonicalEntityRow,
+  aliases: CanonicalEntitySummary["aliases"]
+): CanonicalEntitySummary {
   return {
     id: row.id,
     entityType: row.entity_type,
@@ -483,10 +494,7 @@ function acceptedRecordStatusFromRow(row: QueueRow): RelationshipAcceptedRecordS
   return "deleted";
 }
 
-function acceptedRecordStatusExplanation(
-  status: RelationshipAcceptedRecordStatus,
-  row: QueueRow
-): string {
+function acceptedRecordStatusExplanation(status: RelationshipAcceptedRecordStatus, row: QueueRow): string {
   switch (status) {
     case "active":
       return "Accepted relationship truth is currently present and supported by the relationship lane.";
@@ -608,7 +616,8 @@ function parseAcceptedRelationshipDraft(row: SupportedAcceptedRelationshipRow): 
   }
 
   const normalizedDomain = typeof organizationDomain === "string" ? normalizeDomain(organizationDomain) : null;
-  const trimmedOrganizationName = typeof organizationName === "string" && organizationName.trim() ? organizationName.trim() : null;
+  const trimmedOrganizationName =
+    typeof organizationName === "string" && organizationName.trim() ? organizationName.trim() : null;
 
   if (!trimmedOrganizationName && !normalizedDomain) {
     return null;
@@ -636,7 +645,10 @@ function mergeCandidates(candidates: RelationshipEntityMatchCandidate[]): Relati
 
     const existingPriority = signalPriority(existing.signalType);
     const nextPriority = signalPriority(candidate.signalType);
-    if (nextPriority < existingPriority || (nextPriority === existingPriority && candidate.confidence > existing.confidence)) {
+    if (
+      nextPriority < existingPriority ||
+      (nextPriority === existingPriority && candidate.confidence > existing.confidence)
+    ) {
       bestByEntity.set(candidate.entityId, candidate);
     }
   }
@@ -951,7 +963,9 @@ function buildAcceptedRelationshipRecordSnapshotFromCandidate(input: {
     sourceCandidateId: input.candidateDetail.candidate.id,
     artifactBlobId: input.candidateDetail.candidate.artifactBlobId,
     fieldName:
-      typeof metadata.acceptedFieldName === "string" ? metadata.acceptedFieldName : input.candidateDetail.candidate.fieldName,
+      typeof metadata.acceptedFieldName === "string"
+        ? metadata.acceptedFieldName
+        : input.candidateDetail.candidate.fieldName,
     valueType: input.candidateDetail.candidate.valueType,
     acceptedValue,
     sourceSemanticObjectType: input.candidateDetail.candidate.sourceSemanticObjectType,
@@ -1005,7 +1019,8 @@ async function loadArtifactLinkedAssetCandidatesTx(input: {
       signalType: "artifact_entity_link",
       confidence: 0.99,
       rationale: `Reviewed asset truth from this artifact is already attached to canonical asset "${row.canonical_entity_display_name}".`,
-      matchedName: typeof matchedName === "string" && matchedName.trim() ? matchedName : row.canonical_entity_display_name,
+      matchedName:
+        typeof matchedName === "string" && matchedName.trim() ? matchedName : row.canonical_entity_display_name,
       matchedFrom: "reviewed asset truth from the same artifact"
     } satisfies RelationshipEntityMatchCandidate;
   });
@@ -1038,7 +1053,8 @@ async function loadArtifactLinkedOrganizationCandidatesTx(input: {
       signalType: "artifact_entity_link",
       confidence: 0.99,
       rationale: `Reviewed organization truth from this artifact is already attached to canonical organization "${row.canonical_entity_display_name}".`,
-      matchedName: typeof matchedName === "string" && matchedName.trim() ? matchedName : row.canonical_entity_display_name,
+      matchedName:
+        typeof matchedName === "string" && matchedName.trim() ? matchedName : row.canonical_entity_display_name,
       matchedFrom: "reviewed organization truth from the same artifact"
     } satisfies RelationshipEntityMatchCandidate;
   });
@@ -1123,7 +1139,8 @@ function buildExactOrganizationCandidates(
 
     if (draft.normalizedOrganizationName) {
       const nameAlias = entity.aliases.find(
-        (alias) => alias.aliasType === "observed_name" && alias.normalizedAliasValue === draft.normalizedOrganizationName
+        (alias) =>
+          alias.aliasType === "observed_name" && alias.normalizedAliasValue === draft.normalizedOrganizationName
       );
       if (nameAlias) {
         candidates.push({
@@ -1158,7 +1175,8 @@ function buildRelationshipMatchOutcome(input: {
       organizationEntityId: null,
       readiness: "missing_both",
       confidence: 0.46,
-      rationale: "Accepted relationship truth is missing both canonical asset and canonical organization attachment context."
+      rationale:
+        "Accepted relationship truth is missing both canonical asset and canonical organization attachment context."
     };
   }
 
@@ -1170,7 +1188,8 @@ function buildRelationshipMatchOutcome(input: {
       organizationEntityId: mergedOrganizationCandidates.length === 1 ? mergedOrganizationCandidates[0].entityId : null,
       readiness: "missing_asset",
       confidence: 0.58,
-      rationale: "Accepted relationship truth has canonical organization context, but the related asset is not yet reconciled to a canonical entity."
+      rationale:
+        "Accepted relationship truth has canonical organization context, but the related asset is not yet reconciled to a canonical entity."
     };
   }
 
@@ -1182,7 +1201,8 @@ function buildRelationshipMatchOutcome(input: {
       organizationEntityId: null,
       readiness: "missing_organization",
       confidence: 0.58,
-      rationale: "Accepted relationship truth has canonical asset context, but the related organization is not yet reconciled to a canonical entity."
+      rationale:
+        "Accepted relationship truth has canonical asset context, but the related organization is not yet reconciled to a canonical entity."
     };
   }
 
@@ -1193,7 +1213,10 @@ function buildRelationshipMatchOutcome(input: {
       assetEntityId: mergedAssetCandidates[0].entityId,
       organizationEntityId: mergedOrganizationCandidates[0].entityId,
       readiness: "ready_to_attach",
-      confidence: Math.min(0.97, (mergedAssetCandidates[0].confidence + mergedOrganizationCandidates[0].confidence) / 2),
+      confidence: Math.min(
+        0.97,
+        (mergedAssetCandidates[0].confidence + mergedOrganizationCandidates[0].confidence) / 2
+      ),
       rationale: `Accepted relationship truth can attach "${input.draft.assetName}" to "${input.draft.organizationName ?? input.draft.organizationDomain ?? "the reviewed organization"}" using current canonical asset and organization context.`
     };
   }
@@ -1208,7 +1231,8 @@ function buildRelationshipMatchOutcome(input: {
       0.84,
       ((mergedAssetCandidates[0]?.confidence ?? 0.7) + (mergedOrganizationCandidates[0]?.confidence ?? 0.7)) / 2
     ),
-    rationale: "Accepted relationship truth has multiple canonical asset or organization candidates and needs operator selection."
+    rationale:
+      "Accepted relationship truth has multiple canonical asset or organization candidates and needs operator selection."
   };
 }
 
@@ -1233,7 +1257,9 @@ function buildProposalKey(input: {
         organizationCandidates: input.organizationCandidates.map((candidate) => ({
           entityId: candidate.entityId,
           matchedName:
-            candidate.signalType === "exact_domain_match" ? normalizeDomain(candidate.matchedName) : normalizeEntityName(candidate.matchedName),
+            candidate.signalType === "exact_domain_match"
+              ? normalizeDomain(candidate.matchedName)
+              : normalizeEntityName(candidate.matchedName),
           signalType: candidate.signalType
         }))
       })
@@ -1389,7 +1415,8 @@ async function syncRelationshipProposalTx(input: {
           signalType: "artifact_entity_link",
           confidence: 0.99,
           rationale: `Accepted relationship is already attached to canonical organization "${currentLink.canonicalOrganizationDisplayName}".`,
-          matchedName: draft.organizationName ?? draft.organizationDomain ?? currentLink.canonicalOrganizationDisplayName,
+          matchedName:
+            draft.organizationName ?? draft.organizationDomain ?? currentLink.canonicalOrganizationDisplayName,
           matchedFrom: "existing relationship attachment"
         }
       ],
@@ -1427,7 +1454,10 @@ async function syncRelationshipProposalTx(input: {
     outcome = buildRelationshipMatchOutcome({
       draft,
       assetCandidates: [...artifactAssetCandidates, ...buildExactAssetCandidates(canonicalAssets, draft)],
-      organizationCandidates: [...artifactOrganizationCandidates, ...buildExactOrganizationCandidates(canonicalOrganizations, draft)]
+      organizationCandidates: [
+        ...artifactOrganizationCandidates,
+        ...buildExactOrganizationCandidates(canonicalOrganizations, draft)
+      ]
     });
   }
 
@@ -1567,7 +1597,8 @@ async function syncRelationshipProposalTx(input: {
         canonicalAssetDisplayName: currentProposal.asset_entity_display_name,
         canonicalOrganizationEntityId: currentProposal.organization_entity_id,
         canonicalOrganizationDisplayName: currentProposal.organization_entity_display_name,
-        summary: "Auto-sync superseded this relationship proposal because a newer current relationship context became authoritative for the same source candidate."
+        summary:
+          "Auto-sync superseded this relationship proposal because a newer current relationship context became authoritative for the same source candidate."
       });
     }
 
@@ -1666,7 +1697,8 @@ async function syncRelationshipProposalTx(input: {
         canonicalAssetDisplayName: currentProposal.asset_entity_display_name,
         canonicalOrganizationEntityId: currentProposal.organization_entity_id,
         canonicalOrganizationDisplayName: currentProposal.organization_entity_display_name,
-        summary: "Auto-sync superseded this relationship proposal because a newer current relationship context became authoritative for the same source candidate."
+        summary:
+          "Auto-sync superseded this relationship proposal because a newer current relationship context became authoritative for the same source candidate."
       });
     }
 
@@ -1698,7 +1730,8 @@ async function syncRelationshipProposalTx(input: {
       canonicalAssetDisplayName: currentProposal.asset_entity_display_name,
       canonicalOrganizationEntityId: currentProposal.organization_entity_id,
       canonicalOrganizationDisplayName: currentProposal.organization_entity_display_name,
-      summary: "Auto-sync superseded this relationship proposal because a newer current relationship context became authoritative for the same source candidate."
+      summary:
+        "Auto-sync superseded this relationship proposal because a newer current relationship context became authoritative for the same source candidate."
     });
   }
 
@@ -1871,7 +1904,9 @@ async function supersedeStaleRelationshipProposalsTx(input: {
     return;
   }
 
-  const staleSourceCandidateIds = [...new Set([...staleProposals, ...staleLinks].map((row) => row.source_candidate_id))];
+  const staleSourceCandidateIds = [
+    ...new Set([...staleProposals, ...staleLinks].map((row) => row.source_candidate_id))
+  ];
 
   if (staleProposals.length > 0) {
     await input.tx`
@@ -2208,9 +2243,10 @@ export async function getAssetOrganizationRelationshipDetail(
       reviewHistory: candidateReviewDetail.reviewHistory,
       reconciliationHistory,
       systemEvents,
-      currentRelationshipLink: row.current_link_id && row.current_link_asset_entity_id && row.current_link_organization_entity_id
-        ? mapQueueItem(row).currentRelationshipLink
-        : null,
+      currentRelationshipLink:
+        row.current_link_id && row.current_link_asset_entity_id && row.current_link_organization_entity_id
+          ? mapQueueItem(row).currentRelationshipLink
+          : null,
       matchingAssets,
       matchingOrganizations
     };
@@ -2227,9 +2263,10 @@ export async function getAssetOrganizationRelationshipDetail(
     reviewHistory: acceptedTruthDetail.reviewHistory,
     reconciliationHistory,
     systemEvents,
-    currentRelationshipLink: row.current_link_id && row.current_link_asset_entity_id && row.current_link_organization_entity_id
-      ? mapQueueItem(row).currentRelationshipLink
-      : null,
+    currentRelationshipLink:
+      row.current_link_id && row.current_link_asset_entity_id && row.current_link_organization_entity_id
+        ? mapQueueItem(row).currentRelationshipLink
+        : null,
     matchingAssets,
     matchingOrganizations
   };
@@ -2329,7 +2366,9 @@ export async function reviewAssetOrganizationRelationshipProposal(input: {
     }
 
     if (!input.canonicalAssetEntityId || !input.canonicalOrganizationEntityId) {
-      throw new AssetOrganizationRelationshipConflictError("Both canonical asset and organization entities are required to accept this proposal.");
+      throw new AssetOrganizationRelationshipConflictError(
+        "Both canonical asset and organization entities are required to accept this proposal."
+      );
     }
 
     const [assetEntity, organizationEntity] = await Promise.all([
@@ -2343,11 +2382,11 @@ export async function reviewAssetOrganizationRelationshipProposal(input: {
       })
     ]);
 
-    if (!assetEntity[0] || assetEntity[0].entityType !== "asset") {
+    if (assetEntity[0]?.entityType !== "asset") {
       throw new AssetOrganizationRelationshipConflictError("Selected canonical asset entity was not found.");
     }
 
-    if (!organizationEntity[0] || organizationEntity[0].entityType !== "organization") {
+    if (organizationEntity[0]?.entityType !== "organization") {
       throw new AssetOrganizationRelationshipConflictError("Selected canonical organization entity was not found.");
     }
 

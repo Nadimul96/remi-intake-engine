@@ -1,4 +1,3 @@
-import { createId } from "@remi/domain";
 import type {
   AcceptedRecordType,
   CandidateCitationPacket,
@@ -10,7 +9,8 @@ import type {
   ParserResultStatus,
   ParserWarning
 } from "@remi/domain";
-import postgres from "postgres";
+import { createId } from "@remi/domain";
+import type postgres from "postgres";
 
 import { getDb } from "./client";
 
@@ -272,16 +272,18 @@ export async function upsertCandidateExtractionState(
   input: UpsertCandidateExtractionStateInput
 ): Promise<CandidateExtractionResult> {
   const sql = getDb();
-  const [row] = await sql<{
-    candidate_count: number | string;
-    reason_codes_json: string[] | string;
-    reprocess_recommended: boolean;
-    retry_recommended: boolean;
-    status: ParserResultStatus;
-    summary: string;
-    updated_at: Date;
-    warnings_json: ParserWarning[] | string;
-  }[]>`
+  const [row] = await sql<
+    {
+      candidate_count: number | string;
+      reason_codes_json: string[] | string;
+      reprocess_recommended: boolean;
+      retry_recommended: boolean;
+      status: ParserResultStatus;
+      summary: string;
+      updated_at: Date;
+      warnings_json: ParserWarning[] | string;
+    }[]
+  >`
     insert into candidate_extraction_states (
       id,
       artifact_blob_id,
@@ -324,16 +326,18 @@ export async function upsertCandidateExtractionState(
 
 export async function getCandidateExtractionSummary(artifactBlobId: string): Promise<CandidateExtractionResult | null> {
   const sql = getDb();
-  const [row] = await sql<{
-    candidate_count: number | string;
-    reason_codes_json: string[] | string;
-    reprocess_recommended: boolean;
-    retry_recommended: boolean;
-    status: ParserResultStatus;
-    summary: string;
-    updated_at: Date;
-    warnings_json: ParserWarning[] | string;
-  }[]>`
+  const [row] = await sql<
+    {
+      candidate_count: number | string;
+      reason_codes_json: string[] | string;
+      reprocess_recommended: boolean;
+      retry_recommended: boolean;
+      status: ParserResultStatus;
+      summary: string;
+      updated_at: Date;
+      warnings_json: ParserWarning[] | string;
+    }[]
+  >`
     select
       status,
       summary,

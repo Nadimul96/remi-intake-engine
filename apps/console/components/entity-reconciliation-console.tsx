@@ -7,8 +7,8 @@ import type {
 } from "@remi/domain";
 import { formatBytes, statusTone } from "@remi/ui";
 import Link from "next/link";
-import { startTransition, useEffect, useEffectEvent, useState } from "react";
 import type { ReactElement } from "react";
+import { startTransition, useEffect, useEffectEvent, useState } from "react";
 
 import { ConsoleNav } from "./console-nav";
 
@@ -85,7 +85,9 @@ export function EntityReconciliationConsole(props: {
       ""
   );
   const [displayName, setDisplayName] = useState(
-    props.initialDetail?.currentEntityLink?.canonicalEntityDisplayName ?? props.initialDetail?.proposal.proposedDisplayName ?? ""
+    props.initialDetail?.currentEntityLink?.canonicalEntityDisplayName ??
+      props.initialDetail?.proposal.proposedDisplayName ??
+      ""
   );
 
   const loadQueue = useEffectEvent(async (focusProposalId?: string) => {
@@ -133,7 +135,10 @@ export function EntityReconciliationConsole(props: {
   useEffect(() => {
     setReviewNote(detail?.proposal.reviewNote ?? "");
     setSelectedEntityId(
-      detail?.currentEntityLink?.canonicalEntityId ?? detail?.proposal.targetEntityId ?? detail?.matchingEntities[0]?.id ?? ""
+      detail?.currentEntityLink?.canonicalEntityId ??
+        detail?.proposal.targetEntityId ??
+        detail?.matchingEntities[0]?.id ??
+        ""
     );
     setDisplayName(detail?.currentEntityLink?.canonicalEntityDisplayName ?? detail?.proposal.proposedDisplayName ?? "");
     setActionState({
@@ -205,7 +210,9 @@ export function EntityReconciliationConsole(props: {
         }}
       >
         <div>
-          <div style={{ color: "var(--accent)", fontSize: "0.75rem", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+          <div
+            style={{ color: "var(--accent)", fontSize: "0.75rem", letterSpacing: "0.12em", textTransform: "uppercase" }}
+          >
             REMI Operator Console
           </div>
           <h1 style={{ fontSize: "2rem", margin: "0.35rem 0 0.2rem" }}>Entity Reconciliation</h1>
@@ -349,12 +356,20 @@ export function EntityReconciliationConsole(props: {
           {detail ? (
             <>
               <div>
-                <div style={{ color: "var(--muted)", fontSize: "0.78rem", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                <div
+                  style={{
+                    color: "var(--muted)",
+                    fontSize: "0.78rem",
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase"
+                  }}
+                >
                   Entity Proposal
                 </div>
                 <h2 style={{ margin: "0.35rem 0 0" }}>{detail.proposal.proposedDisplayName}</h2>
                 <div style={{ color: "var(--muted)", marginTop: "0.35rem" }}>
-                  {detail.proposal.entityType} • {humanizeStatus(detail.proposal.matchCategory)} • {detail.proposal.matchStrategy}
+                  {detail.proposal.entityType} • {humanizeStatus(detail.proposal.matchCategory)} •{" "}
+                  {detail.proposal.matchStrategy}
                 </div>
               </div>
 
@@ -378,11 +393,15 @@ export function EntityReconciliationConsole(props: {
               </div>
 
               <div>
-                <div style={{ fontSize: "0.9rem", fontWeight: 600, marginBottom: "0.65rem" }}>Current Entity Attachment</div>
+                <div style={{ fontSize: "0.9rem", fontWeight: 600, marginBottom: "0.65rem" }}>
+                  Current Entity Attachment
+                </div>
                 {detail.currentEntityLink ? (
                   (() => {
                     const linkedEntity =
-                      detail.matchingEntities.find((entity) => entity.id === detail.currentEntityLink?.canonicalEntityId) ?? null;
+                      detail.matchingEntities.find(
+                        (entity) => entity.id === detail.currentEntityLink?.canonicalEntityId
+                      ) ?? null;
 
                     return (
                       <ContentCard
@@ -392,7 +411,10 @@ export function EntityReconciliationConsole(props: {
                           ["Entity Type", detail.currentEntityLink.canonicalEntityType],
                           ["Link Status", detail.currentEntityLink.linkStatus],
                           ["Link Reason", detail.currentEntityLink.linkReason],
-                          ["Observed Aliases", formatAliasList(linkedEntity?.aliases.map((alias) => alias.aliasValue) ?? [])],
+                          [
+                            "Observed Aliases",
+                            formatAliasList(linkedEntity?.aliases.map((alias) => alias.aliasValue) ?? [])
+                          ],
                           [
                             "Linked By",
                             `${detail.currentEntityLink.reviewerActorName} • ${formatTimestamp(detail.currentEntityLink.updatedAt)}`
@@ -402,12 +424,16 @@ export function EntityReconciliationConsole(props: {
                     );
                   })()
                 ) : (
-                  <div style={{ color: "var(--muted)" }}>This accepted truth is not yet attached to a canonical entity.</div>
+                  <div style={{ color: "var(--muted)" }}>
+                    This accepted truth is not yet attached to a canonical entity.
+                  </div>
                 )}
               </div>
 
               <div>
-                <div style={{ fontSize: "0.9rem", fontWeight: 600, marginBottom: "0.65rem" }}>Accepted Truth Source</div>
+                <div style={{ fontSize: "0.9rem", fontWeight: 600, marginBottom: "0.65rem" }}>
+                  Accepted Truth Source
+                </div>
                 <ContentCard
                   title={detail.acceptedRecord.fieldName}
                   rows={[
@@ -431,12 +457,15 @@ export function EntityReconciliationConsole(props: {
               </div>
 
               <div>
-                <div style={{ fontSize: "0.9rem", fontWeight: 600, marginBottom: "0.65rem" }}>Matching Canonical Entities</div>
+                <div style={{ fontSize: "0.9rem", fontWeight: 600, marginBottom: "0.65rem" }}>
+                  Matching Canonical Entities
+                </div>
                 {detail.matchingEntities.length > 0 ? (
                   <div style={{ display: "grid", gap: "0.55rem" }}>
                     {detail.matchingEntities.map((entity) => {
                       const matchCandidate =
-                        detail.proposal.matchingCandidates.find((candidate) => candidate.entityId === entity.id) ?? null;
+                        detail.proposal.matchingCandidates.find((candidate) => candidate.entityId === entity.id) ??
+                        null;
 
                       return (
                         <label
@@ -487,13 +516,16 @@ export function EntityReconciliationConsole(props: {
                   </div>
                 ) : (
                   <div style={{ color: "var(--muted)" }}>
-                    No supported canonical entity matches were found. Accepting will create a new entity for this reviewed truth.
+                    No supported canonical entity matches were found. Accepting will create a new entity for this
+                    reviewed truth.
                   </div>
                 )}
               </div>
 
               <div>
-                <div style={{ fontSize: "0.9rem", fontWeight: 600, marginBottom: "0.65rem" }}>Source Artifact + Evidence</div>
+                <div style={{ fontSize: "0.9rem", fontWeight: 600, marginBottom: "0.65rem" }}>
+                  Source Artifact + Evidence
+                </div>
                 <ContentCard
                   title={detail.artifact.originalFileName}
                   rows={[
@@ -507,7 +539,9 @@ export function EntityReconciliationConsole(props: {
               </div>
 
               <div>
-                <div style={{ fontSize: "0.9rem", fontWeight: 600, marginBottom: "0.65rem" }}>Candidate Review + Provenance</div>
+                <div style={{ fontSize: "0.9rem", fontWeight: 600, marginBottom: "0.65rem" }}>
+                  Candidate Review + Provenance
+                </div>
                 <ContentCard
                   title="Review Context"
                   rows={[
@@ -520,7 +554,9 @@ export function EntityReconciliationConsole(props: {
               </div>
 
               <div>
-                <div style={{ fontSize: "0.9rem", fontWeight: 600, marginBottom: "0.65rem" }}>Reconciliation History</div>
+                <div style={{ fontSize: "0.9rem", fontWeight: 600, marginBottom: "0.65rem" }}>
+                  Reconciliation History
+                </div>
                 {detail.reconciliationHistory.length > 0 ? (
                   <div style={{ display: "grid", gap: "0.6rem" }}>
                     {detail.reconciliationHistory.map((entry) => (
@@ -528,7 +564,10 @@ export function EntityReconciliationConsole(props: {
                         key={entry.id}
                         title={`${humanizeStatus(entry.action)} • ${formatTimestamp(entry.createdAt)}`}
                         rows={[
-                          ["State Change", `${humanizeStatus(entry.previousProposalState)} -> ${humanizeStatus(entry.newProposalState)}`],
+                          [
+                            "State Change",
+                            `${humanizeStatus(entry.previousProposalState)} -> ${humanizeStatus(entry.newProposalState)}`
+                          ],
                           ["Chosen Entity", entry.chosenEntityDisplayName ?? entry.chosenEntityId ?? "None"],
                           ["Created Entity", entry.chosenEntityCreated ? "Yes" : "No"],
                           ["Created Aliases", formatAliasList(entry.createdAliasValues)],
@@ -540,13 +579,16 @@ export function EntityReconciliationConsole(props: {
                   </div>
                 ) : (
                   <div style={{ color: "var(--muted)" }}>
-                    No reconciliation decisions have been recorded yet. This proposal is still relying on its current status and match context.
+                    No reconciliation decisions have been recorded yet. This proposal is still relying on its current
+                    status and match context.
                   </div>
                 )}
               </div>
 
               <div>
-                <div style={{ fontSize: "0.9rem", fontWeight: 600, marginBottom: "0.65rem" }}>Auto-Sync System Events</div>
+                <div style={{ fontSize: "0.9rem", fontWeight: 600, marginBottom: "0.65rem" }}>
+                  Auto-Sync System Events
+                </div>
                 {detail.systemEvents.length > 0 ? (
                   <div style={{ display: "grid", gap: "0.6rem" }}>
                     {detail.systemEvents.map((entry) => (
@@ -575,10 +617,14 @@ export function EntityReconciliationConsole(props: {
               </div>
 
               <div>
-                <div style={{ fontSize: "0.9rem", fontWeight: 600, marginBottom: "0.65rem" }}>Reconciliation Action</div>
+                <div style={{ fontSize: "0.9rem", fontWeight: 600, marginBottom: "0.65rem" }}>
+                  Reconciliation Action
+                </div>
                 <div style={{ display: "grid", gap: "0.75rem" }}>
                   <label style={{ display: "grid", gap: "0.35rem" }}>
-                    <span style={{ color: "var(--muted)", fontSize: "0.82rem", textTransform: "uppercase" }}>Review Note</span>
+                    <span style={{ color: "var(--muted)", fontSize: "0.82rem", textTransform: "uppercase" }}>
+                      Review Note
+                    </span>
                     <textarea
                       disabled={actionState.status === "working" || !detail.proposal.currentProposal}
                       onChange={(event) => setReviewNote(event.target.value)}
@@ -662,7 +708,9 @@ export function EntityReconciliationConsole(props: {
               </div>
             </>
           ) : (
-            <div style={{ color: "var(--muted)" }}>Select a reconciliation item to inspect accepted truth and entity options.</div>
+            <div style={{ color: "var(--muted)" }}>
+              Select a reconciliation item to inspect accepted truth and entity options.
+            </div>
           )}
         </aside>
       </section>
@@ -694,7 +742,9 @@ function MetadataRow(props: { label: string; value: string }): ReactElement {
       <div style={{ color: "var(--muted)", fontSize: "0.78rem", letterSpacing: "0.08em", textTransform: "uppercase" }}>
         {props.label}
       </div>
-      <div style={{ fontSize: "0.94rem", lineHeight: 1.45, whiteSpace: "pre-wrap", wordBreak: "break-word" }}>{props.value}</div>
+      <div style={{ fontSize: "0.94rem", lineHeight: 1.45, whiteSpace: "pre-wrap", wordBreak: "break-word" }}>
+        {props.value}
+      </div>
     </div>
   );
 }

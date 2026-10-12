@@ -112,12 +112,7 @@ export const CandidateReviewDetailSchema = z.object({
 export const ReviewCandidateActionRequestSchema = z
   .object({
     action: ReviewCandidateActionTypeSchema,
-    note: z
-      .string()
-      .trim()
-      .max(2_000)
-      .nullable()
-      .optional(),
+    note: z.string().trim().max(2_000).nullable().optional(),
     reviewedValue: z.unknown().optional()
   })
   .superRefine((value, context) => {

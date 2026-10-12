@@ -1,9 +1,9 @@
 import type {
   AcceptedRecordSummary,
-  AcceptedTruthFilter,
   AcceptedRecordType,
   AcceptedTruthBrowserResponse,
   AcceptedTruthDetail,
+  AcceptedTruthFilter,
   AcceptedTruthListItem,
   CandidateReviewStatus,
   ReviewCandidateActionType,
@@ -138,7 +138,9 @@ function mapAcceptedTruthListItem(row: AcceptedTruthListRow): AcceptedTruthListI
     latestReviewAction: row.latest_review_action,
     latestReviewAt: iso(row.latest_review_at),
     provenanceAnchorCount:
-      typeof row.provenance_anchor_count === "number" ? row.provenance_anchor_count : Number(row.provenance_anchor_count),
+      typeof row.provenance_anchor_count === "number"
+        ? row.provenance_anchor_count
+        : Number(row.provenance_anchor_count),
     createdAt: iso(row.created_at) ?? "",
     updatedAt: iso(row.updated_at) ?? ""
   };
@@ -250,7 +252,9 @@ async function loadAcceptedRecord(
   }
 }
 
-export async function listAcceptedTruthRecords(filter: AcceptedTruthFilter = "all"): Promise<AcceptedTruthBrowserResponse> {
+export async function listAcceptedTruthRecords(
+  filter: AcceptedTruthFilter = "all"
+): Promise<AcceptedTruthBrowserResponse> {
   const sql = getDb();
   const rows = await sql<AcceptedTruthListRow[]>`
     select

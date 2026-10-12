@@ -2,9 +2,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { NativeConnection, Worker } from "@temporalio/worker";
-
-import { workflowConfig } from "./config";
 import * as intakeActivities from "./activities/intake";
+import { workflowConfig } from "./config";
 
 async function main(): Promise<void> {
   const connection = await NativeConnection.connect({

@@ -1,8 +1,8 @@
+import { createHash } from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { createHash } from "node:crypto";
-import postgres from "postgres";
+import type postgres from "postgres";
 
 import { closeDb, getDb } from "./client";
 import { loadRootEnv } from "./env";

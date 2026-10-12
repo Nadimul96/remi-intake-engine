@@ -1,5 +1,5 @@
-import { DealScreeningWorkbenchSchema } from "@remi/domain";
 import { getDealScreeningWorkbench } from "@remi/db";
+import { DealScreeningWorkbenchSchema } from "@remi/domain";
 import type { FastifyPluginAsync } from "fastify";
 
 export const screeningRoutes: FastifyPluginAsync = async (app) => {
