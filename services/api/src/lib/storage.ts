@@ -19,7 +19,9 @@ function createClient(endpoint: string): S3Client {
     },
     endpoint,
     forcePathStyle: apiConfig.s3.forcePathStyle,
-    region: apiConfig.s3.region
+    region: apiConfig.s3.region,
+    // Otherwise the SDK signs a CRC32 of an empty body into presigned PUT URLs, which strict S3 servers reject.
+    requestChecksumCalculation: "WHEN_REQUIRED"
   });
 }
 
