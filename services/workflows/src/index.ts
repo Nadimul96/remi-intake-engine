@@ -1,6 +1,9 @@
+import { rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { modelConfigFromEnv } from "@remi/extraction";
 import { NativeConnection, Worker } from "@temporalio/worker";
 import * as conflictActivities from "./activities/conflicts";
 import * as intakeActivities from "./activities/intake";
@@ -21,7 +24,14 @@ async function connectWithRetry(tries = 30): Promise<NativeConnection> {
   }
 }
 
+/** Exists while the worker is polling; the compose healthcheck looks for it. */
+const READY_FILE = path.join(tmpdir(), "remi-worker-ready");
+
 async function main(): Promise<void> {
+  // A restarted container keeps /tmp, so clear a marker left by the previous process.
+  await rm(READY_FILE, { force: true });
+  const model = modelConfigFromEnv(process.env);
+  console.log(`Model-assisted extraction: ${model ? `${model.provider} (${model.model})` : "off, rules only"}`);
   const connection = await connectWithRetry();
 
   const worker = await Worker.create({
@@ -32,7 +42,12 @@ async function main(): Promise<void> {
     workflowsPath: path.resolve(path.dirname(fileURLToPath(import.meta.url)), "workflows/register-intake.ts")
   });
 
-  await worker.run();
+  await writeFile(READY_FILE, `${process.pid}\n`);
+  try {
+    await worker.run();
+  } finally {
+    await rm(READY_FILE, { force: true });
+  }
 }
 
 main().catch((error) => {
