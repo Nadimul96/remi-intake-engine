@@ -6,14 +6,14 @@ allowBuilds:
   '@swc/core': true
   esbuild: true
   protobufjs: false
-# Security floors for transitive dependencies of the Temporal SDK (pnpm audit), kept within
-# the major versions the SDK declares.
+# Security floors for transitive dependencies of the Temporal SDK (pnpm audit). Each override
+# only lifts versions below the patched release, so packages on a newer major keep theirs.
 overrides:
-  '@grpc/grpc-js': ^1.14.6
-  '@protobufjs/utf8': ^1.1.2
-  baseline-browser-mapping: ^2.11.28
-  browserslist: ^4.29.3
-  fast-uri: ^3.1.8
-  protobufjs: ^7.6.6
-  source-map-js: ^1.2.2
-  uuid: ^11.1.1
+  '@grpc/grpc-js@<1.14.6': ^1.14.6
+  '@protobufjs/utf8@<1.1.2': ^1.1.2
+  baseline-browser-mapping@<2.11.28: ^2.11.28
+  browserslist@<4.29.3: ^4.29.3
+  fast-uri@<3.1.8: ^3.1.8
+  protobufjs@<7.6.6: ^7.6.6
+  source-map-js@<1.2.2: ^1.2.2
+  uuid@<11.1.1: ^11.1.1
