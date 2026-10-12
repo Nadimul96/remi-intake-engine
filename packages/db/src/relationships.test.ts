@@ -5,7 +5,7 @@ import { after, test } from "node:test";
 import { createId } from "@remi/domain";
 import type { PersistExtractedCandidateInput } from "./candidates";
 import { replaceExtractedCandidates } from "./candidates";
-import { closeDb, getDb } from "./client";
+import { closeDb, getDb, jsonb } from "./client";
 import { listEntityResolutionQueue, reviewEntityResolutionProposal } from "./entities";
 import {
   getAssetOrganizationRelationshipDetail,
@@ -77,8 +77,8 @@ test("accepted asset-organization relationship truth can attach to canonical ass
         ${"header"},
         ${`${name} header`},
         ${`Verification header anchor for ${name}`},
-        ${JSON.stringify({ section: "header" })}::jsonb,
-        ${JSON.stringify({ verification: true })}::jsonb
+        ${jsonb({ section: "header" })},
+        ${jsonb({ verification: true })}
       )
     `;
 

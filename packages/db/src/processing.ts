@@ -11,7 +11,7 @@ import type {
 import { createId } from "@remi/domain";
 import type postgres from "postgres";
 
-import { getDb } from "./client";
+import { getDb, jsonb } from "./client";
 import { getNormalizedContentRecords } from "./content";
 
 type DbTransaction = postgres.Sql;
@@ -179,11 +179,11 @@ export async function upsertNormalizationResult(input: UpsertNormalizationResult
       ${input.contentKind},
       ${input.status},
       ${input.summary},
-      ${JSON.stringify(input.reasonCodes)}::jsonb,
-      ${JSON.stringify(input.warnings)}::jsonb,
+      ${jsonb(input.reasonCodes)},
+      ${jsonb(input.warnings)},
       ${input.retryRecommended},
       ${input.reprocessRecommended},
-      ${JSON.stringify(input.metadata ?? {})}::jsonb
+      ${jsonb(input.metadata ?? {})}
     )
     on conflict (source_item_id)
     do update set
@@ -232,11 +232,11 @@ export async function upsertArtifactProcessingState(
       ${input.normalizationStatus},
       ${input.contentKind},
       ${input.summary},
-      ${JSON.stringify(input.reasonCodes)}::jsonb,
-      ${JSON.stringify(input.warnings)}::jsonb,
+      ${jsonb(input.reasonCodes)},
+      ${jsonb(input.warnings)},
       ${input.retryRecommended},
       ${input.reprocessRecommended},
-      ${JSON.stringify(input.metadata ?? {})}::jsonb
+      ${jsonb(input.metadata ?? {})}
     )
     on conflict (artifact_blob_id)
     do update set
@@ -364,8 +364,8 @@ export async function persistProvenanceAnchors(input: {
           ${anchor.anchorKey},
           ${anchor.title},
           ${anchor.summary},
-          ${JSON.stringify(anchor.locator)}::jsonb,
-          ${JSON.stringify(anchor.metadata)}::jsonb
+          ${jsonb(anchor.locator)},
+          ${jsonb(anchor.metadata)}
         )
         on conflict (owner_type, owner_id, anchor_kind, anchor_key)
         do update set

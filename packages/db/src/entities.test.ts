@@ -5,7 +5,7 @@ import { after, test } from "node:test";
 import { createId } from "@remi/domain";
 import type { PersistExtractedCandidateInput } from "./candidates";
 import { replaceExtractedCandidates } from "./candidates";
-import { closeDb, getDb } from "./client";
+import { closeDb, getDb, jsonb } from "./client";
 import {
   getEntityResolutionDetail,
   listCanonicalEntities,
@@ -77,8 +77,8 @@ test("entity reconciliation supports create-new, alias-match, and possible-match
         ${"primary"},
         ${`${name} anchor`},
         ${`Verification anchor for ${name}`},
-        ${JSON.stringify({ sample: name, section: "body" })}::jsonb,
-        ${JSON.stringify({ verification: true })}::jsonb
+        ${jsonb({ sample: name, section: "body" })},
+        ${jsonb({ verification: true })}
       )
     `;
 
@@ -530,8 +530,8 @@ test("entity reconciliation supports narrow organization domain and name flows w
         ${"primary"},
         ${`${name} header`},
         ${`Verification header for ${name}`},
-        ${JSON.stringify({ sample: name, section: "header" })}::jsonb,
-        ${JSON.stringify({ verification: true })}::jsonb
+        ${jsonb({ sample: name, section: "header" })},
+        ${jsonb({ verification: true })}
       )
     `;
 

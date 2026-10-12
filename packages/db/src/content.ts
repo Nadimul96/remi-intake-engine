@@ -14,7 +14,7 @@ import type {
 import { createId } from "@remi/domain";
 import type postgres from "postgres";
 
-import { getDb } from "./client";
+import { getDb, jsonb } from "./client";
 
 interface JsonMap {
   [key: string]: unknown;
@@ -303,7 +303,7 @@ export async function persistNormalizedContent(
           ${document.pageCount},
           ${document.textAvailable},
           ${document.textPreview},
-          ${JSON.stringify(document.metadata)}::jsonb
+          ${jsonb(document.metadata)}
         )
         on conflict (artifact_blob_id)
         do update set
@@ -335,7 +335,7 @@ export async function persistNormalizedContent(
             ${page.charCount},
             ${page.textPreview},
             ${page.text ?? null},
-            ${JSON.stringify(page.metadata)}::jsonb
+            ${jsonb(page.metadata)}
           )
           on conflict (document_id, page_number)
           do update set
@@ -377,7 +377,7 @@ export async function persistNormalizedContent(
           ${email.thread.threadKey},
           ${email.thread.subject},
           ${email.thread.messageCount},
-          ${JSON.stringify(email.thread.metadata)}::jsonb
+          ${jsonb(email.thread.metadata)}
         )
         on conflict (artifact_blob_id)
         do update set
@@ -420,13 +420,13 @@ export async function persistNormalizedContent(
             ${message.messageIdHeader},
             ${message.subject},
             ${message.sender},
-            ${JSON.stringify(message.to)}::jsonb,
-            ${JSON.stringify(message.cc)}::jsonb,
+            ${jsonb(message.to)},
+            ${jsonb(message.cc)},
             ${parseSentAt(message.sentAt)},
             ${message.sentAtRaw},
             ${message.bodyPreview},
             ${message.attachmentCount},
-            ${JSON.stringify(message.metadata)}::jsonb
+            ${jsonb(message.metadata)}
           )
           on conflict (artifact_blob_id)
           do update set
@@ -486,7 +486,7 @@ export async function persistNormalizedContent(
             ${attachment.contentDisposition},
             ${attachment.contentId},
             ${attachment.sha256},
-            ${JSON.stringify(attachment.metadata)}::jsonb
+            ${jsonb(attachment.metadata)}
           )
           on conflict (email_message_id, part_index)
           do update set
@@ -544,7 +544,7 @@ export async function persistNormalizedContent(
           ${input.artifactBlobId},
           ${workbook.fileName},
           ${workbook.sheetCount},
-          ${JSON.stringify(workbook.metadata)}::jsonb
+          ${jsonb(workbook.metadata)}
         )
         on conflict (artifact_blob_id)
         do update set
@@ -581,8 +581,8 @@ export async function persistNormalizedContent(
             ${worksheet.maxRow},
             ${worksheet.maxColumn},
             ${worksheet.tableCount},
-            ${JSON.stringify(worksheet.rows ?? [])}::jsonb,
-            ${JSON.stringify(worksheet.metadata)}::jsonb
+            ${jsonb(worksheet.rows ?? [])},
+            ${jsonb(worksheet.metadata)}
           )
           on conflict (workbook_id, sheet_index)
           do update set
@@ -624,7 +624,7 @@ export async function persistNormalizedContent(
             ${table.name},
             ${table.ref},
             ${table.headerRowCount},
-            ${JSON.stringify(table.metadata)}::jsonb
+            ${jsonb(table.metadata)}
           )
           on conflict (worksheet_id, table_key)
           do update set

@@ -9,7 +9,7 @@ import type {
 import { createId } from "@remi/domain";
 import type postgres from "postgres";
 
-import { getDb } from "./client";
+import { getDb, jsonb } from "./client";
 
 type DbTransaction = postgres.Sql;
 
@@ -180,7 +180,7 @@ export async function runConflictDetection(
           ${conflict.period},
           ${conflict.title},
           ${conflict.summary},
-          ${JSON.stringify(conflict.sides)}::jsonb
+          ${jsonb(conflict.sides)}
         )
         on conflict (tenant_id, conflict_key) do update set
           kind = excluded.kind,

@@ -16,7 +16,7 @@ import { createId } from "@remi/domain";
 import type postgres from "postgres";
 
 import { getExtractedCandidate } from "./candidates";
-import { getDb } from "./client";
+import { getDb, jsonb } from "./client";
 
 type DbTransaction = postgres.Sql;
 
@@ -468,7 +468,7 @@ async function insertReviewHistoryTx(input: {
       ${input.newReviewStatus},
       ${input.action},
       ${input.reviewNote},
-      ${input.editedValue === undefined ? null : JSON.stringify(input.editedValue)}::jsonb,
+      ${input.editedValue === undefined ? null : jsonb(input.editedValue)},
       ${input.actorId},
       ${input.actorName}
     )
@@ -552,17 +552,17 @@ async function upsertAcceptedRecordTx(input: {
           ${input.candidate.artifact_blob_id},
           ${input.candidate.field_name},
           ${input.candidate.value_type},
-          ${JSON.stringify(input.acceptedValue)}::jsonb,
+          ${jsonb(input.acceptedValue)},
           ${input.candidate.source_semantic_object_type},
           ${input.candidate.source_semantic_object_id},
-          ${JSON.stringify(provenanceAnchorIds)}::jsonb,
-          ${JSON.stringify(input.citationPacket)}::jsonb,
+          ${jsonb(provenanceAnchorIds)},
+          ${jsonb(input.citationPacket)},
           ${input.reviewStatus},
           ${input.actorId},
           ${input.actorName},
           now(),
           ${input.note},
-          ${JSON.stringify(metadata)}::jsonb
+          ${jsonb(metadata)}
         )
         on conflict (source_candidate_id)
         do update set
@@ -609,17 +609,17 @@ async function upsertAcceptedRecordTx(input: {
           ${input.candidate.artifact_blob_id},
           ${input.candidate.field_name},
           ${input.candidate.value_type},
-          ${JSON.stringify(input.acceptedValue)}::jsonb,
+          ${jsonb(input.acceptedValue)},
           ${input.candidate.source_semantic_object_type},
           ${input.candidate.source_semantic_object_id},
-          ${JSON.stringify(provenanceAnchorIds)}::jsonb,
-          ${JSON.stringify(input.citationPacket)}::jsonb,
+          ${jsonb(provenanceAnchorIds)},
+          ${jsonb(input.citationPacket)},
           ${input.reviewStatus},
           ${input.actorId},
           ${input.actorName},
           now(),
           ${input.note},
-          ${JSON.stringify(metadata)}::jsonb
+          ${jsonb(metadata)}
         )
         on conflict (source_candidate_id)
         do update set
@@ -666,17 +666,17 @@ async function upsertAcceptedRecordTx(input: {
           ${input.candidate.artifact_blob_id},
           ${input.candidate.field_name},
           ${input.candidate.value_type},
-          ${JSON.stringify(input.acceptedValue)}::jsonb,
+          ${jsonb(input.acceptedValue)},
           ${input.candidate.source_semantic_object_type},
           ${input.candidate.source_semantic_object_id},
-          ${JSON.stringify(provenanceAnchorIds)}::jsonb,
-          ${JSON.stringify(input.citationPacket)}::jsonb,
+          ${jsonb(provenanceAnchorIds)},
+          ${jsonb(input.citationPacket)},
           ${input.reviewStatus},
           ${input.actorId},
           ${input.actorName},
           now(),
           ${input.note},
-          ${JSON.stringify(metadata)}::jsonb
+          ${jsonb(metadata)}
         )
         on conflict (source_candidate_id)
         do update set
@@ -927,7 +927,7 @@ export async function reviewCandidate(input: {
       update extracted_candidates
       set
         review_status = ${reviewStatus},
-        reviewed_value_json = ${input.action === "edit_and_accept" ? JSON.stringify(input.reviewedValue ?? null) : null}::jsonb,
+        reviewed_value_json = ${input.action === "edit_and_accept" ? jsonb(input.reviewedValue ?? null) : null},
         review_note = ${note},
         reviewed_by_actor_id = ${input.actorId},
         reviewed_by_actor_name = ${input.actorName},

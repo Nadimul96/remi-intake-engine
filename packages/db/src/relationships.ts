@@ -21,7 +21,7 @@ import type {
 import { createId } from "@remi/domain";
 import type postgres from "postgres";
 
-import { getDb } from "./client";
+import { getDb, jsonb } from "./client";
 import { getCandidateReviewDetail } from "./reviews";
 import { getAcceptedTruthDetail } from "./truth";
 
@@ -1522,8 +1522,8 @@ async function syncRelationshipProposalTx(input: {
         ${outcome.rationale},
         ${currentLink.canonicalAssetEntityId},
         ${currentLink.canonicalOrganizationEntityId},
-        ${JSON.stringify(outcome.assetCandidates)}::jsonb,
-        ${JSON.stringify(outcome.organizationCandidates)}::jsonb,
+        ${jsonb(outcome.assetCandidates)},
+        ${jsonb(outcome.organizationCandidates)},
         true,
         ${matchingProposal?.review_note ?? currentLink.reviewNote},
         ${matchingProposal?.reviewed_at ?? new Date(currentLink.updatedAt)},
@@ -1638,8 +1638,8 @@ async function syncRelationshipProposalTx(input: {
         rationale = ${outcome.rationale},
         asset_entity_id = ${outcome.assetEntityId},
         organization_entity_id = ${outcome.organizationEntityId},
-        asset_candidates_json = ${JSON.stringify(outcome.assetCandidates)}::jsonb,
-        organization_candidates_json = ${JSON.stringify(outcome.organizationCandidates)}::jsonb,
+        asset_candidates_json = ${jsonb(outcome.assetCandidates)},
+        organization_candidates_json = ${jsonb(outcome.organizationCandidates)},
         superseded_at = null,
         review_note = ${nextProposalState === "pending_review" ? null : matchingProposal.review_note},
         reviewed_at = ${nextProposalState === "pending_review" ? null : matchingProposal.reviewed_at},
@@ -1765,8 +1765,8 @@ async function syncRelationshipProposalTx(input: {
       ${outcome.rationale},
       ${outcome.assetEntityId},
       ${outcome.organizationEntityId},
-      ${JSON.stringify(outcome.assetCandidates)}::jsonb,
-      ${JSON.stringify(outcome.organizationCandidates)}::jsonb,
+      ${jsonb(outcome.assetCandidates)},
+      ${jsonb(outcome.organizationCandidates)},
       ${proposalMetadataJson}::jsonb
     )
   `;

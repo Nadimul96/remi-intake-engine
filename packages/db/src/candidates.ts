@@ -12,7 +12,7 @@ import type {
 import { createId } from "@remi/domain";
 import type postgres from "postgres";
 
-import { getDb } from "./client";
+import { getDb, jsonb } from "./client";
 
 type DbTransaction = postgres.Sql;
 
@@ -206,7 +206,7 @@ export async function replaceExtractedCandidates(input: {
           ${candidate.candidateType},
           ${candidate.fieldName},
           ${candidate.valueType},
-          ${JSON.stringify(candidate.candidateValue)}::jsonb,
+          ${jsonb(candidate.candidateValue)},
           ${candidate.confidence},
           ${candidate.extractionMethod},
           ${candidate.extractionMethodDetail},
@@ -214,8 +214,8 @@ export async function replaceExtractedCandidates(input: {
           ${candidate.sourceSemanticObjectId},
           ${candidate.summary},
           ${candidate.reviewReady},
-          ${JSON.stringify(candidate.citationPacket)}::jsonb,
-          ${JSON.stringify(candidate.metadata ?? {})}::jsonb,
+          ${jsonb(candidate.citationPacket)},
+          ${jsonb(candidate.metadata ?? {})},
           true,
           null
         )
@@ -301,11 +301,11 @@ export async function upsertCandidateExtractionState(
       ${input.status},
       ${input.summary},
       ${input.candidateCount},
-      ${JSON.stringify(input.reasonCodes)}::jsonb,
-      ${JSON.stringify(input.warnings)}::jsonb,
+      ${jsonb(input.reasonCodes)},
+      ${jsonb(input.warnings)},
       ${input.retryRecommended},
       ${input.reprocessRecommended},
-      ${JSON.stringify(input.metadata ?? {})}::jsonb
+      ${jsonb(input.metadata ?? {})}
     )
     on conflict (artifact_blob_id)
     do update set

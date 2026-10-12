@@ -19,7 +19,7 @@ import { createId } from "@remi/domain";
 import type postgres from "postgres";
 
 import { getCandidateExtractionSummary, getExtractedCandidates } from "./candidates";
-import { getDb } from "./client";
+import { getDb, jsonb } from "./client";
 import { getNormalizedContentRecords } from "./content";
 import { requiredEnv } from "./env";
 import { getNormalizationResultSummary, getProvenanceAnchorsSummary, upsertNormalizationResult } from "./processing";
@@ -339,7 +339,7 @@ async function insertEvent(
       ${input.actorType ?? "system"},
       ${input.actorId},
       ${input.message},
-      ${JSON.stringify(input.payload ?? {})}::jsonb
+      ${jsonb(input.payload ?? {})}
     )
   `;
 }
@@ -625,7 +625,7 @@ export async function upsertDerivedArtifact(input: DerivedArtifactUpsertInput): 
       ${input.version},
       ${input.storageBucket},
       ${input.storageKey},
-      ${JSON.stringify(input.metadata)}::jsonb
+      ${jsonb(input.metadata)}
     )
     on conflict (artifact_blob_id, kind, version)
     do update set

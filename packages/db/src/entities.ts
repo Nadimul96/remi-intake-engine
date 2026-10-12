@@ -22,7 +22,7 @@ import type {
 import { createId } from "@remi/domain";
 import type postgres from "postgres";
 
-import { getDb } from "./client";
+import { getDb, jsonb } from "./client";
 import { getCandidateReviewDetail } from "./reviews";
 import { getAcceptedTruthDetail } from "./truth";
 
@@ -1487,7 +1487,7 @@ async function syncEntityResolutionProposalTx(input: {
           rationale = ${`Accepted truth is already attached to canonical entity "${currentLink.canonicalEntityDisplayName}".`},
           match_category = 'active_link',
           match_strategy = 'active_entity_link',
-          matching_candidates_json = ${JSON.stringify(matchingCandidates)}::jsonb,
+          matching_candidates_json = ${jsonb(matchingCandidates)},
           current_proposal = true,
           superseded_at = null,
           updated_at = now()
@@ -1557,7 +1557,7 @@ async function syncEntityResolutionProposalTx(input: {
         ${`Accepted truth is already attached to canonical entity "${currentLink.canonicalEntityDisplayName}".`},
         'active_link',
         'active_entity_link',
-        ${JSON.stringify(matchingCandidates)}::jsonb,
+        ${jsonb(matchingCandidates)},
         true,
         now(),
         ${currentLink.reviewerActorId},
@@ -1697,7 +1697,7 @@ async function syncEntityResolutionProposalTx(input: {
       ${matchOutcome.rationale},
       ${matchOutcome.matchCategory},
       ${matchOutcome.matchStrategy},
-      ${JSON.stringify(matchOutcome.matchingCandidates)}::jsonb,
+      ${jsonb(matchOutcome.matchingCandidates)},
       true,
       ${JSON.stringify({
         artifactBlobId: input.acceptedTruth.artifact_blob_id,
@@ -2180,7 +2180,7 @@ async function recordEntityResolutionSystemEventTx(input: {
       ${input.newProposalState ?? null},
       ${input.canonicalEntityId ?? null},
       ${input.canonicalEntityDisplayName ?? null},
-      ${JSON.stringify(input.aliasValues ?? [])}::jsonb,
+      ${jsonb(input.aliasValues ?? [])},
       ${input.summary}
     )
     on conflict (event_key) do nothing
@@ -2236,7 +2236,7 @@ async function recordEntityResolutionHistoryTx(input: {
       ${input.chosenEntityId},
       ${input.chosenEntityDisplayName},
       ${input.chosenEntityCreated},
-      ${JSON.stringify(input.createdAliasValues)}::jsonb,
+      ${jsonb(input.createdAliasValues)},
       ${input.note},
       ${input.actorId},
       ${input.actorName},
