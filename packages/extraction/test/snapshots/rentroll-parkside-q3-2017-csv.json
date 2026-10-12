@@ -1,0 +1,3757 @@
+{
+ "fileName": "RentRoll_Parkside_Q3_2017.csv",
+ "normalized": {
+  "kind": "workbook",
+  "workbook": {
+   "fileName": "RentRoll_Parkside_Q3_2017.csv",
+   "metadata": {
+    "delimiter": ",",
+    "source": "csv"
+   },
+   "sheetCount": 1,
+   "structuredTables": [],
+   "worksheets": [
+    {
+     "maxColumn": 4,
+     "maxRow": 149,
+     "metadata": {
+      "source": "csv",
+      "truncated": false
+     },
+     "name": "RentRoll_Parkside_Q3_2017",
+     "rows": [
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A1",
+         "text": "Unit"
+        },
+        {
+         "column": 2,
+         "ref": "B1",
+         "text": "Type"
+        },
+        {
+         "column": 3,
+         "ref": "C1",
+         "text": "Rent"
+        },
+        {
+         "column": 4,
+         "ref": "D1",
+         "text": "Status"
+        }
+       ],
+       "rowNumber": 1
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A2",
+         "text": "100"
+        },
+        {
+         "column": 2,
+         "ref": "B2",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C2",
+         "text": "1223"
+        },
+        {
+         "column": 4,
+         "ref": "D2",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 2
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A3",
+         "text": "101"
+        },
+        {
+         "column": 2,
+         "ref": "B3",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C3",
+         "text": "1202"
+        },
+        {
+         "column": 4,
+         "ref": "D3",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 3
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A4",
+         "text": "102"
+        },
+        {
+         "column": 2,
+         "ref": "B4",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C4",
+         "text": "988"
+        },
+        {
+         "column": 4,
+         "ref": "D4",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 4
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A5",
+         "text": "103"
+        },
+        {
+         "column": 2,
+         "ref": "B5",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C5",
+         "text": "1172"
+        },
+        {
+         "column": 4,
+         "ref": "D5",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 5
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A6",
+         "text": "104"
+        },
+        {
+         "column": 2,
+         "ref": "B6",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C6",
+         "text": "1011"
+        },
+        {
+         "column": 4,
+         "ref": "D6",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 6
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A7",
+         "text": "105"
+        },
+        {
+         "column": 2,
+         "ref": "B7",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C7",
+         "text": "964"
+        },
+        {
+         "column": 4,
+         "ref": "D7",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 7
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A8",
+         "text": "106"
+        },
+        {
+         "column": 2,
+         "ref": "B8",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C8",
+         "text": "1273"
+        },
+        {
+         "column": 4,
+         "ref": "D8",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 8
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A9",
+         "text": "107"
+        },
+        {
+         "column": 2,
+         "ref": "B9",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C9",
+         "text": "989"
+        },
+        {
+         "column": 4,
+         "ref": "D9",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 9
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A10",
+         "text": "108"
+        },
+        {
+         "column": 2,
+         "ref": "B10",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C10",
+         "text": "1029"
+        },
+        {
+         "column": 4,
+         "ref": "D10",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 10
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A11",
+         "text": "109"
+        },
+        {
+         "column": 2,
+         "ref": "B11",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C11",
+         "text": "967"
+        },
+        {
+         "column": 4,
+         "ref": "D11",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 11
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A12",
+         "text": "110"
+        },
+        {
+         "column": 2,
+         "ref": "B12",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C12",
+         "text": "1271"
+        },
+        {
+         "column": 4,
+         "ref": "D12",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 12
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A13",
+         "text": "111"
+        },
+        {
+         "column": 2,
+         "ref": "B13",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C13",
+         "text": "977"
+        },
+        {
+         "column": 4,
+         "ref": "D13",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 13
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A14",
+         "text": "112"
+        },
+        {
+         "column": 2,
+         "ref": "B14",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C14",
+         "text": "1179"
+        },
+        {
+         "column": 4,
+         "ref": "D14",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 14
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A15",
+         "text": "113"
+        },
+        {
+         "column": 2,
+         "ref": "B15",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C15",
+         "text": "1522"
+        },
+        {
+         "column": 4,
+         "ref": "D15",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 15
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A16",
+         "text": "114"
+        },
+        {
+         "column": 2,
+         "ref": "B16",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C16",
+         "text": "1039"
+        },
+        {
+         "column": 4,
+         "ref": "D16",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 16
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A17",
+         "text": "115"
+        },
+        {
+         "column": 2,
+         "ref": "B17",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C17",
+         "text": "954"
+        },
+        {
+         "column": 4,
+         "ref": "D17",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 17
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A18",
+         "text": "116"
+        },
+        {
+         "column": 2,
+         "ref": "B18",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C18",
+         "text": "991"
+        },
+        {
+         "column": 4,
+         "ref": "D18",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 18
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A19",
+         "text": "117"
+        },
+        {
+         "column": 2,
+         "ref": "B19",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C19",
+         "text": "1215"
+        },
+        {
+         "column": 4,
+         "ref": "D19",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 19
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A20",
+         "text": "118"
+        },
+        {
+         "column": 2,
+         "ref": "B20",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C20",
+         "text": "1182"
+        },
+        {
+         "column": 4,
+         "ref": "D20",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 20
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A21",
+         "text": "119"
+        },
+        {
+         "column": 2,
+         "ref": "B21",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C21",
+         "text": "1181"
+        },
+        {
+         "column": 4,
+         "ref": "D21",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 21
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A22",
+         "text": "120"
+        },
+        {
+         "column": 2,
+         "ref": "B22",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C22",
+         "text": "1046"
+        },
+        {
+         "column": 4,
+         "ref": "D22",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 22
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A23",
+         "text": "121"
+        },
+        {
+         "column": 2,
+         "ref": "B23",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C23",
+         "text": "1210"
+        },
+        {
+         "column": 4,
+         "ref": "D23",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 23
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A24",
+         "text": "122"
+        },
+        {
+         "column": 2,
+         "ref": "B24",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C24",
+         "text": "1259"
+        },
+        {
+         "column": 4,
+         "ref": "D24",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 24
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A25",
+         "text": "123"
+        },
+        {
+         "column": 2,
+         "ref": "B25",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C25",
+         "text": "1554"
+        },
+        {
+         "column": 4,
+         "ref": "D25",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 25
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A26",
+         "text": "124"
+        },
+        {
+         "column": 2,
+         "ref": "B26",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C26",
+         "text": "1550"
+        },
+        {
+         "column": 4,
+         "ref": "D26",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 26
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A27",
+         "text": "125"
+        },
+        {
+         "column": 2,
+         "ref": "B27",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C27",
+         "text": "1573"
+        },
+        {
+         "column": 4,
+         "ref": "D27",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 27
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A28",
+         "text": "126"
+        },
+        {
+         "column": 2,
+         "ref": "B28",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C28",
+         "text": "1245"
+        },
+        {
+         "column": 4,
+         "ref": "D28",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 28
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A29",
+         "text": "127"
+        },
+        {
+         "column": 2,
+         "ref": "B29",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C29",
+         "text": "1013"
+        },
+        {
+         "column": 4,
+         "ref": "D29",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 29
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A30",
+         "text": "128"
+        },
+        {
+         "column": 2,
+         "ref": "B30",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C30",
+         "text": "1196"
+        },
+        {
+         "column": 4,
+         "ref": "D30",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 30
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A31",
+         "text": "129"
+        },
+        {
+         "column": 2,
+         "ref": "B31",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C31",
+         "text": "1189"
+        },
+        {
+         "column": 4,
+         "ref": "D31",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 31
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A32",
+         "text": "130"
+        },
+        {
+         "column": 2,
+         "ref": "B32",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C32",
+         "text": "981"
+        },
+        {
+         "column": 4,
+         "ref": "D32",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 32
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A33",
+         "text": "131"
+        },
+        {
+         "column": 2,
+         "ref": "B33",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C33",
+         "text": "1261"
+        },
+        {
+         "column": 4,
+         "ref": "D33",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 33
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A34",
+         "text": "132"
+        },
+        {
+         "column": 2,
+         "ref": "B34",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C34",
+         "text": "1524"
+        },
+        {
+         "column": 4,
+         "ref": "D34",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 34
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A35",
+         "text": "133"
+        },
+        {
+         "column": 2,
+         "ref": "B35",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C35",
+         "text": "1196"
+        },
+        {
+         "column": 4,
+         "ref": "D35",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 35
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A36",
+         "text": "134"
+        },
+        {
+         "column": 2,
+         "ref": "B36",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C36",
+         "text": "1219"
+        },
+        {
+         "column": 4,
+         "ref": "D36",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 36
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A37",
+         "text": "135"
+        },
+        {
+         "column": 2,
+         "ref": "B37",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C37",
+         "text": "1188"
+        },
+        {
+         "column": 4,
+         "ref": "D37",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 37
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A38",
+         "text": "136"
+        },
+        {
+         "column": 2,
+         "ref": "B38",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C38",
+         "text": "1528"
+        },
+        {
+         "column": 4,
+         "ref": "D38",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 38
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A39",
+         "text": "137"
+        },
+        {
+         "column": 2,
+         "ref": "B39",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C39",
+         "text": "1481"
+        },
+        {
+         "column": 4,
+         "ref": "D39",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 39
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A40",
+         "text": "138"
+        },
+        {
+         "column": 2,
+         "ref": "B40",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C40",
+         "text": "1519"
+        },
+        {
+         "column": 4,
+         "ref": "D40",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 40
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A41",
+         "text": "139"
+        },
+        {
+         "column": 2,
+         "ref": "B41",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C41",
+         "text": "1015"
+        },
+        {
+         "column": 4,
+         "ref": "D41",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 41
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A42",
+         "text": "140"
+        },
+        {
+         "column": 2,
+         "ref": "B42",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C42",
+         "text": "1473"
+        },
+        {
+         "column": 4,
+         "ref": "D42",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 42
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A43",
+         "text": "141"
+        },
+        {
+         "column": 2,
+         "ref": "B43",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C43",
+         "text": "1579"
+        },
+        {
+         "column": 4,
+         "ref": "D43",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 43
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A44",
+         "text": "142"
+        },
+        {
+         "column": 2,
+         "ref": "B44",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C44",
+         "text": "1554"
+        },
+        {
+         "column": 4,
+         "ref": "D44",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 44
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A45",
+         "text": "143"
+        },
+        {
+         "column": 2,
+         "ref": "B45",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C45",
+         "text": "1568"
+        },
+        {
+         "column": 4,
+         "ref": "D45",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 45
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A46",
+         "text": "144"
+        },
+        {
+         "column": 2,
+         "ref": "B46",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C46",
+         "text": "1210"
+        },
+        {
+         "column": 4,
+         "ref": "D46",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 46
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A47",
+         "text": "145"
+        },
+        {
+         "column": 2,
+         "ref": "B47",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C47",
+         "text": "1191"
+        },
+        {
+         "column": 4,
+         "ref": "D47",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 47
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A48",
+         "text": "146"
+        },
+        {
+         "column": 2,
+         "ref": "B48",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C48",
+         "text": "951"
+        },
+        {
+         "column": 4,
+         "ref": "D48",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 48
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A49",
+         "text": "147"
+        },
+        {
+         "column": 2,
+         "ref": "B49",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C49",
+         "text": "1505"
+        },
+        {
+         "column": 4,
+         "ref": "D49",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 49
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A50",
+         "text": "148"
+        },
+        {
+         "column": 2,
+         "ref": "B50",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C50",
+         "text": "1001"
+        },
+        {
+         "column": 4,
+         "ref": "D50",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 50
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A51",
+         "text": "149"
+        },
+        {
+         "column": 2,
+         "ref": "B51",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C51",
+         "text": "950"
+        },
+        {
+         "column": 4,
+         "ref": "D51",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 51
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A52",
+         "text": "150"
+        },
+        {
+         "column": 2,
+         "ref": "B52",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C52",
+         "text": "1543"
+        },
+        {
+         "column": 4,
+         "ref": "D52",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 52
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A53",
+         "text": "151"
+        },
+        {
+         "column": 2,
+         "ref": "B53",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C53",
+         "text": "1249"
+        },
+        {
+         "column": 4,
+         "ref": "D53",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 53
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A54",
+         "text": "152"
+        },
+        {
+         "column": 2,
+         "ref": "B54",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C54",
+         "text": "1228"
+        },
+        {
+         "column": 4,
+         "ref": "D54",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 54
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A55",
+         "text": "153"
+        },
+        {
+         "column": 2,
+         "ref": "B55",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C55",
+         "text": "1195"
+        },
+        {
+         "column": 4,
+         "ref": "D55",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 55
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A56",
+         "text": "154"
+        },
+        {
+         "column": 2,
+         "ref": "B56",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C56",
+         "text": "1204"
+        },
+        {
+         "column": 4,
+         "ref": "D56",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 56
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A57",
+         "text": "155"
+        },
+        {
+         "column": 2,
+         "ref": "B57",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C57",
+         "text": "1032"
+        },
+        {
+         "column": 4,
+         "ref": "D57",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 57
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A58",
+         "text": "156"
+        },
+        {
+         "column": 2,
+         "ref": "B58",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C58",
+         "text": "1554"
+        },
+        {
+         "column": 4,
+         "ref": "D58",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 58
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A59",
+         "text": "157"
+        },
+        {
+         "column": 2,
+         "ref": "B59",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C59",
+         "text": "1013"
+        },
+        {
+         "column": 4,
+         "ref": "D59",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 59
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A60",
+         "text": "158"
+        },
+        {
+         "column": 2,
+         "ref": "B60",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C60",
+         "text": "969"
+        },
+        {
+         "column": 4,
+         "ref": "D60",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 60
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A61",
+         "text": "159"
+        },
+        {
+         "column": 2,
+         "ref": "B61",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C61",
+         "text": "1026"
+        },
+        {
+         "column": 4,
+         "ref": "D61",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 61
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A62",
+         "text": "160"
+        },
+        {
+         "column": 2,
+         "ref": "B62",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C62",
+         "text": "1278"
+        },
+        {
+         "column": 4,
+         "ref": "D62",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 62
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A63",
+         "text": "161"
+        },
+        {
+         "column": 2,
+         "ref": "B63",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C63",
+         "text": "1182"
+        },
+        {
+         "column": 4,
+         "ref": "D63",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 63
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A64",
+         "text": "162"
+        },
+        {
+         "column": 2,
+         "ref": "B64",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C64",
+         "text": "1028"
+        },
+        {
+         "column": 4,
+         "ref": "D64",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 64
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A65",
+         "text": "163"
+        },
+        {
+         "column": 2,
+         "ref": "B65",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C65",
+         "text": "1050"
+        },
+        {
+         "column": 4,
+         "ref": "D65",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 65
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A66",
+         "text": "164"
+        },
+        {
+         "column": 2,
+         "ref": "B66",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C66",
+         "text": "961"
+        },
+        {
+         "column": 4,
+         "ref": "D66",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 66
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A67",
+         "text": "165"
+        },
+        {
+         "column": 2,
+         "ref": "B67",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C67",
+         "text": "1038"
+        },
+        {
+         "column": 4,
+         "ref": "D67",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 67
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A68",
+         "text": "166"
+        },
+        {
+         "column": 2,
+         "ref": "B68",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C68",
+         "text": "1000"
+        },
+        {
+         "column": 4,
+         "ref": "D68",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 68
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A69",
+         "text": "167"
+        },
+        {
+         "column": 2,
+         "ref": "B69",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C69",
+         "text": "1490"
+        },
+        {
+         "column": 4,
+         "ref": "D69",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 69
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A70",
+         "text": "168"
+        },
+        {
+         "column": 2,
+         "ref": "B70",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C70",
+         "text": "1035"
+        },
+        {
+         "column": 4,
+         "ref": "D70",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 70
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A71",
+         "text": "169"
+        },
+        {
+         "column": 2,
+         "ref": "B71",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C71",
+         "text": "1279"
+        },
+        {
+         "column": 4,
+         "ref": "D71",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 71
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A72",
+         "text": "170"
+        },
+        {
+         "column": 2,
+         "ref": "B72",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C72",
+         "text": "1253"
+        },
+        {
+         "column": 4,
+         "ref": "D72",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 72
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A73",
+         "text": "171"
+        },
+        {
+         "column": 2,
+         "ref": "B73",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C73",
+         "text": "1218"
+        },
+        {
+         "column": 4,
+         "ref": "D73",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 73
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A74",
+         "text": "172"
+        },
+        {
+         "column": 2,
+         "ref": "B74",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C74",
+         "text": "1218"
+        },
+        {
+         "column": 4,
+         "ref": "D74",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 74
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A75",
+         "text": "173"
+        },
+        {
+         "column": 2,
+         "ref": "B75",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C75",
+         "text": "1040"
+        },
+        {
+         "column": 4,
+         "ref": "D75",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 75
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A76",
+         "text": "174"
+        },
+        {
+         "column": 2,
+         "ref": "B76",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C76",
+         "text": "1473"
+        },
+        {
+         "column": 4,
+         "ref": "D76",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 76
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A77",
+         "text": "175"
+        },
+        {
+         "column": 2,
+         "ref": "B77",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C77",
+         "text": "991"
+        },
+        {
+         "column": 4,
+         "ref": "D77",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 77
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A78",
+         "text": "176"
+        },
+        {
+         "column": 2,
+         "ref": "B78",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C78",
+         "text": "1552"
+        },
+        {
+         "column": 4,
+         "ref": "D78",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 78
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A79",
+         "text": "177"
+        },
+        {
+         "column": 2,
+         "ref": "B79",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C79",
+         "text": "1199"
+        },
+        {
+         "column": 4,
+         "ref": "D79",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 79
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A80",
+         "text": "178"
+        },
+        {
+         "column": 2,
+         "ref": "B80",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C80",
+         "text": "1216"
+        },
+        {
+         "column": 4,
+         "ref": "D80",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 80
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A81",
+         "text": "179"
+        },
+        {
+         "column": 2,
+         "ref": "B81",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C81",
+         "text": "1243"
+        },
+        {
+         "column": 4,
+         "ref": "D81",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 81
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A82",
+         "text": "180"
+        },
+        {
+         "column": 2,
+         "ref": "B82",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C82",
+         "text": "1054"
+        },
+        {
+         "column": 4,
+         "ref": "D82",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 82
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A83",
+         "text": "181"
+        },
+        {
+         "column": 2,
+         "ref": "B83",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C83",
+         "text": "1236"
+        },
+        {
+         "column": 4,
+         "ref": "D83",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 83
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A84",
+         "text": "182"
+        },
+        {
+         "column": 2,
+         "ref": "B84",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C84",
+         "text": "1560"
+        },
+        {
+         "column": 4,
+         "ref": "D84",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 84
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A85",
+         "text": "183"
+        },
+        {
+         "column": 2,
+         "ref": "B85",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C85",
+         "text": "1037"
+        },
+        {
+         "column": 4,
+         "ref": "D85",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 85
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A86",
+         "text": "184"
+        },
+        {
+         "column": 2,
+         "ref": "B86",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C86",
+         "text": "1245"
+        },
+        {
+         "column": 4,
+         "ref": "D86",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 86
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A87",
+         "text": "185"
+        },
+        {
+         "column": 2,
+         "ref": "B87",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C87",
+         "text": "1058"
+        },
+        {
+         "column": 4,
+         "ref": "D87",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 87
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A88",
+         "text": "186"
+        },
+        {
+         "column": 2,
+         "ref": "B88",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C88",
+         "text": "1253"
+        },
+        {
+         "column": 4,
+         "ref": "D88",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 88
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A89",
+         "text": "187"
+        },
+        {
+         "column": 2,
+         "ref": "B89",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C89",
+         "text": "1555"
+        },
+        {
+         "column": 4,
+         "ref": "D89",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 89
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A90",
+         "text": "188"
+        },
+        {
+         "column": 2,
+         "ref": "B90",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C90",
+         "text": "979"
+        },
+        {
+         "column": 4,
+         "ref": "D90",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 90
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A91",
+         "text": "189"
+        },
+        {
+         "column": 2,
+         "ref": "B91",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C91",
+         "text": "1499"
+        },
+        {
+         "column": 4,
+         "ref": "D91",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 91
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A92",
+         "text": "190"
+        },
+        {
+         "column": 2,
+         "ref": "B92",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C92",
+         "text": "957"
+        },
+        {
+         "column": 4,
+         "ref": "D92",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 92
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A93",
+         "text": "191"
+        },
+        {
+         "column": 2,
+         "ref": "B93",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C93",
+         "text": "960"
+        },
+        {
+         "column": 4,
+         "ref": "D93",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 93
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A94",
+         "text": "192"
+        },
+        {
+         "column": 2,
+         "ref": "B94",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C94",
+         "text": "1570"
+        },
+        {
+         "column": 4,
+         "ref": "D94",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 94
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A95",
+         "text": "193"
+        },
+        {
+         "column": 2,
+         "ref": "B95",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C95",
+         "text": "1242"
+        },
+        {
+         "column": 4,
+         "ref": "D95",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 95
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A96",
+         "text": "194"
+        },
+        {
+         "column": 2,
+         "ref": "B96",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C96",
+         "text": "1274"
+        },
+        {
+         "column": 4,
+         "ref": "D96",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 96
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A97",
+         "text": "195"
+        },
+        {
+         "column": 2,
+         "ref": "B97",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C97",
+         "text": "1227"
+        },
+        {
+         "column": 4,
+         "ref": "D97",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 97
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A98",
+         "text": "196"
+        },
+        {
+         "column": 2,
+         "ref": "B98",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C98",
+         "text": "1577"
+        },
+        {
+         "column": 4,
+         "ref": "D98",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 98
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A99",
+         "text": "197"
+        },
+        {
+         "column": 2,
+         "ref": "B99",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C99",
+         "text": "1245"
+        },
+        {
+         "column": 4,
+         "ref": "D99",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 99
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A100",
+         "text": "198"
+        },
+        {
+         "column": 2,
+         "ref": "B100",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C100",
+         "text": "1041"
+        },
+        {
+         "column": 4,
+         "ref": "D100",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 100
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A101",
+         "text": "199"
+        },
+        {
+         "column": 2,
+         "ref": "B101",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C101",
+         "text": "1254"
+        },
+        {
+         "column": 4,
+         "ref": "D101",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 101
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A102",
+         "text": "200"
+        },
+        {
+         "column": 2,
+         "ref": "B102",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C102",
+         "text": "1265"
+        },
+        {
+         "column": 4,
+         "ref": "D102",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 102
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A103",
+         "text": "201"
+        },
+        {
+         "column": 2,
+         "ref": "B103",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C103",
+         "text": "1242"
+        },
+        {
+         "column": 4,
+         "ref": "D103",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 103
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A104",
+         "text": "202"
+        },
+        {
+         "column": 2,
+         "ref": "B104",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C104",
+         "text": "999"
+        },
+        {
+         "column": 4,
+         "ref": "D104",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 104
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A105",
+         "text": "203"
+        },
+        {
+         "column": 2,
+         "ref": "B105",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C105",
+         "text": "1056"
+        },
+        {
+         "column": 4,
+         "ref": "D105",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 105
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A106",
+         "text": "204"
+        },
+        {
+         "column": 2,
+         "ref": "B106",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C106",
+         "text": "1177"
+        },
+        {
+         "column": 4,
+         "ref": "D106",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 106
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A107",
+         "text": "205"
+        },
+        {
+         "column": 2,
+         "ref": "B107",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C107",
+         "text": "996"
+        },
+        {
+         "column": 4,
+         "ref": "D107",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 107
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A108",
+         "text": "206"
+        },
+        {
+         "column": 2,
+         "ref": "B108",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C108",
+         "text": "1180"
+        },
+        {
+         "column": 4,
+         "ref": "D108",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 108
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A109",
+         "text": "207"
+        },
+        {
+         "column": 2,
+         "ref": "B109",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C109",
+         "text": "1488"
+        },
+        {
+         "column": 4,
+         "ref": "D109",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 109
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A110",
+         "text": "208"
+        },
+        {
+         "column": 2,
+         "ref": "B110",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C110",
+         "text": "1211"
+        },
+        {
+         "column": 4,
+         "ref": "D110",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 110
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A111",
+         "text": "209"
+        },
+        {
+         "column": 2,
+         "ref": "B111",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C111",
+         "text": "951"
+        },
+        {
+         "column": 4,
+         "ref": "D111",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 111
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A112",
+         "text": "210"
+        },
+        {
+         "column": 2,
+         "ref": "B112",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C112",
+         "text": "1211"
+        },
+        {
+         "column": 4,
+         "ref": "D112",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 112
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A113",
+         "text": "211"
+        },
+        {
+         "column": 2,
+         "ref": "B113",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C113",
+         "text": "1035"
+        },
+        {
+         "column": 4,
+         "ref": "D113",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 113
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A114",
+         "text": "212"
+        },
+        {
+         "column": 2,
+         "ref": "B114",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C114",
+         "text": "1025"
+        },
+        {
+         "column": 4,
+         "ref": "D114",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 114
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A115",
+         "text": "213"
+        },
+        {
+         "column": 2,
+         "ref": "B115",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C115",
+         "text": "1569"
+        },
+        {
+         "column": 4,
+         "ref": "D115",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 115
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A116",
+         "text": "214"
+        },
+        {
+         "column": 2,
+         "ref": "B116",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C116",
+         "text": "1247"
+        },
+        {
+         "column": 4,
+         "ref": "D116",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 116
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A117",
+         "text": "215"
+        },
+        {
+         "column": 2,
+         "ref": "B117",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C117",
+         "text": "1572"
+        },
+        {
+         "column": 4,
+         "ref": "D117",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 117
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A118",
+         "text": "216"
+        },
+        {
+         "column": 2,
+         "ref": "B118",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C118",
+         "text": "1058"
+        },
+        {
+         "column": 4,
+         "ref": "D118",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 118
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A119",
+         "text": "217"
+        },
+        {
+         "column": 2,
+         "ref": "B119",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C119",
+         "text": "1555"
+        },
+        {
+         "column": 4,
+         "ref": "D119",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 119
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A120",
+         "text": "218"
+        },
+        {
+         "column": 2,
+         "ref": "B120",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C120",
+         "text": "1030"
+        },
+        {
+         "column": 4,
+         "ref": "D120",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 120
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A121",
+         "text": "219"
+        },
+        {
+         "column": 2,
+         "ref": "B121",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C121",
+         "text": "960"
+        },
+        {
+         "column": 4,
+         "ref": "D121",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 121
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A122",
+         "text": "220"
+        },
+        {
+         "column": 2,
+         "ref": "B122",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C122",
+         "text": "966"
+        },
+        {
+         "column": 4,
+         "ref": "D122",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 122
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A123",
+         "text": "221"
+        },
+        {
+         "column": 2,
+         "ref": "B123",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C123",
+         "text": "1205"
+        },
+        {
+         "column": 4,
+         "ref": "D123",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 123
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A124",
+         "text": "222"
+        },
+        {
+         "column": 2,
+         "ref": "B124",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C124",
+         "text": "1550"
+        },
+        {
+         "column": 4,
+         "ref": "D124",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 124
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A125",
+         "text": "223"
+        },
+        {
+         "column": 2,
+         "ref": "B125",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C125",
+         "text": "1029"
+        },
+        {
+         "column": 4,
+         "ref": "D125",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 125
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A126",
+         "text": "224"
+        },
+        {
+         "column": 2,
+         "ref": "B126",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C126",
+         "text": "1564"
+        },
+        {
+         "column": 4,
+         "ref": "D126",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 126
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A127",
+         "text": "225"
+        },
+        {
+         "column": 2,
+         "ref": "B127",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C127",
+         "text": "1221"
+        },
+        {
+         "column": 4,
+         "ref": "D127",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 127
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A128",
+         "text": "226"
+        },
+        {
+         "column": 2,
+         "ref": "B128",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C128",
+         "text": "1569"
+        },
+        {
+         "column": 4,
+         "ref": "D128",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 128
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A129",
+         "text": "227"
+        },
+        {
+         "column": 2,
+         "ref": "B129",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C129",
+         "text": "1218"
+        },
+        {
+         "column": 4,
+         "ref": "D129",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 129
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A130",
+         "text": "228"
+        },
+        {
+         "column": 2,
+         "ref": "B130",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C130",
+         "text": "952"
+        },
+        {
+         "column": 4,
+         "ref": "D130",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 130
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A131",
+         "text": "229"
+        },
+        {
+         "column": 2,
+         "ref": "B131",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C131",
+         "text": "965"
+        },
+        {
+         "column": 4,
+         "ref": "D131",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 131
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A132",
+         "text": "230"
+        },
+        {
+         "column": 2,
+         "ref": "B132",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C132",
+         "text": "1018"
+        },
+        {
+         "column": 4,
+         "ref": "D132",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 132
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A133",
+         "text": "231"
+        },
+        {
+         "column": 2,
+         "ref": "B133",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C133",
+         "text": "1057"
+        },
+        {
+         "column": 4,
+         "ref": "D133",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 133
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A134",
+         "text": "232"
+        },
+        {
+         "column": 2,
+         "ref": "B134",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C134",
+         "text": "1176"
+        },
+        {
+         "column": 4,
+         "ref": "D134",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 134
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A135",
+         "text": "233"
+        },
+        {
+         "column": 2,
+         "ref": "B135",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C135",
+         "text": "1522"
+        },
+        {
+         "column": 4,
+         "ref": "D135",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 135
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A136",
+         "text": "234"
+        },
+        {
+         "column": 2,
+         "ref": "B136",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C136",
+         "text": "1513"
+        },
+        {
+         "column": 4,
+         "ref": "D136",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 136
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A137",
+         "text": "235"
+        },
+        {
+         "column": 2,
+         "ref": "B137",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C137",
+         "text": "1226"
+        },
+        {
+         "column": 4,
+         "ref": "D137",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 137
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A138",
+         "text": "236"
+        },
+        {
+         "column": 2,
+         "ref": "B138",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C138",
+         "text": "1503"
+        },
+        {
+         "column": 4,
+         "ref": "D138",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 138
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A139",
+         "text": "237"
+        },
+        {
+         "column": 2,
+         "ref": "B139",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C139",
+         "text": "1204"
+        },
+        {
+         "column": 4,
+         "ref": "D139",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 139
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A140",
+         "text": "238"
+        },
+        {
+         "column": 2,
+         "ref": "B140",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C140",
+         "text": "1053"
+        },
+        {
+         "column": 4,
+         "ref": "D140",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 140
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A141",
+         "text": "239"
+        },
+        {
+         "column": 2,
+         "ref": "B141",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C141",
+         "text": "1216"
+        },
+        {
+         "column": 4,
+         "ref": "D141",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 141
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A142",
+         "text": "240"
+        },
+        {
+         "column": 2,
+         "ref": "B142",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C142",
+         "text": "1011"
+        },
+        {
+         "column": 4,
+         "ref": "D142",
+         "text": "Occupied"
+        }
+       ],
+       "rowNumber": 142
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A143",
+         "text": "241"
+        },
+        {
+         "column": 2,
+         "ref": "B143",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C143",
+         "text": "1506"
+        },
+        {
+         "column": 4,
+         "ref": "D143",
+         "text": "Vacant"
+        }
+       ],
+       "rowNumber": 143
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A144",
+         "text": "242"
+        },
+        {
+         "column": 2,
+         "ref": "B144",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C144",
+         "text": "1044"
+        },
+        {
+         "column": 4,
+         "ref": "D144",
+         "text": "Vacant"
+        }
+       ],
+       "rowNumber": 144
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A145",
+         "text": "243"
+        },
+        {
+         "column": 2,
+         "ref": "B145",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C145",
+         "text": "1050"
+        },
+        {
+         "column": 4,
+         "ref": "D145",
+         "text": "Vacant"
+        }
+       ],
+       "rowNumber": 145
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A146",
+         "text": "244"
+        },
+        {
+         "column": 2,
+         "ref": "B146",
+         "text": "1BR/1BA"
+        },
+        {
+         "column": 3,
+         "ref": "C146",
+         "text": "1034"
+        },
+        {
+         "column": 4,
+         "ref": "D146",
+         "text": "Vacant"
+        }
+       ],
+       "rowNumber": 146
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A147",
+         "text": "245"
+        },
+        {
+         "column": 2,
+         "ref": "B147",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C147",
+         "text": "1528"
+        },
+        {
+         "column": 4,
+         "ref": "D147",
+         "text": "Vacant"
+        }
+       ],
+       "rowNumber": 147
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A148",
+         "text": "246"
+        },
+        {
+         "column": 2,
+         "ref": "B148",
+         "text": "3BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C148",
+         "text": "1568"
+        },
+        {
+         "column": 4,
+         "ref": "D148",
+         "text": "Vacant"
+        }
+       ],
+       "rowNumber": 148
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A149",
+         "text": "247"
+        },
+        {
+         "column": 2,
+         "ref": "B149",
+         "text": "2BR/2BA"
+        },
+        {
+         "column": 3,
+         "ref": "C149",
+         "text": "1183"
+        },
+        {
+         "column": 4,
+         "ref": "D149",
+         "text": "Vacant"
+        }
+       ],
+       "rowNumber": 149
+      }
+     ],
+     "sheetIndex": 0,
+     "tableCount": 0
+    }
+   ]
+  }
+ },
+ "parserTarget": "csv",
+ "sha256": "1c1c8b475376f6109e4631bc896f69667c74a59089c6f114ceb455a9c1e2f0d5"
+}

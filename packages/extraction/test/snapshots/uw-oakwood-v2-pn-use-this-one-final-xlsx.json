@@ -1,0 +1,3351 @@
+{
+ "fileName": "UW_Oakwood_v2_PN_USE THIS ONE_FINAL.xlsx",
+ "normalized": {
+  "kind": "workbook",
+  "workbook": {
+   "fileName": "UW_Oakwood_v2_PN_USE THIS ONE_FINAL.xlsx",
+   "metadata": {
+    "creator": "openpyxl",
+    "source": "xlsx",
+    "title": null
+   },
+   "sheetCount": 9,
+   "structuredTables": [],
+   "worksheets": [
+    {
+     "maxColumn": 3,
+     "maxRow": 37,
+     "metadata": {
+      "formulaCellsWithoutCachedValues": 0,
+      "sheetState": "visible",
+      "truncated": false
+     },
+     "name": "Summary",
+     "rows": [
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A1",
+         "text": "SYNTHETIC CAPITAL PARTNERS"
+        }
+       ],
+       "rowNumber": 1
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A2",
+         "text": "Oakwood Commons Underwriting Model"
+        }
+       ],
+       "rowNumber": 2
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A3",
+         "text": "Version: v2 (November 2020)"
+        },
+        {
+         "column": 2,
+         "ref": "B3",
+         "text": "Analyst: Priya Nair"
+        },
+        {
+         "column": 3,
+         "ref": "C3",
+         "text": "POST-PROPERTY TOUR"
+        }
+       ],
+       "rowNumber": 3
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A5",
+         "text": "KEY METRICS"
+        }
+       ],
+       "rowNumber": 5
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A6",
+         "text": "Purchase Price"
+        },
+        {
+         "column": 2,
+         "ref": "B6",
+         "text": "$41,200,000"
+        }
+       ],
+       "rowNumber": 6
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A7",
+         "text": "Entry Cap Rate"
+        },
+        {
+         "column": 2,
+         "ref": "B7",
+         "text": "5.6%"
+        }
+       ],
+       "rowNumber": 7
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A8",
+         "text": "Units"
+        },
+        {
+         "column": 2,
+         "ref": "B8",
+         "text": "232"
+        }
+       ],
+       "rowNumber": 8
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A9",
+         "text": "Price per Unit"
+        },
+        {
+         "column": 2,
+         "ref": "B9",
+         "text": "$177,586"
+        }
+       ],
+       "rowNumber": 9
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A11",
+         "text": "RETURNS"
+        }
+       ],
+       "rowNumber": 11
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A12",
+         "text": "Levered IRR"
+        },
+        {
+         "column": 2,
+         "ref": "B12",
+         "text": "16.4%"
+        }
+       ],
+       "rowNumber": 12
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A13",
+         "text": "Equity Multiple"
+        },
+        {
+         "column": 2,
+         "ref": "B13",
+         "text": "2.08x"
+        }
+       ],
+       "rowNumber": 13
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A14",
+         "text": "Avg Cash-on-Cash"
+        },
+        {
+         "column": 2,
+         "ref": "B14",
+         "text": "6.8%"
+        }
+       ],
+       "rowNumber": 14
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A16",
+         "text": "ASSUMPTIONS"
+        }
+       ],
+       "rowNumber": 16
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A17",
+         "text": "In-Place NOI (Normalized)"
+        },
+        {
+         "column": 2,
+         "ref": "B17",
+         "text": "$2,307,200"
+        }
+       ],
+       "rowNumber": 17
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A18",
+         "text": "Market Rent (blended)"
+        },
+        {
+         "column": 2,
+         "ref": "B18",
+         "text": "$1,310/unit"
+        }
+       ],
+       "rowNumber": 18
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A19",
+         "text": "Rent Growth"
+        },
+        {
+         "column": 2,
+         "ref": "B19",
+         "text": "2.5%"
+        }
+       ],
+       "rowNumber": 19
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A20",
+         "text": "Physical Vacancy"
+        },
+        {
+         "column": 2,
+         "ref": "B20",
+         "text": "7.0%"
+        }
+       ],
+       "rowNumber": 20
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A21",
+         "text": "Economic Vacancy"
+        },
+        {
+         "column": 2,
+         "ref": "B21",
+         "text": "2.5%"
+        }
+       ],
+       "rowNumber": 21
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A22",
+         "text": "Total Vacancy Load"
+        },
+        {
+         "column": 2,
+         "ref": "B22",
+         "text": "9.5%"
+        }
+       ],
+       "rowNumber": 22
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A23",
+         "text": "Management Fee"
+        },
+        {
+         "column": 2,
+         "ref": "B23",
+         "text": "4.5% of EGR (~$780/unit)"
+        }
+       ],
+       "rowNumber": 23
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A24",
+         "text": "OpEx per Unit"
+        },
+        {
+         "column": 2,
+         "ref": "B24",
+         "text": "$7,140"
+        }
+       ],
+       "rowNumber": 24
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A25",
+         "text": "Exit Cap"
+        },
+        {
+         "column": 2,
+         "ref": "B25",
+         "text": "6.0%"
+        }
+       ],
+       "rowNumber": 25
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A26",
+         "text": "Hold Period"
+        },
+        {
+         "column": 2,
+         "ref": "B26",
+         "text": "5 years"
+        }
+       ],
+       "rowNumber": 26
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A28",
+         "text": "FINANCING"
+        }
+       ],
+       "rowNumber": 28
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A29",
+         "text": "Loan Amount"
+        },
+        {
+         "column": 2,
+         "ref": "B29",
+         "text": "$13,800,000 (75% LTV)"
+        }
+       ],
+       "rowNumber": 29
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A30",
+         "text": "Interest Rate"
+        },
+        {
+         "column": 2,
+         "ref": "B30",
+         "text": "4.25%"
+        }
+       ],
+       "rowNumber": 30
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A31",
+         "text": "Equity Required"
+        },
+        {
+         "column": 2,
+         "ref": "B31",
+         "text": "$27,400,000"
+        }
+       ],
+       "rowNumber": 31
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A33",
+         "text": "NOTES"
+        }
+       ],
+       "rowNumber": 33
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A34",
+         "text": "Entry cap revised down — market tightened, comparable sales came in stronger."
+        }
+       ],
+       "rowNumber": 34
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A35",
+         "text": "Removed $180K one-time insurance reimbursement from NOI (non-recurring per seller CFO)."
+        }
+       ],
+       "rowNumber": 35
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A36",
+         "text": "Greenfield confirmed $780/unit mgmt fee — AD used $850 standard quote but we negotiated."
+        }
+       ],
+       "rowNumber": 36
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A37",
+         "text": "THIS IS THE APPROVED VERSION FOR IC MEMO"
+        }
+       ],
+       "rowNumber": 37
+      }
+     ],
+     "sheetIndex": 0,
+     "tableCount": 0
+    },
+    {
+     "maxColumn": 4,
+     "maxRow": 33,
+     "metadata": {
+      "formulaCellsWithoutCachedValues": 0,
+      "sheetState": "visible",
+      "truncated": false
+     },
+     "name": "Assumptions",
+     "rows": [
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A1",
+         "text": "ASSUMPTIONS"
+        }
+       ],
+       "rowNumber": 1
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A2",
+         "text": "Category"
+        },
+        {
+         "column": 2,
+         "ref": "B2",
+         "text": "Input"
+        },
+        {
+         "column": 3,
+         "ref": "C2",
+         "text": "Unit"
+        },
+        {
+         "column": 4,
+         "ref": "D2",
+         "text": "Notes"
+        }
+       ],
+       "rowNumber": 2
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A3",
+         "text": "Acquisition"
+        }
+       ],
+       "rowNumber": 3
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A4",
+         "text": "Purchase Price"
+        },
+        {
+         "column": 2,
+         "ref": "B4",
+         "text": "41200000"
+        },
+        {
+         "column": 3,
+         "ref": "C4",
+         "text": "USD"
+        },
+        {
+         "column": 4,
+         "ref": "D4",
+         "text": "Negotiated price"
+        }
+       ],
+       "rowNumber": 4
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A5",
+         "text": "Closing Costs"
+        },
+        {
+         "column": 2,
+         "ref": "B5",
+         "text": "824000"
+        },
+        {
+         "column": 3,
+         "ref": "C5",
+         "text": "USD"
+        },
+        {
+         "column": 4,
+         "ref": "D5",
+         "text": "2.0% of purchase"
+        }
+       ],
+       "rowNumber": 5
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A6",
+         "text": "Total Cost"
+        },
+        {
+         "column": 2,
+         "ref": "B6",
+         "text": "42024000"
+        },
+        {
+         "column": 3,
+         "ref": "C6",
+         "text": "USD"
+        }
+       ],
+       "rowNumber": 6
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A8",
+         "text": "Property"
+        }
+       ],
+       "rowNumber": 8
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A9",
+         "text": "Units"
+        },
+        {
+         "column": 2,
+         "ref": "B9",
+         "text": "232"
+        },
+        {
+         "column": 3,
+         "ref": "C9",
+         "text": "units"
+        }
+       ],
+       "rowNumber": 9
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A10",
+         "text": "Price per Unit"
+        },
+        {
+         "column": 2,
+         "ref": "B10",
+         "text": "177586"
+        },
+        {
+         "column": 3,
+         "ref": "C10",
+         "text": "USD"
+        }
+       ],
+       "rowNumber": 10
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A11",
+         "text": "Entry Cap Rate"
+        },
+        {
+         "column": 2,
+         "ref": "B11",
+         "text": "5.6%"
+        },
+        {
+         "column": 4,
+         "ref": "D11",
+         "text": "Revised down post-tour"
+        }
+       ],
+       "rowNumber": 11
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A13",
+         "text": "Revenue"
+        }
+       ],
+       "rowNumber": 13
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A14",
+         "text": "Year 1 Market Rent"
+        },
+        {
+         "column": 2,
+         "ref": "B14",
+         "text": "1310"
+        },
+        {
+         "column": 3,
+         "ref": "C14",
+         "text": "USD/unit"
+        },
+        {
+         "column": 4,
+         "ref": "D14",
+         "text": "Tour showed units nicer than OM photos"
+        }
+       ],
+       "rowNumber": 14
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A15",
+         "text": "Rent Growth"
+        },
+        {
+         "column": 2,
+         "ref": "B15",
+         "text": "2.5%"
+        },
+        {
+         "column": 3,
+         "ref": "C15",
+         "text": "annual"
+        },
+        {
+         "column": 4,
+         "ref": "D15",
+         "text": "Conservative"
+        }
+       ],
+       "rowNumber": 15
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A16",
+         "text": "Physical Vacancy"
+        },
+        {
+         "column": 2,
+         "ref": "B16",
+         "text": "7.0%"
+        }
+       ],
+       "rowNumber": 16
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A17",
+         "text": "Economic Vacancy"
+        },
+        {
+         "column": 2,
+         "ref": "B17",
+         "text": "2.5%"
+        }
+       ],
+       "rowNumber": 17
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A18",
+         "text": "Other Income"
+        },
+        {
+         "column": 2,
+         "ref": "B18",
+         "text": "190"
+        },
+        {
+         "column": 3,
+         "ref": "C18",
+         "text": "USD/unit"
+        },
+        {
+         "column": 4,
+         "ref": "D18",
+         "text": "Pet, parking, laundry, storage"
+        }
+       ],
+       "rowNumber": 18
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A20",
+         "text": "Expenses"
+        }
+       ],
+       "rowNumber": 20
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A21",
+         "text": "Management Fee"
+        },
+        {
+         "column": 2,
+         "ref": "B21",
+         "text": "4.5%"
+        },
+        {
+         "column": 3,
+         "ref": "C21",
+         "text": "of EGR"
+        },
+        {
+         "column": 4,
+         "ref": "D21",
+         "text": "$780/unit - NEGOTIATED with Greenfield"
+        }
+       ],
+       "rowNumber": 21
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A22",
+         "text": "OpEx per Unit"
+        },
+        {
+         "column": 2,
+         "ref": "B22",
+         "text": "7140"
+        },
+        {
+         "column": 3,
+         "ref": "C22",
+         "text": "USD/unit/yr"
+        },
+        {
+         "column": 4,
+         "ref": "D22",
+         "text": "Lower than v1 - Greenfield runs lean"
+        }
+       ],
+       "rowNumber": 22
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A23",
+         "text": "Expense Growth"
+        },
+        {
+         "column": 2,
+         "ref": "B23",
+         "text": "3.0%"
+        },
+        {
+         "column": 3,
+         "ref": "C23",
+         "text": "annual"
+        }
+       ],
+       "rowNumber": 23
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A25",
+         "text": "Exit"
+        }
+       ],
+       "rowNumber": 25
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A26",
+         "text": "Exit Cap Rate"
+        },
+        {
+         "column": 2,
+         "ref": "B26",
+         "text": "6.0%"
+        },
+        {
+         "column": 4,
+         "ref": "D26",
+         "text": "Market has moved"
+        }
+       ],
+       "rowNumber": 26
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A27",
+         "text": "Hold Period"
+        },
+        {
+         "column": 2,
+         "ref": "B27",
+         "text": "5"
+        },
+        {
+         "column": 3,
+         "ref": "C27",
+         "text": "years"
+        }
+       ],
+       "rowNumber": 27
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A29",
+         "text": "Financing"
+        }
+       ],
+       "rowNumber": 29
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A30",
+         "text": "Loan Amount"
+        },
+        {
+         "column": 2,
+         "ref": "B30",
+         "text": "13800000"
+        },
+        {
+         "column": 3,
+         "ref": "C30",
+         "text": "USD"
+        },
+        {
+         "column": 4,
+         "ref": "D30",
+         "text": "75% LTV"
+        }
+       ],
+       "rowNumber": 30
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A31",
+         "text": "Interest Rate"
+        },
+        {
+         "column": 2,
+         "ref": "B31",
+         "text": "4.25%"
+        }
+       ],
+       "rowNumber": 31
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A32",
+         "text": "Amortization"
+        },
+        {
+         "column": 2,
+         "ref": "B32",
+         "text": "30"
+        },
+        {
+         "column": 3,
+         "ref": "C32",
+         "text": "years"
+        }
+       ],
+       "rowNumber": 32
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A33",
+         "text": "IO Period"
+        },
+        {
+         "column": 2,
+         "ref": "B33",
+         "text": "5"
+        },
+        {
+         "column": 3,
+         "ref": "C33",
+         "text": "years"
+        }
+       ],
+       "rowNumber": 33
+      }
+     ],
+     "sheetIndex": 1,
+     "tableCount": 0
+    },
+    {
+     "maxColumn": 6,
+     "maxRow": 18,
+     "metadata": {
+      "formulaCellsWithoutCachedValues": 0,
+      "sheetState": "visible",
+      "truncated": false
+     },
+     "name": "Revenue",
+     "rows": [
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A1",
+         "text": "REVENUE SCHEDULE"
+        }
+       ],
+       "rowNumber": 1
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A2",
+         "text": "Year"
+        },
+        {
+         "column": 2,
+         "ref": "B2",
+         "text": "1"
+        },
+        {
+         "column": 3,
+         "ref": "C2",
+         "text": "2"
+        },
+        {
+         "column": 4,
+         "ref": "D2",
+         "text": "3"
+        },
+        {
+         "column": 5,
+         "ref": "E2",
+         "text": "4"
+        },
+        {
+         "column": 6,
+         "ref": "F2",
+         "text": "5"
+        }
+       ],
+       "rowNumber": 2
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A4",
+         "text": "UNIT MIX"
+        }
+       ],
+       "rowNumber": 4
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A5",
+         "text": "1BR Units"
+        },
+        {
+         "column": 2,
+         "ref": "B5",
+         "text": "90"
+        }
+       ],
+       "rowNumber": 5
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A6",
+         "text": "2BR Units"
+        },
+        {
+         "column": 2,
+         "ref": "B6",
+         "text": "115"
+        }
+       ],
+       "rowNumber": 6
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A7",
+         "text": "3BR Units"
+        },
+        {
+         "column": 2,
+         "ref": "B7",
+         "text": "27"
+        }
+       ],
+       "rowNumber": 7
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A8",
+         "text": "Total Units"
+        },
+        {
+         "column": 2,
+         "ref": "B8",
+         "text": "232"
+        }
+       ],
+       "rowNumber": 8
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A10",
+         "text": "RENT SCHEDULE"
+        }
+       ],
+       "rowNumber": 10
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A11",
+         "text": "Market Rent (blended)"
+        },
+        {
+         "column": 2,
+         "ref": "B11",
+         "text": "1310"
+        },
+        {
+         "column": 3,
+         "ref": "C11",
+         "text": "1343"
+        },
+        {
+         "column": 4,
+         "ref": "D11",
+         "text": "1376"
+        },
+        {
+         "column": 5,
+         "ref": "E11",
+         "text": "1411"
+        },
+        {
+         "column": 6,
+         "ref": "F11",
+         "text": "1446"
+        }
+       ],
+       "rowNumber": 11
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A12",
+         "text": "Gross Potential Rent"
+        },
+        {
+         "column": 2,
+         "ref": "B12",
+         "text": "3647040"
+        },
+        {
+         "column": 3,
+         "ref": "C12",
+         "text": "3738216"
+        },
+        {
+         "column": 4,
+         "ref": "D12",
+         "text": "3831671"
+        },
+        {
+         "column": 5,
+         "ref": "E12",
+         "text": "3927478"
+        },
+        {
+         "column": 6,
+         "ref": "F12",
+         "text": "4025665"
+        }
+       ],
+       "rowNumber": 12
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A13",
+         "text": "Physical Vacancy %"
+        },
+        {
+         "column": 2,
+         "ref": "B13",
+         "text": "7.0%"
+        },
+        {
+         "column": 3,
+         "ref": "C13",
+         "text": "7.0%"
+        },
+        {
+         "column": 4,
+         "ref": "D13",
+         "text": "6.5%"
+        },
+        {
+         "column": 5,
+         "ref": "E13",
+         "text": "6.5%"
+        },
+        {
+         "column": 6,
+         "ref": "F13",
+         "text": "6.0%"
+        }
+       ],
+       "rowNumber": 13
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A14",
+         "text": "Economic Vacancy %"
+        },
+        {
+         "column": 2,
+         "ref": "B14",
+         "text": "2.5%"
+        },
+        {
+         "column": 3,
+         "ref": "C14",
+         "text": "2.5%"
+        },
+        {
+         "column": 4,
+         "ref": "D14",
+         "text": "2.5%"
+        },
+        {
+         "column": 5,
+         "ref": "E14",
+         "text": "2.0%"
+        },
+        {
+         "column": 6,
+         "ref": "F14",
+         "text": "2.0%"
+        }
+       ],
+       "rowNumber": 14
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A15",
+         "text": "Total Vacancy %"
+        },
+        {
+         "column": 2,
+         "ref": "B15",
+         "text": "9.5%"
+        },
+        {
+         "column": 3,
+         "ref": "C15",
+         "text": "9.5%"
+        },
+        {
+         "column": 4,
+         "ref": "D15",
+         "text": "9.0%"
+        },
+        {
+         "column": 5,
+         "ref": "E15",
+         "text": "8.5%"
+        },
+        {
+         "column": 6,
+         "ref": "F15",
+         "text": "8.0%"
+        }
+       ],
+       "rowNumber": 15
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A16",
+         "text": "Effective Gross Rent"
+        },
+        {
+         "column": 2,
+         "ref": "B16",
+         "text": "3301571"
+        },
+        {
+         "column": 3,
+         "ref": "C16",
+         "text": "3383086"
+        },
+        {
+         "column": 4,
+         "ref": "D16",
+         "text": "3486811"
+        },
+        {
+         "column": 5,
+         "ref": "E16",
+         "text": "3593642"
+        },
+        {
+         "column": 6,
+         "ref": "F16",
+         "text": "3703612"
+        }
+       ],
+       "rowNumber": 16
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A17",
+         "text": "Other Income"
+        },
+        {
+         "column": 2,
+         "ref": "B17",
+         "text": "528960"
+        },
+        {
+         "column": 3,
+         "ref": "C17",
+         "text": "528960"
+        },
+        {
+         "column": 4,
+         "ref": "D17",
+         "text": "528960"
+        },
+        {
+         "column": 5,
+         "ref": "E17",
+         "text": "528960"
+        },
+        {
+         "column": 6,
+         "ref": "F17",
+         "text": "528960"
+        }
+       ],
+       "rowNumber": 17
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A18",
+         "text": "Effective Gross Revenue"
+        },
+        {
+         "column": 2,
+         "ref": "B18",
+         "text": "3830531"
+        },
+        {
+         "column": 3,
+         "ref": "C18",
+         "text": "3912046"
+        },
+        {
+         "column": 4,
+         "ref": "D18",
+         "text": "4015771"
+        },
+        {
+         "column": 5,
+         "ref": "E18",
+         "text": "4122602"
+        },
+        {
+         "column": 6,
+         "ref": "F18",
+         "text": "4232572"
+        }
+       ],
+       "rowNumber": 18
+      }
+     ],
+     "sheetIndex": 2,
+     "tableCount": 0
+    },
+    {
+     "maxColumn": 6,
+     "maxRow": 16,
+     "metadata": {
+      "formulaCellsWithoutCachedValues": 0,
+      "sheetState": "visible",
+      "truncated": false
+     },
+     "name": "Expenses",
+     "rows": [
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A1",
+         "text": "EXPENSE SCHEDULE"
+        }
+       ],
+       "rowNumber": 1
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A2",
+         "text": "Year"
+        },
+        {
+         "column": 2,
+         "ref": "B2",
+         "text": "1"
+        },
+        {
+         "column": 3,
+         "ref": "C2",
+         "text": "2"
+        },
+        {
+         "column": 4,
+         "ref": "D2",
+         "text": "3"
+        },
+        {
+         "column": 5,
+         "ref": "E2",
+         "text": "4"
+        },
+        {
+         "column": 6,
+         "ref": "F2",
+         "text": "5"
+        }
+       ],
+       "rowNumber": 2
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A4",
+         "text": "OPERATING EXPENSES"
+        }
+       ],
+       "rowNumber": 4
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A5",
+         "text": "Management Fee"
+        },
+        {
+         "column": 2,
+         "ref": "B5",
+         "text": "172374"
+        },
+        {
+         "column": 3,
+         "ref": "C5",
+         "text": "176042"
+        },
+        {
+         "column": 4,
+         "ref": "D5",
+         "text": "180710"
+        },
+        {
+         "column": 5,
+         "ref": "E5",
+         "text": "185517"
+        },
+        {
+         "column": 6,
+         "ref": "F5",
+         "text": "190466"
+        }
+       ],
+       "rowNumber": 5
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A6",
+         "text": "Payroll & Benefits"
+        },
+        {
+         "column": 2,
+         "ref": "B6",
+         "text": "305000"
+        },
+        {
+         "column": 3,
+         "ref": "C6",
+         "text": "314150"
+        },
+        {
+         "column": 4,
+         "ref": "D6",
+         "text": "323575"
+        },
+        {
+         "column": 5,
+         "ref": "E6",
+         "text": "333283"
+        },
+        {
+         "column": 6,
+         "ref": "F6",
+         "text": "343281"
+        }
+       ],
+       "rowNumber": 6
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A7",
+         "text": "Repairs & Maintenance"
+        },
+        {
+         "column": 2,
+         "ref": "B7",
+         "text": "170000"
+        },
+        {
+         "column": 3,
+         "ref": "C7",
+         "text": "175100"
+        },
+        {
+         "column": 4,
+         "ref": "D7",
+         "text": "180353"
+        },
+        {
+         "column": 5,
+         "ref": "E7",
+         "text": "185763"
+        },
+        {
+         "column": 6,
+         "ref": "F7",
+         "text": "191336"
+        }
+       ],
+       "rowNumber": 7
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A8",
+         "text": "Turnover/Make Ready"
+        },
+        {
+         "column": 2,
+         "ref": "B8",
+         "text": "42000"
+        },
+        {
+         "column": 3,
+         "ref": "C8",
+         "text": "43260"
+        },
+        {
+         "column": 4,
+         "ref": "D8",
+         "text": "44558"
+        },
+        {
+         "column": 5,
+         "ref": "E8",
+         "text": "45895"
+        },
+        {
+         "column": 6,
+         "ref": "F8",
+         "text": "47272"
+        }
+       ],
+       "rowNumber": 8
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A9",
+         "text": "Utilities"
+        },
+        {
+         "column": 2,
+         "ref": "B9",
+         "text": "175000"
+        },
+        {
+         "column": 3,
+         "ref": "C9",
+         "text": "180250"
+        },
+        {
+         "column": 4,
+         "ref": "D9",
+         "text": "185658"
+        },
+        {
+         "column": 5,
+         "ref": "E9",
+         "text": "191228"
+        },
+        {
+         "column": 6,
+         "ref": "F9",
+         "text": "196965"
+        }
+       ],
+       "rowNumber": 9
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A10",
+         "text": "Insurance"
+        },
+        {
+         "column": 2,
+         "ref": "B10",
+         "text": "102000"
+        },
+        {
+         "column": 3,
+         "ref": "C10",
+         "text": "105060"
+        },
+        {
+         "column": 4,
+         "ref": "D10",
+         "text": "108212"
+        },
+        {
+         "column": 5,
+         "ref": "E10",
+         "text": "111458"
+        },
+        {
+         "column": 6,
+         "ref": "F10",
+         "text": "114802"
+        }
+       ],
+       "rowNumber": 10
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A11",
+         "text": "Property Taxes"
+        },
+        {
+         "column": 2,
+         "ref": "B11",
+         "text": "360000"
+        },
+        {
+         "column": 3,
+         "ref": "C11",
+         "text": "370800"
+        },
+        {
+         "column": 4,
+         "ref": "D11",
+         "text": "381924"
+        },
+        {
+         "column": 5,
+         "ref": "E11",
+         "text": "393382"
+        },
+        {
+         "column": 6,
+         "ref": "F11",
+         "text": "405184"
+        }
+       ],
+       "rowNumber": 11
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A12",
+         "text": "Marketing/Advertising"
+        },
+        {
+         "column": 2,
+         "ref": "B12",
+         "text": "14000"
+        },
+        {
+         "column": 3,
+         "ref": "C12",
+         "text": "14420"
+        },
+        {
+         "column": 4,
+         "ref": "D12",
+         "text": "14853"
+        },
+        {
+         "column": 5,
+         "ref": "E12",
+         "text": "15299"
+        },
+        {
+         "column": 6,
+         "ref": "F12",
+         "text": "15758"
+        }
+       ],
+       "rowNumber": 12
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A13",
+         "text": "Administrative/Office"
+        },
+        {
+         "column": 2,
+         "ref": "B13",
+         "text": "33000"
+        },
+        {
+         "column": 3,
+         "ref": "C13",
+         "text": "33990"
+        },
+        {
+         "column": 4,
+         "ref": "D13",
+         "text": "35010"
+        },
+        {
+         "column": 5,
+         "ref": "E13",
+         "text": "36060"
+        },
+        {
+         "column": 6,
+         "ref": "F13",
+         "text": "37142"
+        }
+       ],
+       "rowNumber": 13
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A14",
+         "text": "Contract Services"
+        },
+        {
+         "column": 2,
+         "ref": "B14",
+         "text": "115000"
+        },
+        {
+         "column": 3,
+         "ref": "C14",
+         "text": "118450"
+        },
+        {
+         "column": 4,
+         "ref": "D14",
+         "text": "122003"
+        },
+        {
+         "column": 5,
+         "ref": "E14",
+         "text": "125663"
+        },
+        {
+         "column": 6,
+         "ref": "F14",
+         "text": "129433"
+        }
+       ],
+       "rowNumber": 14
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A15",
+         "text": "Landscaping/Grounds"
+        },
+        {
+         "column": 2,
+         "ref": "B15",
+         "text": "50000"
+        },
+        {
+         "column": 3,
+         "ref": "C15",
+         "text": "51500"
+        },
+        {
+         "column": 4,
+         "ref": "D15",
+         "text": "53045"
+        },
+        {
+         "column": 5,
+         "ref": "E15",
+         "text": "54636"
+        },
+        {
+         "column": 6,
+         "ref": "F15",
+         "text": "56275"
+        }
+       ],
+       "rowNumber": 15
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A16",
+         "text": "TOTAL OPERATING EXPENSES"
+        },
+        {
+         "column": 2,
+         "ref": "B16",
+         "text": "1538374"
+        },
+        {
+         "column": 3,
+         "ref": "C16",
+         "text": "1588022"
+        },
+        {
+         "column": 4,
+         "ref": "D16",
+         "text": "1639901"
+        },
+        {
+         "column": 5,
+         "ref": "E16",
+         "text": "1693184"
+        },
+        {
+         "column": 6,
+         "ref": "F16",
+         "text": "1747934"
+        }
+       ],
+       "rowNumber": 16
+      }
+     ],
+     "sheetIndex": 3,
+     "tableCount": 0
+    },
+    {
+     "maxColumn": 6,
+     "maxRow": 12,
+     "metadata": {
+      "formulaCellsWithoutCachedValues": 0,
+      "sheetState": "visible",
+      "truncated": false
+     },
+     "name": "Debt",
+     "rows": [
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A1",
+         "text": "DEBT SCHEDULE"
+        }
+       ],
+       "rowNumber": 1
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A2",
+         "text": "Loan Amount"
+        },
+        {
+         "column": 2,
+         "ref": "B2",
+         "text": "13800000"
+        }
+       ],
+       "rowNumber": 2
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A3",
+         "text": "Interest Rate"
+        },
+        {
+         "column": 2,
+         "ref": "B3",
+         "text": "4.25%"
+        }
+       ],
+       "rowNumber": 3
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A4",
+         "text": "Term"
+        },
+        {
+         "column": 2,
+         "ref": "B4",
+         "text": "5 years"
+        }
+       ],
+       "rowNumber": 4
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A5",
+         "text": "IO Period"
+        },
+        {
+         "column": 2,
+         "ref": "B5",
+         "text": "5 years (full term)"
+        }
+       ],
+       "rowNumber": 5
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A7",
+         "text": "Year"
+        },
+        {
+         "column": 2,
+         "ref": "B7",
+         "text": "1"
+        },
+        {
+         "column": 3,
+         "ref": "C7",
+         "text": "2"
+        },
+        {
+         "column": 4,
+         "ref": "D7",
+         "text": "3"
+        },
+        {
+         "column": 5,
+         "ref": "E7",
+         "text": "4"
+        },
+        {
+         "column": 6,
+         "ref": "F7",
+         "text": "5"
+        }
+       ],
+       "rowNumber": 7
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A8",
+         "text": "Beginning Balance"
+        },
+        {
+         "column": 2,
+         "ref": "B8",
+         "text": "13800000"
+        },
+        {
+         "column": 3,
+         "ref": "C8",
+         "text": "13800000"
+        },
+        {
+         "column": 4,
+         "ref": "D8",
+         "text": "13800000"
+        },
+        {
+         "column": 5,
+         "ref": "E8",
+         "text": "13800000"
+        },
+        {
+         "column": 6,
+         "ref": "F8",
+         "text": "13800000"
+        }
+       ],
+       "rowNumber": 8
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A9",
+         "text": "Debt Service"
+        },
+        {
+         "column": 2,
+         "ref": "B9",
+         "text": "586500"
+        },
+        {
+         "column": 3,
+         "ref": "C9",
+         "text": "586500"
+        },
+        {
+         "column": 4,
+         "ref": "D9",
+         "text": "586500"
+        },
+        {
+         "column": 5,
+         "ref": "E9",
+         "text": "586500"
+        },
+        {
+         "column": 6,
+         "ref": "F9",
+         "text": "586500"
+        }
+       ],
+       "rowNumber": 9
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A10",
+         "text": "Interest"
+        },
+        {
+         "column": 2,
+         "ref": "B10",
+         "text": "586500"
+        },
+        {
+         "column": 3,
+         "ref": "C10",
+         "text": "586500"
+        },
+        {
+         "column": 4,
+         "ref": "D10",
+         "text": "586500"
+        },
+        {
+         "column": 5,
+         "ref": "E10",
+         "text": "586500"
+        },
+        {
+         "column": 6,
+         "ref": "F10",
+         "text": "586500"
+        }
+       ],
+       "rowNumber": 10
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A11",
+         "text": "Principal"
+        },
+        {
+         "column": 2,
+         "ref": "B11",
+         "text": "0"
+        },
+        {
+         "column": 3,
+         "ref": "C11",
+         "text": "0"
+        },
+        {
+         "column": 4,
+         "ref": "D11",
+         "text": "0"
+        },
+        {
+         "column": 5,
+         "ref": "E11",
+         "text": "0"
+        },
+        {
+         "column": 6,
+         "ref": "F11",
+         "text": "0"
+        }
+       ],
+       "rowNumber": 11
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A12",
+         "text": "Ending Balance"
+        },
+        {
+         "column": 2,
+         "ref": "B12",
+         "text": "13800000"
+        },
+        {
+         "column": 3,
+         "ref": "C12",
+         "text": "13800000"
+        },
+        {
+         "column": 4,
+         "ref": "D12",
+         "text": "13800000"
+        },
+        {
+         "column": 5,
+         "ref": "E12",
+         "text": "13800000"
+        },
+        {
+         "column": 6,
+         "ref": "F12",
+         "text": "13800000"
+        }
+       ],
+       "rowNumber": 12
+      }
+     ],
+     "sheetIndex": 4,
+     "tableCount": 0
+    },
+    {
+     "maxColumn": 7,
+     "maxRow": 13,
+     "metadata": {
+      "formulaCellsWithoutCachedValues": 0,
+      "sheetState": "visible",
+      "truncated": false
+     },
+     "name": "Cash Flow",
+     "rows": [
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A1",
+         "text": "CASH FLOW"
+        }
+       ],
+       "rowNumber": 1
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A2",
+         "text": "Year"
+        },
+        {
+         "column": 2,
+         "ref": "B2",
+         "text": "0"
+        },
+        {
+         "column": 3,
+         "ref": "C2",
+         "text": "1"
+        },
+        {
+         "column": 4,
+         "ref": "D2",
+         "text": "2"
+        },
+        {
+         "column": 5,
+         "ref": "E2",
+         "text": "3"
+        },
+        {
+         "column": 6,
+         "ref": "F2",
+         "text": "4"
+        },
+        {
+         "column": 7,
+         "ref": "G2",
+         "text": "5"
+        }
+       ],
+       "rowNumber": 2
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A4",
+         "text": "Effective Gross Revenue"
+        },
+        {
+         "column": 3,
+         "ref": "C4",
+         "text": "3830531"
+        },
+        {
+         "column": 4,
+         "ref": "D4",
+         "text": "3912046"
+        },
+        {
+         "column": 5,
+         "ref": "E4",
+         "text": "4015771"
+        },
+        {
+         "column": 6,
+         "ref": "F4",
+         "text": "4122602"
+        },
+        {
+         "column": 7,
+         "ref": "G4",
+         "text": "4232572"
+        }
+       ],
+       "rowNumber": 4
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A5",
+         "text": "Operating Expenses"
+        },
+        {
+         "column": 3,
+         "ref": "C5",
+         "text": "-1538374"
+        },
+        {
+         "column": 4,
+         "ref": "D5",
+         "text": "-1588022"
+        },
+        {
+         "column": 5,
+         "ref": "E5",
+         "text": "-1639901"
+        },
+        {
+         "column": 6,
+         "ref": "F5",
+         "text": "-1693184"
+        },
+        {
+         "column": 7,
+         "ref": "G5",
+         "text": "-1747934"
+        }
+       ],
+       "rowNumber": 5
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A6",
+         "text": "Net Operating Income"
+        },
+        {
+         "column": 3,
+         "ref": "C6",
+         "text": "2292157"
+        },
+        {
+         "column": 4,
+         "ref": "D6",
+         "text": "2324024"
+        },
+        {
+         "column": 5,
+         "ref": "E6",
+         "text": "2375870"
+        },
+        {
+         "column": 6,
+         "ref": "F6",
+         "text": "2429418"
+        },
+        {
+         "column": 7,
+         "ref": "G6",
+         "text": "2484638"
+        }
+       ],
+       "rowNumber": 6
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A8",
+         "text": "Debt Service"
+        },
+        {
+         "column": 3,
+         "ref": "C8",
+         "text": "-586500"
+        },
+        {
+         "column": 4,
+         "ref": "D8",
+         "text": "-586500"
+        },
+        {
+         "column": 5,
+         "ref": "E8",
+         "text": "-586500"
+        },
+        {
+         "column": 6,
+         "ref": "F8",
+         "text": "-586500"
+        },
+        {
+         "column": 7,
+         "ref": "G8",
+         "text": "-586500"
+        }
+       ],
+       "rowNumber": 8
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A9",
+         "text": "Cash Flow After Debt"
+        },
+        {
+         "column": 3,
+         "ref": "C9",
+         "text": "1705657"
+        },
+        {
+         "column": 4,
+         "ref": "D9",
+         "text": "1737524"
+        },
+        {
+         "column": 5,
+         "ref": "E9",
+         "text": "1789370"
+        },
+        {
+         "column": 6,
+         "ref": "F9",
+         "text": "1842918"
+        },
+        {
+         "column": 7,
+         "ref": "G9",
+         "text": "1898138"
+        }
+       ],
+       "rowNumber": 9
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A11",
+         "text": "Acquisition Costs"
+        },
+        {
+         "column": 2,
+         "ref": "B11",
+         "text": "-42024000"
+        }
+       ],
+       "rowNumber": 11
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A12",
+         "text": "Sale Proceeds"
+        },
+        {
+         "column": 7,
+         "ref": "G12",
+         "text": "48319292"
+        }
+       ],
+       "rowNumber": 12
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A13",
+         "text": "Net Cash Flow"
+        },
+        {
+         "column": 2,
+         "ref": "B13",
+         "text": "-42024000"
+        },
+        {
+         "column": 3,
+         "ref": "C13",
+         "text": "1705657"
+        },
+        {
+         "column": 4,
+         "ref": "D13",
+         "text": "1737524"
+        },
+        {
+         "column": 5,
+         "ref": "E13",
+         "text": "1789370"
+        },
+        {
+         "column": 6,
+         "ref": "F13",
+         "text": "1842918"
+        },
+        {
+         "column": 7,
+         "ref": "G13",
+         "text": "50217430"
+        }
+       ],
+       "rowNumber": 13
+      }
+     ],
+     "sheetIndex": 5,
+     "tableCount": 0
+    },
+    {
+     "maxColumn": 2,
+     "maxRow": 18,
+     "metadata": {
+      "formulaCellsWithoutCachedValues": 0,
+      "sheetState": "visible",
+      "truncated": false
+     },
+     "name": "Returns",
+     "rows": [
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A1",
+         "text": "RETURNS ANALYSIS"
+        }
+       ],
+       "rowNumber": 1
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A3",
+         "text": "Levered IRR"
+        },
+        {
+         "column": 2,
+         "ref": "B3",
+         "text": "16.4%"
+        }
+       ],
+       "rowNumber": 3
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A4",
+         "text": "Equity Multiple"
+        },
+        {
+         "column": 2,
+         "ref": "B4",
+         "text": "2.08x"
+        }
+       ],
+       "rowNumber": 4
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A6",
+         "text": "Cash-on-Cash Returns"
+        }
+       ],
+       "rowNumber": 6
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A7",
+         "text": "Year 1"
+        },
+        {
+         "column": 2,
+         "ref": "B7",
+         "text": "6.8%"
+        }
+       ],
+       "rowNumber": 7
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A8",
+         "text": "Year 2"
+        },
+        {
+         "column": 2,
+         "ref": "B8",
+         "text": "6.9%"
+        }
+       ],
+       "rowNumber": 8
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A9",
+         "text": "Year 3"
+        },
+        {
+         "column": 2,
+         "ref": "B9",
+         "text": "7.1%"
+        }
+       ],
+       "rowNumber": 9
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A10",
+         "text": "Year 4"
+        },
+        {
+         "column": 2,
+         "ref": "B10",
+         "text": "7.3%"
+        }
+       ],
+       "rowNumber": 10
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A11",
+         "text": "Year 5"
+        },
+        {
+         "column": 2,
+         "ref": "B11",
+         "text": "7.5%"
+        }
+       ],
+       "rowNumber": 11
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A13",
+         "text": "Cumulative Cash Flow"
+        }
+       ],
+       "rowNumber": 13
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A14",
+         "text": "Year 1"
+        },
+        {
+         "column": 2,
+         "ref": "B14",
+         "text": "1705657"
+        }
+       ],
+       "rowNumber": 14
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A15",
+         "text": "Year 2"
+        },
+        {
+         "column": 2,
+         "ref": "B15",
+         "text": "3443181"
+        }
+       ],
+       "rowNumber": 15
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A16",
+         "text": "Year 3"
+        },
+        {
+         "column": 2,
+         "ref": "B16",
+         "text": "5232551"
+        }
+       ],
+       "rowNumber": 16
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A17",
+         "text": "Year 4"
+        },
+        {
+         "column": 2,
+         "ref": "B17",
+         "text": "7075469"
+        }
+       ],
+       "rowNumber": 17
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A18",
+         "text": "Year 5"
+        },
+        {
+         "column": 2,
+         "ref": "B18",
+         "text": "57292899"
+        }
+       ],
+       "rowNumber": 18
+      }
+     ],
+     "sheetIndex": 6,
+     "tableCount": 0
+    },
+    {
+     "maxColumn": 6,
+     "maxRow": 6,
+     "metadata": {
+      "formulaCellsWithoutCachedValues": 0,
+      "sheetState": "visible",
+      "truncated": false
+     },
+     "name": "Sensitivity",
+     "rows": [
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A1",
+         "text": "SENSITIVITY: IRR vs Entry Cap and Exit Cap"
+        }
+       ],
+       "rowNumber": 1
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A3",
+         "text": "Entry Cap / Exit Cap"
+        },
+        {
+         "column": 2,
+         "ref": "B3",
+         "text": "5.25%"
+        },
+        {
+         "column": 3,
+         "ref": "C3",
+         "text": "5.5%"
+        },
+        {
+         "column": 4,
+         "ref": "D3",
+         "text": "5.75%"
+        },
+        {
+         "column": 5,
+         "ref": "E3",
+         "text": "6.0%"
+        },
+        {
+         "column": 6,
+         "ref": "F3",
+         "text": "6.25%"
+        }
+       ],
+       "rowNumber": 3
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A4",
+         "text": "5.4%"
+        },
+        {
+         "column": 2,
+         "ref": "B4",
+         "text": "19.8%"
+        },
+        {
+         "column": 3,
+         "ref": "C4",
+         "text": "18.2%"
+        },
+        {
+         "column": 4,
+         "ref": "D4",
+         "text": "16.7%"
+        },
+        {
+         "column": 5,
+         "ref": "E4",
+         "text": "15.4%"
+        },
+        {
+         "column": 6,
+         "ref": "F4",
+         "text": "14.2%"
+        }
+       ],
+       "rowNumber": 4
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A5",
+         "text": "5.6%"
+        },
+        {
+         "column": 2,
+         "ref": "B5",
+         "text": "18.5%"
+        },
+        {
+         "column": 3,
+         "ref": "C5",
+         "text": "17.0%"
+        },
+        {
+         "column": 4,
+         "ref": "D5",
+         "text": "15.7%"
+        },
+        {
+         "column": 5,
+         "ref": "E5",
+         "text": "14.5%"
+        },
+        {
+         "column": 6,
+         "ref": "F5",
+         "text": "13.4%"
+        }
+       ],
+       "rowNumber": 5
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A6",
+         "text": "5.8%"
+        },
+        {
+         "column": 2,
+         "ref": "B6",
+         "text": "17.3%"
+        },
+        {
+         "column": 3,
+         "ref": "C6",
+         "text": "15.9%"
+        },
+        {
+         "column": 4,
+         "ref": "D6",
+         "text": "14.7%"
+        },
+        {
+         "column": 5,
+         "ref": "E6",
+         "text": "13.6%"
+        },
+        {
+         "column": 6,
+         "ref": "F6",
+         "text": "12.6%"
+        }
+       ],
+       "rowNumber": 6
+      }
+     ],
+     "sheetIndex": 7,
+     "tableCount": 0
+    },
+    {
+     "maxColumn": 7,
+     "maxRow": 18,
+     "metadata": {
+      "formulaCellsWithoutCachedValues": 0,
+      "sheetState": "visible",
+      "truncated": false
+     },
+     "name": "Comparables",
+     "rows": [
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A1",
+         "text": "RENT COMPS (Post-Tour Update)"
+        }
+       ],
+       "rowNumber": 1
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A2",
+         "text": "Property"
+        },
+        {
+         "column": 2,
+         "ref": "B2",
+         "text": "Submarket"
+        },
+        {
+         "column": 3,
+         "ref": "C2",
+         "text": "Year Built"
+        },
+        {
+         "column": 4,
+         "ref": "D2",
+         "text": "1BR Rent"
+        },
+        {
+         "column": 5,
+         "ref": "E2",
+         "text": "2BR Rent"
+        },
+        {
+         "column": 6,
+         "ref": "F2",
+         "text": "3BR Rent"
+        },
+        {
+         "column": 7,
+         "ref": "G2",
+         "text": "Condition"
+        }
+       ],
+       "rowNumber": 2
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A3",
+         "text": "Oakwood Commons (Subject)"
+        },
+        {
+         "column": 2,
+         "ref": "B3",
+         "text": "Westchase"
+        },
+        {
+         "column": 3,
+         "ref": "C3",
+         "text": "2008"
+        },
+        {
+         "column": 4,
+         "ref": "D3",
+         "text": "1050"
+        },
+        {
+         "column": 5,
+         "ref": "E3",
+         "text": "1320"
+        },
+        {
+         "column": 6,
+         "ref": "F3",
+         "text": "1680"
+        },
+        {
+         "column": 7,
+         "ref": "G3",
+         "text": "Recently renovated 2018"
+        }
+       ],
+       "rowNumber": 3
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A4",
+         "text": "Westchase Village"
+        },
+        {
+         "column": 2,
+         "ref": "B4",
+         "text": "Westchase"
+        },
+        {
+         "column": 3,
+         "ref": "C4",
+         "text": "2005"
+        },
+        {
+         "column": 4,
+         "ref": "D4",
+         "text": "1020"
+        },
+        {
+         "column": 5,
+         "ref": "E4",
+         "text": "1280"
+        },
+        {
+         "column": 6,
+         "ref": "F4",
+         "text": "1620"
+        },
+        {
+         "column": 7,
+         "ref": "G4",
+         "text": "Good"
+        }
+       ],
+       "rowNumber": 4
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A5",
+         "text": "Stoneleigh on Westheimer"
+        },
+        {
+         "column": 2,
+         "ref": "B5",
+         "text": "Westchase"
+        },
+        {
+         "column": 3,
+         "ref": "C5",
+         "text": "2010"
+        },
+        {
+         "column": 4,
+         "ref": "D5",
+         "text": "1080"
+        },
+        {
+         "column": 5,
+         "ref": "E5",
+         "text": "1350"
+        },
+        {
+         "column": 6,
+         "ref": "F5",
+         "text": "1700"
+        },
+        {
+         "column": 7,
+         "ref": "G5",
+         "text": "Excellent"
+        }
+       ],
+       "rowNumber": 5
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A6",
+         "text": "Briar Forest Apts"
+        },
+        {
+         "column": 2,
+         "ref": "B6",
+         "text": "Westchase"
+        },
+        {
+         "column": 3,
+         "ref": "C6",
+         "text": "2002"
+        },
+        {
+         "column": 4,
+         "ref": "D6",
+         "text": "950"
+        },
+        {
+         "column": 5,
+         "ref": "E6",
+         "text": "1220"
+        },
+        {
+         "column": 6,
+         "ref": "F6",
+         "text": "1580"
+        },
+        {
+         "column": 7,
+         "ref": "G6",
+         "text": "Fair"
+        }
+       ],
+       "rowNumber": 6
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A7",
+         "text": "Bristol at Westchase"
+        },
+        {
+         "column": 2,
+         "ref": "B7",
+         "text": "Westchase"
+        },
+        {
+         "column": 3,
+         "ref": "C7",
+         "text": "2012"
+        },
+        {
+         "column": 4,
+         "ref": "D7",
+         "text": "1120"
+        },
+        {
+         "column": 5,
+         "ref": "E7",
+         "text": "1400"
+        },
+        {
+         "column": 6,
+         "ref": "F7",
+         "text": "1750"
+        },
+        {
+         "column": 7,
+         "ref": "G7",
+         "text": "Excellent"
+        }
+       ],
+       "rowNumber": 7
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A9",
+         "text": "NOTES FROM PROPERTY TOUR"
+        }
+       ],
+       "rowNumber": 9
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A10",
+         "text": "- Units show better than OM photos — recent flooring and appliance upgrades"
+        }
+       ],
+       "rowNumber": 10
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A11",
+         "text": "- Clubhouse renovated, pool area well-maintained"
+        }
+       ],
+       "rowNumber": 11
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A12",
+         "text": "- Greenfield taking over PM — confirmed $780/unit fee"
+        }
+       ],
+       "rowNumber": 12
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A14",
+         "text": "SALE COMPS"
+        }
+       ],
+       "rowNumber": 14
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A15",
+         "text": "Property"
+        },
+        {
+         "column": 2,
+         "ref": "B15",
+         "text": "Year"
+        },
+        {
+         "column": 3,
+         "ref": "C15",
+         "text": "Units"
+        },
+        {
+         "column": 4,
+         "ref": "D15",
+         "text": "Price"
+        },
+        {
+         "column": 5,
+         "ref": "E15",
+         "text": "$/Unit"
+        },
+        {
+         "column": 6,
+         "ref": "F15",
+         "text": "Cap Rate"
+        }
+       ],
+       "rowNumber": 15
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A16",
+         "text": "Westchase Commons"
+        },
+        {
+         "column": 2,
+         "ref": "B16",
+         "text": "2019"
+        },
+        {
+         "column": 3,
+         "ref": "C16",
+         "text": "180"
+        },
+        {
+         "column": 4,
+         "ref": "D16",
+         "text": "28500000"
+        },
+        {
+         "column": 5,
+         "ref": "E16",
+         "text": "158333"
+        },
+        {
+         "column": 6,
+         "ref": "F16",
+         "text": "5.9%"
+        }
+       ],
+       "rowNumber": 16
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A17",
+         "text": "Briar Pointe"
+        },
+        {
+         "column": 2,
+         "ref": "B17",
+         "text": "2019"
+        },
+        {
+         "column": 3,
+         "ref": "C17",
+         "text": "210"
+        },
+        {
+         "column": 4,
+         "ref": "D17",
+         "text": "35600000"
+        },
+        {
+         "column": 5,
+         "ref": "E17",
+         "text": "169524"
+        },
+        {
+         "column": 6,
+         "ref": "F17",
+         "text": "5.7%"
+        }
+       ],
+       "rowNumber": 17
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A18",
+         "text": "The Park at Westchase"
+        },
+        {
+         "column": 2,
+         "ref": "B18",
+         "text": "2020"
+        },
+        {
+         "column": 3,
+         "ref": "C18",
+         "text": "156"
+        },
+        {
+         "column": 4,
+         "ref": "D18",
+         "text": "27800000"
+        },
+        {
+         "column": 5,
+         "ref": "E18",
+         "text": "178205"
+        },
+        {
+         "column": 6,
+         "ref": "F18",
+         "text": "5.5%"
+        }
+       ],
+       "rowNumber": 18
+      }
+     ],
+     "sheetIndex": 8,
+     "tableCount": 0
+    }
+   ]
+  }
+ },
+ "parserTarget": "xlsx",
+ "sha256": "9970f31bf69da531eaa1be3169950d914d56526596f6e152720cfe03cee8417d"
+}

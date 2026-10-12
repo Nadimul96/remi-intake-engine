@@ -1,0 +1,9 @@
+export { type AnchorDraft, buildProvenanceAnchors } from "./anchors";
+export { namesMatch } from "./assets";
+export { type CandidateRecord, type DetectedConflict, detectConflicts } from "./conflicts/detect";
+export type { ExtractionContext } from "./document-view";
+export type { CandidateDraft } from "./draft";
+export { extractEvidenceBackedCandidates } from "./extract";
+export { ASSET_NAME_FIELD, type AssetNameRole } from "./rules/asset-identity";
+export { type DocumentRole, METRIC_FIELD_PREFIX, type MetricFactValue } from "./rules/fact-draft";
+export { formatValue, type MetricUnit } from "./values";

@@ -1,37 +1,7 @@
-import { createHash } from "node:crypto";
+import type { ProvenanceAnchorSummary } from "@remi/domain";
 
-import type {
-  CandidateCitationPacket,
-  CandidateExtractionMethod,
-  ExtractedCandidateType,
-  NormalizedContentSummary,
-  ProvenanceAnchorSummary,
-  ProvenanceAnchorsSummary
-} from "@remi/domain";
-
-export interface CandidateDraft {
-  candidateKey: string;
-  candidateType: ExtractedCandidateType;
-  candidateValue: unknown;
-  citationPacket: CandidateCitationPacket;
-  confidence: number;
-  extractionMethod: CandidateExtractionMethod;
-  extractionMethodDetail: string;
-  fieldName: string;
-  metadata?: Record<string, unknown>;
-  reviewReady: boolean;
-  sourceSemanticObjectId: string | null;
-  sourceSemanticObjectType: string | null;
-  summary: string;
-  valueType: string;
-}
-
-interface ExtractionContext {
-  artifactBlobId: string;
-  fileName: string;
-  normalizedContent: NormalizedContentSummary;
-  provenanceAnchors: ProvenanceAnchorsSummary;
-}
+import type { ExtractionContext } from "../document-view";
+import { buildCandidateDraft, type CandidateDraft } from "../draft";
 
 const PUBLIC_EMAIL_DOMAINS = new Set([
   "aol.com",
@@ -330,203 +300,53 @@ function extractUnitCount(text: string | null): { count: number; rawText: string
   };
 }
 
-function buildCandidateDraft(input: {
-  artifactBlobId: string;
-  candidateType: ExtractedCandidateType;
-  candidateValue: unknown;
-  confidence: number;
-  evidencePreview: string;
-  extractionMetadata?: Record<string, unknown>;
-  extractionMethod: CandidateExtractionMethod;
-  extractionMethodDetail: string;
-  fieldName: string;
-  metadata?: Record<string, unknown>;
-  provenanceAnchors: ProvenanceAnchorSummary[];
-  sourceSemanticObjectId: string | null;
-  sourceSemanticObjectType: string | null;
-  summary: string;
-  valueType: string;
-}): CandidateDraft {
-  const provenanceAnchorIds = input.provenanceAnchors.map((anchor) => anchor.id);
-  const createdAt = new Date().toISOString();
-  const candidateKey = createHash("sha1")
-    .update(
-      JSON.stringify({
-        artifactBlobId: input.artifactBlobId,
-        candidateType: input.candidateType,
-        fieldName: input.fieldName,
-        provenanceAnchorIds,
-        sourceSemanticObjectId: input.sourceSemanticObjectId,
-        sourceSemanticObjectType: input.sourceSemanticObjectType,
-        value: input.candidateValue
-      })
-    )
-    .digest("hex");
-
-  return {
-    candidateKey,
-    candidateType: input.candidateType,
-    candidateValue: input.candidateValue,
-    citationPacket: {
-      candidateType: input.candidateType,
-      fieldName: input.fieldName,
-      candidateValue: input.candidateValue,
-      confidenceScore: input.confidence,
-      sourceArtifactBlobId: input.artifactBlobId,
-      sourceSemanticObjectType: input.sourceSemanticObjectType,
-      sourceSemanticObjectId: input.sourceSemanticObjectId,
-      provenanceAnchorIds,
-      evidencePreview: input.evidencePreview,
-      extractionMethod: input.extractionMethod,
-      extractionMethodDetail: input.extractionMethodDetail,
-      extractionMetadata: input.extractionMetadata ?? {},
-      createdAt
-    },
-    confidence: input.confidence,
-    extractionMethod: input.extractionMethod,
-    extractionMethodDetail: input.extractionMethodDetail,
-    fieldName: input.fieldName,
-    metadata: input.metadata,
-    reviewReady: provenanceAnchorIds.length > 0,
-    sourceSemanticObjectId: input.sourceSemanticObjectId,
-    sourceSemanticObjectType: input.sourceSemanticObjectType,
-    summary: input.summary,
-    valueType: input.valueType
-  };
-}
-
-function dedupeCandidates(candidates: CandidateDraft[]): CandidateDraft[] {
-  const seen = new Set<string>();
-  return candidates.filter((candidate) => {
-    if (seen.has(candidate.candidateKey)) {
-      return false;
-    }
-
-    seen.add(candidate.candidateKey);
-    return true;
-  });
-}
-
 function buildDocumentCandidates(input: ExtractionContext): CandidateDraft[] {
-  if (!input.normalizedContent.document) {
+  const document = input.normalizedContent.document;
+  if (!document) {
     return [];
   }
 
   const candidates: CandidateDraft[] = [];
-  const previewAnchor =
+  const titleAnchor =
+    anchorFor(input.provenanceAnchors.items, { anchorKind: "text_line" }) ??
     anchorFor(input.provenanceAnchors.items, { anchorKind: "pdf_text_section" }) ??
-    anchorFor(input.provenanceAnchors.items, { anchorKind: "pdf_page" });
-  const previewText = input.normalizedContent.document.textPreview;
+    anchorFor(input.provenanceAnchors.items, { anchorKind: "pdf_page" }) ??
+    anchorFor(input.provenanceAnchors.items, { anchorKind: "text_page" });
+  const title = document.title?.trim() || null;
 
-  if (previewAnchor && previewText) {
+  if (titleAnchor && title) {
     candidates.push(
       buildCandidateDraft({
         artifactBlobId: input.artifactBlobId,
         candidateType: "classification_candidate",
-        candidateValue: previewText,
+        candidateValue: title,
         confidence: 0.72,
-        evidencePreview: previewText,
+        evidencePreview: title,
         extractionMethod: "rule",
-        extractionMethodDetail: "document_preview_title_rule",
+        extractionMethodDetail: "document_first_line_title_rule",
         fieldName: "probable_document_title",
-        provenanceAnchors: [previewAnchor],
-        sourceSemanticObjectId: previewAnchor.ownerId,
-        sourceSemanticObjectType: previewAnchor.ownerType,
-        summary: `Document preview suggests the title "${previewText}".`,
+        provenanceAnchors: [titleAnchor],
+        summary: `Document title appears to be "${title}".`,
         valueType: "text"
       })
     );
   }
 
-  const assetName = inferAssetName(input.fileName) ?? inferAssetName(previewText);
-  if (assetName && previewAnchor) {
-    candidates.push(
-      buildCandidateDraft({
-        artifactBlobId: input.artifactBlobId,
-        candidateType: "classification_candidate",
-        candidateValue: assetName,
-        confidence: 0.69,
-        evidencePreview: previewText ?? input.fileName,
-        extractionMethod: "rule",
-        extractionMethodDetail: "document_asset_name_rule",
-        fieldName: "probable_asset_name_mention",
-        provenanceAnchors: [previewAnchor],
-        sourceSemanticObjectId: previewAnchor.ownerId,
-        sourceSemanticObjectType: previewAnchor.ownerType,
-        summary: `Document text suggests the asset name "${assetName}".`,
-        valueType: "text"
-      })
-    );
-  }
-
-  const docClass = classifyDocument({
-    fileName: input.fileName,
-    hints: [previewText ?? ""]
-  });
-  if (docClass && previewAnchor) {
+  const docClass = classifyDocument({ fileName: input.fileName, hints: [title ?? ""] });
+  if (docClass && titleAnchor) {
     candidates.push(
       buildCandidateDraft({
         artifactBlobId: input.artifactBlobId,
         candidateType: "classification_candidate",
         candidateValue: docClass.label,
         confidence: docClass.confidence,
-        evidencePreview: previewText ?? input.fileName,
+        evidencePreview: title ?? input.fileName,
         extractionMethod: "rule",
         extractionMethodDetail: docClass.methodDetail,
         fieldName: "probable_document_classification",
-        provenanceAnchors: [previewAnchor],
-        sourceSemanticObjectId: previewAnchor.ownerId,
-        sourceSemanticObjectType: previewAnchor.ownerType,
+        provenanceAnchors: [titleAnchor],
         summary: `Document appears to be a ${docClass.label.replaceAll("_", " ")}.`,
         valueType: "classification"
-      })
-    );
-  }
-
-  const askPrice = extractAskPrice(previewText);
-  if (askPrice && previewAnchor) {
-    candidates.push(
-      buildCandidateDraft({
-        artifactBlobId: input.artifactBlobId,
-        candidateType: "metric_fact_candidate",
-        candidateValue: {
-          amountUsd: askPrice.amountUsd,
-          currency: "USD"
-        },
-        confidence: 0.93,
-        evidencePreview: askPrice.rawText,
-        extractionMetadata: {
-          currency: "USD"
-        },
-        extractionMethod: "rule",
-        extractionMethodDetail: "ask_price_regex_rule",
-        fieldName: "probable_ask_price",
-        provenanceAnchors: [previewAnchor],
-        sourceSemanticObjectId: previewAnchor.ownerId,
-        sourceSemanticObjectType: previewAnchor.ownerType,
-        summary: `Document likely references an asking price of $${askPrice.amountUsd.toLocaleString("en-US")}.`,
-        valueType: "currency_usd"
-      })
-    );
-  }
-
-  const unitCount = extractUnitCount(previewText);
-  if (unitCount && previewAnchor) {
-    candidates.push(
-      buildCandidateDraft({
-        artifactBlobId: input.artifactBlobId,
-        candidateType: "metric_fact_candidate",
-        candidateValue: unitCount.count,
-        confidence: 0.9,
-        evidencePreview: unitCount.rawText,
-        extractionMethod: "rule",
-        extractionMethodDetail: "unit_count_regex_rule",
-        fieldName: "probable_unit_count",
-        provenanceAnchors: [previewAnchor],
-        sourceSemanticObjectId: previewAnchor.ownerId,
-        sourceSemanticObjectType: previewAnchor.ownerType,
-        summary: `Document likely references ${unitCount.count} units.`,
-        valueType: "integer"
       })
     );
   }
@@ -562,8 +382,6 @@ function buildWorkbookCandidates(input: ExtractionContext): CandidateDraft[] {
         extractionMethodDetail: "workbook_filename_parser",
         fieldName: "probable_document_title",
         provenanceAnchors: [workbookAnchor],
-        sourceSemanticObjectId: workbookAnchor.ownerId,
-        sourceSemanticObjectType: workbookAnchor.ownerType,
         summary: `Workbook filename suggests the title "${input.normalizedContent.workbook.fileName}".`,
         valueType: "text"
       })
@@ -587,31 +405,8 @@ function buildWorkbookCandidates(input: ExtractionContext): CandidateDraft[] {
         extractionMethodDetail: docClass.methodDetail,
         fieldName: "probable_document_classification",
         provenanceAnchors: supportingAnchors,
-        sourceSemanticObjectId: workbookAnchor.ownerId,
-        sourceSemanticObjectType: workbookAnchor.ownerType,
         summary: `Workbook appears to be a ${docClass.label.replaceAll("_", " ")}.`,
         valueType: "classification"
-      })
-    );
-  }
-
-  const assetName = inferAssetName(input.normalizedContent.workbook.fileName);
-  if (assetName && workbookAnchor) {
-    candidates.push(
-      buildCandidateDraft({
-        artifactBlobId: input.artifactBlobId,
-        candidateType: "classification_candidate",
-        candidateValue: assetName,
-        confidence: 0.81,
-        evidencePreview: input.normalizedContent.workbook.fileName,
-        extractionMethod: "rule",
-        extractionMethodDetail: "workbook_filename_asset_name_rule",
-        fieldName: "probable_asset_name_mention",
-        provenanceAnchors: [workbookAnchor],
-        sourceSemanticObjectId: workbookAnchor.ownerId,
-        sourceSemanticObjectType: workbookAnchor.ownerType,
-        summary: `Workbook filename suggests the asset name "${assetName}".`,
-        valueType: "text"
       })
     );
   }
@@ -654,8 +449,6 @@ function buildEmailCandidates(input: ExtractionContext): CandidateDraft[] {
         extractionMethodDetail: "email_subject_parser",
         fieldName: "probable_document_title",
         provenanceAnchors: [headerAnchor],
-        sourceSemanticObjectId: message.id,
-        sourceSemanticObjectType: "email_message",
         summary: `Email subject suggests the working title "${message.subject}".`,
         valueType: "text"
       })
@@ -675,8 +468,6 @@ function buildEmailCandidates(input: ExtractionContext): CandidateDraft[] {
         extractionMethodDetail: "email_subject_asset_name_rule",
         fieldName: "probable_asset_name_mention",
         provenanceAnchors: [headerAnchor],
-        sourceSemanticObjectId: message.id,
-        sourceSemanticObjectType: "email_message",
         summary: `Email subject suggests the asset name "${assetName}".`,
         valueType: "text"
       })
@@ -701,8 +492,6 @@ function buildEmailCandidates(input: ExtractionContext): CandidateDraft[] {
         provenanceAnchors: [headerAnchor, bodyAnchor].filter((value): value is ProvenanceAnchorSummary =>
           Boolean(value)
         ),
-        sourceSemanticObjectId: message.id,
-        sourceSemanticObjectType: "email_message",
         summary: `Email appears to be a ${docClass.label.replaceAll("_", " ")} intake artifact.`,
         valueType: "classification"
       })
@@ -728,8 +517,6 @@ function buildEmailCandidates(input: ExtractionContext): CandidateDraft[] {
         extractionMethodDetail: "originator_role_rule",
         fieldName: "probable_originator_role",
         provenanceAnchors: [headerAnchor, ...(bodyAnchor ? [bodyAnchor] : [])],
-        sourceSemanticObjectId: message.id,
-        sourceSemanticObjectType: "email_message",
         summary: `Email sender appears to be acting as a ${originatorRole.role}.`,
         valueType: "classification"
       })
@@ -754,8 +541,6 @@ function buildEmailCandidates(input: ExtractionContext): CandidateDraft[] {
           normalizedDomain: organizationDomain.domain
         },
         provenanceAnchors: [headerAnchor],
-        sourceSemanticObjectId: message.id,
-        sourceSemanticObjectType: "email_message",
         summary: `Email sender domain suggests organization identity around "${organizationDomain.domain}".`,
         valueType: "domain"
       })
@@ -778,8 +563,6 @@ function buildEmailCandidates(input: ExtractionContext): CandidateDraft[] {
         extractionMethodDetail: "email_sender_organization_name_rule",
         fieldName: "probable_originating_organization_name",
         provenanceAnchors: [headerAnchor],
-        sourceSemanticObjectId: message.id,
-        sourceSemanticObjectType: "email_message",
         summary: `Email sender display name suggests the organization "${organizationName.name}".`,
         valueType: "text"
       })
@@ -821,8 +604,6 @@ function buildEmailCandidates(input: ExtractionContext): CandidateDraft[] {
           ? "probable_broker_organization_for_asset"
           : "probable_originating_organization_for_asset",
         provenanceAnchors: [headerAnchor, ...(bodyAnchor ? [bodyAnchor] : [])],
-        sourceSemanticObjectId: message.id,
-        sourceSemanticObjectType: "email_message",
         summary: strongBrokerRelationshipSignal
           ? `Email sender likely represents the broker organization for asset "${assetName}".`
           : `Email sender likely represents the originating organization for asset "${assetName}".`,
@@ -843,8 +624,6 @@ function buildEmailCandidates(input: ExtractionContext): CandidateDraft[] {
         extractionMethodDetail: "email_sent_at_parser",
         fieldName: "probable_origination_date",
         provenanceAnchors: [headerAnchor],
-        sourceSemanticObjectId: message.id,
-        sourceSemanticObjectType: "email_message",
         summary: `Email headers indicate an origination timestamp of ${message.sentAt}.`,
         valueType: "date_iso"
       })
@@ -870,8 +649,6 @@ function buildEmailCandidates(input: ExtractionContext): CandidateDraft[] {
         extractionMethodDetail: "email_body_ask_price_rule",
         fieldName: "probable_ask_price",
         provenanceAnchors: [bodyAnchor],
-        sourceSemanticObjectId: message.id,
-        sourceSemanticObjectType: "email_message",
         summary: `Email body likely references an asking price of $${askPrice.amountUsd.toLocaleString("en-US")}.`,
         valueType: "currency_usd"
       })
@@ -891,8 +668,6 @@ function buildEmailCandidates(input: ExtractionContext): CandidateDraft[] {
         extractionMethodDetail: "email_body_unit_count_rule",
         fieldName: "probable_unit_count",
         provenanceAnchors: [bodyAnchor],
-        sourceSemanticObjectId: message.id,
-        sourceSemanticObjectType: "email_message",
         summary: `Email body likely references ${unitCount.count} units.`,
         valueType: "integer"
       })
@@ -939,8 +714,6 @@ function buildEmailCandidates(input: ExtractionContext): CandidateDraft[] {
           ...(threadAnchor ? [threadAnchor] : []),
           ...(bodyAnchor ? [bodyAnchor] : [])
         ],
-        sourceSemanticObjectId: attachment.id,
-        sourceSemanticObjectType: "attachment",
         summary: `Attachment ${attachment.fileName ?? `part ${attachment.partIndex + 1}`} likely supports the originating deal package context.`,
         valueType: "relationship"
       })
@@ -950,19 +723,16 @@ function buildEmailCandidates(input: ExtractionContext): CandidateDraft[] {
   return candidates;
 }
 
-export function extractEvidenceBackedCandidates(input: ExtractionContext): CandidateDraft[] {
-  const candidates = (() => {
-    switch (input.normalizedContent.contentKind) {
-      case "document":
-        return buildDocumentCandidates(input);
-      case "email":
-        return buildEmailCandidates(input);
-      case "workbook":
-        return buildWorkbookCandidates(input);
-      default:
-        return [];
-    }
-  })();
-
-  return dedupeCandidates(candidates.filter((candidate) => candidate.reviewReady));
+/** Title, classification, sender-identity and relationship signals (the original rule set). */
+export function signalCandidates(input: ExtractionContext): CandidateDraft[] {
+  switch (input.normalizedContent.contentKind) {
+    case "document":
+      return buildDocumentCandidates(input);
+    case "email":
+      return buildEmailCandidates(input);
+    case "workbook":
+      return buildWorkbookCandidates(input);
+    default:
+      return [];
+  }
 }

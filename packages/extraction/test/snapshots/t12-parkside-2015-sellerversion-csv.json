@@ -1,0 +1,1872 @@
+{
+ "fileName": "T12_Parkside_2015_SellerVersion.csv",
+ "normalized": {
+  "kind": "workbook",
+  "workbook": {
+   "fileName": "T12_Parkside_2015_SellerVersion.csv",
+   "metadata": {
+    "delimiter": ",",
+    "source": "csv"
+   },
+   "sheetCount": 1,
+   "structuredTables": [],
+   "worksheets": [
+    {
+     "maxColumn": 14,
+     "maxRow": 29,
+     "metadata": {
+      "source": "csv",
+      "truncated": false
+     },
+     "name": "T12_Parkside_2015_SellerVersion",
+     "rows": [
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A1",
+         "text": "Line Item"
+        },
+        {
+         "column": 2,
+         "ref": "B1",
+         "text": "Jan 2015"
+        },
+        {
+         "column": 3,
+         "ref": "C1",
+         "text": "Feb 2015"
+        },
+        {
+         "column": 4,
+         "ref": "D1",
+         "text": "Mar 2015"
+        },
+        {
+         "column": 5,
+         "ref": "E1",
+         "text": "Apr 2015"
+        },
+        {
+         "column": 6,
+         "ref": "F1",
+         "text": "May 2015"
+        },
+        {
+         "column": 7,
+         "ref": "G1",
+         "text": "Jun 2015"
+        },
+        {
+         "column": 8,
+         "ref": "H1",
+         "text": "Jul 2015"
+        },
+        {
+         "column": 9,
+         "ref": "I1",
+         "text": "Aug 2015"
+        },
+        {
+         "column": 10,
+         "ref": "J1",
+         "text": "Sep 2015"
+        },
+        {
+         "column": 11,
+         "ref": "K1",
+         "text": "Oct 2015"
+        },
+        {
+         "column": 12,
+         "ref": "L1",
+         "text": "Nov 2015"
+        },
+        {
+         "column": 13,
+         "ref": "M1",
+         "text": "Dec 2015"
+        },
+        {
+         "column": 14,
+         "ref": "N1",
+         "text": "Total"
+        }
+       ],
+       "rowNumber": 1
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A2",
+         "text": "GROSS POTENTIAL RENT"
+        },
+        {
+         "column": 2,
+         "ref": "B2",
+         "text": "$52,500"
+        },
+        {
+         "column": 3,
+         "ref": "C2",
+         "text": "$52,500"
+        },
+        {
+         "column": 4,
+         "ref": "D2",
+         "text": "$52,500"
+        },
+        {
+         "column": 5,
+         "ref": "E2",
+         "text": "$52,500"
+        },
+        {
+         "column": 6,
+         "ref": "F2",
+         "text": "$52,500"
+        },
+        {
+         "column": 7,
+         "ref": "G2",
+         "text": "$52,500"
+        },
+        {
+         "column": 8,
+         "ref": "H2",
+         "text": "$52,500"
+        },
+        {
+         "column": 9,
+         "ref": "I2",
+         "text": "$52,500"
+        },
+        {
+         "column": 10,
+         "ref": "J2",
+         "text": "$52,500"
+        },
+        {
+         "column": 11,
+         "ref": "K2",
+         "text": "$52,500"
+        },
+        {
+         "column": 12,
+         "ref": "L2",
+         "text": "$52,500"
+        },
+        {
+         "column": 13,
+         "ref": "M2",
+         "text": "$52,500"
+        },
+        {
+         "column": 14,
+         "ref": "N2",
+         "text": "$630,000"
+        }
+       ],
+       "rowNumber": 2
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A3",
+         "text": "Vacancy Loss"
+        },
+        {
+         "column": 2,
+         "ref": "B3",
+         "text": "-$3,150"
+        },
+        {
+         "column": 3,
+         "ref": "C3",
+         "text": "-$2,625"
+        },
+        {
+         "column": 4,
+         "ref": "D3",
+         "text": "-$2,625"
+        },
+        {
+         "column": 5,
+         "ref": "E3",
+         "text": "-$2,625"
+        },
+        {
+         "column": 6,
+         "ref": "F3",
+         "text": "-$2,625"
+        },
+        {
+         "column": 7,
+         "ref": "G3",
+         "text": "-$2,625"
+        },
+        {
+         "column": 8,
+         "ref": "H3",
+         "text": "-$2,625"
+        },
+        {
+         "column": 9,
+         "ref": "I3",
+         "text": "-$2,625"
+        },
+        {
+         "column": 10,
+         "ref": "J3",
+         "text": "-$2,625"
+        },
+        {
+         "column": 11,
+         "ref": "K3",
+         "text": "-$2,625"
+        },
+        {
+         "column": 12,
+         "ref": "L3",
+         "text": "-$2,625"
+        },
+        {
+         "column": 13,
+         "ref": "M3",
+         "text": "-$2,625"
+        },
+        {
+         "column": 14,
+         "ref": "N3",
+         "text": "-$31,500"
+        }
+       ],
+       "rowNumber": 3
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A4",
+         "text": "Loss to Lease"
+        },
+        {
+         "column": 2,
+         "ref": "B4",
+         "text": "-$1,050"
+        },
+        {
+         "column": 3,
+         "ref": "C4",
+         "text": "-$1,050"
+        },
+        {
+         "column": 4,
+         "ref": "D4",
+         "text": "-$1,050"
+        },
+        {
+         "column": 5,
+         "ref": "E4",
+         "text": "-$1,050"
+        },
+        {
+         "column": 6,
+         "ref": "F4",
+         "text": "-$1,050"
+        },
+        {
+         "column": 7,
+         "ref": "G4",
+         "text": "-$1,050"
+        },
+        {
+         "column": 8,
+         "ref": "H4",
+         "text": "-$1,050"
+        },
+        {
+         "column": 9,
+         "ref": "I4",
+         "text": "-$1,050"
+        },
+        {
+         "column": 10,
+         "ref": "J4",
+         "text": "-$1,050"
+        },
+        {
+         "column": 11,
+         "ref": "K4",
+         "text": "-$1,050"
+        },
+        {
+         "column": 12,
+         "ref": "L4",
+         "text": "-$1,050"
+        },
+        {
+         "column": 13,
+         "ref": "M4",
+         "text": "-$1,050"
+        },
+        {
+         "column": 14,
+         "ref": "N4",
+         "text": "-$12,600"
+        }
+       ],
+       "rowNumber": 4
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A5",
+         "text": "Concessions"
+        },
+        {
+         "column": 2,
+         "ref": "B5",
+         "text": "-$500"
+        },
+        {
+         "column": 3,
+         "ref": "C5",
+         "text": "-$500"
+        },
+        {
+         "column": 4,
+         "ref": "D5",
+         "text": "-$500"
+        },
+        {
+         "column": 5,
+         "ref": "E5",
+         "text": "-$500"
+        },
+        {
+         "column": 6,
+         "ref": "F5",
+         "text": "-$500"
+        },
+        {
+         "column": 7,
+         "ref": "G5",
+         "text": "-$500"
+        },
+        {
+         "column": 8,
+         "ref": "H5",
+         "text": "-$500"
+        },
+        {
+         "column": 9,
+         "ref": "I5",
+         "text": "-$500"
+        },
+        {
+         "column": 10,
+         "ref": "J5",
+         "text": "-$500"
+        },
+        {
+         "column": 11,
+         "ref": "K5",
+         "text": "-$500"
+        },
+        {
+         "column": 12,
+         "ref": "L5",
+         "text": "-$500"
+        },
+        {
+         "column": 13,
+         "ref": "M5",
+         "text": "-$500"
+        },
+        {
+         "column": 14,
+         "ref": "N5",
+         "text": "-$6,000"
+        }
+       ],
+       "rowNumber": 5
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A6",
+         "text": "Bad Debt"
+        },
+        {
+         "column": 2,
+         "ref": "B6",
+         "text": "-$200"
+        },
+        {
+         "column": 3,
+         "ref": "C6",
+         "text": "-$150"
+        },
+        {
+         "column": 4,
+         "ref": "D6",
+         "text": "-$200"
+        },
+        {
+         "column": 5,
+         "ref": "E6",
+         "text": "-$100"
+        },
+        {
+         "column": 6,
+         "ref": "F6",
+         "text": "-$150"
+        },
+        {
+         "column": 7,
+         "ref": "G6",
+         "text": "-$200"
+        },
+        {
+         "column": 8,
+         "ref": "H6",
+         "text": "-$150"
+        },
+        {
+         "column": 9,
+         "ref": "I6",
+         "text": "-$100"
+        },
+        {
+         "column": 10,
+         "ref": "J6",
+         "text": "-$150"
+        },
+        {
+         "column": 11,
+         "ref": "K6",
+         "text": "-$200"
+        },
+        {
+         "column": 12,
+         "ref": "L6",
+         "text": "-$150"
+        },
+        {
+         "column": 13,
+         "ref": "M6",
+         "text": "-$100"
+        },
+        {
+         "column": 14,
+         "ref": "N6",
+         "text": "-$1,850"
+        }
+       ],
+       "rowNumber": 6
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A7",
+         "text": "NET RENTAL REVENUE"
+        },
+        {
+         "column": 2,
+         "ref": "B7",
+         "text": "$47,600"
+        },
+        {
+         "column": 3,
+         "ref": "C7",
+         "text": "$48,175"
+        },
+        {
+         "column": 4,
+         "ref": "D7",
+         "text": "$48,125"
+        },
+        {
+         "column": 5,
+         "ref": "E7",
+         "text": "$48,225"
+        },
+        {
+         "column": 6,
+         "ref": "F7",
+         "text": "$48,175"
+        },
+        {
+         "column": 7,
+         "ref": "G7",
+         "text": "$48,125"
+        },
+        {
+         "column": 8,
+         "ref": "H7",
+         "text": "$48,175"
+        },
+        {
+         "column": 9,
+         "ref": "I7",
+         "text": "$48,225"
+        },
+        {
+         "column": 10,
+         "ref": "J7",
+         "text": "$48,175"
+        },
+        {
+         "column": 11,
+         "ref": "K7",
+         "text": "$48,125"
+        },
+        {
+         "column": 12,
+         "ref": "L7",
+         "text": "$48,175"
+        },
+        {
+         "column": 13,
+         "ref": "M7",
+         "text": "$48,225"
+        },
+        {
+         "column": 14,
+         "ref": "N7",
+         "text": "$578,050"
+        }
+       ],
+       "rowNumber": 7
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A8",
+         "text": "Other Income"
+        },
+        {
+         "column": 2,
+         "ref": "B8",
+         "text": "$800"
+        },
+        {
+         "column": 3,
+         "ref": "C8",
+         "text": "$800"
+        },
+        {
+         "column": 4,
+         "ref": "D8",
+         "text": "$850"
+        },
+        {
+         "column": 5,
+         "ref": "E8",
+         "text": "$800"
+        },
+        {
+         "column": 6,
+         "ref": "F8",
+         "text": "$800"
+        },
+        {
+         "column": 7,
+         "ref": "G8",
+         "text": "$850"
+        },
+        {
+         "column": 8,
+         "ref": "H8",
+         "text": "$800"
+        },
+        {
+         "column": 9,
+         "ref": "I8",
+         "text": "$850"
+        },
+        {
+         "column": 10,
+         "ref": "J8",
+         "text": "$800"
+        },
+        {
+         "column": 11,
+         "ref": "K8",
+         "text": "$850"
+        },
+        {
+         "column": 12,
+         "ref": "L8",
+         "text": "$800"
+        },
+        {
+         "column": 13,
+         "ref": "M8",
+         "text": "$850"
+        },
+        {
+         "column": 14,
+         "ref": "N8",
+         "text": "$9,850"
+        }
+       ],
+       "rowNumber": 8
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A9",
+         "text": "TOTAL REVENUE"
+        },
+        {
+         "column": 2,
+         "ref": "B9",
+         "text": "$48,400"
+        },
+        {
+         "column": 3,
+         "ref": "C9",
+         "text": "$48,975"
+        },
+        {
+         "column": 4,
+         "ref": "D9",
+         "text": "$48,975"
+        },
+        {
+         "column": 5,
+         "ref": "E9",
+         "text": "$49,025"
+        },
+        {
+         "column": 6,
+         "ref": "F9",
+         "text": "$48,975"
+        },
+        {
+         "column": 7,
+         "ref": "G9",
+         "text": "$48,975"
+        },
+        {
+         "column": 8,
+         "ref": "H9",
+         "text": "$48,975"
+        },
+        {
+         "column": 9,
+         "ref": "I9",
+         "text": "$49,075"
+        },
+        {
+         "column": 10,
+         "ref": "J9",
+         "text": "$48,975"
+        },
+        {
+         "column": 11,
+         "ref": "K9",
+         "text": "$48,975"
+        },
+        {
+         "column": 12,
+         "ref": "L9",
+         "text": "$48,975"
+        },
+        {
+         "column": 13,
+         "ref": "M9",
+         "text": "$49,075"
+        },
+        {
+         "column": 14,
+         "ref": "N9",
+         "text": "$587,900"
+        }
+       ],
+       "rowNumber": 9
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A10",
+         "text": "Property Management Fee"
+        },
+        {
+         "column": 2,
+         "ref": "B10",
+         "text": "-$1,936"
+        },
+        {
+         "column": 3,
+         "ref": "C10",
+         "text": "-$1,959"
+        },
+        {
+         "column": 4,
+         "ref": "D10",
+         "text": "-$1,959"
+        },
+        {
+         "column": 5,
+         "ref": "E10",
+         "text": "-$1,961"
+        },
+        {
+         "column": 6,
+         "ref": "F10",
+         "text": "-$1,959"
+        },
+        {
+         "column": 7,
+         "ref": "G10",
+         "text": "-$1,959"
+        },
+        {
+         "column": 8,
+         "ref": "H10",
+         "text": "-$1,959"
+        },
+        {
+         "column": 9,
+         "ref": "I10",
+         "text": "-$1,963"
+        },
+        {
+         "column": 10,
+         "ref": "J10",
+         "text": "-$1,959"
+        },
+        {
+         "column": 11,
+         "ref": "K10",
+         "text": "-$1,959"
+        },
+        {
+         "column": 12,
+         "ref": "L10",
+         "text": "-$1,959"
+        },
+        {
+         "column": 13,
+         "ref": "M10",
+         "text": "-$1,963"
+        },
+        {
+         "column": 14,
+         "ref": "N10",
+         "text": "-$23,550"
+        }
+       ],
+       "rowNumber": 10
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A11",
+         "text": "Payroll & Benefits"
+        },
+        {
+         "column": 2,
+         "ref": "B11",
+         "text": "-$3200"
+        },
+        {
+         "column": 3,
+         "ref": "C11",
+         "text": "-$3200"
+        },
+        {
+         "column": 4,
+         "ref": "D11",
+         "text": "-$3200"
+        },
+        {
+         "column": 5,
+         "ref": "E11",
+         "text": "-$3200"
+        },
+        {
+         "column": 6,
+         "ref": "F11",
+         "text": "-$3200"
+        },
+        {
+         "column": 7,
+         "ref": "G11",
+         "text": "-$3200"
+        },
+        {
+         "column": 8,
+         "ref": "H11",
+         "text": "-$3200"
+        },
+        {
+         "column": 9,
+         "ref": "I11",
+         "text": "-$3200"
+        },
+        {
+         "column": 10,
+         "ref": "J11",
+         "text": "-$3200"
+        },
+        {
+         "column": 11,
+         "ref": "K11",
+         "text": "-$3200"
+        },
+        {
+         "column": 12,
+         "ref": "L11",
+         "text": "-$3200"
+        },
+        {
+         "column": 13,
+         "ref": "M11",
+         "text": "-$3200"
+        },
+        {
+         "column": 14,
+         "ref": "N11",
+         "text": "-$38,400"
+        }
+       ],
+       "rowNumber": 11
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A12",
+         "text": "Repairs & Maintenance"
+        },
+        {
+         "column": 2,
+         "ref": "B12",
+         "text": "-$1850"
+        },
+        {
+         "column": 3,
+         "ref": "C12",
+         "text": "-$1200"
+        },
+        {
+         "column": 4,
+         "ref": "D12",
+         "text": "-$1650"
+        },
+        {
+         "column": 5,
+         "ref": "E12",
+         "text": "-$2100"
+        },
+        {
+         "column": 6,
+         "ref": "F12",
+         "text": "-$1450"
+        },
+        {
+         "column": 7,
+         "ref": "G12",
+         "text": "-$1900"
+        },
+        {
+         "column": 8,
+         "ref": "H12",
+         "text": "-$1650"
+        },
+        {
+         "column": 9,
+         "ref": "I12",
+         "text": "-$1400"
+        },
+        {
+         "column": 10,
+         "ref": "J12",
+         "text": "-$1750"
+        },
+        {
+         "column": 11,
+         "ref": "K12",
+         "text": "-$2200"
+        },
+        {
+         "column": 12,
+         "ref": "L12",
+         "text": "-$1550"
+        },
+        {
+         "column": 13,
+         "ref": "M12",
+         "text": "-$1800"
+        },
+        {
+         "column": 14,
+         "ref": "N12",
+         "text": "-$20,500"
+        }
+       ],
+       "rowNumber": 12
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A13",
+         "text": "Turnover/Make Ready"
+        },
+        {
+         "column": 2,
+         "ref": "B13",
+         "text": "-$450"
+        },
+        {
+         "column": 3,
+         "ref": "C13",
+         "text": "-$600"
+        },
+        {
+         "column": 4,
+         "ref": "D13",
+         "text": "-$750"
+        },
+        {
+         "column": 5,
+         "ref": "E13",
+         "text": "-$500"
+        },
+        {
+         "column": 6,
+         "ref": "F13",
+         "text": "-$650"
+        },
+        {
+         "column": 7,
+         "ref": "G13",
+         "text": "-$800"
+        },
+        {
+         "column": 8,
+         "ref": "H13",
+         "text": "-$550"
+        },
+        {
+         "column": 9,
+         "ref": "I13",
+         "text": "-$700"
+        },
+        {
+         "column": 10,
+         "ref": "J13",
+         "text": "-$850"
+        },
+        {
+         "column": 11,
+         "ref": "K13",
+         "text": "-$500"
+        },
+        {
+         "column": 12,
+         "ref": "L13",
+         "text": "-$650"
+        },
+        {
+         "column": 13,
+         "ref": "M13",
+         "text": "-$750"
+        },
+        {
+         "column": 14,
+         "ref": "N13",
+         "text": "-$7,350"
+        }
+       ],
+       "rowNumber": 13
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A14",
+         "text": "Utilities"
+        },
+        {
+         "column": 2,
+         "ref": "B14",
+         "text": "-$2,850"
+        },
+        {
+         "column": 3,
+         "ref": "C14",
+         "text": "-$2,650"
+        },
+        {
+         "column": 4,
+         "ref": "D14",
+         "text": "-$2,450"
+        },
+        {
+         "column": 5,
+         "ref": "E14",
+         "text": "-$2,200"
+        },
+        {
+         "column": 6,
+         "ref": "F14",
+         "text": "-$2,050"
+        },
+        {
+         "column": 7,
+         "ref": "G14",
+         "text": "-$2,450"
+        },
+        {
+         "column": 8,
+         "ref": "H14",
+         "text": "-$2,650"
+        },
+        {
+         "column": 9,
+         "ref": "I14",
+         "text": "-$2,850"
+        },
+        {
+         "column": 10,
+         "ref": "J14",
+         "text": "-$2,550"
+        },
+        {
+         "column": 11,
+         "ref": "K14",
+         "text": "-$2,250"
+        },
+        {
+         "column": 12,
+         "ref": "L14",
+         "text": "-$2,450"
+        },
+        {
+         "column": 13,
+         "ref": "M14",
+         "text": "-$2,650"
+        },
+        {
+         "column": 14,
+         "ref": "N14",
+         "text": "-$30,000"
+        }
+       ],
+       "rowNumber": 14
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A15",
+         "text": "Insurance"
+        },
+        {
+         "column": 2,
+         "ref": "B15",
+         "text": "-$1800"
+        },
+        {
+         "column": 3,
+         "ref": "C15",
+         "text": "-$1800"
+        },
+        {
+         "column": 4,
+         "ref": "D15",
+         "text": "-$1800"
+        },
+        {
+         "column": 5,
+         "ref": "E15",
+         "text": "-$1800"
+        },
+        {
+         "column": 6,
+         "ref": "F15",
+         "text": "-$1800"
+        },
+        {
+         "column": 7,
+         "ref": "G15",
+         "text": "-$1800"
+        },
+        {
+         "column": 8,
+         "ref": "H15",
+         "text": "-$1800"
+        },
+        {
+         "column": 9,
+         "ref": "I15",
+         "text": "-$1800"
+        },
+        {
+         "column": 10,
+         "ref": "J15",
+         "text": "-$1800"
+        },
+        {
+         "column": 11,
+         "ref": "K15",
+         "text": "-$1800"
+        },
+        {
+         "column": 12,
+         "ref": "L15",
+         "text": "-$1800"
+        },
+        {
+         "column": 13,
+         "ref": "M15",
+         "text": "-$1800"
+        },
+        {
+         "column": 14,
+         "ref": "N15",
+         "text": "-$21,600"
+        }
+       ],
+       "rowNumber": 15
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A16",
+         "text": "Property Taxes"
+        },
+        {
+         "column": 2,
+         "ref": "B16",
+         "text": "-$4200"
+        },
+        {
+         "column": 3,
+         "ref": "C16",
+         "text": "-$4200"
+        },
+        {
+         "column": 4,
+         "ref": "D16",
+         "text": "-$4200"
+        },
+        {
+         "column": 5,
+         "ref": "E16",
+         "text": "-$4200"
+        },
+        {
+         "column": 6,
+         "ref": "F16",
+         "text": "-$4200"
+        },
+        {
+         "column": 7,
+         "ref": "G16",
+         "text": "-$4200"
+        },
+        {
+         "column": 8,
+         "ref": "H16",
+         "text": "-$4200"
+        },
+        {
+         "column": 9,
+         "ref": "I16",
+         "text": "-$4200"
+        },
+        {
+         "column": 10,
+         "ref": "J16",
+         "text": "-$4200"
+        },
+        {
+         "column": 11,
+         "ref": "K16",
+         "text": "-$4200"
+        },
+        {
+         "column": 12,
+         "ref": "L16",
+         "text": "-$4200"
+        },
+        {
+         "column": 13,
+         "ref": "M16",
+         "text": "-$4200"
+        },
+        {
+         "column": 14,
+         "ref": "N16",
+         "text": "-$50,400"
+        }
+       ],
+       "rowNumber": 16
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A17",
+         "text": "Marketing/Advertising"
+        },
+        {
+         "column": 2,
+         "ref": "B17",
+         "text": "-$150"
+        },
+        {
+         "column": 3,
+         "ref": "C17",
+         "text": "-$100"
+        },
+        {
+         "column": 4,
+         "ref": "D17",
+         "text": "-$150"
+        },
+        {
+         "column": 5,
+         "ref": "E17",
+         "text": "-$200"
+        },
+        {
+         "column": 6,
+         "ref": "F17",
+         "text": "-$150"
+        },
+        {
+         "column": 7,
+         "ref": "G17",
+         "text": "-$100"
+        },
+        {
+         "column": 8,
+         "ref": "H17",
+         "text": "-$150"
+        },
+        {
+         "column": 9,
+         "ref": "I17",
+         "text": "-$200"
+        },
+        {
+         "column": 10,
+         "ref": "J17",
+         "text": "-$150"
+        },
+        {
+         "column": 11,
+         "ref": "K17",
+         "text": "-$100"
+        },
+        {
+         "column": 12,
+         "ref": "L17",
+         "text": "-$150"
+        },
+        {
+         "column": 13,
+         "ref": "M17",
+         "text": "-$200"
+        },
+        {
+         "column": 14,
+         "ref": "N17",
+         "text": "-$1,800"
+        }
+       ],
+       "rowNumber": 17
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A18",
+         "text": "Administrative/Office"
+        },
+        {
+         "column": 2,
+         "ref": "B18",
+         "text": "-$400"
+        },
+        {
+         "column": 3,
+         "ref": "C18",
+         "text": "-$400"
+        },
+        {
+         "column": 4,
+         "ref": "D18",
+         "text": "-$400"
+        },
+        {
+         "column": 5,
+         "ref": "E18",
+         "text": "-$400"
+        },
+        {
+         "column": 6,
+         "ref": "F18",
+         "text": "-$400"
+        },
+        {
+         "column": 7,
+         "ref": "G18",
+         "text": "-$400"
+        },
+        {
+         "column": 8,
+         "ref": "H18",
+         "text": "-$400"
+        },
+        {
+         "column": 9,
+         "ref": "I18",
+         "text": "-$400"
+        },
+        {
+         "column": 10,
+         "ref": "J18",
+         "text": "-$400"
+        },
+        {
+         "column": 11,
+         "ref": "K18",
+         "text": "-$400"
+        },
+        {
+         "column": 12,
+         "ref": "L18",
+         "text": "-$400"
+        },
+        {
+         "column": 13,
+         "ref": "M18",
+         "text": "-$400"
+        },
+        {
+         "column": 14,
+         "ref": "N18",
+         "text": "-$4,800"
+        }
+       ],
+       "rowNumber": 18
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A19",
+         "text": "Contract Services"
+        },
+        {
+         "column": 2,
+         "ref": "B19",
+         "text": "-$1200"
+        },
+        {
+         "column": 3,
+         "ref": "C19",
+         "text": "-$1200"
+        },
+        {
+         "column": 4,
+         "ref": "D19",
+         "text": "-$1200"
+        },
+        {
+         "column": 5,
+         "ref": "E19",
+         "text": "-$1200"
+        },
+        {
+         "column": 6,
+         "ref": "F19",
+         "text": "-$1200"
+        },
+        {
+         "column": 7,
+         "ref": "G19",
+         "text": "-$1200"
+        },
+        {
+         "column": 8,
+         "ref": "H19",
+         "text": "-$1200"
+        },
+        {
+         "column": 9,
+         "ref": "I19",
+         "text": "-$1200"
+        },
+        {
+         "column": 10,
+         "ref": "J19",
+         "text": "-$1200"
+        },
+        {
+         "column": 11,
+         "ref": "K19",
+         "text": "-$1200"
+        },
+        {
+         "column": 12,
+         "ref": "L19",
+         "text": "-$1200"
+        },
+        {
+         "column": 13,
+         "ref": "M19",
+         "text": "-$1200"
+        },
+        {
+         "column": 14,
+         "ref": "N19",
+         "text": "-$14,400"
+        }
+       ],
+       "rowNumber": 19
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A20",
+         "text": "Landscaping/Grounds"
+        },
+        {
+         "column": 2,
+         "ref": "B20",
+         "text": "-$2850"
+        },
+        {
+         "column": 3,
+         "ref": "C20",
+         "text": "-$2850"
+        },
+        {
+         "column": 4,
+         "ref": "D20",
+         "text": "-$2850"
+        },
+        {
+         "column": 5,
+         "ref": "E20",
+         "text": "-$2850"
+        },
+        {
+         "column": 6,
+         "ref": "F20",
+         "text": "-$2850"
+        },
+        {
+         "column": 7,
+         "ref": "G20",
+         "text": "-$2850"
+        },
+        {
+         "column": 8,
+         "ref": "H20",
+         "text": "-$2850"
+        },
+        {
+         "column": 9,
+         "ref": "I20",
+         "text": "-$2850"
+        },
+        {
+         "column": 10,
+         "ref": "J20",
+         "text": "-$2850"
+        },
+        {
+         "column": 11,
+         "ref": "K20",
+         "text": "-$2850"
+        },
+        {
+         "column": 12,
+         "ref": "L20",
+         "text": "-$2850"
+        },
+        {
+         "column": 13,
+         "ref": "M20",
+         "text": "-$2850"
+        },
+        {
+         "column": 14,
+         "ref": "N20",
+         "text": "-$34,200"
+        }
+       ],
+       "rowNumber": 20
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A21",
+         "text": "TOTAL OPERATING EXPENSES"
+        },
+        {
+         "column": 2,
+         "ref": "B21",
+         "text": "-$20,036"
+        },
+        {
+         "column": 3,
+         "ref": "C21",
+         "text": "-$19,159"
+        },
+        {
+         "column": 4,
+         "ref": "D21",
+         "text": "-$19,209"
+        },
+        {
+         "column": 5,
+         "ref": "E21",
+         "text": "-$19,211"
+        },
+        {
+         "column": 6,
+         "ref": "F21",
+         "text": "-$19,159"
+        },
+        {
+         "column": 7,
+         "ref": "G21",
+         "text": "-$19,309"
+        },
+        {
+         "column": 8,
+         "ref": "H21",
+         "text": "-$19,209"
+        },
+        {
+         "column": 9,
+         "ref": "I21",
+         "text": "-$19,363"
+        },
+        {
+         "column": 10,
+         "ref": "J21",
+         "text": "-$19,259"
+        },
+        {
+         "column": 11,
+         "ref": "K21",
+         "text": "-$19,200"
+        },
+        {
+         "column": 12,
+         "ref": "L21",
+         "text": "-$19,159"
+        },
+        {
+         "column": 13,
+         "ref": "M21",
+         "text": "-$19,363"
+        },
+        {
+         "column": 14,
+         "ref": "N21",
+         "text": "-$232,500"
+        }
+       ],
+       "rowNumber": 21
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A22",
+         "text": "NET OPERATING INCOME"
+        },
+        {
+         "column": 2,
+         "ref": "B22",
+         "text": "$28,364"
+        },
+        {
+         "column": 3,
+         "ref": "C22",
+         "text": "$29,816"
+        },
+        {
+         "column": 4,
+         "ref": "D22",
+         "text": "$29,766"
+        },
+        {
+         "column": 5,
+         "ref": "E22",
+         "text": "$29,814"
+        },
+        {
+         "column": 6,
+         "ref": "F22",
+         "text": "$29,816"
+        },
+        {
+         "column": 7,
+         "ref": "G22",
+         "text": "$29,666"
+        },
+        {
+         "column": 8,
+         "ref": "H22",
+         "text": "$29,766"
+        },
+        {
+         "column": 9,
+         "ref": "I22",
+         "text": "$29,712"
+        },
+        {
+         "column": 10,
+         "ref": "J22",
+         "text": "$29,716"
+        },
+        {
+         "column": 11,
+         "ref": "K22",
+         "text": "$29,775"
+        },
+        {
+         "column": 12,
+         "ref": "L22",
+         "text": "$29,816"
+        },
+        {
+         "column": 13,
+         "ref": "M22",
+         "text": "$29,712"
+        },
+        {
+         "column": 14,
+         "ref": "N22",
+         "text": "$355,400"
+        }
+       ],
+       "rowNumber": 22
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A23",
+         "text": "Capital Expenditures"
+        },
+        {
+         "column": 2,
+         "ref": "B23",
+         "text": "-$1500"
+        },
+        {
+         "column": 3,
+         "ref": "C23",
+         "text": "-$800"
+        },
+        {
+         "column": 4,
+         "ref": "D23",
+         "text": "-$1200"
+        },
+        {
+         "column": 5,
+         "ref": "E23",
+         "text": "-$2000"
+        },
+        {
+         "column": 6,
+         "ref": "F23",
+         "text": "-$1500"
+        },
+        {
+         "column": 7,
+         "ref": "G23",
+         "text": "-$1000"
+        },
+        {
+         "column": 8,
+         "ref": "H23",
+         "text": "-$1800"
+        },
+        {
+         "column": 9,
+         "ref": "I23",
+         "text": "-$1200"
+        },
+        {
+         "column": 10,
+         "ref": "J23",
+         "text": "-$1500"
+        },
+        {
+         "column": 11,
+         "ref": "K23",
+         "text": "-$2200"
+        },
+        {
+         "column": 12,
+         "ref": "L23",
+         "text": "-$1200"
+        },
+        {
+         "column": 13,
+         "ref": "M23",
+         "text": "-$1500"
+        },
+        {
+         "column": 14,
+         "ref": "N23",
+         "text": "-$17,400"
+        }
+       ],
+       "rowNumber": 23
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A24",
+         "text": "CASH FLOW BEFORE DEBT"
+        },
+        {
+         "column": 2,
+         "ref": "B24",
+         "text": "$26,864"
+        },
+        {
+         "column": 3,
+         "ref": "C24",
+         "text": "$29,016"
+        },
+        {
+         "column": 4,
+         "ref": "D24",
+         "text": "$28,566"
+        },
+        {
+         "column": 5,
+         "ref": "E24",
+         "text": "$27,814"
+        },
+        {
+         "column": 6,
+         "ref": "F24",
+         "text": "$28,316"
+        },
+        {
+         "column": 7,
+         "ref": "G24",
+         "text": "$28,666"
+        },
+        {
+         "column": 8,
+         "ref": "H24",
+         "text": "$27,966"
+        },
+        {
+         "column": 9,
+         "ref": "I24",
+         "text": "$28,512"
+        },
+        {
+         "column": 10,
+         "ref": "J24",
+         "text": "$28,216"
+        },
+        {
+         "column": 11,
+         "ref": "K24",
+         "text": "$27,575"
+        },
+        {
+         "column": 12,
+         "ref": "L24",
+         "text": "$28,616"
+        },
+        {
+         "column": 13,
+         "ref": "M24",
+         "text": "$28,212"
+        },
+        {
+         "column": 14,
+         "ref": "N24",
+         "text": "$338,000"
+        }
+       ],
+       "rowNumber": 24
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A26",
+         "text": "NOTES:"
+        }
+       ],
+       "rowNumber": 26
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A27",
+         "text": "- Vacancy: 6% average"
+        }
+       ],
+       "rowNumber": 27
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A28",
+         "text": "- Property Management: 4% of revenue"
+        }
+       ],
+       "rowNumber": 28
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A29",
+         "text": "- 148 units, built 2008, renovated 2014"
+        }
+       ],
+       "rowNumber": 29
+      }
+     ],
+     "sheetIndex": 0,
+     "tableCount": 0
+    }
+   ]
+  }
+ },
+ "parserTarget": "csv",
+ "sha256": "7429e4bdbe637e18421c8cafb4e0d82e74f2bfaa55ec5e1973530f5565560f25"
+}

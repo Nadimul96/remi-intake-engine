@@ -1,0 +1,29 @@
+{
+ "fileName": "DebtSummary_Oakwood_FirstWestern.txt",
+ "normalized": {
+  "document": {
+   "metadata": {
+    "source": "text"
+   },
+   "pageCount": 1,
+   "pages": [
+    {
+     "charCount": 1696,
+     "metadata": {
+      "previewSource": "plain_text"
+     },
+     "pageNumber": 1,
+     "text": "LOAN SUMMARY\nOakwood Commons — Synthetic Value Fund II\n\nLENDER: First Western Capital Partners\nLOAN AMOUNT: $13,800,000\nLOAN TYPE: Fixed Rate Term Loan\nINTEREST RATE: 4.25% (fixed)\nORIGINATION DATE: February 15, 2021\nMATURITY DATE: February 15, 2026\nAMORTIZATION: Interest Only (5 years)\nLTV AT ORIGINATION: 75.0%\nLENDER FEES: 1.0% ($138,000)\n\nMONTHLY DEBT SERVICE:\nPrincipal: $0 (IO period)\nInterest: $48,875\nTotal Monthly Payment: $48,875\nAnnual Debt Service: $586,500\n\nFINANCIAL COVENANTS:\nMinimum DSCR: 1.25x\nMaximum LTV: 80%\n\nDSCR CALCULATIONS (as reported):\nPeriod              NOI         Debt Service    DSCR        Status\n--------------------------------------------------------------------------------\n2021 (Y1 Actual)    $892,400    $586,500        1.52x       ✓ PASS\n2022 (Y2 Actual)    $1,022,080  $586,500        1.74x       ✓ PASS\n2023 (Y3 Actual)    $1,142,000  $943,500*       1.21x       ✗ BREACH\nQ1 2023             $285,500    $235,875        1.21x       ✗ BREACH\nQ2 2023             $288,200    $238,125        1.21x       ✗ BREACH\nQ3 2023             $284,800    $234,750        1.21x       ✗ BREACH\nQ4 2023             $283,500    $234,750        1.21x       ✗ BREACH\n\n*2023 debt service increased due to Supplemental Loan draw of $3.2M for renovation program\n\nREMEDIATION PLAN:\n- Occupancy improvement: Target 94.5% by Q2 2024\n- Rent increases: 4.5% effective Jan 2024\n- Expense reduction: Greenfield fee renegotiation (-$50/unit)\n- DSCR projected recovery: 1.28x by Q3 2024\n\nNOTES:\n- Lender notified June 2023\n- Waiver granted through Q4 2023\n- Monthly reporting required until covenant compliance restored\n\nPrepared by: Diane Foster, Asset Manager\nDate: January 15, 2024",
+     "textAvailable": true,
+     "textPreview": "LOAN SUMMARY Oakwood Commons — Synthetic Value Fund II LENDER: First Western Capital Partners LOAN AMOUNT: $13,800,000 LOAN TYPE: Fixed Rate Term Loan INTEREST RATE: 4.25% (fixed) ORIGINATION DATE: February 15, 2021 MATURITY DATE: February 15, 2026 AMORTIZATION: Interest Only (5 years) LTV AT ORIGINATION: 75.0% LENDER FEES: 1.0% ($138,000) MONTHLY DEBT SERVICE: Principal: $0 (IO period) Interest: $48,875 Total Monthly Payment: $48,875 Annual Debt Service: $586,500 FINANCIAL COVENANTS: Minimum DSCR: 1.25x Maximum LTV: 80% DSCR CALCULATIONS (as reported): Period NOI Debt Service DSCR Status -------------------------------------------------------------------------------- 2021 (Y1 Actual) $892,400 $586,500 1.52x ✓ PASS 2022 (Y2 Actual) $1,022,080 $586,500 1.74x ✓ PASS 2023 (Y3 Actual) $1,142,000 $943,500* 1.21x ✗ BREACH Q1 2023 $285,500 $235,875 1.21x ✗ BREACH Q2 2023 $288,200 $238,125 1.21x ✗ BREACH Q3 2023 $284,800 $234,750 1.21x ✗ BREACH Q4 2023 $283,500 $234,750 1.21x ✗ BREACH *2023 debt service increased due to Supplemental Loan draw of $3.2M for renovation program REMEDIATION PLAN: - Occupancy improvement: Target 94.5% by Q2 2024 - Rent increases: 4.5% effective Jan 2024 - Expens"
+    }
+   ],
+   "textAvailable": true,
+   "textPreview": "LOAN SUMMARY Oakwood Commons — Synthetic Value Fund II LENDER: First Western Capital Partners LOAN AMOUNT: $13,800,000 LOAN TYPE: Fixed Rate Term Loan INTEREST RATE: 4.25% (fixed) ORIGINATION DATE: February 15, 2021 MATURITY DATE: February 15, 2026 AMORTIZATION: Interest Only (5 years) LTV AT ORIGINATION: 75.0% LENDER FEES: 1.0% ($138,000) MONTHLY DEBT SERVICE: Principal: $0 (IO period) Interest: $48,875 Total Monthly Payment: $48,875 Annual Debt Service: $586,500 FINANCIAL COVENANTS: Minimum DSCR: 1.25x Maximum LTV: 80% DSCR CALCULATIONS (as reported): Period NOI Debt Service DSCR Status -------------------------------------------------------------------------------- 2021 (Y1 Actual) $892,400 $586,500 1.52x ✓ PASS 2022 (Y2 Actual) $1,022,080 $586,500 1.74x ✓ PASS 2023 (Y3 Actual) $1,142,000 $943,500* 1.21x ✗ BREACH Q1 2023 $285,500 $235,875 1.21x ✗ BREACH Q2 2023 $288,200 $238,125 1.21x ✗ BREACH Q3 2023 $284,800 $234,750 1.21x ✗ BREACH Q4 2023 $283,500 $234,750 1.21x ✗ BREACH *2023 debt service increased due to Supplemental Loan draw of $3.2M for renovation program REMEDIATION PLAN: - Occupancy improvement: Target 94.5% by Q2 2024 - Rent increases: 4.5% effective Jan 2024 - Expens",
+   "title": "LOAN SUMMARY"
+  },
+  "kind": "document"
+ },
+ "parserTarget": "text",
+ "sha256": "45172acd77badeed1626d151ec7cc4c7aa9735ff3d483f2b9a628d083b4de08d"
+}

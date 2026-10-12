@@ -1,0 +1,28 @@
+{
+  "description": "Curated files from fixtures/synthetic-capital that the demo seeds through the pipeline and the extraction tests run against. Together they plant every conflict in the C1-C7 rubric.",
+  "root": "fixtures/synthetic-capital",
+  "files": [
+    "Fund I - Synthetic Value Fund I/Parkside_at_Meridian/acquisition/T12_Parkside_2015_SellerVersion.csv",
+    "Fund I - Synthetic Value Fund I/Parkside_at_Meridian/acquisition/T12_Parkside_2015_REKEYED_Jordan.csv",
+    "Fund I - Synthetic Value Fund I/Parkside_at_Meridian/acquisition/OM_Parkside_Meridian_Westbrook.txt",
+    "Fund I - Synthetic Value Fund I/Parkside_at_Meridian/asset_management/RentRoll_Parkside_Q3_2017.csv",
+    "Fund I - Synthetic Value Fund I/Parkside_at_Meridian/asset_management/PM_Report_Parkside_Q3_2017.txt",
+    "Fund I - Synthetic Value Fund I/Parkside_at_Meridian/asset_management/SiteVisit_Parkside_2018_DF.txt",
+    "Fund I - Synthetic Value Fund I/Parkside_at_Meridian/disposition/BOV_Parkside_Meridian_2020.pdf",
+    "Fund II - Synthetic Value Fund II/Investment_Memo_FINAL.docx",
+    "Fund II - Synthetic Value Fund II/Q3_RentRoll.xlsx",
+    "Fund II - Synthetic Value Fund II/Oakwood_Commons/acquisition/OM_Oakwood_Commons_Marcus_Realty.pdf",
+    "Fund II - Synthetic Value Fund II/Oakwood_Commons/acquisition/UW_OakwoodCommons_v1_PN_092020.xlsx",
+    "Fund II - Synthetic Value Fund II/Oakwood_Commons/acquisition/UW_OakwoodCommons_v2_PN_112020.xlsx",
+    "Fund II - Synthetic Value Fund II/Oakwood_Commons/acquisition/UW_OakwoodCommons_v3_AD_112020.xlsx",
+    "Fund II - Synthetic Value Fund II/Oakwood_Commons/acquisition/UW_Oakwood_v2_PN_USE THIS ONE_FINAL.xlsx",
+    "Fund II - Synthetic Value Fund II/Oakwood_Commons/acquisition/IC_Memo_Oakwood_Commons_FINAL.txt",
+    "Fund II - Synthetic Value Fund II/Oakwood_Commons/acquisition/T12_Oakwood_2020_SellersVersion.csv",
+    "Fund II - Synthetic Value Fund II/Oakwood_Commons/acquisition/T12_Oakwood_2020_Priya_Normalized.csv",
+    "Fund II - Synthetic Value Fund II/Oakwood_Commons/asset_management/BudgetVariance_Oakwood_Q2_2023.csv",
+    "Fund II - Synthetic Value Fund II/Oakwood_Commons/asset_management/DebtSummary_Oakwood_FirstWestern.txt",
+    "emails/Thread_01_Broker_Oakwood_Intro.txt",
+    "emails/Thread_03_DSCR_Breach_Alert.txt",
+    "emails/Thread_06_Oakwood_IC_Expense_Debate.txt"
+  ]
+}

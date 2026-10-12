@@ -1,0 +1,52 @@
+{
+ "fileName": "BOV_Parkside_Meridian_2020.pdf",
+ "normalized": {
+  "document": {
+   "metadata": {
+    "author": null,
+    "producer": null,
+    "source": "pdf",
+    "subject": null
+   },
+   "pageCount": 3,
+   "pages": [
+    {
+     "charCount": 194,
+     "metadata": {
+      "previewSource": "native_text"
+     },
+     "pageNumber": 1,
+     "text": "BROKER OPINION OF VALUE\nParkside at Meridian\n148-Unit Multifamily Community\nSan Antonio, Texas\nPrepared for: Synthetic Capital Partners\nDate: June 15, 2020\nPrepared by: Westbrook Capital Markets",
+     "textAvailable": true,
+     "textPreview": "BROKER OPINION OF VALUE Parkside at Meridian 148-Unit Multifamily Community San Antonio, Texas Prepared for: Synthetic Capital Partners Date: June 15, 2020 Prepared by: Westbrook Capital Markets"
+    },
+    {
+     "charCount": 536,
+     "metadata": {
+      "previewSource": "native_text"
+     },
+     "pageNumber": 2,
+     "text": "EXECUTIVE SUMMARY\nWestbrook Capital Markets is pleased to provide this Broker Opinion of Value for Parkside at Meridian, a 148-\nunit garden-style multifamily community located in the Medical Center submarket of San Antonio, Texas.\nRECOMMENDED LIST PRICE: $15,800,000\n($106,757 per unit)\nProperty Name: Parkside at Meridian\nAddress: 8423 Datapoint Drive, San Antonio, TX 78229\nY ear Built: 2008\nTotal Units: 148\nAverage Unit Size: 885 SF\nCurrent Occupancy: 96.2%\nIn-Place NOI: $853,200\nMarket Cap Rate: 5.4%\nValue Indication: $15,800,000",
+     "textAvailable": true,
+     "textPreview": "EXECUTIVE SUMMARY Westbrook Capital Markets is pleased to provide this Broker Opinion of Value for Parkside at Meridian, a 148- unit garden-style multifamily community located in the Medical Center submarket of San Antonio, Texas. RECOMMENDED LIST PRICE: $15,800,000 ($106,757 per unit) Property Name: Parkside at Meridian Address: 8423 Datapoint Drive, San Antonio, TX 78229 Y ear Built: 2008 Total Units: 148 Average Unit Size: 885 SF Current Occupancy: 96.2% In-Place NOI: $853,200 Market Cap Rate: 5.4% Value Indication: $15,800,000"
+    },
+    {
+     "charCount": 260,
+     "metadata": {
+      "previewSource": "native_text"
+     },
+     "pageNumber": 3,
+     "text": "SALES COMPARABLES\nProperty Y ear Units Price $/Unit CapThe Meridian 2019 120 $12,600,000 $105,000 5.5%Medical Center Apts 2020 156 $16,380,000 $105,000 5.3%Parkside Terrace 2019 134 $14,070,000 $105,000 5.6%Subject (Parkside) 2020 148 $15,800,000 $106,757 5.4%",
+     "textAvailable": true,
+     "textPreview": "SALES COMPARABLES Property Y ear Units Price $/Unit CapThe Meridian 2019 120 $12,600,000 $105,000 5.5%Medical Center Apts 2020 156 $16,380,000 $105,000 5.3%Parkside Terrace 2019 134 $14,070,000 $105,000 5.6%Subject (Parkside) 2020 148 $15,800,000 $106,757 5.4%"
+    }
+   ],
+   "textAvailable": true,
+   "textPreview": "BROKER OPINION OF VALUE Parkside at Meridian 148-Unit Multifamily Community San Antonio, Texas Prepared for: Synthetic Capital Partners Date: June 15, 2020 Prepared by: Westbrook Capital Markets EXECUTIVE SUMMARY Westbrook Capital Markets is pleased to provide this Broker Opinion of Value for Parkside at Meridian, a 148- unit garden-style multifamily community located in the Medical Center submarket of San Antonio, Texas. RECOMMENDED LIST PRICE: $15,800,000 ($106,757 per unit) Property Name: Parkside at Meridian Address: 8423 Datapoint Drive, San Antonio, TX 78229 Y ear Built: 2008 Total Units: 148 Average Unit Size: 885 SF Current Occupancy: 96.2% In-Place NOI: $853,200 Market Cap Rate: 5.4% Value Indication: $15,800,000 SALES COMPARABLES Property Y ear Units Price $/Unit CapThe Meridian 2019 120 $12,600,000 $105,000 5.5%Medical Center Apts 2020 156 $16,380,000 $105,000 5.3%Parkside Terrace 2019 134 $14,070,000 $105,000 5.6%Subject (Parkside) 2020 148 $15,800,000 $106,757 5.4%",
+   "title": null
+  },
+  "kind": "document"
+ },
+ "parserTarget": "pdf",
+ "sha256": "97544f8d89ad7d62ac057365d62a6bf5a16be4868fa0e0d8285f0e26a0aed04b"
+}

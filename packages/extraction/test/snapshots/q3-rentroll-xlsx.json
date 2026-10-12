@@ -1,0 +1,29 @@
+{
+ "fileName": "Q3_RentRoll.xlsx",
+ "normalized": {
+  "document": {
+   "metadata": {
+    "source": "text"
+   },
+   "pageCount": 1,
+   "pages": [
+    {
+     "charCount": 292,
+     "metadata": {
+      "previewSource": "plain_text"
+     },
+     "pageNumber": 1,
+     "text": "Rent Roll Report\nProperty: Westchase Multifamily\nAlternate Name: Oakwood Commons\nDate: Q3 2023\n\nUnit,Type,Rent,Status\n101,1BR,1250,Occupied\n102,1BR,1280,Occupied\n103,2BR,1520,Vacant\n...\n\nThis file tests entity resolution when the property name appears\nin the body but the filename is generic.",
+     "textAvailable": true,
+     "textPreview": "Rent Roll Report Property: Westchase Multifamily Alternate Name: Oakwood Commons Date: Q3 2023 Unit,Type,Rent,Status 101,1BR,1250,Occupied 102,1BR,1280,Occupied 103,2BR,1520,Vacant ... This file tests entity resolution when the property name appears in the body but the filename is generic."
+    }
+   ],
+   "textAvailable": true,
+   "textPreview": "Rent Roll Report Property: Westchase Multifamily Alternate Name: Oakwood Commons Date: Q3 2023 Unit,Type,Rent,Status 101,1BR,1250,Occupied 102,1BR,1280,Occupied 103,2BR,1520,Vacant ... This file tests entity resolution when the property name appears in the body but the filename is generic.",
+   "title": "Rent Roll Report"
+  },
+  "kind": "document"
+ },
+ "parserTarget": "text",
+ "sha256": "2ee612b09f859864eda6e4d2d0a0de03ae32f45ad4811d5aff1cb088aab18ba9"
+}

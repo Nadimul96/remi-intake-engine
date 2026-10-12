@@ -1,4 +1,5 @@
 import type {
+  ArtifactParserTarget,
   AttachmentSummary,
   DocumentPageSummary,
   DocumentSummary,
@@ -7,6 +8,7 @@ import type {
   NormalizedContentKind,
   StructuredTableSummary,
   WorkbookSummary,
+  WorksheetRow,
   WorksheetSummary
 } from "@remi/domain";
 import { createId } from "@remi/domain";
@@ -29,6 +31,7 @@ interface NormalizedDocumentInput {
       charCount: number;
       metadata: JsonMap;
       pageNumber: number;
+      text?: string | null;
       textAvailable: boolean;
       textPreview: string | null;
     }>;
@@ -94,6 +97,7 @@ interface NormalizedWorkbookInput {
       maxRow: number | null;
       metadata: JsonMap;
       name: string;
+      rows?: WorksheetRow[];
       sheetIndex: number;
       tableCount: number;
     }>;
@@ -321,6 +325,7 @@ export async function persistNormalizedContent(
             text_available,
             char_count,
             text_preview,
+            text_content,
             metadata_json
           ) values (
             ${createId("docpage")},
@@ -329,6 +334,7 @@ export async function persistNormalizedContent(
             ${page.textAvailable},
             ${page.charCount},
             ${page.textPreview},
+            ${page.text ?? null},
             ${JSON.stringify(page.metadata)}::jsonb
           )
           on conflict (document_id, page_number)
@@ -336,6 +342,7 @@ export async function persistNormalizedContent(
             text_available = excluded.text_available,
             char_count = excluded.char_count,
             text_preview = excluded.text_preview,
+            text_content = excluded.text_content,
             metadata_json = excluded.metadata_json,
             updated_at = now()
         `;
@@ -564,6 +571,7 @@ export async function persistNormalizedContent(
             max_row,
             max_column,
             table_count,
+            rows_json,
             metadata_json
           ) values (
             ${createId("worksheet")},
@@ -573,6 +581,7 @@ export async function persistNormalizedContent(
             ${worksheet.maxRow},
             ${worksheet.maxColumn},
             ${worksheet.tableCount},
+            ${JSON.stringify(worksheet.rows ?? [])}::jsonb,
             ${JSON.stringify(worksheet.metadata)}::jsonb
           )
           on conflict (workbook_id, sheet_index)
@@ -581,6 +590,7 @@ export async function persistNormalizedContent(
             max_row = excluded.max_row,
             max_column = excluded.max_column,
             table_count = excluded.table_count,
+            rows_json = excluded.rows_json,
             metadata_json = excluded.metadata_json,
             updated_at = now()
           returning id
@@ -640,23 +650,32 @@ export async function persistNormalizedContent(
     }
   });
 
-  return getNormalizedContentRecords(input.artifactBlobId);
+  return getNormalizedContentRecords(input.artifactBlobId, { includeContent: true });
 }
 
-export async function getNormalizedContentRecords(artifactBlobId: string): Promise<NormalizedContentRecords> {
+/**
+ * Load normalized content for an artifact. Full page text and worksheet cells are
+ * only read when `includeContent` is set (extraction needs them; API views do not).
+ */
+export async function getNormalizedContentRecords(
+  artifactBlobId: string,
+  options: { includeContent?: boolean } = {}
+): Promise<NormalizedContentRecords> {
   const sql = getDb();
+  const includeContent = options.includeContent ?? false;
 
   const [document] = await sql<
     {
       id: string;
       page_count: number;
+      source_format: string | null;
       text_available: boolean;
       text_preview: string | null;
       title: string | null;
       updated_at: Date;
     }[]
   >`
-    select id, title, page_count, text_available, text_preview, updated_at
+    select id, title, page_count, text_available, text_preview, updated_at, metadata_json ->> 'source' as source_format
     from documents
     where artifact_blob_id = ${artifactBlobId}
     limit 1
@@ -669,10 +688,17 @@ export async function getNormalizedContentRecords(artifactBlobId: string): Promi
           id: string;
           page_number: number;
           text_available: boolean;
+          text_content: string | null;
           text_preview: string | null;
         }[]
       >`
-        select id, page_number, text_available, char_count, text_preview
+        select
+          id,
+          page_number,
+          text_available,
+          char_count,
+          text_preview,
+          case when ${includeContent} then text_content else null end as text_content
         from document_pages
         where document_id = ${document.id}
         order by page_number asc
@@ -748,7 +774,7 @@ export async function getNormalizedContentRecords(artifactBlobId: string): Promi
             | "pending"
             | "skipped"
             | null;
-          promoted_parser_target: "archive" | "eml" | "none" | "pdf" | "xlsx" | null;
+          promoted_parser_target: ArtifactParserTarget | null;
           promoted_sha256: string | null;
           promoted_summary: string | null;
           promoted_support_tier: "best_effort" | "deferred" | "supported" | "unsupported" | null;
@@ -806,11 +832,19 @@ export async function getNormalizedContentRecords(artifactBlobId: string): Promi
           max_column: number | null;
           max_row: number | null;
           name: string;
+          rows_json: WorksheetRow[] | string | null;
           sheet_index: number;
           table_count: number;
         }[]
       >`
-        select id, sheet_index, name, max_row, max_column, table_count
+        select
+          id,
+          sheet_index,
+          name,
+          max_row,
+          max_column,
+          table_count,
+          case when ${includeContent} then rows_json else null end as rows_json
         from worksheets
         where workbook_id = ${workbook.id}
         order by sheet_index asc
@@ -868,6 +902,7 @@ export async function getNormalizedContentRecords(artifactBlobId: string): Promi
     document: document
       ? {
           id: document.id,
+          sourceFormat: document.source_format === "text" ? "text" : "pdf",
           title: document.title,
           pageCount: document.page_count,
           textAvailable: document.text_available,
@@ -879,7 +914,8 @@ export async function getNormalizedContentRecords(artifactBlobId: string): Promi
       pageNumber: page.page_number,
       textAvailable: page.text_available,
       charCount: page.char_count,
-      textPreview: page.text_preview
+      textPreview: page.text_preview,
+      ...(includeContent ? { text: page.text_content } : {})
     })),
     emailMessages: emailMessages.map((message) => ({
       id: message.id,
@@ -923,9 +959,17 @@ export async function getNormalizedContentRecords(artifactBlobId: string): Promi
       name: worksheet.name,
       maxRow: worksheet.max_row,
       maxColumn: worksheet.max_column,
-      tableCount: worksheet.table_count
+      tableCount: worksheet.table_count,
+      ...(includeContent ? { rows: parseRows(worksheet.rows_json) } : {})
     }))
   };
+}
+
+function parseRows(value: WorksheetRow[] | string | null): WorksheetRow[] {
+  if (!value) {
+    return [];
+  }
+  return typeof value === "string" ? (JSON.parse(value) as WorksheetRow[]) : value;
 }
 
 export async function updateAttachmentPromotion(input: AttachmentPromotionUpdateInput): Promise<void> {

@@ -1,0 +1,29 @@
+{
+ "fileName": "Investment_Memo_FINAL.docx",
+ "normalized": {
+  "document": {
+   "metadata": {
+    "source": "text"
+   },
+   "pageCount": 1,
+   "pages": [
+    {
+     "charCount": 543,
+     "metadata": {
+      "previewSource": "plain_text"
+     },
+     "pageNumber": 1,
+     "text": "INVESTMENT MEMORANDUM\n\nTO: Investment Committee\nFROM: Alex Donovan\nDATE: November 10, 2020\nRE: Houston Multifamily Acquisition\n\nThe subject property is a 232-unit garden-style multifamily community\nlocated in Houston's Westchase submarket.\n\nPROPERTY IDENTIFICATION:\nThe asset known as \"Oakwood Commons at Westchase\" (also referred to\nby brokers as \"the Houston deal\" or \"OC Houston\") is being offered\nat $41.2M.\n\nThis file tests whether REMI can identify that \"Oakwood Commons\"\nis the property when the filename contains no property reference.",
+     "textAvailable": true,
+     "textPreview": "INVESTMENT MEMORANDUM TO: Investment Committee FROM: Alex Donovan DATE: November 10, 2020 RE: Houston Multifamily Acquisition The subject property is a 232-unit garden-style multifamily community located in Houston's Westchase submarket. PROPERTY IDENTIFICATION: The asset known as \"Oakwood Commons at Westchase\" (also referred to by brokers as \"the Houston deal\" or \"OC Houston\") is being offered at $41.2M. This file tests whether REMI can identify that \"Oakwood Commons\" is the property when the filename contains no property reference."
+    }
+   ],
+   "textAvailable": true,
+   "textPreview": "INVESTMENT MEMORANDUM TO: Investment Committee FROM: Alex Donovan DATE: November 10, 2020 RE: Houston Multifamily Acquisition The subject property is a 232-unit garden-style multifamily community located in Houston's Westchase submarket. PROPERTY IDENTIFICATION: The asset known as \"Oakwood Commons at Westchase\" (also referred to by brokers as \"the Houston deal\" or \"OC Houston\") is being offered at $41.2M. This file tests whether REMI can identify that \"Oakwood Commons\" is the property when the filename contains no property reference.",
+   "title": "INVESTMENT MEMORANDUM"
+  },
+  "kind": "document"
+ },
+ "parserTarget": "text",
+ "sha256": "036c66adb69191ba385369808257735722e22492be83a816d975e8d89c936748"
+}

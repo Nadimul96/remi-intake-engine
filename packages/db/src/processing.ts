@@ -1,4 +1,5 @@
 import type {
+  ArtifactParserTarget,
   NormalizedContentKind,
   ParserResultStatus,
   ParserResultSummary,
@@ -50,7 +51,7 @@ export interface UpsertArtifactProcessingStateInput {
   inspectionStatus: "completed" | "failed" | "pending" | "unsupported" | null;
   metadata?: JsonMap;
   normalizationStatus: ParserResultStatus | null;
-  parserTarget: "archive" | "eml" | "none" | "pdf" | "xlsx" | null;
+  parserTarget: ArtifactParserTarget | null;
   reasonCodes: string[];
   reprocessRecommended: boolean;
   retryRecommended: boolean;
@@ -124,7 +125,7 @@ function mapArtifactProcessing(row: {
   inspection_status: "completed" | "failed" | "pending" | "unsupported" | null;
   normalization_status: ParserResultStatus | null;
   original_file_name: string;
-  parser_target: "archive" | "eml" | "none" | "pdf" | "xlsx" | null;
+  parser_target: ArtifactParserTarget | null;
   sha256: string;
   summary: string;
   support_tier: "best_effort" | "deferred" | "supported" | "unsupported" | null;
@@ -269,7 +270,7 @@ export async function getArtifactProcessingSummary(artifactBlobId: string): Prom
       inspection_status: "completed" | "failed" | "pending" | "unsupported" | null;
       normalization_status: ParserResultStatus | null;
       original_file_name: string;
-      parser_target: "archive" | "eml" | "none" | "pdf" | "xlsx" | null;
+      parser_target: ArtifactParserTarget | null;
       sha256: string;
       summary: string;
       support_tier: "best_effort" | "deferred" | "supported" | "unsupported" | null;

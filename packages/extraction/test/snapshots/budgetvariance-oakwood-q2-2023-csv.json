@@ -1,0 +1,552 @@
+{
+ "fileName": "BudgetVariance_Oakwood_Q2_2023.csv",
+ "normalized": {
+  "kind": "workbook",
+  "workbook": {
+   "fileName": "BudgetVariance_Oakwood_Q2_2023.csv",
+   "metadata": {
+    "delimiter": ",",
+    "source": "csv"
+   },
+   "sheetCount": 1,
+   "structuredTables": [],
+   "worksheets": [
+    {
+     "maxColumn": 6,
+     "maxRow": 24,
+     "metadata": {
+      "source": "csv",
+      "truncated": false
+     },
+     "name": "BudgetVariance_Oakwood_Q2_2023",
+     "rows": [
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A1",
+         "text": "Line Item"
+        },
+        {
+         "column": 2,
+         "ref": "B1",
+         "text": "Budget_Q2_2023"
+        },
+        {
+         "column": 3,
+         "ref": "C1",
+         "text": "Actual_Q2_2023"
+        },
+        {
+         "column": 4,
+         "ref": "D1",
+         "text": "Variance"
+        },
+        {
+         "column": 5,
+         "ref": "E1",
+         "text": "Variance_Pct"
+        },
+        {
+         "column": 6,
+         "ref": "F1",
+         "text": "Notes"
+        }
+       ],
+       "rowNumber": 1
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A2",
+         "text": "Management Fee"
+        },
+        {
+         "column": 2,
+         "ref": "B2",
+         "text": "43650"
+        },
+        {
+         "column": 3,
+         "ref": "C2",
+         "text": "43650"
+        },
+        {
+         "column": 4,
+         "ref": "D2",
+         "text": "0"
+        },
+        {
+         "column": 5,
+         "ref": "E2",
+         "text": "0%"
+        },
+        {
+         "column": 6,
+         "ref": "F2",
+         "text": "As budgeted"
+        }
+       ],
+       "rowNumber": 2
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A3",
+         "text": "Payroll & Benefits"
+        },
+        {
+         "column": 2,
+         "ref": "B3",
+         "text": "83000"
+        },
+        {
+         "column": 3,
+         "ref": "C3",
+         "text": "84750"
+        },
+        {
+         "column": 4,
+         "ref": "D3",
+         "text": "1750"
+        },
+        {
+         "column": 5,
+         "ref": "E3",
+         "text": "2.1%"
+        },
+        {
+         "column": 6,
+         "ref": "F3",
+         "text": "Overtime for summer coverage"
+        }
+       ],
+       "rowNumber": 3
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A4",
+         "text": "Repairs & Maintenance"
+        },
+        {
+         "column": 2,
+         "ref": "B4",
+         "text": "22500"
+        },
+        {
+         "column": 3,
+         "ref": "C4",
+         "text": "28900"
+        },
+        {
+         "column": 4,
+         "ref": "D4",
+         "text": "6400"
+        },
+        {
+         "column": 5,
+         "ref": "E4",
+         "text": "28.4%"
+        },
+        {
+         "column": 6,
+         "ref": "F4",
+         "text": "Water main break repairs"
+        }
+       ],
+       "rowNumber": 4
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A5",
+         "text": "Turnover/Make Ready"
+        },
+        {
+         "column": 2,
+         "ref": "B5",
+         "text": "12000"
+        },
+        {
+         "column": 3,
+         "ref": "C5",
+         "text": "15800"
+        },
+        {
+         "column": 4,
+         "ref": "D5",
+         "text": "3800"
+        },
+        {
+         "column": 5,
+         "ref": "E5",
+         "text": "31.7%"
+        },
+        {
+         "column": 6,
+         "ref": "F5",
+         "text": "Higher than expected move-outs"
+        }
+       ],
+       "rowNumber": 5
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A6",
+         "text": "Utilities"
+        },
+        {
+         "column": 2,
+         "ref": "B6",
+         "text": "18000"
+        },
+        {
+         "column": 3,
+         "ref": "C6",
+         "text": "24120"
+        },
+        {
+         "column": 4,
+         "ref": "D6",
+         "text": "6120"
+        },
+        {
+         "column": 5,
+         "ref": "E6",
+         "text": "34.0%"
+        },
+        {
+         "column": 6,
+         "ref": "F6",
+         "text": "WATER MAIN BREAK — SEE NOTE"
+        }
+       ],
+       "rowNumber": 6
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A7",
+         "text": "Insurance"
+        },
+        {
+         "column": 2,
+         "ref": "B7",
+         "text": "26500"
+        },
+        {
+         "column": 3,
+         "ref": "C7",
+         "text": "26500"
+        },
+        {
+         "column": 4,
+         "ref": "D7",
+         "text": "0"
+        },
+        {
+         "column": 5,
+         "ref": "E7",
+         "text": "0%"
+        },
+        {
+         "column": 6,
+         "ref": "F7",
+         "text": "As budgeted"
+        }
+       ],
+       "rowNumber": 7
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A8",
+         "text": "Property Taxes"
+        },
+        {
+         "column": 2,
+         "ref": "B8",
+         "text": "95000"
+        },
+        {
+         "column": 3,
+         "ref": "C8",
+         "text": "95000"
+        },
+        {
+         "column": 4,
+         "ref": "D8",
+         "text": "0"
+        },
+        {
+         "column": 5,
+         "ref": "E8",
+         "text": "0%"
+        },
+        {
+         "column": 6,
+         "ref": "F8",
+         "text": "As budgeted"
+        }
+       ],
+       "rowNumber": 8
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A9",
+         "text": "Marketing/Advertising"
+        },
+        {
+         "column": 2,
+         "ref": "B9",
+         "text": "3500"
+        },
+        {
+         "column": 3,
+         "ref": "C9",
+         "text": "4200"
+        },
+        {
+         "column": 4,
+         "ref": "D9",
+         "text": "700"
+        },
+        {
+         "column": 5,
+         "ref": "E9",
+         "text": "20.0%"
+        },
+        {
+         "column": 6,
+         "ref": "F9",
+         "text": "Increased concessions"
+        }
+       ],
+       "rowNumber": 9
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A10",
+         "text": "Administrative/Office"
+        },
+        {
+         "column": 2,
+         "ref": "B10",
+         "text": "8200"
+        },
+        {
+         "column": 3,
+         "ref": "C10",
+         "text": "8450"
+        },
+        {
+         "column": 4,
+         "ref": "D10",
+         "text": "250"
+        },
+        {
+         "column": 5,
+         "ref": "E10",
+         "text": "3.0%"
+        }
+       ],
+       "rowNumber": 10
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A11",
+         "text": "Contract Services"
+        },
+        {
+         "column": 2,
+         "ref": "B11",
+         "text": "30500"
+        },
+        {
+         "column": 3,
+         "ref": "C11",
+         "text": "31200"
+        },
+        {
+         "column": 4,
+         "ref": "D11",
+         "text": "700"
+        },
+        {
+         "column": 5,
+         "ref": "E11",
+         "text": "2.3%"
+        }
+       ],
+       "rowNumber": 11
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A12",
+         "text": "Landscaping/Grounds"
+        },
+        {
+         "column": 2,
+         "ref": "B12",
+         "text": "14250"
+        },
+        {
+         "column": 3,
+         "ref": "C12",
+         "text": "14800"
+        },
+        {
+         "column": 4,
+         "ref": "D12",
+         "text": "550"
+        },
+        {
+         "column": 5,
+         "ref": "E12",
+         "text": "3.9%"
+        },
+        {
+         "column": 6,
+         "ref": "F12",
+         "text": "Storm cleanup"
+        }
+       ],
+       "rowNumber": 12
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A13",
+         "text": "TOTAL"
+        },
+        {
+         "column": 2,
+         "ref": "B13",
+         "text": "357100"
+        },
+        {
+         "column": 3,
+         "ref": "C13",
+         "text": "393170"
+        },
+        {
+         "column": 4,
+         "ref": "D13",
+         "text": "36070"
+        },
+        {
+         "column": 5,
+         "ref": "E13",
+         "text": "10.1%"
+        }
+       ],
+       "rowNumber": 13
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A15",
+         "text": "NOTE ON WATER MAIN BREAK:"
+        }
+       ],
+       "rowNumber": 15
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A16",
+         "text": "- April 15: Main line rupture in Building C parking lot"
+        }
+       ],
+       "rowNumber": 16
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A17",
+         "text": "- Emergency repair cost: $12,400"
+        }
+       ],
+       "rowNumber": 17
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A18",
+         "text": "- Water bill spike: Additional $4,920 due to leak (3 weeks before detection)"
+        }
+       ],
+       "rowNumber": 18
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A19",
+         "text": "- Total impact: $17,320"
+        }
+       ],
+       "rowNumber": 19
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A21",
+         "text": "This is a one-time event. Budget amendment not required — will absorb in annual variance."
+        }
+       ],
+       "rowNumber": 21
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A23",
+         "text": "Prepared by: Diane Foster"
+        }
+       ],
+       "rowNumber": 23
+      },
+      {
+       "cells": [
+        {
+         "column": 1,
+         "ref": "A24",
+         "text": "Date: July 10, 2023"
+        }
+       ],
+       "rowNumber": 24
+      }
+     ],
+     "sheetIndex": 0,
+     "tableCount": 0
+    }
+   ]
+  }
+ },
+ "parserTarget": "csv",
+ "sha256": "bb35d0d6dd2be9ce82ece1c16d30e81d18366482363852fae7d920275ff466b5"
+}

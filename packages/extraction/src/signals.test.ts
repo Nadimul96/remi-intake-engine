@@ -3,7 +3,7 @@ import test from "node:test";
 
 import type { NormalizedContentSummary, ProvenanceAnchorsSummary } from "@remi/domain";
 
-import { extractEvidenceBackedCandidates } from "./candidate-extraction";
+import { extractEvidenceBackedCandidates } from "./extract";
 
 function buildEmailContext(input: { sender: string; subject?: string }) {
   const normalizedContent: NormalizedContentSummary = {

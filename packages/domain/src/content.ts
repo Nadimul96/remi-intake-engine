@@ -16,7 +16,7 @@ export const attachmentPromotionStatuses = [
   "promotion_failed"
 ] as const;
 const artifactProcessingSupportTiers = ["supported", "best_effort", "deferred", "unsupported"] as const;
-const artifactProcessingParserTargets = ["pdf", "eml", "xlsx", "archive", "none"] as const;
+const artifactProcessingParserTargets = ["pdf", "eml", "xlsx", "csv", "text", "archive", "none"] as const;
 const artifactProcessingInspectionStatuses = ["pending", "completed", "failed", "unsupported"] as const;
 
 export const ParserResultStatusSchema = z.enum(parserResultStatuses);
@@ -150,8 +150,12 @@ export const StructuredTableSchema = z.object({
   updatedAt: z.date()
 });
 
+export const documentSourceFormats = ["pdf", "text"] as const;
+export const DocumentSourceFormatSchema = z.enum(documentSourceFormats);
+
 export const DocumentSummarySchema = z.object({
   id: z.string(),
+  sourceFormat: DocumentSourceFormatSchema,
   title: z.string().nullable(),
   pageCount: z.number().int().nonnegative(),
   textAvailable: z.boolean(),
@@ -163,7 +167,9 @@ export const DocumentPageSummarySchema = z.object({
   pageNumber: z.number().int().positive(),
   textAvailable: z.boolean(),
   charCount: z.number().int().nonnegative(),
-  textPreview: z.string().nullable()
+  textPreview: z.string().nullable(),
+  /** Full line-structured page text; only loaded for extraction. */
+  text: z.string().nullable().optional()
 });
 
 export const EmailThreadSummarySchema = z.object({
@@ -206,13 +212,26 @@ export const WorkbookSummarySchema = z.object({
   sheetCount: z.number().int().nonnegative()
 });
 
+export const WorksheetCellSchema = z.object({
+  column: z.number().int().positive(),
+  ref: z.string().min(2),
+  text: z.string()
+});
+
+export const WorksheetRowSchema = z.object({
+  rowNumber: z.number().int().positive(),
+  cells: z.array(WorksheetCellSchema)
+});
+
 export const WorksheetSummarySchema = z.object({
   id: z.string(),
   sheetIndex: z.number().int().nonnegative(),
   name: z.string(),
   maxRow: z.number().int().nonnegative().nullable(),
   maxColumn: z.number().int().nonnegative().nullable(),
-  tableCount: z.number().int().nonnegative()
+  tableCount: z.number().int().nonnegative(),
+  /** Sparse cell grid with A1 references; only loaded for extraction. */
+  rows: z.array(WorksheetRowSchema).optional()
 });
 
 export const StructuredTableSummarySchema = z.object({
@@ -284,6 +303,7 @@ export type Document = z.infer<typeof DocumentSchema>;
 export type DocumentPage = z.infer<typeof DocumentPageSchema>;
 export type DocumentPageSummary = z.infer<typeof DocumentPageSummarySchema>;
 export type DocumentSummary = z.infer<typeof DocumentSummarySchema>;
+export type DocumentSourceFormat = z.infer<typeof DocumentSourceFormatSchema>;
 export type EmailMessage = z.infer<typeof EmailMessageSchema>;
 export type EmailMessageSummary = z.infer<typeof EmailMessageSummarySchema>;
 export type EmailThread = z.infer<typeof EmailThreadSchema>;
@@ -298,6 +318,8 @@ export type ProvenanceAnchorSummary = z.infer<typeof ProvenanceAnchorSummarySche
 export type ProvenanceAnchorsSummary = z.infer<typeof ProvenanceAnchorsSummarySchema>;
 export type StructuredTable = z.infer<typeof StructuredTableSchema>;
 export type StructuredTableSummary = z.infer<typeof StructuredTableSummarySchema>;
+export type WorksheetCell = z.infer<typeof WorksheetCellSchema>;
+export type WorksheetRow = z.infer<typeof WorksheetRowSchema>;
 export type Workbook = z.infer<typeof WorkbookSchema>;
 export type WorkbookSummary = z.infer<typeof WorkbookSummarySchema>;
 export type Worksheet = z.infer<typeof WorksheetSchema>;

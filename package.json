@@ -5,7 +5,7 @@
   "scripts": {
     "build": "turbo run build",
     "typecheck": "turbo run typecheck",
-    "test": "pnpm --filter @remi/workflows test",
+    "test": "pnpm --filter @remi/extraction test",
     "test:db": "pnpm --filter @remi/db test",
     "dev": "turbo run dev --parallel --filter=@remi/console --filter=@remi/api --filter=@remi/workflows",
     "dev:console": "pnpm --filter @remi/console dev",

@@ -31,7 +31,7 @@ export function loadRootEnv(anchorUrl: string): void {
     currentDir = parentDir;
   }
 
-  dotenv.config(envPath ? { path: envPath } : undefined);
+  dotenv.config({ path: envPath ?? undefined, quiet: true });
   loaded = true;
 }
 

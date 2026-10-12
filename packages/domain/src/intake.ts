@@ -25,7 +25,7 @@ export const derivedArtifactKinds = [
   "candidate_citation_packets"
 ] as const;
 export const artifactSupportTiers = ["supported", "best_effort", "deferred", "unsupported"] as const;
-export const artifactParserTargets = ["pdf", "eml", "xlsx", "archive", "none"] as const;
+export const artifactParserTargets = ["pdf", "eml", "xlsx", "csv", "text", "archive", "none"] as const;
 export const artifactInspectionStatuses = ["pending", "completed", "failed", "unsupported"] as const;
 export const artifactFileClassifications = ["pdf", "email", "spreadsheet", "archive", "document", "unknown"] as const;
 export const reviewQueues = ["intake", "resolution", "output_approval"] as const;

@@ -25,7 +25,6 @@ import {
   markIngestionProcessing,
   markInspectionStarted,
   markNormalizationStarted,
-  type ProvenanceAnchorInput,
   persistNormalizedContent,
   persistProvenanceAnchors,
   recordAnchoringFailure,
@@ -54,10 +53,9 @@ import type {
   ParserResultStatus,
   ParserWarning
 } from "@remi/domain";
+import { buildProvenanceAnchors, extractEvidenceBackedCandidates } from "@remi/extraction";
 import { fileTypeFromBuffer } from "file-type";
-
 import { workflowConfig } from "../config";
-import { extractEvidenceBackedCandidates } from "../lib/candidate-extraction";
 
 const s3Client = new S3Client({
   credentials: {
@@ -150,33 +148,6 @@ interface NormalizeServiceResponse {
   normalized_content: NormalizedContentInput;
 }
 
-function columnNumberToLetters(value: number | null): string | null {
-  if (!value || value <= 0) {
-    return null;
-  }
-
-  let result = "";
-  let remaining = value;
-
-  while (remaining > 0) {
-    const current = (remaining - 1) % 26;
-    result = String.fromCharCode(65 + current) + result;
-    remaining = Math.floor((remaining - 1) / 26);
-  }
-
-  return result;
-}
-
-function buildWorksheetRangeRef(input: { maxColumn: number | null; maxRow: number | null }): string | null {
-  const endColumn = columnNumberToLetters(input.maxColumn);
-
-  if (!endColumn || !input.maxRow || input.maxRow <= 0) {
-    return null;
-  }
-
-  return `A1:${endColumn}${input.maxRow}`;
-}
-
 function contentKindLabel(value: NormalizedContentKind | null): string {
   switch (value) {
     case "document":
@@ -191,7 +162,7 @@ function contentKindLabel(value: NormalizedContentKind | null): string {
 }
 
 function buildParserWarnings(input: {
-  parserTarget: Extract<ArtifactParserTarget, "eml" | "pdf" | "xlsx">;
+  parserTarget: SupportedParserTarget;
   supportTier: "best_effort" | "deferred" | "supported" | "unsupported" | null;
 }): ParserWarning[] {
   const warnings: ParserWarning[] = [];
@@ -206,201 +177,12 @@ function buildParserWarnings(input: {
   return warnings;
 }
 
-function buildPdfAnchors(normalizedContent: NormalizedContentSummary): ProvenanceAnchorInput[] {
-  return normalizedContent.documentPages.flatMap((page) => {
-    const anchors: ProvenanceAnchorInput[] = [
-      {
-        ownerType: "document_page",
-        ownerId: page.id,
-        anchorKind: "pdf_page",
-        anchorKey: `page:${page.pageNumber}`,
-        title: `Page ${page.pageNumber}`,
-        summary: page.textAvailable
-          ? `Page ${page.pageNumber} with ${page.charCount} characters of native text.`
-          : `Page ${page.pageNumber} without native text.`,
-        locator: {
-          pageNumber: page.pageNumber
-        },
-        metadata: {
-          charCount: page.charCount,
-          textAvailable: page.textAvailable
-        }
-      }
-    ];
-
-    if (page.textPreview) {
-      anchors.push({
-        ownerType: "document_page",
-        ownerId: page.id,
-        anchorKind: "pdf_text_section",
-        anchorKey: `page:${page.pageNumber}:section:1`,
-        title: `Page ${page.pageNumber} Text Preview`,
-        summary: page.textPreview,
-        locator: {
-          pageNumber: page.pageNumber,
-          sectionIndex: 1
-        },
-        metadata: {
-          previewLength: page.textPreview.length
-        }
-      });
-    }
-
-    return anchors;
-  });
-}
-
-function buildEmailAnchors(normalizedContent: NormalizedContentSummary): ProvenanceAnchorInput[] {
-  const anchors: ProvenanceAnchorInput[] = [];
-
-  if (normalizedContent.emailThread) {
-    anchors.push({
-      ownerType: "email_thread",
-      ownerId: normalizedContent.emailThread.id,
-      anchorKind: "email_thread",
-      anchorKey: normalizedContent.emailThread.threadKey,
-      title: normalizedContent.emailThread.subject ?? "Email Thread",
-      summary: `${normalizedContent.emailThread.messageCount} message(s) in thread.`,
-      locator: {
-        threadKey: normalizedContent.emailThread.threadKey
-      },
-      metadata: {
-        messageCount: normalizedContent.emailThread.messageCount
-      }
-    });
-  }
-
-  for (const message of normalizedContent.emailMessages) {
-    anchors.push({
-      ownerType: "email_message",
-      ownerId: message.id,
-      anchorKind: "email_header",
-      anchorKey: `message:${message.position}:headers`,
-      title: message.subject ?? `Email Message ${message.position + 1}`,
-      summary: `Headers for message ${message.position + 1}.`,
-      locator: {
-        messagePosition: message.position,
-        sentAt: message.sentAt,
-        sentAtRaw: message.sentAtRaw
-      },
-      metadata: {
-        attachmentCount: message.attachmentCount,
-        cc: message.cc,
-        from: message.sender,
-        messageIdHeader: message.messageIdHeader,
-        to: message.to
-      }
-    });
-
-    if (message.bodyPreview) {
-      anchors.push({
-        ownerType: "email_message",
-        ownerId: message.id,
-        anchorKind: "email_body",
-        anchorKey: `message:${message.position}:body`,
-        title: `Message ${message.position + 1} Body`,
-        summary: message.bodyPreview,
-        locator: {
-          bodyPart: "text/plain",
-          messagePosition: message.position
-        },
-        metadata: {
-          previewLength: message.bodyPreview.length
-        }
-      });
-    }
-  }
-
-  for (const attachment of normalizedContent.attachments) {
-    anchors.push({
-      ownerType: "attachment",
-      ownerId: attachment.id,
-      anchorKind: "email_attachment",
-      anchorKey: `attachment:${attachment.partIndex}`,
-      title: attachment.fileName ?? `Attachment ${attachment.partIndex + 1}`,
-      summary: `Attachment ${attachment.partIndex + 1}${attachment.contentType ? ` (${attachment.contentType})` : ""}.`,
-      locator: {
-        partIndex: attachment.partIndex
-      },
-      metadata: {
-        contentType: attachment.contentType,
-        promotedArtifactBlobId: attachment.promotedArtifactBlobId,
-        promotionStatus: attachment.promotionStatus,
-        sha256: attachment.sha256,
-        sizeBytes: attachment.sizeBytes
-      }
-    });
-  }
-
-  return anchors;
-}
-
-function buildWorkbookAnchors(normalizedContent: NormalizedContentSummary): ProvenanceAnchorInput[] {
-  const anchors: ProvenanceAnchorInput[] = normalizedContent.worksheets.map((worksheet) => ({
-    ownerType: "worksheet",
-    ownerId: worksheet.id,
-    anchorKind: "worksheet_range",
-    anchorKey: `sheet:${worksheet.sheetIndex}`,
-    title: worksheet.name,
-    summary:
-      buildWorksheetRangeRef({
-        maxColumn: worksheet.maxColumn,
-        maxRow: worksheet.maxRow
-      }) ?? `Worksheet ${worksheet.name}`,
-    locator: {
-      rangeRef: buildWorksheetRangeRef({
-        maxColumn: worksheet.maxColumn,
-        maxRow: worksheet.maxRow
-      }),
-      sheetIndex: worksheet.sheetIndex,
-      sheetName: worksheet.name
-    },
-    metadata: {
-      maxColumn: worksheet.maxColumn,
-      maxRow: worksheet.maxRow,
-      tableCount: worksheet.tableCount
-    }
-  }));
-
-  for (const table of normalizedContent.structuredTables) {
-    anchors.push({
-      ownerType: "structured_table",
-      ownerId: table.id,
-      anchorKind: "structured_table_range",
-      anchorKey: table.tableKey,
-      title: table.name,
-      summary: table.ref ?? table.name,
-      locator: {
-        rangeRef: table.ref
-      },
-      metadata: {
-        headerRowCount: table.headerRowCount,
-        tableKey: table.tableKey
-      }
-    });
-  }
-
-  return anchors;
-}
-
-function buildProvenanceAnchors(normalizedContent: NormalizedContentSummary): ProvenanceAnchorInput[] {
-  switch (normalizedContent.contentKind) {
-    case "document":
-      return buildPdfAnchors(normalizedContent);
-    case "email":
-      return buildEmailAnchors(normalizedContent);
-    case "workbook":
-      return buildWorkbookAnchors(normalizedContent);
-    default:
-      return [];
-  }
-}
-
 function groupAnchorCounts(items: { anchorKind: string; count: number }[]): Record<string, number> {
   return Object.fromEntries(items.map((item) => [item.anchorKind, item.count]));
 }
 
-type SupportedParserTarget = Extract<ArtifactParserTarget, "eml" | "pdf" | "xlsx">;
+type SupportedParserTarget = Extract<ArtifactParserTarget, "csv" | "eml" | "pdf" | "text" | "xlsx">;
+const NORMALIZABLE_TARGETS: ReadonlySet<ArtifactParserTarget> = new Set(["csv", "eml", "pdf", "text", "xlsx"]);
 
 type BlobInspectionResult = {
   derivedArtifacts: {
@@ -447,7 +229,7 @@ type BlobCandidateExtractionResult = {
 };
 
 function supportsNormalizationTarget(target: ArtifactParserTarget): target is SupportedParserTarget {
-  return target === "pdf" || target === "eml" || target === "xlsx";
+  return NORMALIZABLE_TARGETS.has(target);
 }
 
 function emptyNormalizedContent(): NormalizedContentSummary {
@@ -1068,7 +850,7 @@ async function processArtifactBlobInternal(input: {
       (reusableState.hasNormalizedContent && reusableState.hasAnchors))
   ) {
     const normalizedContent = reusableState.hasNormalizedContent
-      ? await getNormalizedContentRecords(input.artifactBlobId)
+      ? await getNormalizedContentRecords(input.artifactBlobId, { includeContent: true })
       : emptyNormalizedContent();
     const provenanceAnchors = reusableState.hasAnchors
       ? await getProvenanceAnchorsSummary(input.artifactBlobId)
@@ -1202,7 +984,7 @@ async function processArtifactBlobInternal(input: {
         });
         attachmentWarnings = outcome.warnings;
         reprocessRecommended = outcome.promotionFailedCount > 0 || outcome.downstreamFailedCount > 0;
-        normalizedContent = await getNormalizedContentRecords(input.artifactBlobId);
+        normalizedContent = await getNormalizedContentRecords(input.artifactBlobId, { includeContent: true });
       }
     }
 
@@ -1404,7 +1186,7 @@ export async function inspectUploadedArtifact(input: {
     version: number;
   }[];
   parserEligible: boolean;
-  parserTarget: "archive" | "eml" | "none" | "pdf" | "xlsx";
+  parserTarget: ArtifactParserTarget;
   supportTier: "best_effort" | "deferred" | "supported" | "unsupported" | null;
 }> {
   await markInspectionStarted({
@@ -1487,7 +1269,7 @@ export async function normalizeUploadedArtifact(input: {
   fileName: string;
   ingestionRunId: string;
   parserEligible: boolean;
-  parserTarget: "archive" | "eml" | "none" | "pdf" | "xlsx";
+  parserTarget: ArtifactParserTarget;
   sourceItemId: string;
   storageKey: string;
   supportTier: "best_effort" | "deferred" | "supported" | "unsupported" | null;
@@ -1500,7 +1282,7 @@ export async function normalizeUploadedArtifact(input: {
   const reusableState = await getBlobReuseState(input.artifactBlobId);
   const existingProcessing = await getArtifactProcessingSummary(input.artifactBlobId);
 
-  if (!input.parserEligible || !["pdf", "eml", "xlsx"].includes(input.parserTarget)) {
+  if (!input.parserEligible || !supportsNormalizationTarget(input.parserTarget)) {
     const status = input.supportTier === "deferred" || input.supportTier === "unsupported" ? "deferred" : "skipped";
     const summary =
       status === "deferred"
@@ -1598,10 +1380,10 @@ export async function normalizeUploadedArtifact(input: {
   });
 
   try {
-    const parserTarget = input.parserTarget as Extract<ArtifactParserTarget, "eml" | "pdf" | "xlsx">;
+    const parserTarget = input.parserTarget as SupportedParserTarget;
     let normalizedContent =
       existingProcessing?.normalizationStatus && reusableState.hasNormalizedContent
-        ? await getNormalizedContentRecords(input.artifactBlobId)
+        ? await getNormalizedContentRecords(input.artifactBlobId, { includeContent: true })
         : null;
     let contentKind = existingProcessing?.contentKind ?? reusableState.contentKind;
     let normalizedPayload: NormalizeServiceResponse | null = null;
@@ -1650,7 +1432,7 @@ export async function normalizeUploadedArtifact(input: {
         tenantId: input.tenantId,
         visitedArtifactBlobIds: [input.artifactBlobId]
       });
-      normalizedContent = await getNormalizedContentRecords(input.artifactBlobId);
+      normalizedContent = await getNormalizedContentRecords(input.artifactBlobId, { includeContent: true });
     }
 
     const warnings = [
@@ -1836,7 +1618,7 @@ export async function extractCandidatesForUploadedArtifact(input: {
   });
 
   try {
-    const normalizedContent = await getNormalizedContentRecords(input.artifactBlobId);
+    const normalizedContent = await getNormalizedContentRecords(input.artifactBlobId, { includeContent: true });
     const provenanceAnchors = await getProvenanceAnchorsSummary(input.artifactBlobId);
     const candidateExtraction = await extractCandidatesForBlobInternal({
       artifactBlobId: input.artifactBlobId,

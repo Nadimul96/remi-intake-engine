@@ -6,7 +6,7 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": ["**", "!**/next-env.d.ts", "!fixtures", "!tests/fixtures", "!**/*.snapshot.json"]
+    "includes": ["**", "!**/next-env.d.ts", "!fixtures", "!tests/fixtures", "!packages/extraction/test/snapshots/**"]
   },
   "formatter": {
     "enabled": true,

@@ -1,0 +1,29 @@
+{
+ "fileName": "Thread_06_Oakwood_IC_Expense_Debate.txt",
+ "normalized": {
+  "document": {
+   "metadata": {
+    "source": "text"
+   },
+   "pageCount": 1,
+   "pages": [
+    {
+     "charCount": 2204,
+     "metadata": {
+      "previewSource": "plain_text"
+     },
+     "pageNumber": 1,
+     "text": "From: Diane Foster <diane.foster@syntheticcapital.com>\nTo: Nadi <mp@syntheticcapital.com>, Sarah Chen <sarah.chen@syntheticcapital.com>\nDate: November 8, 2020\nSubject: Oakwood — Final IC Memo Version\n\nNadi, Sarah —\n\nJust confirmed with Priya that v2 is the final model for the IC memo. Alex's v3 is being treated as an upside sensitivity case only.\n\n**Why v2 was chosen:**\n1. NOI normalization ($180K insurance removal) — Priya is correct, this is standard practice\n2. Management fee ($780 vs $850) — We have this negotiated rate in writing from Greenfield\n3. Rent growth (2.5% base) — More defensible for LP reporting than Alex's 3.5%\n\n**Alex's frustration:**\nHe's pushing back that we're \"leaving money on the table.\" He may be right on rent growth — Westchase is hot right now — but Marcus made the call and we should move forward.\n\n**IC memo:**\nI've reviewed the draft. It references v2 throughout. The only place Alex's numbers appear is in the sensitivity table as \"Upside Case: 18.2% IRR (Alex v3 assumptions)\"\n\n**Recommendation:**\nApprove as drafted. Alex has been heard but overruled. Let's not reopen this debate at IC.\n\nDiane\n\n---\n\nFrom: Nadi <mp@syntheticcapital.com>\nTo: Diane Foster <diane.foster@syntheticcapital.com>, Sarah Chen <sarah.chen@syntheticcapital.com>, Priya Nair <priya.nair@syntheticcapital.com>, Alex Donovan <alex.donovan@syntheticcapital.com>\nDate: November 9, 2020\nSubject: Re: Oakwood — Final IC Memo Version\n\nTeam —\n\nDecision made. We're using Priya v2 as the base case for IC approval.\n\n**Rationale:**\n- Conservative underwriting protects LPs and our reputation\n- Alex's v3 is valuable as an upside case and will be presented as such\n- The $180K normalization is the right call — non-recurring income doesn't support cap rate\n\n**For Alex:**\nYour analysis was thorough and your market data was helpful. The 3.5% rent growth sensitivity will be in the memo. But the base case must be defensible to our investment committee and LPs.\n\n**Moving forward:**\n- Priya: Finalize IC memo with v2 as base, v3 as upside\n- Sarah: Prepare capital call documentation\n- Alex: Move on to sourcing the next deal — there will be many more\n\nIC meeting is Wednesday. Let's be aligned.\n\nNadi",
+     "textAvailable": true,
+     "textPreview": "From: Diane Foster <diane.foster@syntheticcapital.com> To: Nadi <mp@syntheticcapital.com>, Sarah Chen <sarah.chen@syntheticcapital.com> Date: November 8, 2020 Subject: Oakwood — Final IC Memo Version Nadi, Sarah — Just confirmed with Priya that v2 is the final model for the IC memo. Alex's v3 is being treated as an upside sensitivity case only. **Why v2 was chosen:** 1. NOI normalization ($180K insurance removal) — Priya is correct, this is standard practice 2. Management fee ($780 vs $850) — We have this negotiated rate in writing from Greenfield 3. Rent growth (2.5% base) — More defensible for LP reporting than Alex's 3.5% **Alex's frustration:** He's pushing back that we're \"leaving money on the table.\" He may be right on rent growth — Westchase is hot right now — but Marcus made the call and we should move forward. **IC memo:** I've reviewed the draft. It references v2 throughout. The only place Alex's numbers appear is in the sensitivity table as \"Upside Case: 18.2% IRR (Alex v3 assumptions)\" **Recommendation:** Approve as drafted. Alex has been heard but overruled. Let's not reopen this debate at IC. Diane --- From: Nadi <mp@syntheticcapital.com> To: Diane Foster <diane.foste"
+    }
+   ],
+   "textAvailable": true,
+   "textPreview": "From: Diane Foster <diane.foster@syntheticcapital.com> To: Nadi <mp@syntheticcapital.com>, Sarah Chen <sarah.chen@syntheticcapital.com> Date: November 8, 2020 Subject: Oakwood — Final IC Memo Version Nadi, Sarah — Just confirmed with Priya that v2 is the final model for the IC memo. Alex's v3 is being treated as an upside sensitivity case only. **Why v2 was chosen:** 1. NOI normalization ($180K insurance removal) — Priya is correct, this is standard practice 2. Management fee ($780 vs $850) — We have this negotiated rate in writing from Greenfield 3. Rent growth (2.5% base) — More defensible for LP reporting than Alex's 3.5% **Alex's frustration:** He's pushing back that we're \"leaving money on the table.\" He may be right on rent growth — Westchase is hot right now — but Marcus made the call and we should move forward. **IC memo:** I've reviewed the draft. It references v2 throughout. The only place Alex's numbers appear is in the sensitivity table as \"Upside Case: 18.2% IRR (Alex v3 assumptions)\" **Recommendation:** Approve as drafted. Alex has been heard but overruled. Let's not reopen this debate at IC. Diane --- From: Nadi <mp@syntheticcapital.com> To: Diane Foster <diane.foste",
+   "title": "Oakwood — Final IC Memo Version"
+  },
+  "kind": "document"
+ },
+ "parserTarget": "text",
+ "sha256": "e61369132dd669bf3519808a53e9a7c25e31deec7d2b6c0f3cb91db882526e05"
+}

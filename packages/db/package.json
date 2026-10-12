@@ -8,7 +8,7 @@
   },
   "scripts": {
     "migrate": "tsx src/migrate.ts",
-    "test": "node --import tsx --test --test-concurrency=1 src/entities.test.ts src/relationships.test.ts src/screening.test.ts",
+    "test": "node --import tsx --test --test-concurrency=1 \"src/**/*.test.ts\"",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
