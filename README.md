@@ -5,6 +5,7 @@ Provenance-tracked document intake for real-estate investment teams: every numbe
 ![Conflicts view: two T-12s disagree on landscaping, with the cited cells one click away](docs/media/conflicts.webp)
 
 [![CI](https://github.com/Nadimul96/remi-intake-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/Nadimul96/remi-intake-engine/actions/workflows/ci.yml)
+[![Compose end-to-end](https://github.com/Nadimul96/remi-intake-engine/actions/workflows/e2e.yml/badge.svg)](https://github.com/Nadimul96/remi-intake-engine/actions/workflows/e2e.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 ![Node 24](https://img.shields.io/badge/node-24-339933?logo=node.js&logoColor=white)
 ![Python 3.12](https://img.shields.io/badge/python-3.12-3776AB?logo=python&logoColor=white)
@@ -28,9 +29,11 @@ git clone https://github.com/Nadimul96/remi-intake-engine.git && cd remi-intake-
 docker compose up --build
 ```
 
-Then open <http://localhost:3000>. Compose starts Postgres, a Temporal dev server, S3-compatible storage, the extractor, API, worker and console; applies migrations; and seeds the demo by pushing 22 files from [`fixtures/synthetic-capital/`](fixtures/synthetic-capital/) through the real pipeline (about a minute). `pnpm doctor` tells you what is missing if anything fails to start. Temporal's UI is at <http://localhost:8233>.
+Then open <http://localhost:3000>. Compose starts Postgres, a Temporal dev server, S3-compatible storage, the extractor, API, worker and console; applies migrations; and seeds the demo by pushing 22 files from [`fixtures/synthetic-capital/`](fixtures/synthetic-capital/) through the real pipeline. `pnpm doctor` tells you what is missing if anything fails to start. Temporal's UI is at <http://localhost:8233>. Stopping and starting again (`docker compose down`, then the same command) keeps the data and does not seed twice.
 
-**Optional AI-assisted extraction:** get a free key at [Google AI Studio](https://aistudio.google.com/apikey), then `MODEL_EXTRACTION=gemini GEMINI_API_KEY=... docker compose up --build`. For a local model: `MODEL_EXTRACTION=openai OPENAI_COMPATIBLE_BASE_URL=http://host.docker.internal:11434/v1 OPENAI_COMPATIBLE_MODEL=llama3.2`.
+This exact sequence runs in CI on a clean runner on every push and pull request ([`e2e.yml`](.github/workflows/e2e.yml)): it waits for every service to report healthy and the seed to exit cleanly, then, through the console's port alone, checks that all 22 files completed, that exactly the 16 expected conflicts exist, that C1's two citations resolve to their cells, and that the main pages and their assets load; then it restarts the stack, checks again, and uploads files the way the browser does (presigned PUT to storage, CORS included).
+
+**Optional AI-assisted extraction (bring your own key):** get a free key at [Google AI Studio](https://aistudio.google.com/apikey), then `MODEL_EXTRACTION=gemini GEMINI_API_KEY=... docker compose up --build`. For a local model: `MODEL_EXTRACTION=openai OPENAI_COMPATIBLE_BASE_URL=http://host.docker.internal:11434/v1 OPENAI_COMPATIBLE_MODEL=llama3.2`. If the provider rejects the key, the worker logs one message saying which variable to fix and carries on with rule-based extraction; CI checks this with a placeholder key.
 
 <details>
 <summary>Without Docker for the app (local development)</summary>
@@ -85,7 +88,7 @@ flowchart LR
 
 ## What the detector finds in the demo data
 
-The dataset plants seven conflicts ([rubric](fixtures/synthetic-capital/README.md#designed-conflicts-evaluation-rubric)). [`fixtures.test.ts`](packages/extraction/src/fixtures.test.ts) runs extraction and detection over the extractor's real output for the demo set and asserts each one; the same 16 conflicts appear when the files go through the full pipeline.
+The dataset plants seven conflicts ([rubric](fixtures/synthetic-capital/README.md#designed-conflicts-evaluation-rubric)). [`fixtures.test.ts`](packages/extraction/src/fixtures.test.ts) runs extraction and detection over the extractor's real output for the demo set and asserts each one; the [compose end-to-end job](.github/workflows/e2e.yml) checks that the same 16 conflicts, listed in [`demo-set.json`](fixtures/demo-set.json), appear when the files go through the full pipeline.
 
 | ID | Rubric item | Result |
 |----|-------------|--------|
@@ -132,6 +135,7 @@ pnpm test            # extraction, conflict detection and model grounding (offli
 pnpm test:db         # DB-backed tests; needs a migrated Postgres (DATABASE_URL)
 pnpm build           # console production build
 pnpm doctor          # preflight for both start paths
+scripts/wait-for-stack.sh && node scripts/verify-stack.mts   # the CI end-to-end checks, against a running stack
 cd services/extractor && uv run ruff check . && uv run pytest
 ```
 
@@ -146,7 +150,8 @@ The extraction tests run against committed snapshots of the extractor's output (
 - Scanned PDFs are classified as `best_effort`; there is no OCR. `.docx`, `.pptx` and real ZIP archives are deferred.
 - Review lists are not paginated, which is fine for the demo's few hundred candidates and would not be for a real data room.
 - The relationship page is populated only by broker emails in `.eml` form; the demo set has none, so it starts empty.
-- Verified for this version: install, Biome, `tsc`, the console production build, unit tests (29 TS plus one opt-in live test, 43 Python), DB tests on Postgres 18, and the full pipeline (API, Temporal worker, extractor, Postgres 18, S3-compatible storage) run natively with the same Temporal CLI and RustFS releases the compose file uses. `docker compose up` itself was validated with `docker compose config` but not run end to end on the development machine; CI builds every image.
+- Temporal runs as the single-process dev server with in-memory state, so workflow history does not survive a restart; the pipeline's results live in Postgres and do.
+- Verified for this version: install, Biome, `tsc`, the console production build, unit tests (33 TS plus one opt-in live test, 43 Python), DB tests on Postgres 18, and `docker compose up --build` end to end on a clean GitHub-hosted Ubuntu runner on every push and pull request ([`e2e.yml`](.github/workflows/e2e.yml)). The stack has not been run under Docker Desktop on macOS or Windows.
 
 ## License
 
