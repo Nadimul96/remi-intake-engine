@@ -63,6 +63,30 @@ export function modelConfigFromEnv(env: Record<string, string | undefined>): Mod
   throw new Error(`Unknown MODEL_EXTRACTION value "${mode}"; use off, gemini or openai.`);
 }
 
+/** The provider refused the credentials. Retrying cannot help, so callers stop asking. */
+export class ModelAuthError extends Error {
+  override name = "ModelAuthError";
+}
+
+/** Gemini answers a bad key with HTTP 400 (API_KEY_INVALID) rather than 401. */
+function isAuthFailure(status: number, body: string): boolean {
+  return status === 401 || status === 403 || (status === 400 && /API_KEY_INVALID|API key not valid/i.test(body));
+}
+
+/** The provider's own error message when the body is a JSON error envelope, else the raw text. */
+function providerMessage(body: string): string {
+  try {
+    const parsed = JSON.parse(body) as { error?: { message?: unknown } | string };
+    const message = typeof parsed.error === "string" ? parsed.error : parsed.error?.message;
+    if (typeof message === "string" && message.trim()) {
+      return message.trim().slice(0, 300);
+    }
+  } catch {
+    // Not JSON; fall through to the raw text.
+  }
+  return body.slice(0, 300);
+}
+
 async function postJson(
   url: string,
   headers: Record<string, string>,
@@ -76,7 +100,12 @@ async function postJson(
     signal: AbortSignal.timeout(timeoutMs)
   });
   if (!response.ok) {
-    throw new Error(`Model request failed with HTTP ${response.status}: ${(await response.text()).slice(0, 300)}`);
+    const text = await response.text();
+    const detail = `HTTP ${response.status}: ${providerMessage(text)}`;
+    if (isAuthFailure(response.status, text)) {
+      throw new ModelAuthError(detail);
+    }
+    throw new Error(`Model request failed with ${detail}`);
   }
   return response.json();
 }
@@ -123,6 +152,46 @@ export function openAICompatibleClient(config: ModelConfig): ModelClient {
   };
 }
 
-export function createModelClient(config: ModelConfig): ModelClient {
-  return config.provider === "gemini" ? geminiClient(config) : openAICompatibleClient(config);
+const KEY_HELP: Record<ModelConfig["provider"], string> = {
+  gemini: "Check GEMINI_API_KEY (free key: https://aistudio.google.com/apikey)",
+  openai: "Check OPENAI_COMPATIBLE_API_KEY and OPENAI_COMPATIBLE_BASE_URL"
+};
+
+/**
+ * After the provider rejects the key once, log one actionable message and fail every later
+ * request immediately. Extraction then carries on with rules alone instead of sending a
+ * doomed request for every chunk of every document.
+ */
+export function withAuthCutoff(
+  client: ModelClient,
+  provider: ModelConfig["provider"],
+  log: (message: string) => void = console.error
+): ModelClient {
+  let rejection: ModelAuthError | null = null;
+  return {
+    label: client.label,
+    async complete(prompt) {
+      if (rejection) {
+        throw rejection;
+      }
+      try {
+        return await client.complete(prompt);
+      } catch (error) {
+        if (error instanceof ModelAuthError) {
+          rejection = new ModelAuthError(`${provider} rejected the API key (${error.message})`);
+          log(
+            `Model-assisted extraction disabled: ${rejection.message}. ${KEY_HELP[provider]}, or set ` +
+              "MODEL_EXTRACTION=off. Continuing with rule-based extraction only."
+          );
+          throw rejection;
+        }
+        throw error;
+      }
+    }
+  };
+}
+
+export function createModelClient(config: ModelConfig, log?: (message: string) => void): ModelClient {
+  const client = config.provider === "gemini" ? geminiClient(config) : openAICompatibleClient(config);
+  return withAuthCutoff(client, config.provider, log);
 }
