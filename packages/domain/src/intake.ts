@@ -244,6 +244,8 @@ export const RegisterIntakeResponseSchema = z.object({
 
 export const IntakeRegistrationWorkflowInputSchema = z.object({
   actorId: z.string(),
+  /** The name the uploader registered; preferred over object-store metadata, which not every S3 server keeps. */
+  fileName: z.string().min(1).optional(),
   ingestionRunId: z.string(),
   sourceItemId: z.string(),
   tenantId: z.string(),

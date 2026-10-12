@@ -61,6 +61,7 @@ export const intakeRoutes: FastifyPluginAsync = async (app) => {
         args: [
           IntakeRegistrationWorkflowInputSchema.parse({
             actorId: request.remiActor.id,
+            fileName: body.fileName,
             ingestionRunId: registration.ingestionRunId,
             sourceItemId: registration.sourceItemId,
             tenantId: apiConfig.tenantId,

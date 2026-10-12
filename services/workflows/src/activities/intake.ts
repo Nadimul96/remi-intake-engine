@@ -67,6 +67,18 @@ const s3Client = new S3Client({
   region: workflowConfig.s3.region
 });
 
+/** S3 metadata is ASCII-only, so file names are stored URI-encoded. */
+function decodeMetadataValue(value: string | undefined): string | null {
+  if (!value) {
+    return null;
+  }
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value;
+  }
+}
+
 async function readObjectBuffer(key: string): Promise<Buffer> {
   const response = await s3Client.send(
     new GetObjectCommand({
@@ -94,7 +106,7 @@ async function getObjectMetadata(
 
   return {
     contentType: response.ContentType ?? null,
-    originalFileName: response.Metadata?.["original-file-name"] ?? null
+    originalFileName: decodeMetadataValue(response.Metadata?.["original-file-name"])
   };
 }
 
@@ -287,7 +299,7 @@ async function writeBlobObject(input: {
       ContentType: input.contentType ?? "application/octet-stream",
       Key: input.key,
       Metadata: {
-        "original-file-name": input.fileName
+        "original-file-name": encodeURIComponent(input.fileName)
       }
     })
   );
@@ -1141,7 +1153,7 @@ export async function promoteUploadedArtifact(input: {
 
   const artifactBlob = await upsertArtifactBlob({
     contentType: detected?.mime ?? stagedMetadata.contentType,
-    fileName: stagedMetadata.originalFileName ?? input.uploadKey.split("/").at(-1) ?? input.uploadKey,
+    fileName: input.fileName ?? stagedMetadata.originalFileName ?? input.uploadKey.split("/").at(-1) ?? input.uploadKey,
     sha256,
     sizeBytes: buffer.byteLength,
     storageBucket: workflowConfig.bucket,
