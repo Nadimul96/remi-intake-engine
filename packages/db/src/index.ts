@@ -6,6 +6,7 @@ export * from "./entities";
 export * from "./env";
 export * from "./intake";
 export * from "./processing";
+export * from "./provenance";
 export * from "./relationships";
 export * from "./reviews";
 export * from "./screening";

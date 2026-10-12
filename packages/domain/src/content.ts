@@ -324,3 +324,17 @@ export type Workbook = z.infer<typeof WorkbookSchema>;
 export type WorkbookSummary = z.infer<typeof WorkbookSummarySchema>;
 export type Worksheet = z.infer<typeof WorksheetSchema>;
 export type WorksheetSummary = z.infer<typeof WorksheetSummarySchema>;
+
+/** One cited anchor with the surrounding source a reviewer needs to judge it. */
+export const ProvenanceViewSchema = z.object({
+  anchor: ProvenanceAnchorSummarySchema,
+  artifact: z.object({
+    id: z.string(),
+    fileName: z.string(),
+    contentType: z.string().nullable()
+  }),
+  /** Neighbouring lines, or the header row plus nearby rows, ordered as in the source. */
+  context: z.array(ProvenanceAnchorSummarySchema)
+});
+
+export type ProvenanceView = z.infer<typeof ProvenanceViewSchema>;

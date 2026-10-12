@@ -94,7 +94,7 @@ function mapParserResult(row: {
   };
 }
 
-function mapAnchor(row: {
+export function mapAnchor(row: {
   anchor_key: string;
   anchor_kind: string;
   id: string;

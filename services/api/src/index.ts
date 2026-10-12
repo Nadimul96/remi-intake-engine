@@ -7,6 +7,7 @@ import { conflictRoutes } from "./routes/conflicts";
 import { entityRoutes } from "./routes/entities";
 import { healthRoutes } from "./routes/health";
 import { intakeRoutes } from "./routes/intake";
+import { provenanceRoutes } from "./routes/provenance";
 import { relationshipRoutes } from "./routes/relationships";
 import { reviewRoutes } from "./routes/review";
 import { screeningRoutes } from "./routes/screening";
@@ -62,6 +63,7 @@ async function main(): Promise<void> {
   await app.register(entityRoutes);
   await app.register(truthRoutes);
   await app.register(conflictRoutes);
+  await app.register(provenanceRoutes);
 
   // Storage may still be starting when the stack comes up together.
   await retry("object storage", ensureBucket);
