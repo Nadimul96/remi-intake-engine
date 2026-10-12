@@ -43,7 +43,7 @@ export function ErrorState({
         <p className="mt-0.5 break-words text-danger-text/80">{message}</p>
         <p className="mt-2 text-xs text-danger-text/70">
           Start the stack with <code className="font-mono">docker compose up --build</code>, or run{" "}
-          <code className="font-mono">pnpm doctor</code> to see what is missing.
+          <code className="font-mono">pnpm run doctor</code> to see what is missing.
         </p>
       </div>
     </div>
