@@ -1,0 +1,13 @@
+Rent Roll Report
+Property: Westchase Multifamily
+Alternate Name: Oakwood Commons
+Date: Q3 2023
+
+Unit,Type,Rent,Status
+101,1BR,1250,Occupied
+102,1BR,1280,Occupied
+103,2BR,1520,Vacant
+...
+
+This file tests entity resolution when the property name appears
+in the body but the filename is generic.

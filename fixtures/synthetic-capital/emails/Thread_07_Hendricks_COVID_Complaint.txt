@@ -1,0 +1,108 @@
+From: Robert Hendricks <rhendricks@hendricksfamilyoffice.com>
+To: Nadi <mp@syntheticcapital.com>
+Date: April 3, 2020
+Subject: Fund I Performance — Concerns About Distribution
+
+Nadi —
+
+I hope you and your family are staying healthy during this crisis. I'm writing to express concern about the Q1 2020 distribution from Synthetic Value Fund I.
+
+As you know, we invested $5M in Fund I based on the projected 17%+ IRR and regular quarterly distributions. The Q1 distribution was only $112K vs. the projected $287K. I understand we're in unprecedented times, but I need to understand:
+
+1. Which assets are affected by rent non-payment?
+2. What is the fund's current cash position?
+3. Are you suspending distributions for Q2?
+
+I have LPs asking me questions and I need to be able to respond with specifics.
+
+Robert Hendricks
+Hendricks Family Office
+
+---
+
+From: Nadi <mp@syntheticcapital.com>
+To: Robert Hendricks <rhendricks@hendricksfamilyoffice.com>
+Date: April 4, 2020
+Subject: Re: Fund I Performance — Concerns About Distribution
+
+Robert —
+
+Thank you for reaching out. These are exactly the right questions to ask. Let me be transparent:
+
+**Fund I Portfolio Impact:**
+- Parkside at Meridian (sold Aug 2020): No impact — already exited
+- Sunrise Village (Phoenix): 18% of tenants requested rent deferrals. We've granted 3-month payment plans to 12 households.
+- Willow Creek (Dallas): 8% deferral requests. Lower impact due to tenant base.
+- Crestwood Apartments (Austin): 22% deferral requests — this is our biggest concern.
+
+**Cash Position:**
+Fund I has $1.2M in reserves. We're holding $400K for operational needs and have $800K available for distributions if needed.
+
+**Q2 Distribution:**
+We are NOT suspending Q2 distributions at this time. We will pay the reduced amount ($112K) and reassess for Q3 based on collection rates.
+
+**What we're doing:**
+- Weekly cash monitoring at each asset
+- Applied for SBA loans at property level (not guaranteed)
+- Negotiating with lenders on reserve releases
+
+I'll send you a detailed LP update by Friday. Would you like to schedule a call to discuss?
+
+Nadi
+
+---
+
+From: Robert Hendricks <rhendricks@hendricksfamilyoffice.com>
+To: Nadi <mp@syntheticcapital.com>
+Date: April 5, 2020
+Subject: Re: Fund I Performance — Concerns About Distribution
+
+Nadi —
+
+I appreciate the transparency. The $800K reserve gives me some comfort.
+
+A few follow-ups:
+1. What's the total rent roll at risk across the portfolio? (dollar amount)
+2. Are you modeling a 6-month or 12-month recovery scenario?
+3. What's your break-even occupancy for each asset?
+
+Let's schedule a call next week. Tuesday or Wednesday work for me.
+
+Also — thank you for not doing what some GPs are doing and going silent. Communication matters right now.
+
+Robert
+
+---
+
+From: Nadi <mp@syntheticcapital.com>
+To: Robert Hendricks <rhendricks@hendricksfamilyoffice.com>
+Date: April 6, 2020
+Subject: Re: Fund I Performance — Concerns About Distribution
+
+Robert —
+
+Quick answers:
+
+**Rent at risk:**
+- Total monthly rent roll: $412K across Fund I
+- At-risk portion: $78K/month (19%) if all deferrals default
+- Likely scenario: $35-40K/month shortfall for 3-4 months
+
+**Recovery scenarios:**
+- Base case: 6-month disruption, 12-month recovery to prior occupancy
+- Downside: 12-month disruption, 18-month recovery
+- Our COVID reserve ($800K) covers 20 months at base case shortfall
+
+**Break-even occupancy:**
+- Sunrise Village: 82%
+- Willow Creek: 78%
+- Crestwood: 85%
+
+Current occupancy: 91%, 94%, 88% respectively. We have cushion.
+
+**Call:**
+Tuesday 2pm CT works. I'll send calendar invite.
+
+Also — I'll add you to our weekly COVID update email. Other LPs have found it helpful.
+
+Nadi

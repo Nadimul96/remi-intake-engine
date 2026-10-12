@@ -1,0 +1,42 @@
+From: Alex Donovan <alex.donovan@syntheticcapital.com>
+To: Jordan Ellis <jordan.ellis@syntheticcapital.com>
+Date: September 28, 2020
+Subject: Oakwood Files
+
+Jordan —
+
+I'm looking for the Oakwood rent roll from August. Is it in the shared drive? I checked Fund II/Oakwood/ but I'm only seeing the 2021 pre-close file.
+
+Need this for a comp analysis. Let me know.
+
+Alex
+
+---
+
+From: Jordan Ellis <jordan.ellis@syntheticcapital.com>
+To: Alex Donovan <alex.donovan@syntheticcapital.com>
+Date: September 28, 2020
+Subject: Re: Oakwood Files
+
+Alex —
+
+I think Diane has it. Try asking her? Or check the OLD folder, I think some PM reports got dumped there during the last cleanup.
+
+Jordan
+
+---
+
+From: Alex Donovan <alex.donovan@syntheticcapital.com>
+To: Jordan Ellis <jordan.ellis@syntheticcapital.com>, Diane Foster <diane.foster@syntheticcapital.com>, Priya Nair <priya.nair@syntheticcapital.com>
+Date: September 28, 2020
+Subject: Re: Oakwood Files — FOUND IT
+
+Never mind — found it. It was in:
+
+`\\scp-fileserver\shared\OLD\random\Oakwood_RentRoll_AUG2020_JE.xlsx`
+
+Why is an August 2020 file in a folder called "random" under "OLD"? This is exactly the kind of thing that makes us look unprofessional to LPs.
+
+Can we please establish some file naming conventions? Or at least put things in the right folders?
+
+Alex

@@ -1,0 +1,52 @@
+From: Diane Foster <diane.foster@syntheticcapital.com>
+To: Nadi <mp@syntheticcapital.com>, Sarah Chen <sarah.chen@syntheticcapital.com>
+Date: November 8, 2020
+Subject: Oakwood — Final IC Memo Version
+
+Nadi, Sarah —
+
+Just confirmed with Priya that v2 is the final model for the IC memo. Alex's v3 is being treated as an upside sensitivity case only.
+
+**Why v2 was chosen:**
+1. NOI normalization ($180K insurance removal) — Priya is correct, this is standard practice
+2. Management fee ($780 vs $850) — We have this negotiated rate in writing from Greenfield
+3. Rent growth (2.5% base) — More defensible for LP reporting than Alex's 3.5%
+
+**Alex's frustration:**
+He's pushing back that we're "leaving money on the table." He may be right on rent growth — Westchase is hot right now — but Marcus made the call and we should move forward.
+
+**IC memo:**
+I've reviewed the draft. It references v2 throughout. The only place Alex's numbers appear is in the sensitivity table as "Upside Case: 18.2% IRR (Alex v3 assumptions)"
+
+**Recommendation:**
+Approve as drafted. Alex has been heard but overruled. Let's not reopen this debate at IC.
+
+Diane
+
+---
+
+From: Nadi <mp@syntheticcapital.com>
+To: Diane Foster <diane.foster@syntheticcapital.com>, Sarah Chen <sarah.chen@syntheticcapital.com>, Priya Nair <priya.nair@syntheticcapital.com>, Alex Donovan <alex.donovan@syntheticcapital.com>
+Date: November 9, 2020
+Subject: Re: Oakwood — Final IC Memo Version
+
+Team —
+
+Decision made. We're using Priya v2 as the base case for IC approval.
+
+**Rationale:**
+- Conservative underwriting protects LPs and our reputation
+- Alex's v3 is valuable as an upside case and will be presented as such
+- The $180K normalization is the right call — non-recurring income doesn't support cap rate
+
+**For Alex:**
+Your analysis was thorough and your market data was helpful. The 3.5% rent growth sensitivity will be in the memo. But the base case must be defensible to our investment committee and LPs.
+
+**Moving forward:**
+- Priya: Finalize IC memo with v2 as base, v3 as upside
+- Sarah: Prepare capital call documentation
+- Alex: Move on to sourcing the next deal — there will be many more
+
+IC meeting is Wednesday. Let's be aligned.
+
+Nadi

@@ -1,0 +1,51 @@
+INVESTMENT COMMITTEE MEMORANDUM — DRAFT
+
+TO: Investment Committee
+FROM: Alex Donovan, Senior Associate
+DATE: November 4, 2020
+RE: Acquisition of Oakwood Commons — DRAFT WITH COMMENTS
+
+EXECUTIVE SUMMARY
+Synthetic Capital Partners proposes the acquisition of Oakwood Commons, a 232-unit multifamily community in Houston's Westchase submarket. [AD: This is a solid value-add opportunity with immediate cash flow.]
+
+INVESTMENT THESIS
+• Value-add opportunity on 45+ units [AD: Priya says 45, I counted 52 — need to verify]
+• In-place rents 8% below market [AD: Based on comps or actual lease trade-outs?]
+• Strong demographic tailwinds [AD: Cite the Axiometrics data here — 3.8% rent growth]
+
+ACQUISITION SUMMARY
+Purchase Price: $41,200,000 ($177,586/unit) [PN COMMENT: Price confirmed with seller]
+Closing Costs: $824,000
+Total Cost: $42,024,000
+
+FINANCING
+Senior Loan: $13,800,000 (75% LTV) [AD: 75% seems aggressive given Houston market, suggest 70%]
+Interest Rate: 4.25% fixed
+Term: 5-year interest only
+DSCR (stabilized): 1.31x
+
+PERFORMANCE METRICS
+Entry Cap Rate: 5.6% [AD: I think 6.0% is more realistic — see my v3 model]
+Levered IRR: 16.4% [AD: My v3 gets to 18.2% with better rent growth assumptions]
+Equity Multiple: 2.08x
+5-Year Hold, Exit at 5.5% cap
+
+SENSITIVITY ANALYSIS [AD: Add 6.0% entry cap as a case — this is where I think market actually is]
+Scenario          Entry Cap    Exit Cap    IRR
+Base Case         5.6%         5.5%        16.4%
+Upside            5.6%         5.0%        19.8%
+Downside          6.0%         6.0%        14.1% [PN: Added per AD request]
+
+RISK FACTORS
+• Houston market concentration [AD: Mitigated but not eliminated — let's be honest about this]
+• Value-add execution risk [AD: Greenfield has good track record but 45 units is a lot]
+• Interest rate risk [AD: 5-year hold with 5-year fixed = matched, good]
+
+RECOMMENDATION
+[AD: I recommend we approve at $41.2M but use my v3 assumptions — the 3.5% rent growth is supportable and the NOI normalization removes valid income. Priya is being too conservative.]
+
+[PN RESPONSE: Respectfully disagree. The $180K insurance reimbursement is non-recurring per seller CFO. Standard practice is to normalize. AD's 3.5% rent growth uses trailing data during a recovery period — forward-looking should be lower. Recommend base case 2.5% with 3.5% upside scenario.]
+
+[NADI FINAL DECISION: Use Priya v2 as base case. AD's v3 becomes upside scenario. Marcus exact words: "We don't underwrite to optimistic management fee assumptions and we don't include non-recurring income in cap rate math. Use Priya's base."]
+
+APPROVED VERSION: Priya v2 (Entry cap 5.6%, $41.2M, IRR 16.4%)

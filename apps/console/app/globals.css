@@ -1,0 +1,58 @@
+:root {
+  color-scheme: dark;
+  --bg: #0b1110;
+  --panel: #121a18;
+  --panel-alt: #17211f;
+  --panel-soft: #0f1615;
+  --line: rgba(255, 255, 255, 0.08);
+  --text: #f3f3ee;
+  --muted: #96a39c;
+  --accent: #c48a4a;
+  --success: #3ca776;
+  --danger: #d56363;
+  --active: #5f8dd3;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: radial-gradient(circle at top, rgba(196, 138, 74, 0.12), transparent 28%), var(--bg);
+  color: var(--text);
+  font-family: "SF Pro Display", "Inter", sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+.tone-success {
+  color: #ccf6df;
+  background: rgba(60, 167, 118, 0.2);
+}
+
+.tone-danger {
+  color: #ffd7d7;
+  background: rgba(213, 99, 99, 0.18);
+}
+
+.tone-active {
+  color: #d8e6ff;
+  background: rgba(95, 141, 211, 0.22);
+}
+
+.tone-muted {
+  color: #d7ded9;
+  background: rgba(255, 255, 255, 0.08);
+}

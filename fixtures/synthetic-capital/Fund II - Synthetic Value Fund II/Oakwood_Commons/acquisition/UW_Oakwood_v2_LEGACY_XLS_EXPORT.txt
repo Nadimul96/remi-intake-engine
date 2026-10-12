@@ -1,0 +1,33 @@
+MICROSOFT EXCEL 97-2003 WORKBOOK EXPORT
+======================================
+File: UW_OakwoodCommons_v2_PN_112020.xls
+Created: November 20, 2020
+Analyst: Priya Nair
+
+[WORKBOOK STRUCTURE]
+Sheet1: Assumptions
+Sheet2: Revenue  
+Sheet3: Expenses
+Sheet4: Cash Flow
+Sheet5: Returns
+
+[SHEET: ASSUMPTIONS]
+Cell A1: ASSUMPTIONS
+Cell A3: Purchase Price
+Cell B3: 41200000
+Cell A4: Entry Cap Rate
+Cell B4: 5.6%
+Cell A5: Units
+Cell B5: 232
+Cell A6: Year 1 Market Rent
+Cell B6: 1310
+
+[FORMULA CONVERSION NOTE]
+Original .xls contained formulas:
+- B7: =B3*(1+2%)
+- B10: =B3/B5
+These formulas were lost in text export.
+
+[WARNING]
+This file was converted from .xls format.
+Some formatting and formulas may not have transferred correctly.

@@ -1,0 +1,117 @@
+From: Priya Nair <priya.nair@syntheticcapital.com>
+To: Alex Donovan <alex.donovan@syntheticcapital.com>, Nadi <mp@syntheticcapital.com>
+Date: November 3, 2020
+Subject: Oakwood Commons — IC Memo Draft
+
+Alex, Nadi —
+
+Attached is the IC memo draft for Oakwood Commons. I used my v2 model (5.6% entry cap, $41.2M price).
+
+One open item: Alex, your v3 model has a 6.0% entry cap assumption. I want to confirm — are you proposing we use that as the base case? My 5.6% is based on the actual ask and my normalized NOI.
+
+My view: 5.6% is realistic for Westchase value-add in this market. 6.0% feels like a recession scenario, not base case.
+
+Let me know if you want me to revise or if we should present both.
+
+Priya
+
+---
+
+From: Alex Donovan <alex.donovan@syntheticcapital.com>
+To: Priya Nair <priya.nair@syntheticcapital.com>, Nadi <mp@syntheticcapital.com>, Sarah Chen <sarah.chen@syntheticcapital.com>
+Date: November 4, 2020
+Subject: Re: Oakwood Commons — IC Memo Draft
+
+Priya —
+
+I'm not saying 6.0% should be the base case. I'm saying we should STRESS TEST at 6.0% because Houston cap rates have been compressing and 5.6% leaves us no margin if the market turns.
+
+Look at what happened in 2016-2018 — everyone was buying at 5.0% and then the market softened. I'd rather be conservative on entry and have upside than be aggressive and pray.
+
+Also — and this is important — Greenfield quoted $800/unit for management fees in their email to me, but your model uses $850. I know it's only $50/unit but that's $12K/year and $60K over the hold period. Small stuff adds up.
+
+Alex
+
+---
+
+From: Sarah Chen <sarah.chen@syntheticcapital.com>
+To: Alex Donovan <alex.donovan@syntheticcapital.com>, Priya Nair <priya.nair@syntheticcapital.com>, Nadi <mp@syntheticcapital.com>
+Date: November 4, 2020
+Subject: Re: Oakwood Commons — IC Memo Draft
+
+Quick note on debt sizing:
+
+First Western confirmed they can do 75% LTV at 4.25% fixed, 5-year IO. DSCR minimum 1.25x.
+
+Priya's v2 model shows 1.31x DSCR at stabilization. Alex's v3 (6.0% cap) shows 1.38x but that's because you're assuming lower NOI.
+
+Either way we're above covenant. But I agree with Alex — let's stress test at 6.0% and make sure the deal still works.
+
+Sarah
+CFO, Synthetic Capital Partners
+
+---
+
+From: Nadi <mp@syntheticcapital.com>
+To: Alex Donovan <alex.donovan@syntheticcapital.com>, Priya Nair <priya.nair@syntheticcapital.com>, Sarah Chen <sarah.chen@syntheticcapital.com>
+Date: November 5, 2020
+Subject: Re: Oakwood Commons — IC Memo Draft
+
+Team —
+
+I've reviewed both models. Here's my decision:
+
+1. We present Priya v2 as the BASE CASE (5.6% entry, $41.2M). This is the model we negotiate from.
+2. We include Alex's 6.0% cap as the CONSERVATIVE/STRESS case in the sensitivity table.
+3. Priya — update the IC memo to reflect the $800/unit management fee (Alex is right, Greenfield quoted $800).
+
+Alex — your point about 2016-2018 is well taken. But Westchase is a stronger submarket now than it was then. I'm comfortable at 5.6% with 6.0% as our downside protection.
+
+Revised memo due Monday. IC meeting Wednesday.
+
+Nadi
+
+---
+
+From: Priya Nair <priya.nair@syntheticcapital.com>
+To: Alex Donovan <alex.donovan@syntheticcapital.com>, Nadi <mp@syntheticcapital.com>, Sarah Chen <sarah.chen@syntheticcapital.com>
+Date: November 6, 2020
+Subject: Oakwood Commons — IC Memo FINAL
+
+All —
+
+Final IC memo attached. Changes:
+- Base case: 5.6% entry cap, $41.2M price, $800/unit management fee
+- Stress case: 6.0% entry cap included in sensitivity
+- IRR: 17.2% base, 14.1% stress
+- DSCR: 1.31x at stabilization
+
+Ready for IC approval.
+
+Priya
+
+---
+
+From: Nadi <mp@syntheticcapital.com>
+To: Priya Nair <priya.nair@syntheticcapital.com>, Alex Donovan <alex.donovan@syntheticcapital.com>, Sarah Chen <sarah.chen@syntheticcapital.com>, Jordan Ellis <jordan.ellis@syntheticcapital.com>, Diane Foster <diane.foster@syntheticcapital.com>
+Date: November 10, 2020
+Subject: APPROVED — Oakwood Commons Acquisition
+
+IC has approved Oakwood Commons at $41.2M.
+
+Key terms:
+- Entry cap: 5.6% (per Priya v2 model)
+- Financing: First Western, 75% LTV, 4.25% fixed
+- Close: January 2021
+
+Priya — finalize PSA with Derek.
+Alex — coordinate with Greenfield for PM transition.
+Sarah — prepare capital call.
+Diane — start asset management prep.
+Jordan — update the comp database with this transaction.
+
+Let's execute.
+
+Nadi
+Managing Partner
+Synthetic Capital Partners

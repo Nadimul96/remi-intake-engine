@@ -1,0 +1,24 @@
+Subject: Sycamore Ridge teaser
+From: broker@example.com
+To: team@syntheticcapital.com
+Cc: acquisitions@syntheticcapital.com
+Date: Tue, 10 Mar 2026 09:15:00 -0500
+Message-ID: <sample-broker-email@syntheticcapital.com>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============6106472885063620243=="
+
+--===============6106472885063620243==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Please find the teaser attached. Asking price is in the OM.
+
+--===============6106472885063620243==
+Content-Type: text/plain
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="teaser-note.txt"
+MIME-Version: 1.0
+
+QnJva2VyIGF0dGFjaG1lbnQgbm90ZQ==
+
+--===============6106472885063620243==--

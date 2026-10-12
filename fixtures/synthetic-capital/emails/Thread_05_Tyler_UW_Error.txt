@@ -1,0 +1,111 @@
+From: Priya Nair <priya.nair@syntheticcapital.com>
+To: Alex Donovan <alex.donovan@syntheticcapital.com>, Nadi <mp@syntheticcapital.com>
+Date: December 3, 2020
+Subject: FW: Hawthorne Terrace UW Error — Need to Discuss
+
+Alex, Nadi —
+
+We have a problem with the Hawthorne Terrace underwriting. Tyler (analyst) made a material error in the expense assumptions that's been in the model since September.
+
+**The Error:**
+- Tyler used $3,200/unit for operating expenses
+- Actual T12 shows $3,850/unit
+- Difference: $650/unit × 156 units = $101,400/year
+- Impact on IRR: Our 19.2% drops to 16.8%
+
+**How This Happened:**
+Tyler pulled the expense number from the OM instead of the actual T12. The OM used pro forma stabilized expenses, not trailing 12-month actuals.
+
+**Current Status:**
+- We've been negotiating based on a 19%+ IRR
+- Seller has seen our model (we shared v2)
+- If we restate to 16.8%, we need to renegotiate price or walk
+
+**Options:**
+1. Restate to seller, try to renegotiate ($18.2M down to $17.4M)
+2. Find other value-add levers to get back to 17%+
+3. Walk from the deal
+
+Nadi — how do you want to handle this? Tyler is mortified but this is a learning moment we need to address systematically.
+
+Priya
+
+---
+
+From: Alex Donovan <alex.donovan@syntheticcapital.com>
+To: Priya Nair <priya.nair@syntheticcapital.com>, Nadi <mp@syntheticcapital.com>
+Date: December 3, 2020
+Subject: Re: FW: Hawthorne Terrace UW Error — Need to Discuss
+
+Priya —
+
+Tyler's error is unfortunate but we need to look at how this got through review. Did you catch this in your first pass? I remember you signing off on v2.
+
+That said, let's focus on solutions. A few thoughts:
+
+1. We can get to 17.5% IRR if we assume 4.0% rent growth (vs 3.5% in current model). Houston market is trending that way post-COVID.
+
+2. We can push seller on CapEx credits. The roof replacement they quoted $180K — our contractor says $120K. That's $60K cushion.
+
+3. I'm not comfortable renegotiating down $800K. Seller will walk and we'll damage our reputation with Marcus Realty.
+
+My recommendation: Restate the model with 4.0% rent growth and $120K roof. Gets us to 17.4% IRR. Present that as "refined underwriting" not "error correction."
+
+Alex
+
+---
+
+From: Nadi <mp@syntheticcapital.com>
+To: Priya Nair <priya.nair@syntheticcapital.com>, Alex Donovan <alex.donovan@syntheticcapital.com>
+Date: December 4, 2020
+Subject: Re: FW: Hawthorne Terrace UW Error — Need to Discuss
+
+Team —
+
+**Process Issue First:**
+Tyler's mistake is one thing, but this got through Priya's review. We need a checklist for underwriting validation. Every model needs:
+- [ ] Expense validation against source docs (not OM)
+- [ ] Rent roll tie-out
+- [ ] CapEx contractor quotes
+- [ ] Sensitivity table at ±10%
+
+**Deal Issue:**
+Alex's solution is pragmatic but we need to be honest with ourselves. 4.0% rent growth is aggressive for this submarket. Let's model 3.5% base, 4.0% upside.
+
+**Decision:**
+- Restate model with correct expenses ($3,850/unit)
+- Keep 3.5% rent growth base case
+- If IRR is <17%, we walk
+- If IRR is 17-18%, we proceed with full disclosure to IC
+
+Priya — run the numbers today. Alex — prepare talking points in case we need to explain to seller.
+
+And Tyler — you're not in trouble, but you're going to build the checklist I described above. Learn from this.
+
+Nadi
+
+---
+
+From: Priya Nair <priya.nair@syntheticcapital.com>
+To: Nadi <mp@syntheticcapital.com>, Alex Donovan <alex.donovan@syntheticcapital.com>
+Date: December 4, 2020
+Subject: Re: FW: Hawthorne Terrace UW Error — Need to Discuss
+
+Updated model attached.
+
+**Restated Assumptions:**
+- Expenses: $3,850/unit (actual T12)
+- Rent growth: 3.5% base, 4.0% upside
+- Roof CapEx: $120K (contractor quote)
+
+**Results:**
+- Base case: 17.1% IRR
+- Upside case: 18.3% IRR
+
+**Recommendation:** Proceed with base case. 17.1% is within our threshold and we have 120bps of upside if rent growth hits 4%.
+
+I'll draft the IC memo revision.
+
+Also — Tyler's checklist is attached. He's going to present it at next team meeting.
+
+Priya

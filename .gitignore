@@ -1,0 +1,50 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment files (keep the examples)
+.env
+.env.*
+**/.env
+**/.env.*
+!/.env.example
+!/apps/console/.env.example
+
+# Build and tool output
+dist/
+**/dist/
+build/
+**/build/
+.next/
+**/.next/
+out/
+**/out/
+.turbo/
+**/.turbo/
+*.tsbuildinfo
+
+# Test artifacts
+coverage/
+**/coverage/
+playwright-report/
+**/playwright-report/
+test-results/
+**/test-results/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Python (extractor service)
+__pycache__/
+*.py[cod]
+.venv/
+services/extractor/.venv/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+.cursor/
+.claude/

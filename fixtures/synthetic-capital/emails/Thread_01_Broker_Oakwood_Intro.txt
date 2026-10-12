@@ -1,0 +1,140 @@
+From: Derek Santos <derek.santos@marcusrealty.com>
+To: Alex Donovan <alex.donovan@syntheticcapital.com>
+Date: September 15, 2020
+Subject: Off-Market Multifamily — Oakwood Commons, Houston
+
+Alex —
+
+Wanted to flag a new off-market deal we just got in. 232 units in Westchase submarket, Houston. Asking $41.5M. Attached is the OM.
+
+Highlights:
+- Built 2008, renovated 2018
+- 91% occupied
+- In-place rents 8% below market
+- Value-add opportunity on 40+ units
+- Seller motivated, needs to close Q1
+
+This feels like it fits your Fund II strategy. Can you get me feedback by Friday? Want to know if we should set up a property tour.
+
+Also — the seller has another property in Austin they might sell if this goes well. Let's talk.
+
+Derek Santos
+Senior Director
+Marcus Realty Group
+derek.santos@marcusrealty.com
+(713) 555-0142
+
+---
+
+From: Alex Donovan <alex.donovan@syntheticcapital.com>
+To: Nadi <mp@syntheticcapital.com>, Priya Nair <priya.nair@syntheticcapital.com>, Sarah Chen <sarah.chen@syntheticcapital.com>
+Date: September 15, 2020
+Subject: Fwd: Off-Market Multifamily — Oakwood Commons, Houston
+
+Team —
+
+Just got this from Derek at Marcus. Houston deal, 232 units, asking $41.5M ($179k/unit). My initial reaction is this could work for Fund II but I want Priya to model it before we commit to anything.
+
+Key things that caught my eye:
+- Asking price seems aggressive for Houston but Westchase is a solid submarket
+- 91% occupied with value-add component — fits our strategy
+- Seller timeline (Q1 close) works with our Fund II capital call schedule
+
+Nadi — can we get Priya on this ASAP? I'd like to have a first pass model by end of week so we can decide on a property tour.
+
+Also noting: Derek says there's another Austin deal behind this if we perform. Worth keeping that in mind.
+
+Alex
+
+---
+
+From: Nadi <mp@syntheticcapital.com>
+To: Alex Donovan <alex.donovan@syntheticcapital.com>, Priya Nair <priya.nair@syntheticcapital.com>
+Date: September 15, 2020
+Subject: Re: Fwd: Off-Market Multifamily — Oakwood Commons, Houston
+
+Alex —
+
+Agree this is worth a look. Priya, can you put together a first-pass model? Focus on:
+- Entry cap at ask
+- Value-add upside on those 40+ units
+- Debt sizing with First Western (they're hungry right now)
+- Stress test at 6.0% cap
+
+Let's plan to review Monday afternoon. If the numbers work, we'll do a site visit the following week.
+
+Alex — good catch on the potential Austin follow-on. Keep that warm with Derek.
+
+Nadi
+Managing Partner
+Synthetic Capital Partners
+
+---
+
+From: Priya Nair <priya.nair@syntheticcapital.com>
+To: Nadi <mp@syntheticcapital.com>, Alex Donovan <alex.donovan@syntheticcapital.com>, Sarah Chen <sarah.chen@syntheticcapital.com>
+Date: September 18, 2020
+Subject: Oakwood Commons — Initial Underwriting (v1)
+
+All —
+
+Attached is my first pass on Oakwood Commons. Key outputs:
+
+- Entry cap at ask ($41.5M): 5.8%
+- Value-add renovation: $8K/unit on 45 units, $175/month rent bumps
+- Levered IRR (base case): 16.8%
+- Equity multiple: 1.9x
+- 5-year hold, exit at 5.5% cap
+
+A few concerns:
+- Expenses look light in the OM. I'm underwriting $4,100/unit but OM shows $3,850. Need to verify with PM.
+- Rent growth assumption: Using 3.0% (conservative for Houston post-COVID)
+- Debt: Sized at 75% LTV, 4.25% fixed, 5-year IO
+
+This is a PASS at ask price. We'd need to get to $41.2M or lower to hit our 17%+ IRR target.
+
+Let me know if you want me to stress test other scenarios.
+
+Priya
+
+---
+
+From: Alex Donovan <alex.donovan@syntheticcapital.com>
+To: Priya Nair <priya.nair@syntheticcapital.com>, Nadi <mp@syntheticcapital.com>
+Date: September 18, 2020
+Subject: Re: Oakwood Commons — Initial Underwriting (v1)
+
+Priya —
+
+I think you're being too conservative on expenses. Derek told me the seller has been self-managing with an internal team — that's why expenses look light. Greenfield quoted us $800/unit for professional management, not $850.
+
+Also, I think 3.0% rent growth is low for Westchase. I'm seeing 3.5-4.0% in comparable properties. Can you run a scenario at 3.5%?
+
+On price: $41.2M feels achievable. Derek hinted there's flexibility if we move fast.
+
+Alex
+
+---
+
+From: Priya Nair <priya.nair@syntheticcapital.com>
+To: Alex Donovan <alex.donovan@syntheticcapital.com>, Nadi <mp@syntheticcapital.com>, Sarah Chen <sarah.chen@syntheticcapital.com>
+Date: September 22, 2020
+Subject: Oakwood Commons — Revised Underwriting (v2)
+
+Team —
+
+Updated model attached (v2). Changes from Alex's feedback:
+- Expenses: Reduced to $4,020/unit (Greenfield quote confirmed)
+- Rent growth: 3.0% base, 3.5% upside case
+- Revised ask: $41.2M (assuming we negotiate down)
+
+New outputs at $41.2M:
+- Entry cap: 5.6%
+- Levered IRR: 17.2% (base), 18.4% (upside)
+- Equity multiple: 2.0x
+
+I'm comfortable with this at $41.2M. Still PASS at $41.5M.
+
+Ready for IC memo draft.
+
+Priya

@@ -1,0 +1,24 @@
+{
+  "name": "remi-intake-engine",
+  "private": true,
+  "packageManager": "pnpm@10.13.1",
+  "scripts": {
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "test": "pnpm --filter @remi/workflows test",
+    "test:db": "pnpm --filter @remi/db test",
+    "dev": "turbo run dev --parallel --filter=@remi/console --filter=@remi/api --filter=@remi/workflows",
+    "dev:console": "pnpm --filter @remi/console dev",
+    "dev:api": "pnpm --filter @remi/api dev",
+    "dev:workflows": "pnpm --filter @remi/workflows dev",
+    "dev:extractor": "python3 services/extractor/src/main.py",
+    "infra:up": "docker compose -f infrastructure/local/docker-compose.yml up -d",
+    "infra:down": "docker compose -f infrastructure/local/docker-compose.yml down -v",
+    "db:migrate": "pnpm --filter @remi/db migrate"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "turbo": "^2.4.4",
+    "typescript": "^5.8.2"
+  }
+}
