@@ -1,7 +1,7 @@
 /**
  * Preflight: tells you exactly what is missing before you start the stack.
  *
- *   pnpm doctor
+ *   pnpm run doctor   (plain `pnpm doctor` runs pnpm's own built-in check)
  *
  * Checks the Docker path (`docker compose up`) and the local-dev path (`pnpm dev`)
  * separately, so a missing tool only fails the path that needs it.
@@ -53,6 +53,24 @@ function portInUse(port: number): Promise<boolean> {
   });
 }
 
+function port(variable: string, fallback: number): number {
+  const value = Number(process.env[variable]);
+  return Number.isInteger(value) && value > 0 ? value : fallback;
+}
+
+/** Only the ports a mode actually binds: each mode's group lists its own. */
+async function checkPorts(group: string, ports: [number, string, string][]): Promise<void> {
+  for (const [number, service, override] of ports) {
+    const busy = await portInUse(number);
+    add(
+      group,
+      `port ${number}`,
+      busy ? "warn" : "ok",
+      busy ? `in use (${service}); fine if that is this stack, else free it or set ${override}` : `free (${service})`
+    );
+  }
+}
+
 async function main(): Promise<void> {
   const [major, minor] = process.versions.node.split(".").map(Number);
   add(
@@ -69,24 +87,11 @@ async function main(): Promise<void> {
   add("docker", "Docker daemon", daemon ? "ok" : "fail", daemon ? `server ${daemon}` : "start Docker, then re-run");
   add("docker", "Compose v2", compose ? "ok" : "fail", compose ?? "docker compose plugin not found");
 
-  const ports: [number, string][] = [
-    [3000, "console"],
-    [4001, "API"],
-    [4003, "extractor"],
-    [5432, "Postgres"],
-    [7233, "Temporal"],
-    [8233, "Temporal UI"],
-    [9000, "object storage"]
-  ];
-  for (const [port, service] of ports) {
-    const busy = await portInUse(port);
-    add(
-      "docker",
-      `port ${port}`,
-      busy ? "warn" : "ok",
-      busy ? `in use (${service}); fine if this stack is already running, else set the *_PORT override` : "free"
-    );
-  }
+  await checkPorts("docker", [
+    [port("CONSOLE_PORT", 3000), "console", "CONSOLE_PORT"],
+    [port("STORAGE_PORT", 9000), "object storage, for browser uploads", "STORAGE_PORT"],
+    [port("TEMPORAL_UI_PORT", 8233), "Temporal UI", "TEMPORAL_UI_PORT"]
+  ]);
 
   const pnpm = run("pnpm", ["--version"]);
   const uv = run("uv", ["--version"]);
@@ -104,6 +109,16 @@ async function main(): Promise<void> {
     existsSync(path.join(REPO_ROOT, ".env")) ? "ok" : "warn",
     "copy .env.example to .env (only needed for `pnpm dev`)"
   );
+  await checkPorts("local dev", [
+    [port("POSTGRES_PORT", 5432), "Postgres via pnpm dev:infra", "POSTGRES_PORT"],
+    [port("TEMPORAL_PORT", 7233), "Temporal via pnpm dev:infra", "TEMPORAL_PORT"],
+    [port("TEMPORAL_UI_PORT", 8233), "Temporal UI via pnpm dev:infra", "TEMPORAL_UI_PORT"],
+    [port("STORAGE_PORT", 9000), "object storage via pnpm dev:infra", "STORAGE_PORT"],
+    [port("STORAGE_CONSOLE_PORT", 9001), "storage console via pnpm dev:infra", "STORAGE_CONSOLE_PORT"],
+    [port("CONSOLE_PORT", 3000), "console via pnpm dev", "a different port for next dev"],
+    [port("API_PORT", 4001), "API via pnpm dev", "API_PORT"],
+    [port("EXTRACTOR_PORT", 4003), "extractor via pnpm dev:extractor", "EXTRACTOR_PORT"]
+  ]);
 
   const mode = (process.env.MODEL_EXTRACTION ?? "off").toLowerCase();
   if (mode === "off") {

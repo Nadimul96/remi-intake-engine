@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import { type DetectedConflict, detectConflicts } from "./conflicts/detect";
-import { extractFixtureRecords } from "./test-support";
+import { demoSet, extractFixtureRecords } from "./test-support";
 
 /**
  * Runs rule-based extraction and conflict detection over the curated demo set
@@ -86,6 +86,11 @@ test("every conflict side cites at least one provenance anchor", () => {
       assert.ok(side.provenanceAnchorIds.length > 0, `${conflict.conflictKey} has an uncited side`);
     }
   }
+});
+
+test("the demo set produces exactly the expected conflicts", () => {
+  // The docker compose end-to-end job asserts the same list against the running stack.
+  assert.deepEqual(conflicts.map((conflict) => conflict.conflictKey).sort(), demoSet().expectedConflictKeys);
 });
 
 test("detection is deterministic", () => {

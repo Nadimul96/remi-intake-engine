@@ -53,7 +53,7 @@ export interface FixtureArtifact {
   context: ExtractionContext;
 }
 
-export function demoSet(): { root: string; files: string[] } {
+export function demoSet(): { root: string; files: string[]; expectedConflictKeys: string[] } {
   return JSON.parse(readFileSync(path.join(REPO_ROOT, "fixtures/demo-set.json"), "utf8"));
 }
 

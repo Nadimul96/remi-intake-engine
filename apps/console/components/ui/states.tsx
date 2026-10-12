@@ -36,14 +36,14 @@ export function ErrorState({
   message: string;
 }): ReactElement {
   return (
-    <div className="flex items-start gap-3 rounded-xl border border-danger/30 bg-danger-soft p-4 text-sm">
+    <div role="alert" className="flex items-start gap-3 rounded-xl border border-danger/30 bg-danger-soft p-4 text-sm">
       <AlertTriangle className="mt-0.5 size-4 shrink-0 text-danger" />
       <div className="min-w-0">
         <p className="font-medium text-danger-text">{title}</p>
         <p className="mt-0.5 break-words text-danger-text/80">{message}</p>
         <p className="mt-2 text-xs text-danger-text/70">
           Start the stack with <code className="font-mono">docker compose up --build</code>, or run{" "}
-          <code className="font-mono">pnpm doctor</code> to see what is missing.
+          <code className="font-mono">pnpm run doctor</code> to see what is missing.
         </p>
       </div>
     </div>

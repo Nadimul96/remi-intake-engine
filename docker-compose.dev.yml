@@ -1,0 +1,29 @@
+# Host ports for the `pnpm dev` path, layered over docker-compose.yml:
+#
+#   pnpm dev:infra   # docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d postgres temporal storage
+#
+# The app then runs natively against Postgres :5432, Temporal :7233 and storage :9000
+# (see .env.example). The API and extractor mappings are here for debugging a full
+# compose stack; `pnpm dev` runs its own API and extractor on those ports, so don't
+# start both. Everything binds to 127.0.0.1.
+
+services:
+  postgres:
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+
+  temporal:
+    ports:
+      - "127.0.0.1:${TEMPORAL_PORT:-7233}:7233"
+
+  storage:
+    ports:
+      - "127.0.0.1:${STORAGE_CONSOLE_PORT:-9001}:9001"
+
+  extractor:
+    ports:
+      - "127.0.0.1:${EXTRACTOR_PORT:-4003}:4003"
+
+  api:
+    ports:
+      - "127.0.0.1:${API_PORT:-4001}:4001"

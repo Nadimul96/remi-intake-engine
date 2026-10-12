@@ -4,8 +4,12 @@
 # extractor, the API, the worker and the console; applies migrations; then seeds the
 # demo by pushing fixtures/demo-set.json through the real pipeline.
 #
-# Console http://localhost:3000 · API http://localhost:4001 · Temporal UI http://localhost:8233
-# Every value below has a working default; override any of them in a .env file.
+# Console http://localhost:3000 · Temporal UI http://localhost:8233
+# Only what a browser needs is published, on 127.0.0.1: the console, the Temporal UI and
+# storage's S3 port (the console uploads to it with presigned PUTs). Postgres, Temporal's
+# gRPC port, the API and the extractor stay on the compose network, so a local Postgres or
+# anything else on those ports cannot collide. docker-compose.dev.yml publishes them for
+# the `pnpm dev` path. Every value below has a working default; override any in a .env file.
 
 x-app-env: &app-env
   DATABASE_URL: postgresql://remi:remi@postgres:5432/remi
@@ -42,8 +46,6 @@ services:
       interval: 3s
       timeout: 3s
       retries: 30
-    ports:
-      - "${POSTGRES_PORT:-5432}:5432"
     volumes:
       - postgres-data:/var/lib/postgresql
 
@@ -51,9 +53,13 @@ services:
     # The Temporal CLI dev server: one process, in-memory persistence, built-in UI.
     image: temporalio/temporal:1.9.1
     command: ["server", "start-dev", "--ip", "0.0.0.0", "--ui-port", "8233", "--log-level", "warn"]
+    healthcheck:
+      test: ["CMD", "temporal", "operator", "cluster", "health", "--address", "127.0.0.1:7233"]
+      interval: 3s
+      timeout: 5s
+      retries: 40
     ports:
-      - "${TEMPORAL_PORT:-7233}:7233"
-      - "${TEMPORAL_UI_PORT:-8233}:8233"
+      - "127.0.0.1:${TEMPORAL_UI_PORT:-8233}:8233"
 
   storage:
     # S3-compatible object storage (MinIO's images are no longer published on Docker Hub).
@@ -64,16 +70,18 @@ services:
       RUSTFS_ADDRESS: ":9000"
       RUSTFS_CONSOLE_ENABLE: "true"
       RUSTFS_CONSOLE_ADDRESS: ":9001"
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "-o", "/dev/null", "http://127.0.0.1:9000/health"]
+      interval: 3s
+      timeout: 3s
+      retries: 40
     ports:
-      - "${STORAGE_PORT:-9000}:9000"
-      - "${STORAGE_CONSOLE_PORT:-9001}:9001"
+      - "127.0.0.1:${STORAGE_PORT:-9000}:9000"
     volumes:
       - storage-data:/data
 
   extractor:
     build: ./services/extractor
-    ports:
-      - "${EXTRACTOR_PORT:-4003}:4003"
 
   migrate:
     build:
@@ -94,8 +102,6 @@ services:
     environment:
       <<: *app-env
       API_PORT: "4001"
-    ports:
-      - "${API_PORT:-4001}:4001"
     healthcheck:
       test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4001/api/health').then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))"]
       interval: 3s
@@ -105,9 +111,9 @@ services:
       migrate:
         condition: service_completed_successfully
       storage:
-        condition: service_started
+        condition: service_healthy
       temporal:
-        condition: service_started
+        condition: service_healthy
     restart: unless-stopped
 
   worker:
@@ -116,13 +122,21 @@ services:
       target: services
     command: ["pnpm", "--filter", "@remi/workflows", "start"]
     environment: *app-env
+    healthcheck:
+      # The worker writes this marker once it is polling its task queue.
+      test: ["CMD", "test", "-f", "/tmp/remi-worker-ready"]
+      interval: 3s
+      timeout: 3s
+      retries: 60
     depends_on:
       migrate:
         condition: service_completed_successfully
       extractor:
         condition: service_healthy
+      storage:
+        condition: service_healthy
       temporal:
-        condition: service_started
+        condition: service_healthy
     restart: unless-stopped
 
   seed:
@@ -136,7 +150,7 @@ services:
       api:
         condition: service_healthy
       worker:
-        condition: service_started
+        condition: service_healthy
     restart: "no"
 
   console:
@@ -146,7 +160,12 @@ services:
     environment:
       API_BASE_URL: http://api:4001
     ports:
-      - "${CONSOLE_PORT:-3000}:3000"
+      - "127.0.0.1:${CONSOLE_PORT:-3000}:3000"
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/api/health').then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))"]
+      interval: 3s
+      timeout: 3s
+      retries: 40
     depends_on:
       api:
         condition: service_healthy
