@@ -1,256 +1,153 @@
 # REMI Intake Engine
 
-A provenance-tracked document intake and entity reconciliation engine for real
-estate investment teams: every number that reaches the "accepted truth" table
-can be traced back to the page, cell, or email message it came from, and every
-reviewer decision that got it there is on record.
+Provenance-tracked document intake for real-estate investment teams: every number is cited to the page line or spreadsheet cell it came from, and every disagreement between documents is surfaced as a reviewable conflict.
 
-**The problem.** A deal team's knowledge lives in offering memos, T-12s, rent
-rolls, underwriting workbooks and email threads. The same property shows up
-under four names, three versions of the same model disagree on NOI, a rekeyed
-spreadsheet differs from the seller's PDF by one transposed digit, and nobody
-can say which file is current or who decided. This repo is the ingestion and
-review spine for that problem: immutable storage, normalization, evidence-backed
-candidate extraction, human review, and entity resolution with full audit
-history.
+![Conflicts view: two T-12s disagree on landscaping, with the cited cells one click away](docs/media/conflicts.webp)
 
-## Architecture
+[![CI](https://github.com/Nadimul96/remi-intake-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/Nadimul96/remi-intake-engine/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+![Node 24](https://img.shields.io/badge/node-24-339933?logo=node.js&logoColor=white)
+![Python 3.12](https://img.shields.io/badge/python-3.12-3776AB?logo=python&logoColor=white)
 
-```
-                 ┌────────────────────────────┐
-  upload ───────▶│ Fastify API  (services/api) │  POST /api/uploads/presign  → S3 presigned PUT
-                 │                            │  POST /api/intake/register  → Temporal workflow start
-                 └─────────────┬──────────────┘
-                               │ starts registerIntakeSourceItemWorkflow
-                               ▼
-┌──────────────────────────────────────────────────────────────────────────────────┐
-│ Temporal worker (services/workflows)                                              │
-│                                                                                  │
-│  promote ──▶ inspect ──▶ normalize ──▶ extract candidates ──▶ finalize           │
-│  staging→   sniff type,  eml / pdf /   rule-based signals     mark run complete  │
-│  immutable  sha256,      xlsx / zip    with citation packets  (or fail + record) │
-│  blob       support tier  via extractor and provenance anchors                   │
-│                               │                                                  │
-│                               ▼                                                  │
-│                    Python extractor (services/extractor)                          │
-│                    FastAPI: /inspect, /normalize (pypdf, openpyxl, email)         │
-└───────────────────────────────┬──────────────────────────────────────────────────┘
-                                │ writes
-                                ▼
-   ┌────────────────────────────────────────────────────────────────────────┐
-   │ Postgres (packages/db, 16 SQL migrations)                              │
-   │ source_items → artifact_blobs → documents/email_messages/worksheets    │
-   │   → provenance_anchors → extracted_candidates                          │
-   │   → accepted_{fact,relationship,classification}_records                │
-   │   → entity_resolution_proposals → canonical_entities + aliases         │
-   │   → asset_organization_relationship_proposals → accepted links         │
-   │ + intake_events, candidate_review_history, *_system_events (audit)     │
-   └───────────────────────────────┬────────────────────────────────────────┘
-                                   │ read / decide
-                                   ▼
-   ┌────────────────────────────────────────────────────────────────────────┐
-   │ Next.js review console (apps/console)                                  │
-   │ /intake  /screening  /review  /truth  /relationships  /entities        │
-   └────────────────────────────────────────────────────────────────────────┘
+A deal team's knowledge lives in offering memos, T-12s, rent rolls, underwriting workbooks and email threads. The same property shows up under four names, three versions of a model disagree on price, and a rekeyed spreadsheet differs from the seller's by one transposed digit. REMI ingests those files through a durable pipeline, extracts candidate facts that always carry their citation, and runs deterministic cross-document checks so a reviewer sees the disagreement, both sources, and the exact cells, before anything becomes accepted truth.
 
-   Local infra (docker compose): Postgres 16 + pgvector, Temporal 1.27 + UI, MinIO (S3)
-```
+## Why it's interesting
 
-The flow a single file takes:
-
-1. **Intake.** The console asks the API for a presigned S3 PUT, uploads
-   directly to MinIO, then registers the object. The API creates a
-   `source_item`, an `ingestion_run`, and a `workflow_run`, and starts a
-   Temporal workflow keyed `intake-<sourceItemId>`.
-2. **Promote.** The worker moves the staged object to an immutable prefix keyed
-   by SHA-256. A re-upload of the same bytes reuses the existing
-   `artifact_blob` instead of creating a new one.
-3. **Inspect and normalize.** The extractor sniffs the real type (not the
-   extension), assigns a support tier (`supported`, `best_effort`, `deferred`,
-   `unsupported`) and a parser target (`pdf`, `eml`, `xlsx`, `archive`,
-   `none`), then produces normalized content: document pages, email threads and
-   messages with attachments, or workbooks with worksheets and structured
-   tables. Email attachments are promoted to their own blobs and processed
-   recursively, with a depth limit.
-4. **Anchor and extract.** Each page, message, attachment or worksheet gets a
-   `provenance_anchor` with a locator. Rule-based extraction then emits
-   candidates (metric facts, relationship assertions, classifications) that
-   carry a confidence, the extraction method, and a citation packet pointing at
-   the anchors that justify them.
-5. **Review.** An operator accepts, rejects, or edits-and-accepts each
-   candidate. Accepted candidates become `accepted_*_records`; every decision
-   is appended to `candidate_review_history`.
-6. **Reconcile.** Accepted asset and organization names generate
-   `entity_resolution_proposals` against the canonical entity catalog, each
-   with a match category, strategy, confidence and the competing matches.
-   Accepting one links the record to a canonical entity and records the
-   observed name as an alias. Asset-to-organization relationships (currently
-   two types: the originating organization and the broker for an asset) go
-   through the same proposal/accept cycle.
-
-## What is technically interesting
-
-| Topic | Why it matters | Where |
-|-------|----------------|-------|
-| **Provenance anchors and citation packets** | A candidate is never just a value. It references anchors (`owner_type`, `owner_id`, `anchor_kind`, `anchor_key`, JSON locator) that point into the normalized content, so a reviewer can open the exact page, message, or worksheet region. Accepted records keep the anchor IDs and the packet. | [`004_provenance_anchors_and_parser_results.sql`](packages/db/src/migrations/004_provenance_anchors_and_parser_results.sql), [`candidate-extraction.ts`](services/workflows/src/lib/candidate-extraction.ts), [`007_candidate_review_and_accepted_truth.sql`](packages/db/src/migrations/007_candidate_review_and_accepted_truth.sql) |
-| **Supersession instead of deletion** | Re-running extraction on a blob upserts on `(artifact_blob_id, candidate_key)` and flips candidates that no longer appear to `current_extraction = false` with a `superseded_at` timestamp. The same pattern applies to resolution proposals (`current_proposal`, `superseded_at`): a newer reconciliation context for the same source candidate supersedes the old one, and accepted-but-stale proposals are moved out of the current lane rather than rewritten. | [`candidates.ts`](packages/db/src/candidates.ts), [`entities.ts`](packages/db/src/entities.ts), [`009_entity_resolution_skeleton.sql`](packages/db/src/migrations/009_entity_resolution_skeleton.sql) |
-| **Entity resolution proposals with explicit match evidence** | Proposals carry `proposal_kind` (`create_entity` / `attach_to_existing`), `match_category` (`active_link`, `exact_match`, `alias_match`, `possible_match`, `create_new`), a free-text `match_strategy`, a `confidence_score`, and `matching_candidates_json` listing every competing entity with its signal (`exact_name_match`, `exact_domain_match`, `alias_match`, `possible_name_overlap`) and rationale. Names are NFKD-normalized and token-overlap scored; organization identity can come from a sender domain, with public email domains suppressed. | [`entity.ts`](packages/domain/src/entity.ts), [`entities.ts`](packages/db/src/entities.ts), [`010_entity_aliases_and_match_signals.sql`](packages/db/src/migrations/010_entity_aliases_and_match_signals.sql) |
-| **Audit and system-event tables** | Human actions and automatic reconciliations are recorded separately. `candidate_review_history` and `entity_resolution_history` capture reviewer decisions; `entity_resolution_system_events` and `asset_organization_relationship_system_events` capture what auto-sync did and why (`proposal_superseded`, `stale_link_removed`, `alias_removed`, `active_link_preserved`, ...), each with an idempotent `event_key`. `intake_events` records every stage transition for a source item. | [`008_candidate_review_history.sql`](packages/db/src/migrations/008_candidate_review_history.sql), [`011_entity_reconciliation_history.sql`](packages/db/src/migrations/011_entity_reconciliation_history.sql), [`012_entity_reconciliation_system_events.sql`](packages/db/src/migrations/012_entity_reconciliation_system_events.sql), [`014_relationship_reconciliation_auditability.sql`](packages/db/src/migrations/014_relationship_reconciliation_auditability.sql) |
-| **Why Temporal** | Intake is a multi-step pipeline with external calls (S3, the Python extractor) that can fail halfway. The workflow is six activities with retries (`maximumAttempts: 3`, 5-minute start-to-close) and a compensating `failUploadedArtifact` activity, so a crashed worker resumes rather than leaving a half-processed item. Workflow IDs are derived from the source item, which gives idempotent registration for free. | [`register-intake.ts`](services/workflows/src/workflows/register-intake.ts), [`activities/intake.ts`](services/workflows/src/activities/intake.ts), [`routes/intake.ts`](services/api/src/routes/intake.ts) |
-| **Tenant scoping** | Every row that carries business data has a `tenant_id`, and the lookup indexes lead with it (`canonical_entities (tenant_id, entity_type, normalized_name, ...)`). The API currently injects a single tenant and actor from environment variables; the schema is ready for real auth, the service is not. | [`001_intake_spine.sql`](packages/db/src/migrations/001_intake_spine.sql), [`lib/config.ts`](services/api/src/lib/config.ts) |
-| **Content-addressed, immutable artifacts** | `artifact_blobs.sha256` is unique. Attachments embedded in emails are promoted to first-class blobs (`promotion_status`: `embedded_only`, `promoted`, `reused_existing_blob`, `promotion_failed`) so a rent roll that arrives both as an upload and as an email attachment is one artifact with two source items. | [`001_intake_spine.sql`](packages/db/src/migrations/001_intake_spine.sql), [`005_attachment_blob_handoff.sql`](packages/db/src/migrations/005_attachment_blob_handoff.sql) |
-| **Checksummed migrations** | A small migrator applies `*.sql` in order inside transactions and refuses to continue if an already-applied file's SHA-256 changed. | [`migrate.ts`](packages/db/src/migrate.ts) |
-| **Zod schemas as the contract** | Domain enums and payload shapes live in one package consumed by the API, the worker and the console, so a new candidate type or proposal state is a one-line change that the typechecker propagates. | [`packages/domain/src`](packages/domain/src) |
-
-## Data model
-
-Sixteen migrations in [`packages/db/src/migrations`](packages/db/src/migrations). Grouped by concern:
-
-**Intake spine** (`001`, `002`, `005`)
-`source_connections`, `source_items`, `artifact_blobs` (unique `sha256`),
-`ingestion_runs` (stage: `registered` → `immutable_storage` → `inspection` →
-`normalization` → `anchoring` → `candidate_extraction` → `complete` | `failed`),
-`workflow_runs` (bound to the Temporal workflow ID), `derived_artifacts`
-(versioned inspection reports, previews, anchor manifests, citation packets),
-`artifact_processing_states`, `review_items`, `intake_events`.
-
-**Normalized content** (`003`, `004`)
-`documents` / `document_pages`, `email_threads` / `email_messages` /
-`attachments`, `workbooks` / `worksheets` / `structured_tables`,
-`normalization_results`, `provenance_anchors`.
-
-**Candidates and accepted truth** (`006`, `007`, `008`)
-`candidate_extraction_states`, `extracted_candidates` (confidence,
-`extraction_method`, `citation_packet_json`, `review_status`,
-`current_extraction`, `superseded_at`), `accepted_fact_records`,
-`accepted_relationship_records`, `accepted_classification_records`,
-`candidate_review_history`.
-
-**Entity resolution** (`009`–`012`)
-`canonical_entities` (`asset` | `organization`), `canonical_entity_aliases`
-(`observed_name` | `observed_domain`), `entity_resolution_proposals`,
-`accepted_truth_entity_links`, `entity_resolution_history`,
-`entity_resolution_system_events`.
-
-**Asset–organization relationships** (`013`–`016`)
-`asset_organization_relationship_proposals`,
-`accepted_asset_organization_relationship_links`, their `_resolution_history`
-and `_system_events` tables, and two migrations that relax foreign keys so that
-deleted accepted truth leaves its relationship history in place.
-
-## Repository layout
-
-```
-apps/console/            Next.js 16 review console (intake, screening, review, truth, relationships, entities)
-packages/domain/         Zod schemas and enums shared by every service
-packages/db/             postgres.js data access, migrator, SQL migrations, DB-backed tests
-packages/connectors/     intake connector descriptors (upload, mailbox, file drop, SFTP)
-packages/ui/             two formatting helpers used by the console
-services/api/            Fastify API: presign, register, review/decision, truth, reconciliation
-services/workflows/      Temporal worker, intake workflow, activities, rule-based extraction
-services/extractor/      Python FastAPI service: type sniffing + pdf/eml/xlsx normalization
-infrastructure/local/    docker compose for Postgres, Temporal, MinIO (plus Neo4j and Valkey, unused)
-tests/fixtures/          small eml/pdf/xlsx/zip samples used by the DB-backed tests
-fixtures/synthetic-capital/  evaluation dataset with a seven-conflict answer key
-```
+- **Citations down to the cell and the line.** Normalization keeps every worksheet cell's A1 reference and every page's line structure; each row and line becomes a provenance anchor that carries its own source text. A candidate is never just a value. [`anchors.ts`](packages/extraction/src/anchors.ts), [`tabular.py`](services/extractor/remi_extractor/tabular.py)
+- **Deterministic cross-document conflict detection.** Facts are keyed by asset, metric, period and basis; asset names are clustered conservatively (an ambiguous short name links nothing); readings are compared at the precision of the coarser source, so `2.0x` agrees with `2.01x` but `$41.2M` does not agree with `$41.5M`. Seven of the dataset's planted conflicts are asserted in tests. [`detect.ts`](packages/extraction/src/conflicts/detect.ts), [`asset-clusters.ts`](packages/extraction/src/conflicts/asset-clusters.ts), [`fixtures.test.ts`](packages/extraction/src/fixtures.test.ts)
+- **Optional LLM extraction that cannot invent numbers.** With a free Gemini key (or any OpenAI-compatible endpoint, including a local Ollama), a model may propose metrics the rules missed, but a proposal is stored only if it cites one of the numbered source lines, its quote appears verbatim in that line, and its value can be read from the quote. Off by default. [`propose.ts`](packages/extraction/src/model/propose.ts)
+- **A durable, idempotent pipeline.** A Temporal workflow promotes uploads to content-addressed storage (identical bytes become one artifact), sniffs the real file type (a `.docx` that is plain text is parsed as text and flagged), normalizes, anchors, extracts, and re-runs detection inside one transaction behind a per-tenant advisory lock. [`register-intake.ts`](services/workflows/src/workflows/register-intake.ts), [`conflicts.ts`](packages/db/src/conflicts.ts)
+- **Supersession and audit, not overwrites.** Re-extraction supersedes candidates, re-detection supersedes conflicts that stop reproducing, and every reviewer decision (candidate, entity, relationship, conflict) is appended to a history table. [`migrations/`](packages/db/src/migrations)
 
 ## Quickstart
 
-Prerequisites: Node 22 (typecheck also passes under Node 24.18), pnpm 10,
-Docker with Compose, and Python 3.11+ for the extractor.
+You need Docker. No API keys.
 
 ```bash
-pnpm install --frozen-lockfile
-cp .env.example .env                       # defaults match docker-compose
-pnpm infra:up                              # Postgres, Temporal + UI (:8080), MinIO (:9001)
-pnpm db:migrate                            # applies packages/db/src/migrations/*.sql
-
-# extractor, in a second terminal
-python3 -m venv services/extractor/.venv && source services/extractor/.venv/bin/activate
-pip install -r services/extractor/requirements.txt
-pnpm dev:extractor                         # FastAPI on :4003
-
-# console (:3000), API (:4001) and Temporal worker, in a third terminal
-pnpm dev
+git clone https://github.com/Nadimul96/remi-intake-engine.git && cd remi-intake-engine
+docker compose up --build
 ```
 
-Then open <http://localhost:3000/intake> and drop files from
-`fixtures/synthetic-capital/`. A good first set: the two Parkside T-12 CSVs
-(deliberate rekey error), the three Oakwood UW workbooks (version conflict),
-and `emails/Thread_01_Broker_Oakwood_Intro.txt` (name variants and broker
-relationship). Watch the run advance through its stages on `/intake`, review
-candidates on `/review`, and resolve names on `/entities`.
+Then open <http://localhost:3000>. Compose starts Postgres, a Temporal dev server, S3-compatible storage, the extractor, API, worker and console; applies migrations; and seeds the demo by pushing 22 files from [`fixtures/synthetic-capital/`](fixtures/synthetic-capital/) through the real pipeline (about a minute). `pnpm doctor` tells you what is missing if anything fails to start. Temporal's UI is at <http://localhost:8233>.
 
-Without the console, the same thing over HTTP:
+**Optional AI-assisted extraction:** get a free key at [Google AI Studio](https://aistudio.google.com/apikey), then `MODEL_EXTRACTION=gemini GEMINI_API_KEY=... docker compose up --build`. For a local model: `MODEL_EXTRACTION=openai OPENAI_COMPATIBLE_BASE_URL=http://host.docker.internal:11434/v1 OPENAI_COMPATIBLE_MODEL=llama3.2`.
+
+<details>
+<summary>Without Docker for the app (local development)</summary>
+
+Requires Node 22.12+ (24 recommended), pnpm via `corepack enable`, and [uv](https://docs.astral.sh/uv/).
 
 ```bash
-# 1. presign
-curl -s localhost:4001/api/uploads/presign -H 'content-type: application/json' \
-  -d '{"fileName":"T12_Parkside_2015_REKEYED_Jordan.csv","contentType":"text/csv","sizeBytes":3133}'
-# 2. PUT the file to the returned uploadUrl with the returned headers
-# 3. register
-curl -s localhost:4001/api/intake/register -H 'content-type: application/json' \
-  -d '{"fileName":"T12_Parkside_2015_REKEYED_Jordan.csv","contentType":"text/csv","sizeBytes":3133,"uploadKey":"<uploadKey from step 1>"}'
+pnpm install
+cp .env.example .env
+docker compose up -d postgres temporal storage   # or your own Postgres 16+, Temporal and S3
+pnpm db:migrate
+pnpm dev:extractor        # terminal 1: FastAPI extractor on :4003
+pnpm dev                  # terminal 2: console :3000, API :4001, worker
+pnpm seed                 # terminal 3: ingest the demo set
+```
+</details>
+
+## How it works
+
+```mermaid
+flowchart LR
+  U[Upload or pnpm seed] -->|presigned PUT / POST /api/uploads| S[(S3 storage)]
+  U -->|POST /api/intake/register| A[Fastify API]
+  A -->|start workflow| T{{Temporal}}
+  T --> W[Worker]
+  W -->|inspect, normalize| X[Python extractor]
+  W -->|anchors, candidates| P[(Postgres)]
+  W -->|detect conflicts| P
+  C[Next.js console] -->|/api/remi proxy| A
+  A --> P
 ```
 
-Other root scripts: `pnpm typecheck`, `pnpm test`, `pnpm test:db`, `pnpm build`,
-`pnpm dev:api`, `pnpm dev:workflows`, `pnpm dev:console`, `pnpm infra:down`.
+1. **Intake.** The file lands in a staging prefix; the API records a source item and starts `registerIntakeSourceItemWorkflow`.
+2. **Promote and inspect.** The worker copies the bytes to an immutable key named by SHA-256 and asks the extractor what the file really is (PDF, email, XLSX, CSV or text), whatever its extension says.
+3. **Normalize and anchor.** The extractor returns pages with line-structured text, emails with attachments, or workbooks as sparse cell grids. Every page, line, message, sheet and row becomes a provenance anchor.
+4. **Extract.** Rules in [`packages/extraction`](packages/extraction/src/rules) read T-12 totals, label/value rows, `Label: value` lines, rent-roll status counts, budget-vs-actual sheets and DSCR tables into metric facts, plus the document's asset name and the variants it uses. Optionally, a model proposes more, subject to the grounding check.
+5. **Detect.** After each artifact, detection re-runs over the tenant's current candidates and upserts conflicts by key.
+6. **Review.** Operators resolve conflicts (choosing the reading they trust), accept or reject candidates into accepted truth, and reconcile asset names into canonical entities. Click any value to see its source.
 
-## Verify
+## Screenshots
 
-Commands run on macOS with Node 22.22.0 and pnpm 10.13.1 at the time this
-repo was assembled:
+| | |
+|---|---|
+| ![Provenance panel showing the cited Total cell of the rekeyed T-12](docs/media/provenance.webp) | ![Candidate review with evidence and decision actions](docs/media/review.webp) |
+| **Provenance.** The cited cell, outlined, with its header row and neighbours. | **Review.** Every candidate shows its evidence and rule. |
+| ![Overview dashboard](docs/media/overview.webp) | ![Entity reconciliation](docs/media/entities.webp) |
+| **Overview.** Open conflicts first. | **Entities.** Name variants attached to canonical records (after a few reconciliation decisions). |
+| ![Conflicts in dark mode](docs/media/conflicts-dark.webp) | ![Intake queue and pipeline detail](docs/media/intake.webp) |
+| **Dark mode.** | **Intake.** Upload, pipeline stages and what each file produced. |
 
-| Command | Result |
-|---------|--------|
-| `pnpm install --frozen-lockfile` | 346 packages, lockfile up to date, 5 s |
-| `pnpm typecheck` (turbo → `tsc --noEmit` in all 7 packages) | 7/7 successful |
-| `pnpm test` (`services/workflows/src/lib/candidate-extraction.test.ts`, no infrastructure needed) | 4 tests, 4 pass, 0 fail |
-| `pnpm test:db` (`packages/db/src/{entities,relationships,screening}.test.ts`) | **not run**: requires a migrated Postgres (`pnpm infra:up && pnpm db:migrate`); Docker was not running on the machine used to assemble this repo |
+<p align="center"><img src="docs/media/mobile.webp" width="300" alt="Conflict detail on a phone"></p>
 
-There is no lint script in the workspace. The Python extractor was not
-exercised here either; its dependencies are pinned in
-[`services/extractor/requirements.txt`](services/extractor/requirements.txt).
+## What the detector finds in the demo data
 
-## Evaluation dataset
+The dataset plants seven conflicts ([rubric](fixtures/synthetic-capital/README.md#designed-conflicts-evaluation-rubric)). [`fixtures.test.ts`](packages/extraction/src/fixtures.test.ts) runs extraction and detection over the extractor's real output for the demo set and asserts each one; the same 16 conflicts appear when the files go through the full pipeline.
 
-[`fixtures/synthetic-capital/`](fixtures/synthetic-capital/) holds 73 fully
-synthetic files for a fictional two-fund multifamily investor: PDFs, CSV rent
-rolls, formula-driven XLSX underwriting models, seven email threads and a
-ground-truth answer key. Seven conflicts are planted on purpose (a rekeyed
-T-12, an occupancy mismatch, asset-name variants, three competing UW versions,
-seller vs. normalized NOI, a one-time budget blowout, a DSCR covenant breach),
-alongside realistic naming chaos: `(1).csv` copies, `USE THIS ONE_FINAL.xlsx`,
-misfiled documents, a text file with a `.docx` extension. The
-[dataset README](fixtures/synthetic-capital/README.md) lists the conflicts as a
-rubric with the expected resolution for each.
+| ID | Rubric item | Result |
+|----|-------------|--------|
+| C1 | Rekeyed Parkside T-12: landscaping `$43,200` vs `$34,200` | Detected, cited to cell `N20` in both files; the knock-on total-opex and NOI differences are flagged too |
+| C2 | Parkside Q3 2017 occupancy `95.3%` vs `94.1%` | Detected: rent-roll status count (141 of 148) vs the PM report, plus occupied units 141 vs 139 |
+| C3 | Asset-name variants | Detected for Oakwood: `Oakwood Commons at Westchase`, `OC Houston`, `the Houston deal` (declared aliases), `Westchase Multifamily` (alternate-name label), `Oakwood`. For Parkside only `Parkside` occurs in the source files |
+| C4 | Three Oakwood underwriting versions | Detected as version conflicts on price, entry and exit cap, levered IRR, equity multiple and loan amount, each labelled with version and analyst. Which version was approved is left to the reviewer (the IC memo and emails say v2) |
+| C5 | Seller NOI vs normalized NOI | Detected: `$580,800` vs `$597,400` (normalized basis). The reason for the gap is not inferred |
+| C6 | Q2 2023 water/sewer 34% over budget | Flagged with the other lines more than 25% over budget. Whether it is one-time is not decided |
+| C7 | DSCR `1.21x` vs `1.25x` covenant | Detected across the debt summary's periods and the alert email |
 
-Detecting these conflicts automatically is the target this dataset was built
-for. Today the engine gets the evidence into one place with provenance and a
-review trail; cross-document numeric conflict detection is not yet implemented
-(see Status).
+Not detected: anything that needs reading comprehension rather than numbers and names (why a figure differs, which document is authoritative), and inconsistencies inside the ground-truth files, which are not ingested.
 
-## Status
+## Configuration
 
-Extracted from a larger private project. What is here:
+`docker compose up` needs none of these; local development reads them from `.env` (see [`.env.example`](.env.example)).
 
-- The schema, migrator, data-access layer, Temporal workflow, API and
-  extraction logic are complete for the intake → review → reconciliation loop
-  and typecheck clean.
-- The review console is functional but unpolished: inline styles, no
-  pagination, a stubbed single operator identity.
-- Candidate extraction is rule-based (regex and heuristics over normalized
-  content). There is no model-assisted extraction yet, although the
-  `extraction_method` column reserves `model_assisted`.
-- `docker-compose.yml` also provisions Neo4j and Valkey, and migration `001`
-  enables the `vector` extension; none of the three is used by any code in
-  this repo yet.
-- Authentication is a stub: tenant and actor come from `.env`.
-- Cross-document conflict detection (the C1–C7 rubric in the fixtures) is the
-  next layer and is not implemented.
-- DB-backed tests exist for entity reconciliation, relationship reconciliation
-  and the screening workbench, but need Postgres to run.
+| Variable | Required | Default | What it does |
+|----------|----------|---------|--------------|
+| `DATABASE_URL` | yes (local) | `postgresql://remi:remi@127.0.0.1:5432/remi` | Postgres connection for API, worker, migrations |
+| `TEMPORAL_ADDRESS` | no | `127.0.0.1:7233` | Temporal frontend |
+| `S3_ENDPOINT` | yes (local) | `http://127.0.0.1:9000` | Any S3-compatible endpoint (compose runs RustFS) |
+| `S3_PUBLIC_ENDPOINT` | no | `S3_ENDPOINT` | Host the browser uses for presigned uploads |
+| `S3_BUCKET` | yes (local) | `remi-dev` | Bucket; created with a CORS rule on API start |
+| `S3_ACCESS_KEY` / `S3_SECRET_KEY` | yes (local) | `remi-local` / `remi-local-secret` | Storage credentials (local defaults only) |
+| `EXTRACTOR_URL` | yes (local) | `http://127.0.0.1:4003` | Python extractor |
+| `API_PORT` | no | `4001` | API port |
+| `API_BASE_URL` | no | `http://127.0.0.1:4001` | Where the console's server and proxy reach the API |
+| `CONSOLE_ORIGIN` | no | `http://localhost:3000,http://127.0.0.1:3000` | Browser origins allowed for API CORS and storage uploads |
+| `DEFAULT_TENANT_ID` / `DEFAULT_ACTOR_ID` | no | `fund-zero` / `operator-demo` | Stub identity until real auth exists |
+| `MODEL_EXTRACTION` | no | `off` | `off`, `gemini` or `openai` (any OpenAI-compatible endpoint) |
+| `GEMINI_API_KEY` | with `gemini` | | Free key from Google AI Studio |
+| `GEMINI_MODEL` | no | `gemini-3.5-flash-lite` | Gemini model |
+| `OPENAI_COMPATIBLE_BASE_URL` | with `openai` | | e.g. `http://127.0.0.1:11434/v1` for Ollama |
+| `OPENAI_COMPATIBLE_MODEL` | with `openai` | | Model name |
+| `OPENAI_COMPATIBLE_API_KEY` | no | | Sent as a bearer token when set |
+
+## Development
+
+```bash
+pnpm lint            # Biome: format + lint, zero warnings
+pnpm typecheck       # tsc (TypeScript 7) across all packages and scripts
+pnpm test            # extraction, conflict detection and model grounding (offline, no keys)
+pnpm test:db         # DB-backed tests; needs a migrated Postgres (DATABASE_URL)
+pnpm build           # console production build
+pnpm doctor          # preflight for both start paths
+cd services/extractor && uv run ruff check . && uv run pytest
+```
+
+Repository layout: `apps/console` (Next.js 16 console), `packages/domain` (zod schemas), `packages/db` (postgres.js data access, 18 SQL migrations, checksummed migrator), `packages/extraction` (anchors, rules, conflict detection, model-assisted extraction; pure and offline-testable), `services/api` (Fastify), `services/workflows` (Temporal worker), `services/extractor` (Python FastAPI), `fixtures/synthetic-capital` (synthetic dataset with the answer key), `scripts` (seed, doctor).
+
+The extraction tests run against committed snapshots of the extractor's output ([`packages/extraction/test/snapshots`](packages/extraction/test/snapshots)); a pytest contract test fails if the extractor drifts from them. Regenerate with `cd services/extractor && uv run python scripts/snapshot_fixtures.py`. A live model check is opt-in: `REMI_LIVE_MODEL_TESTS=1 MODEL_EXTRACTION=gemini GEMINI_API_KEY=... pnpm test`.
+
+## Status and limitations
+
+- Extracted from a larger private project; experimental, single-tenant in practice. Auth is a stub: tenant and actor come from the environment.
+- Rule-based extraction is tuned on this dataset's document shapes (T-12s, rent rolls, underwriting summaries, memos). New layouts will need new rules or the optional model path.
+- Scanned PDFs are classified as `best_effort`; there is no OCR. `.docx`, `.pptx` and real ZIP archives are deferred.
+- Review lists are not paginated, which is fine for the demo's few hundred candidates and would not be for a real data room.
+- The relationship page is populated only by broker emails in `.eml` form; the demo set has none, so it starts empty.
+- Verified for this version: install, Biome, `tsc`, the console production build, unit tests (29 TS plus one opt-in live test, 43 Python), DB tests on Postgres 18, and the full pipeline (API, Temporal worker, extractor, Postgres 18, S3-compatible storage) run natively with the same Temporal CLI and RustFS releases the compose file uses. `docker compose up` itself was validated with `docker compose config` but not run end to end on the development machine; CI builds every image.
 
 ## License
 
-MIT, see [LICENSE](LICENSE).
+MIT, see [LICENSE](LICENSE). The fixture dataset is fully synthetic.
