@@ -1,5 +1,5 @@
 {
-  "description": "Curated files from fixtures/synthetic-capital that the demo seeds through the pipeline and the extraction tests run against. Together they plant every conflict in the C1-C7 rubric.",
+  "description": "Curated files from fixtures/synthetic-capital that the demo seeds through the pipeline and the extraction tests run against. Together they plant every conflict in the C1-C7 rubric. expectedConflictKeys is what detection must report for exactly these files; the offline tests and the docker compose end-to-end job both assert it.",
   "root": "fixtures/synthetic-capital",
   "files": [
     "Fund I - Synthetic Value Fund I/Parkside_at_Meridian/acquisition/T12_Parkside_2015_SellerVersion.csv",
@@ -24,5 +24,23 @@
     "emails/Thread_01_Broker_Oakwood_Intro.txt",
     "emails/Thread_03_DSCR_Breach_Alert.txt",
     "emails/Thread_06_Oakwood_IC_Expense_Debate.txt"
+  ],
+  "expectedConflictKeys": [
+    "budget_variance:oakwood-commons:-:q2-2023",
+    "covenant_breach:oakwood-commons:dscr:-",
+    "name_variants:oakwood-commons:-:-",
+    "name_variants:parkside-at-meridian:-:-",
+    "value_mismatch:oakwood-commons:noi:fy2020",
+    "value_mismatch:parkside-at-meridian:landscaping-grounds:fy2015",
+    "value_mismatch:parkside-at-meridian:noi:fy2015",
+    "value_mismatch:parkside-at-meridian:occupied-units:q3-2017",
+    "value_mismatch:parkside-at-meridian:physical-occupancy:q3-2017",
+    "value_mismatch:parkside-at-meridian:total-operating-expenses:fy2015",
+    "version_conflict:oakwood-commons:entry-cap-rate:-",
+    "version_conflict:oakwood-commons:equity-multiple:-",
+    "version_conflict:oakwood-commons:exit-cap-rate:-",
+    "version_conflict:oakwood-commons:levered-irr:-",
+    "version_conflict:oakwood-commons:loan-amount:-",
+    "version_conflict:oakwood-commons:purchase-price:-"
   ]
 }
