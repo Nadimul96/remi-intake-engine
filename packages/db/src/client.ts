@@ -9,7 +9,8 @@ export function getDb(): postgres.Sql {
 
   if (!sqlInstance) {
     sqlInstance = postgres(requiredEnv("DATABASE_URL"), {
-      max: 10
+      max: 10,
+      onnotice: () => undefined
     });
   }
 

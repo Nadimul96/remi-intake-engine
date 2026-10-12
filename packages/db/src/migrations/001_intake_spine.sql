@@ -1,5 +1,3 @@
-create extension if not exists vector;
-
 create table if not exists source_connections (
   id text primary key,
   tenant_id text not null,
