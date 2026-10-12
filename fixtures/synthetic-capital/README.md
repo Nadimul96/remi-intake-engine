@@ -62,9 +62,12 @@ The same two assets are referred to inconsistently across documents. An entity
 reconciliation layer should collapse these onto one canonical record each.
 
 | Canonical asset | Variants found in the corpus |
-|-----------------|------------------------------|
-| Parkside at Meridian | `ParkSide Meridian`, `Meridian Park`, `Parkside` |
-| Oakwood Commons | `OC`, `OC Houston`, `Oakwood Commons at Westchase`, `the Houston deal`, `Oakwood` |
+|-----------------|-----------------------------|
+| Parkside at Meridian | `Parkside` (file names, the BOV) |
+| Oakwood Commons | `Oakwood Commons at Westchase`, `OC Houston`, `the Houston deal` (all in `Investment_Memo_FINAL.docx`), `Westchase Multifamily` with `Alternate Name: Oakwood Commons` (`Q3_RentRoll.xlsx`), `Oakwood` (file names, email subjects) |
+
+An earlier version of this table also listed `ParkSide Meridian` and `Meridian Park`; those
+strings appear only in `ground_truth/GroundTruth_MASTER.md`, not in any source document.
 
 Organizations vary too: the lender is "First Western Capital Partners" in
 `DebtSummary_Oakwood_FirstWestern.txt`, "First Western Capital" in the ground
@@ -82,7 +85,7 @@ context to pick the right one?
 | C2 | Parkside Q3 2017 occupancy `95.3%` vs `94.1%` | `RentRoll_Parkside_Q3_2017.csv` vs `PM_Report_Parkside_Q3_2017.txt` | Two-unit timing difference (141 vs 139 of 148). `SiteVisit_Parkside_2018_DF.txt` mentions unit 214 offline. Either is defensible; the system should flag, not silently pick. |
 | C3 | Asset-name variants | emails, IC memos, PM reports | See table above. `OC Houston` and `Oakwood Commons at Westchase` are the same property. |
 | C4 | Three Oakwood underwriting versions with different assumptions | `UW_OakwoodCommons_v1_PN_092020.xlsx`, `..._v2_PN_112020.xlsx`, `..._v3_AD_112020.xlsx` (+ renamed duplicates) | **v2 (Priya) is the approved model**: 5.6% entry cap, $41.2M price. `IC_Memo_Oakwood_Commons_FINAL.txt` and `Thread_06_Oakwood_IC_Expense_Debate.txt` explain why. v1 was superseded; v3 became the upside case. |
-| C5 | Oakwood NOI: seller T-12 vs normalized | `T12_Oakwood_2020_SellersVersion.csv` vs `T12_Oakwood_2020_Priya_Normalized.csv` | Use the normalized figure. The seller T-12 includes a one-time `$180K` insurance reimbursement. |
+| C5 | Oakwood NOI: seller T-12 vs normalized | `T12_Oakwood_2020_SellersVersion.csv` vs `T12_Oakwood_2020_Priya_Normalized.csv` | Use the normalized figure (`$597,400` vs the seller's `$580,800`). The emails and IC memo attribute the gap to a one-time `$180K` insurance reimbursement; the normalized CSV's own notes list an `$8,400` reimbursement instead, one more inconsistency for a reviewer. |
 | C6 | Q2 2023 budget variance: water/sewer 34% over | `BudgetVariance_Oakwood_Q2_2023.csv` | One-time event (main-line break in Building C, `$12,400` repair + `$4,920` leak spike). Not a run-rate change. |
 | C7 | DSCR covenant breach `1.21x` vs `1.25x` minimum | `DebtSummary_Oakwood_FirstWestern.txt`, `Thread_03_DSCR_Breach_Alert.txt` | Real breach: NOI `$1,142K` / debt service `$943.5K`. Flagged Q2 2023, remediation plan submitted. |
 
