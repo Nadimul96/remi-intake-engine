@@ -1,7 +1,8 @@
-import type { IntakeRegistrationWorkflowInput } from "@remi/domain";
+import type { ArtifactParserTarget, IntakeRegistrationWorkflowInput } from "@remi/domain";
 import { proxyActivities } from "@temporalio/workflow";
 
 interface IntakeActivities {
+  detectConflictsForTenant(input: { tenantId: string }): Promise<{ current: number; superseded: number }>;
   extractCandidatesForUploadedArtifact(input: {
     actorId: string;
     artifactBlobId: string;
@@ -49,7 +50,7 @@ interface IntakeActivities {
       version: number;
     }[];
     parserEligible: boolean;
-    parserTarget: "archive" | "eml" | "none" | "pdf" | "xlsx";
+    parserTarget: ArtifactParserTarget;
     supportTier: "best_effort" | "deferred" | "supported" | "unsupported" | null;
   }>;
   normalizeUploadedArtifact(input: {
@@ -58,7 +59,7 @@ interface IntakeActivities {
     fileName: string;
     ingestionRunId: string;
     parserEligible: boolean;
-    parserTarget: "archive" | "eml" | "none" | "pdf" | "xlsx";
+    parserTarget: ArtifactParserTarget;
     sourceItemId: string;
     storageKey: string;
     supportTier: "best_effort" | "deferred" | "supported" | "unsupported" | null;
@@ -129,6 +130,8 @@ export async function registerIntakeSourceItemWorkflow(input: IntakeRegistration
       tenantId: input.tenantId,
       workflowRunId: input.workflowRunId
     });
+
+    await activities.detectConflictsForTenant({ tenantId: input.tenantId });
 
     await activities.finalizeUploadedArtifact({
       actorId: input.actorId,

@@ -10,6 +10,8 @@ export type RemiId =
   | `artifactproc_${string}`
   | `candidate_${string}`
   | `candextract_${string}`
+  | `conflict_${string}`
+  | `conflicthist_${string}`
   | `document_${string}`
   | `docpage_${string}`
   | `derived_${string}`
@@ -50,6 +52,8 @@ export type RemiIdPrefix =
   | "artifactproc"
   | "candidate"
   | "candextract"
+  | "conflict"
+  | "conflicthist"
   | "document"
   | "docpage"
   | "derived"

@@ -2,6 +2,7 @@ import cors from "@fastify/cors";
 import Fastify from "fastify";
 import { apiConfig } from "./lib/config";
 import { authRoutes } from "./routes/auth";
+import { conflictRoutes } from "./routes/conflicts";
 import { entityRoutes } from "./routes/entities";
 import { healthRoutes } from "./routes/health";
 import { intakeRoutes } from "./routes/intake";
@@ -45,6 +46,7 @@ async function main(): Promise<void> {
   await app.register(relationshipRoutes);
   await app.register(entityRoutes);
   await app.register(truthRoutes);
+  await app.register(conflictRoutes);
 
   await app.listen({
     host: "0.0.0.0",
