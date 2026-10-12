@@ -14,6 +14,11 @@ import { Button } from "../ui/button";
 import { Card } from "../ui/card";
 import { KIND_DESCRIPTION, KIND_LABEL, SEVERITY_TONE, STATUS_TONE, VALUE_SWATCHES } from "./labels";
 
+/** Version labels ("v2 (November 2020) · Priya Nair") are shown verbatim; roles are humanized. */
+function sideLabel(label: string): string {
+  return /^v\d/i.test(label) ? label : humanize(label);
+}
+
 function swatchIndex(sides: ConflictSide[]): Map<string, number> {
   const distinct = [...new Set(sides.map((side) => side.display))];
   return new Map(distinct.map((display, index) => [display, index % VALUE_SWATCHES.length]));
@@ -72,7 +77,7 @@ function SideRow({
           {side.fileName}
         </p>
         <p className="truncate text-xs text-muted">
-          {humanize(side.label)}
+          {sideLabel(side.label)}
           {side.locatorHint ? <span className="text-faint"> · {side.locatorHint}</span> : null}
         </p>
       </div>
